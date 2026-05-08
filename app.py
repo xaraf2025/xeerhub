@@ -1,7 +1,7 @@
 import os, json
 from flask import Flask, request, jsonify, send_from_directory
 
-app = Flask(__name__, static_folder='static', template_folder='templates')
+app = Flask(__name__, static_folder='static', template_folder='static')
 
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 
@@ -239,14 +239,17 @@ QA_DATA = {
 
 @app.route('/')
 def index():
-    return send_from_directory('static', 'index.html')
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/<path:path>')
 def static_files(path):
     try:
-        return send_from_directory('static', path)
-    except:
-        return send_from_directory('static', 'index.html')
+        full = os.path.join(app.static_folder, path)
+        if os.path.exists(full):
+            return send_from_directory(app.static_folder, path)
+        return send_from_directory(app.static_folder, 'index.html')
+    except Exception as e:
+        return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/api/qa')
 def get_qa():
