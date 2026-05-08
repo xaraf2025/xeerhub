@@ -273,25 +273,27 @@ def ask():
     if not question:
         return jsonify({'error': 'Question is required'}), 400
 
-    if not ANTHROPIC_API_KEY:
-        return jsonify({'error': 'API key not configured. Set ANTHROPIC_API_KEY environment variable.'}), 500
+    GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '').strip()
+    if not GROQ_API_KEY:
+        return jsonify({'error': 'API key not configured. Set GROQ_API_KEY environment variable.'}), 500
 
     payload = {
-        'model': 'claude-haiku-4-5-20251001',
+        'model': 'llama-3.3-70b-versatile',
         'max_tokens': 600,
-        'system': SYSTEM_PROMPT,
-        'messages': [{'role': 'user', 'content': 'Law area: ' + law_area + ' Question: ' + question}]
+        'messages': [
+            {'role': 'system', 'content': SYSTEM_PROMPT},
+            {'role': 'user', 'content': 'Law area: ' + law_area + ' Question: ' + question}
+        ]
     }
 
     headers = {
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
+        'Authorization': 'Bearer ' + GROQ_API_KEY,
         'content-type': 'application/json'
     }
 
     try:
         resp = req.post(
-            'https://api.anthropic.com/v1/messages',
+            'https://api.groq.com/openai/v1/chat/completions',
             headers=headers,
             json=payload,
             timeout=30
@@ -303,10 +305,10 @@ def ask():
                 error_msg = error_body.get('error', {}).get('message', 'Unknown error')
             except:
                 error_msg = resp.text
-            return jsonify({'error': 'Anthropic error: ' + error_msg}), 500
+            return jsonify({'error': 'AI error: ' + error_msg}), 500
 
         result = resp.json()
-        answer = result['content'][0]['text']
+        answer = result['choices'][0]['message']['content']
         return jsonify({'answer': answer, 'question': question})
 
     except req.exceptions.Timeout:
