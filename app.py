@@ -308,7 +308,29 @@ def subscribe():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
+@app.route('/api/subscribe', methods=['POST'])
+def subscribe():
+    import requests as req
+    data = request.get_json()
+    email = (data.get('email') or '').strip().lower()
+    if not email or '@' not in email:
+        return jsonify({'error': 'Valid email required'}), 400
+    url = 'https://us13.api.mailchimp.com/3.0/lists/fb814dd0f4/members'
+    try:
+        resp = req.post(
+            url,
+            auth=('anystring', 'd93ad2f4edf46069f1c804142752b467-us13'),
+            json={'email_address': email, 'status': 'pending', 'tags': ['xeerhub-website']},
+            timeout=10
+        )
+        body = resp.json()
+        if resp.status_code == 400 and body.get('title') == 'Member Exists':
+            return jsonify({'status': 'subscribed'}), 200
+        if resp.status_code in (200, 201):
+            return jsonify({'status': body.get('status', 'pending')}), 200
+        return jsonify(body), resp.status_code
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 @app.route('/api/ask', methods=['POST'])
 def ask():
     import requests as req
