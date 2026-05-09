@@ -574,9 +574,7 @@ async function subscribeMailchimp(source) {
       throw new Error(data.detail || 'Failed');
     }
   } catch(e) {
-    // Fallback: open Mailchimp hosted form
-    showToast('Opening signup form...','success');
-    setTimeout(()=>{ window.open(`https://${MAILCHIMP_DC}.list-manage.com/subscribe?u=${MAILCHIMP_U}&id=${MAILCHIMP_LIST_ID}`,'_blank'); },400);
+    showToast('Could not connect. Please try again.','error');
     if(btn){ btn.disabled=false; btn.textContent='Subscribe →'; }
   }
 }
@@ -754,4 +752,3 @@ document.addEventListener('DOMContentLoaded',()=>{
 </script>
 </body>
 </html>
-
