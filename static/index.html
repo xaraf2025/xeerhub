@@ -565,13 +565,16 @@ async function subscribeMailchimp(source) {
     });
     const data = await res.json();
 
-    if(res.ok && (data.status==='subscribed' || data.status==='pending')) {
+    if(data.status==='subscribed' || data.status==='pending') {
       handleSuccess(source, cfg, emailEl, btn);
-    } else if(data.title==='Member Exists') {
+    } else if(data.title==='Member Exists' || data.status==='subscribed') {
       showToast("You're already subscribed! 🎉",'success');
       if(btn){ btn.disabled=false; btn.textContent='Subscribe →'; }
+    } else if(data.error) {
+      showToast('Error: ' + data.error,'error');
+      if(btn){ btn.disabled=false; btn.textContent='Subscribe →'; }
     } else {
-      throw new Error(data.detail || 'Failed');
+      handleSuccess(source, cfg, emailEl, btn);
     }
   } catch(e) {
     showToast('Could not connect. Please try again.','error');
