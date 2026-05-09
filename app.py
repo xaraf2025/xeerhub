@@ -275,21 +275,32 @@ def subscribe():
     email = (data.get('email') or '').strip().lower()
     if not email or '@' not in email:
         return jsonify({'error': 'Valid email required'}), 400
-    url = 'https://us13.api.mailchimp.com/3.0/lists/fb814dd0f4/members'
+
+    MAILCHIMP_API_KEY = 'd93ad2f4edf46069f1c804142752b467-us13'
+    MAILCHIMP_LIST_ID = 'fb814dd0f4'
+    MAILCHIMP_DC = 'us13'
+    url = 'https://{}.api.mailchimp.com/3.0/lists/{}/members'.format(MAILCHIMP_DC, MAILCHIMP_LIST_ID)
+
     try:
-        resp = req.post(
-            url,
-            auth=('anystring', 'd93ad2f4edf46069f1c804142752b467-us13'),
-            json={'email_address': email, 'status': 'pending', 'tags': ['xeerhub-website']},
-            timeout=10
+        resp = req.put(
+            url + '/' + __import__('hashlib').md5(email.encode()).hexdigest(),
+            auth=('anystring', MAILCHIMP_API_KEY),
+            json={
+                'email_address': email,
+                'status_if_new': 'pending',
+                'status': 'pending'
+            },
+            timeout=15
         )
+        print('Mailchimp status:', resp.status_code, resp.text[:200], flush=True)
         body = resp.json()
-        if resp.status_code == 400 and body.get('title') == 'Member Exists':
-            return jsonify({'status': 'subscribed'}), 200
         if resp.status_code in (200, 201):
             return jsonify({'status': body.get('status', 'pending')}), 200
-        return jsonify(body), resp.status_code
+        if resp.status_code == 400 and body.get('title') == 'Member Exists':
+            return jsonify({'status': 'subscribed'}), 200
+        return jsonify({'status': 'pending', 'detail': body.get('detail', '')}), 200
     except Exception as e:
+        print('Subscribe error:', str(e), flush=True)
         return jsonify({'error': str(e)}), 500
 
 
