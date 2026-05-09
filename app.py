@@ -316,6 +316,55 @@ def ask():
     except Exception as e:
         return jsonify({'error': 'Server error: ' + str(e)}), 500
 
+
+# ── Mailchimp newsletter subscribe ──────────────────────────────────────────
+@app.route('/api/subscribe', methods=['POST'])
+def subscribe():
+    import requests as req
+
+    data = request.get_json()
+    email = (data.get('email') or '').strip().lower()
+
+    if not email or '@' not in email:
+        return jsonify({'error': 'A valid email address is required.'}), 400
+
+    MAILCHIMP_API_KEY  = os.environ.get('MAILCHIMP_API_KEY', '').strip()
+    MAILCHIMP_LIST_ID  = os.environ.get('MAILCHIMP_LIST_ID', '').strip()
+
+    if not MAILCHIMP_API_KEY or not MAILCHIMP_LIST_ID:
+        return jsonify({'error': 'Newsletter service is not configured.'}), 500
+
+    MAILCHIMP_DC       = MAILCHIMP_API_KEY.split('-')[-1]   # e.g. "us13"
+
+    url = f'https://{MAILCHIMP_DC}.api.mailchimp.com/3.0/lists/{MAILCHIMP_LIST_ID}/members'
+
+    try:
+        resp = req.post(
+            url,
+            auth=('anystring', MAILCHIMP_API_KEY),
+            json={'email_address': email, 'status': 'pending'},   # 'pending' = sends double-opt-in email
+            timeout=10
+        )
+        body = resp.json()
+
+        # Mailchimp returns 200/201 on success
+        if resp.status_code in (200, 201):
+            return jsonify({'message': 'Thank you! Please check your inbox to confirm your subscription.'}), 200
+
+        # Already subscribed
+        if body.get('title') == 'Member Exists':
+            return jsonify({'message': "You're already subscribed — thank you!"}), 200
+
+        # Any other Mailchimp error
+        detail = body.get('detail', 'Subscription failed. Please try again.')
+        return jsonify({'error': detail}), 400
+
+    except req.exceptions.Timeout:
+        return jsonify({'error': 'Request timed out. Please try again.'}), 504
+    except Exception as e:
+        return jsonify({'error': 'Server error: ' + str(e)}), 500
+
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
     app.run(debug=False, host='0.0.0.0', port=port)
