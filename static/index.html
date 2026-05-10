@@ -28,6 +28,7 @@
   --company: #2563EB; --company-bg: rgba(37,99,235,0.08);
   --invest: #D97706; --invest-bg: rgba(217,119,6,0.09);
   --civil: #7C3AED; --civil-bg: rgba(124,58,237,0.09);
+  --tax: #0E7490; --tax-bg: rgba(14,116,144,0.09);
   --success: #059669; --danger: #DC2626;
   --r: 10px; --r-sm: 6px;
   --shadow: 0 4px 24px rgba(26,35,50,0.09); --shadow-sm: 0 2px 10px rgba(26,35,50,0.07); --shadow-lg: 0 12px 48px rgba(26,35,50,0.14);
@@ -54,7 +55,7 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:700;line-height:1.15
 .card{background:var(--ink-2);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;transition:border-color .2s,box-shadow .2s;}
 .card:hover{border-color:var(--teal-border);box-shadow:var(--shadow)}
 .tag{display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .7rem;border-radius:100px;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;}
-.tag-labor{background:var(--labor-bg);color:var(--labor)}.tag-company{background:var(--company-bg);color:var(--company)}.tag-invest{background:var(--invest-bg);color:var(--invest)}.tag-civil{background:var(--civil-bg);color:var(--civil)}.tag-free{background:rgba(5,150,105,.10);color:var(--labor)}.tag-premium{background:var(--ink-3);color:var(--cream-mute);border:1px solid var(--border)}.tag-gold{background:var(--gold-dim);color:var(--gold);border:1px solid var(--gold-border)}
+.tag-labor{background:var(--labor-bg);color:var(--labor)}.tag-company{background:var(--company-bg);color:var(--company)}.tag-invest{background:var(--invest-bg);color:var(--invest)}.tag-civil{background:var(--civil-bg);color:var(--civil)}.tag-tax{background:var(--tax-bg);color:var(--tax)}.tag-free{background:rgba(5,150,105,.10);color:var(--labor)}.tag-premium{background:var(--ink-3);color:var(--cream-mute);border:1px solid var(--border)}.tag-gold{background:var(--gold-dim);color:var(--gold);border:1px solid var(--gold-border)}
 .input{width:100%;padding:.85rem 1.1rem;background:#fff;border:1.5px solid var(--border);border-radius:var(--r-sm);color:var(--cream);font-size:.95rem;outline:none;transition:border-color .2s;box-shadow:0 1px 3px rgba(26,35,50,.05);}
 .input:focus{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-dim)}.input::placeholder{color:var(--cream-mute)}
 .label{display:block;font-size:.8rem;color:var(--cream-dim);margin-bottom:.4rem;font-weight:500}
@@ -383,14 +384,14 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
     <div class="hero-inner">
       <div class="hero-eyebrow">🇸🇴 Somalia's Legal Intelligence Platform</div>
       <h1>Clear answers to<br><em>real legal questions</em></h1>
-      <p class="hero-sub">Instant, verified answers on Somali Labor Law, Company Law, and Foreign Investment Law — built for NGOs, lawyers, and business professionals.</p>
+      <p class="hero-sub">Instant, verified answers on Somali Labor Law, Company Law, Foreign Investment Law, and Income Tax Law — built for NGOs, lawyers, and business professionals.</p>
       <div class="hero-ctas">
         <button class="btn btn-gold btn-lg" onclick="showPage('library')">Browse Q&A Library →</button>
         <button class="btn btn-teal btn-lg" onclick="showPage('ask')">Ask a Legal Question</button>
       </div>
       <div class="hero-stats stagger">
-        <div><div class="hero-stat-num">200</div><div class="hero-stat-label">Verified Q&As</div></div>
-        <div><div class="hero-stat-num">3</div><div class="hero-stat-label">Laws Covered</div></div>
+        <div><div class="hero-stat-num">240</div><div class="hero-stat-label">Verified Q&As</div></div>
+        <div><div class="hero-stat-num">4</div><div class="hero-stat-label">Laws Covered</div></div>
         <div><div class="hero-stat-num">4</div><div class="hero-stat-label">Target Audiences</div></div>
         <div><div class="hero-stat-num">AI</div><div class="hero-stat-label">Powered Answers</div></div>
       </div>
@@ -402,7 +403,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <div class="trust-bar-inner container">
         <div class="trust-item">🔒 SSL Encrypted</div>
         <div class="trust-dot"></div>
-        <div class="trust-item">⚖️ 200+ Verified Q&As</div>
+        <div class="trust-item">⚖️ 240+ Verified Q&As</div>
         <div class="trust-dot"></div>
         <div class="trust-item">🇸🇴 Official Somali Legislation</div>
         <div class="trust-dot"></div>
@@ -438,8 +439,9 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
         <div class="preview-card"><div class="preview-card-header"><span class="tag tag-labor">🟢 Labor Law</span></div><div class="preview-card-body"><div class="preview-q">Do I have to give an employee a written contract?</div><div class="preview-a">Yes. Every employment relationship must be documented in writing. Verbal agreements are not enforceable for key terms such as salary, duration, and job role.</div><div class="preview-ref">Labour Code · Arts. 16–18</div></div></div>
         <div class="preview-card"><div class="preview-card-header"><span class="tag tag-company">🔵 Company Law</span></div><div class="preview-card-body"><div class="preview-q">Can one person start a company alone in Somalia?</div><div class="preview-a">Yes. A single individual aged 18 or over can found a company. The minimum age of 18 is a firm requirement — no one under 18 can be a founding member.</div><div class="preview-ref">Companies Law · Art. 12</div></div></div>
         <div class="preview-card"><div class="preview-card-header"><span class="tag tag-invest">🟡 Investment Law</span></div><div class="preview-card-body"><div class="preview-q">Can the government seize my foreign investment?</div><div class="preview-a">Registered foreign investment is protected from expropriation except in cases of overriding public interest. Adequate compensation at fair market value is required.</div><div class="preview-ref">Foreign Investment Law · Art. 18</div></div></div>
+        <div class="preview-card"><div class="preview-card-header"><span class="tag tag-tax">🔷 Income Tax Law</span></div><div class="preview-card-body"><div class="preview-q">What is the Presumptive Tax Regime (PTR)?</div><div class="preview-a">PTR is a simplified tax regime for resident individual sole traders with annual turnover not exceeding USD 50,000. Quarterly tax is the higher of USD 37.50 or 1.5% of quarterly turnover.</div><div class="preview-ref">ITA 2025 · Arts. 9, 97</div></div></div>
       </div>
-      <div style="text-align:center;margin-top:2.5rem"><button class="btn btn-gold btn-lg" onclick="showPage('library')">View All 200 Q&As →</button></div>
+      <div style="text-align:center;margin-top:2.5rem"><button class="btn btn-gold btn-lg" onclick="showPage('library')">View All 240 Q&As →</button></div>
     </div>
   </section>
 
@@ -473,7 +475,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <div class="section-eyebrow">How it works</div>
       <h2 class="section-title">Three ways to get your answer</h2>
       <div class="steps-grid stagger">
-        <div class="step-card"><div class="step-num">1</div><div class="step-title">Browse the Library</div><div class="step-desc">Search 200 verified Q&As across Labor Law, Company Law, and Foreign Investment Law. Filter by topic and find your answer instantly.</div></div>
+        <div class="step-card"><div class="step-num">1</div><div class="step-title">Browse the Library</div><div class="step-desc">Search 240 verified Q&As across Labor Law, Company Law, Foreign Investment Law, and Income Tax Law. Filter by topic and find your answer instantly.</div></div>
         <div class="step-card"><div class="step-num">2</div><div class="step-title">Ask the AI</div><div class="step-desc">Type your question in plain English. Claude AI responds with a clear answer and the exact article reference from Somali legislation.</div></div>
         <div class="step-card"><div class="step-num">3</div><div class="step-title">Save & Share</div><div class="step-desc">Save answers to your dashboard, download PDF summaries, and share insights with your team. Everything organised in one place.</div></div>
       </div>
@@ -517,17 +519,18 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
   <div class="library-header">
     <div class="container">
       <div class="library-title-row">
-        <div><div class="section-eyebrow">Q&A Library</div><h1 style="font-size:2.2rem">Verified Legal Q&As</h1><p style="color:var(--cream-dim);font-size:.9rem;margin-top:.3rem">200 questions · 4 laws · all article references included</p></div>
+        <div><div class="section-eyebrow">Q&A Library</div><h1 style="font-size:2.2rem">Verified Legal Q&As</h1><p style="color:var(--cream-dim);font-size:.9rem;margin-top:.3rem">240 questions · 5 laws · all article references included</p></div>
         <button class="btn btn-gold" onclick="showPage('ask')">✦ Ask Your Own Question</button>
       </div>
       <div class="library-controls">
         <div class="search-wrap"><span class="search-icon">🔍</span><input class="input search-input" type="text" placeholder="Search questions..." id="searchInput" oninput="filterQA()"></div>
         <div class="filter-tabs">
-          <button class="filter-tab active" onclick="setFilter('all',this)">All (200)</button>
+          <button class="filter-tab active" onclick="setFilter('all',this)">All (240)</button>
           <button class="filter-tab" onclick="setFilter('labor',this)">🟢 Labor Law</button>
           <button class="filter-tab" onclick="setFilter('company',this)">🔵 Company Law</button>
           <button class="filter-tab" onclick="setFilter('investment',this)">🟡 Investment Law</button>
           <button class="filter-tab" onclick="setFilter('civil',this)">🟣 Civil Law</button>
+          <button class="filter-tab" onclick="setFilter('tax',this)">🔷 Tax Law</button>
         </div>
       </div>
     </div>
@@ -538,10 +541,10 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 <!-- ASK PAGE -->
 <div class="page" id="page-ask">
   <div class="ask-page">
-    <div class="ask-header"><div class="section-eyebrow">AI Answer Engine</div><h1 style="font-size:2.2rem">Ask a Legal Question</h1><p style="color:var(--cream-dim);margin-top:.5rem;font-size:.95rem">Get instant answers from Claude AI — trained on Somali Labour Code, Companies Law, and Foreign Investment Law.</p></div>
+    <div class="ask-header"><div class="section-eyebrow">AI Answer Engine</div><h1 style="font-size:2.2rem">Ask a Legal Question</h1><p style="color:var(--cream-dim);margin-top:.5rem;font-size:.95rem">Get instant answers from Claude AI — trained on Somali Labour Code, Companies Law, Foreign Investment Law, and Income Tax Law 2025.</p></div>
     <div id="noKeyBanner" class="no-key-banner" style="display:none"><span class="no-key-banner-icon">⚠️</span><div class="no-key-banner-text"><strong>API Key Required</strong> — Set the <code style="background:rgba(13,148,136,.1);padding:.1rem .3rem;border-radius:3px;color:var(--teal)">ANTHROPIC_API_KEY</code> environment variable. The Q&A Library works without a key.</div></div>
     <div class="ask-card">
-      <div class="ask-select-row"><label class="label">Law area (optional)</label><select class="select" id="lawAreaSelect"><option value="General">All areas / General</option><option value="Labor Law">Labor Law</option><option value="Company Law">Company Law</option><option value="Foreign Investment Law">Foreign Investment Law</option><option value="Civil Law">Civil Law</option></select></div>
+      <div class="ask-select-row"><label class="label">Law area (optional)</label><select class="select" id="lawAreaSelect"><option value="General">All areas / General</option><option value="Labor Law">Labor Law</option><option value="Company Law">Company Law</option><option value="Foreign Investment Law">Foreign Investment Law</option><option value="Civil Law">Civil Law</option><option value="Income Tax Law">Income Tax Law</option></select></div>
       <label class="label">Your question</label>
       <textarea class="input" id="questionInput" placeholder="e.g. How many days of maternity leave is an employee entitled to?" rows="4"></textarea>
       <div class="ask-form-row" style="margin-top:1rem"><div></div><button class="ask-submit" id="askBtn" onclick="submitQuestion()">Get Answer →</button></div>
@@ -555,6 +558,8 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
         <span class="sample-chip" onclick="setSample(this)">Is maternity leave paid?</span>
         <span class="sample-chip" onclick="setSample(this)">Can the government take my investment?</span>
         <span class="sample-chip" onclick="setSample(this)">Do I need a written employment contract?</span>
+        <span class="sample-chip" onclick="setSample(this)">What is the Presumptive Tax Regime?</span>
+        <span class="sample-chip" onclick="setSample(this)">What are the withholding tax rates in Somalia?</span>
       </div>
     </div>
     <div id="answerArea" style="margin-top:2rem"></div>
@@ -573,7 +578,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
     </div>
     <div class="pricing-faq"><h2 class="faq-title">Common questions</h2>
       <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is this legal advice? <span class="faq-icon">+</span></div><div class="faq-a">No. XeerHub provides legal information — verified answers referencing official Somali legislation. Always consult a qualified Somali lawyer for case-specific advice.</div></div>
-      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What laws are covered in Phase 1? <span class="faq-icon">+</span></div><div class="faq-a">Phase 1 covers the Somalia Labour Code, the Companies Law (Law No. 18, December 2019), and the Foreign Investment Law. Civil Law, Tax Law, and Maritime Law are coming in Phase 2.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What laws are covered? <span class="faq-icon">+</span></div><div class="faq-a">XeerHub currently covers: Somalia Labour Code, Companies Law (Law No. 18/2019), Foreign Investment Law, Civil Law, and the Income Tax Law 2025 (ITA 2025). Maritime Law and a Somali-language interface are planned for future phases.</div></div>
       <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How accurate are the AI answers? <span class="faq-icon">+</span></div><div class="faq-a">The AI is instructed to only cite articles it knows exist in the covered laws and to always provide article references. The Q&A library answers are manually verified.</div></div>
       <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Can I cancel anytime? <span class="faq-icon">+</span></div><div class="faq-a">Yes. Cancel at any time from your dashboard. Your access continues until the end of the billing period. No questions asked.</div></div>
       <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Do you offer NGO discounts? <span class="faq-icon">+</span></div><div class="faq-a">Yes. Registered NGOs and humanitarian organisations can contact us for special pricing.</div></div>
@@ -617,7 +622,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <div>
         <div class="about-mission-label">Mission</div>
         <h2 style="font-size:1.8rem;margin-bottom:.75rem">Making Somali law accessible to everyone who needs it</h2>
-        <p class="about-mission-text">Somalia's legal system has been rebuilt from the ground up. New company laws, investment protections, and labour codes now exist — but they're locked inside dense PDF documents that most professionals never read.<br><br>XeerHub was built to change that. We translate official Somali legislation into plain English, cite every article, and put it in the hands of the lawyers, NGOs, and business founders who need it most.<br><br>Every Q&A is manually verified. Every answer cites the exact article. No guesswork.</p>
+        <p class="about-mission-text">Somalia's legal system has been rebuilt from the ground up. New company laws, investment protections, labour codes, and income tax laws now exist — but they're locked inside dense PDF documents that most professionals never read.<br><br>XeerHub was built to change that. We translate official Somali legislation into plain English, cite every article, and put it in the hands of the lawyers, NGOs, and business founders who need it most.<br><br>Every Q&A is manually verified. Every answer cites the exact article. No guesswork.</p>
         <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem">
           <button class="btn btn-gold" onclick="showPage('library')">Browse the Library →</button>
           <button class="btn btn-outline" onclick="showPage('contact')">Get in touch</button>
@@ -682,8 +687,8 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
         <div class="timeline-dot">🚀</div>
         <div class="timeline-content">
           <div class="timeline-date">2025</div>
-          <div class="timeline-title">XeerHub goes live</div>
-          <div class="timeline-text">xeerhub.com launches. Phase 2 roadmap underway: Tax Law, Maritime Law, and a Somali-language interface. Somalia's legal intelligence platform — now open for everyone.</div>
+          <div class="timeline-title">XeerHub goes live — now with Income Tax Law</div>
+          <div class="timeline-text">xeerhub.com launches with 240 verified Q&As across 5 laws. Income Tax Law 2025 (ITA 2025) added — covering PTR, withholding taxes, corporation tax, GIA, and more. Phase 3 roadmap: Maritime Law and Somali-language interface.</div>
         </div>
       </div>
     </div>
@@ -1146,14 +1151,56 @@ const QA = {
     {id:28,q:"Do I have to hire Somali staff?",a:"Yes. At least 50% of all staff, contractors, and consultants must be residents of Somalia. Investors must contribute to skills transfer.",ref:"Foreign Investment Law · Arts. 4(f), 17",tier:"premium"},
     {id:29,q:"What types of investment are not covered by this law?",a:"The law does not apply to mineral research, mining, petroleum extraction, military manufacturing, weapons storage, and nuclear power.",ref:"Foreign Investment Law · Art. 21",tier:"premium"},
     {id:30,q:"If there is a dispute with the government, how is it resolved?",a:"Disputes are resolved first by mutual agreement, then bilateral treaties. If neither applies, ICSID international arbitration is available.",ref:"Foreign Investment Law · Art. 19",tier:"premium"},
+  ],
+  tax:[
+    {id:201,q:"Who is liable to pay income tax in Somalia?",a:"Income tax is payable by: any person with chargeable income for the year; any person who receives a final withholding payment; and any non-resident with a Somali permanent establishment that has repatriated income. Both individuals and entities (partnerships, trusts, corporations) can be liable.",ref:"ITA 2025 · Arts. 3, 9, 11, 86",tier:"free"},
+    {id:202,q:"When must I register for income tax in Somalia?",a:"If you earn income from business or investments from Somalia for any year of assessment, you must register with the Inland Revenue Department (IRD) using Form TR1. The form can be downloaded from the Ministry of Finance website.",ref:"ITA 2025 · Arts. 10, 11; ITR 2025 · Art. 9",tier:"free"},
+    {id:203,q:"What is the tax year in Somalia?",a:"The default year of assessment is the calendar year (January to December). A taxpayer may apply to the IRD to use a different year. Returns and final payments are due by 31 March of the following year.",ref:"ITA 2025 · Arts. 10, 97",tier:"free"},
+    {id:204,q:"How do I pay income tax on business income?",a:"Estimate your income tax at the start of the year and pay in four quarterly instalments by 31 March, 30 June, 30 September, and 31 December. Reconcile with actual tax due by 31 March of the following year.",ref:"ITA 2025 · Arts. 10, 97",tier:"free"},
+    {id:205,q:"What is chargeable income?",a:"Chargeable income is the total of a person's assessable income from employment, business, and investment for the year of assessment, minus allowed deductions. Each person's chargeable income is determined separately.",ref:"ITA 2025 · Arts. 10, 70",tier:"free"},
+    {id:206,q:"Who is a resident person for income tax purposes?",a:"An individual is resident if they have a permanent home in Somalia; are a Somali citizen without a home abroad; are present 183+ days in any 12-month period; or are a government official posted abroad. Corporations are resident if incorporated or effectively managed in Somalia.",ref:"ITA 2025 · Art. 77",tier:"free"},
+    {id:207,q:"How are employees taxed in Somalia?",a:"Employers withhold Personal Income Tax (PIT) from wages monthly and pay the IRD by the 15th of the following month. Employees with only one job need not file separately unless they also have business or investment income.",ref:"ITR 2025 · Art. 90",tier:"free"},
+    {id:208,q:"What are the Personal Income Tax (PIT) rates for resident individuals?",a:"Monthly: USD 0–100 at 0%; USD 101–500 at 6%; USD 501–1,500 at 12%; above USD 1,500 at 18%. Annual equivalents: USD 0–1,200 at 0%; USD 1,201–6,000 at 6%; USD 6,001–18,000 at 12%; above USD 18,000 at 18%.",ref:"ITA 2025 · Arts. 5, 7, 9, 10",tier:"free"},
+    {id:209,q:"What is the corporation tax rate in Somalia?",a:"Resident corporations pay: USD 150 flat for sales under USD 10,000; 1.5% for sales USD 10,001–50,000; 15% for sales over USD 50,000. Non-resident corporations pay a flat 18%.",ref:"ITA 2025 · Arts. 3, 60, 61",tier:"free"},
+    {id:210,q:"What is the Presumptive Tax Regime (PTR)?",a:"PTR is a simplified tax regime for resident individual sole traders with annual business turnover not exceeding USD 50,000 (rolling 3-year average). Quarterly tax is the higher of USD 37.50 or 1.5% of quarterly turnover. PTR does not apply to corporations, partners in partnerships, or listed professionals.",ref:"ITA 2025 · Arts. 9, 97",tier:"free"},
+    {id:211,q:"What professionals are excluded from the Presumptive Tax Regime?",a:"PTR is not available to: doctors, pharmacists, surgeons, dentists, nurses, physiotherapists, psychologists, veterinarians, architects, engineers, accountants, actuaries, auditors, economists, lawyers, journalists, teachers, lecturers, and professors.",ref:"ITA 2025 · Arts. 9, 97",tier:"premium"},
+    {id:212,q:"How is tax calculated under the Presumptive Tax Regime?",a:"Quarterly PTR tax is the higher of USD 37.50 or 1.5% of the quarter's turnover. Example: sales of USD 10,000 → 1.5% = USD 150, which exceeds USD 37.50, so USD 150 is payable.",ref:"ITA 2025 · Art. 97",tier:"free"},
+    {id:213,q:"What deductions can I claim against business income?",a:"Expenses incurred in producing business income may be deducted. Total deductions cannot exceed 95% of income — minimum tax on 5% applies even in a loss year. Capital expenses and private expenses are not deductible. Depreciation is deducted at prescribed rates.",ref:"ITA 2025 · Arts. 16–19",tier:"premium"},
+    {id:214,q:"What are the depreciation rates for business assets?",a:"Class 1 (computers, R&D): 40%. Class 2 (vehicles, construction, manufacturing plant): 30%. Class 3 (aircraft, vessels, office furniture, general equipment): 20%. Class 4 (buildings): 5%. Class 5 (intangibles): divided by useful life.",ref:"ITA 2025 · Art. 19",tier:"premium"},
+    {id:215,q:"What withholding tax rates apply in Somalia?",a:"WHT rates: immovable rental 5%; movable rental 10%; capital gains 15%; trust income 26%; dividends 5%; Murabaha/debt returns 10%; royalties 15%; service fees 10%; insurance premiums 5%.",ref:"ITA 2025 · First Schedule Art. 5",tier:"free"},
+    {id:216,q:"What is withholding tax and how does it work?",a:"WHT is deducted at source at the point of payment and paid directly to the Revenue Directorate by the payer. The recipient receives the net amount. Different income types attract different WHT rates.",ref:"ITA 2025 · First Schedule Art. 5",tier:"free"},
+    {id:217,q:"How are partnerships taxed in Somalia?",a:"Partnerships are not directly liable for income tax. The partnership's income and losses are allocated to individual partners in proportion to their ownership percentage and taxed under each partner's PIT.",ref:"ITA 2025 · Arts. 3, 54–57",tier:"premium"},
+    {id:218,q:"How are trusts (Amaano) taxed?",a:"A trust is taxed as a business entity. The trust's chargeable income for each year of assessment is taxed at a flat rate of 26%.",ref:"ITA 2025 · Arts. 3, 58, 59",tier:"premium"},
+    {id:219,q:"What is the tax on dividends paid by corporations?",a:"Dividends from a resident corporation to a resident individual are subject to 5% WHT, which is a final tax. Inter-corporate dividends are exempt if the recipient holds more than 12.5% for a continuous 365-day period before distribution.",ref:"ITA 2025 · Arts. 14, 61; First Schedule Art. 5",tier:"premium"},
+    {id:220,q:"What is Gain on Investment Assets (GIA) and how is it taxed?",a:"GIA tax applies to gains from disposing of investment assets such as land, buildings, and shares. For primary private residences, the first USD 100,000 of gain is exempt. Where total chargeable income exceeds USD 18,000, the GIA rate is 15% (with further excess taxed at 18%).",ref:"ITA 2025 · Arts. 6, 39",tier:"premium"},
+    {id:221,q:"Is there a capital gains tax exemption for selling a home?",a:"Yes. When selling a primary private residence, the first USD 100,000 of capital gain is exempt. Any remaining gain is included in investment income. This exemption applies only to the primary residence.",ref:"ITA 2025 · Art. 39",tier:"premium"},
+    {id:222,q:"What records must a business keep for tax purposes?",a:"Businesses must keep: audited financial statements; purchase and sales invoices; creditor and debtor statements; receipts; payroll books; petty cash book; bank statements; and asset registers with depreciation schedules.",ref:"ITA 2025 · Arts. 5, 7, 9, 10",tier:"premium"},
+    {id:223,q:"What happens if I fail to register, file, or pay income tax?",a:"Civil penalties apply for: failing to pay; underestimating tax; not maintaining records; failing to file; false statements; and aiding non-compliance. Criminal offences arise when a person acts knowingly or recklessly including failing to comply, pay, or impeding administration.",ref:"Revenue Administration Law",tier:"free"},
+    {id:224,q:"What is the PIT rate for non-resident individuals?",a:"Non-resident individuals are taxed at a flat rate of 18% on Somali-sourced income. Resident individuals below the age of 18 are taxed at 20%. Residents use the standard progressive rates.",ref:"ITA 2025 · Art. 10",tier:"premium"},
+    {id:225,q:"What is a Somali Permanent Establishment (PE)?",a:"A Somali PE is a fixed place in Somalia where a non-resident carries out business for 90 days or more in any 12-month period. Non-residents with a PE in Somalia are liable for tax on income attributable to that PE and on repatriated income.",ref:"ITA 2025 · Art. 86",tier:"premium"},
+    {id:226,q:"Can a resident person claim a foreign tax credit?",a:"Yes. A resident person (other than a partnership) may claim a foreign tax credit for any foreign income tax paid on their assessable foreign income for the year. This prevents double taxation.",ref:"ITA 2025 · Art. 11",tier:"premium"},
+    {id:227,q:"What is the tax rate for rental income in Somalia?",a:"Rental income from immovable property (real estate) is subject to 5% withholding tax. Rental from movable property such as vehicles and machinery is subject to 10% WHT. Both are withheld at source.",ref:"ITA 2025 · First Schedule Art. 5",tier:"free"},
+    {id:228,q:"What is the withholding tax on royalties?",a:"Royalties, intellectual property rights, and licensing fees are subject to 15% withholding tax. This applies to patents, trademarks, copyrights, software licences, and similar rights.",ref:"ITA 2025 · First Schedule Art. 5",tier:"premium"},
+    {id:229,q:"What are the quarterly instalment payment deadlines?",a:"Quarterly instalments are due: 31 March, 30 June, 30 September, and 31 December. By 31 March of the following year, file the annual return and reconcile instalments against total tax liability.",ref:"ITA 2025 · Arts. 10, 97",tier:"free"},
+    {id:230,q:"Do I pay tax on insurance compensation or gifts received?",a:"No. Insurance compensation (e.g. for a car accident) and personal gifts from friends or family are not income under the ITA 2025 and are not subject to income tax.",ref:"ITA 2025 · Art. 70",tier:"free"},
+    {id:231,q:"How is service fee income taxed in Somalia?",a:"Service fees are subject to 10% withholding tax deducted at source by the payer, who must file a WHT return and remit to the Revenue Directorate. This applies to consultancy, contracting, and professional services.",ref:"ITA 2025 · First Schedule Art. 5",tier:"premium"},
+    {id:232,q:"Can I use a non-calendar tax year for my business?",a:"Yes. A taxpayer may apply to the IRD to use a different tax year. If approved, the annual return must be filed within three calendar months following the end of the agreed tax year.",ref:"ITA 2025 · Arts. 10, 97",tier:"premium"},
+    {id:233,q:"What qualifies as a deductible business expense?",a:"An expense is deductible if incurred in producing business income, is not capital in nature (lasting more than 12 months), and is not a private expense. Entertainment and personal effects do not qualify. Depreciation is also deductible at prescribed rates.",ref:"ITA 2025 · Arts. 16–19",tier:"premium"},
+    {id:234,q:"Who must file an annual income tax return?",a:"Every person earning income from business or investments must file an annual return with the IRD by 31 March of the following year. Employees with only one employer whose tax is withheld do not need to file separately unless they also have other income.",ref:"ITA 2025 · Arts. 10, 11, 97, 98",tier:"free"},
+    {id:235,q:"What is the penalty for late filing of a tax return?",a:"Under the Revenue Administration Regulation 2024, late filers are liable to a penalty not exceeding USD 500 or 2% of the unpaid tax per month, whichever is higher. Continued failure may lead to further enforcement actions.",ref:"Revenue Administration Regulation 2024 · Art. 68",tier:"premium"},
+    {id:236,q:"What did the Income Tax Act 2025 replace?",a:"The ITA 2025 replaced the 1966 Direct Taxation Law. It came into effect on 11 May 2025, followed by the Income Tax Regulations 2025 signed on 15 May 2025.",ref:"ITA 2025 · Introduction",tier:"free"},
+    {id:237,q:"Is Murabaha profit subject to withholding tax?",a:"Yes. Returns on debt claims including Murabaha profit are subject to 10% withholding tax. The payer deducts this at source and remits it to the Revenue Directorate.",ref:"ITA 2025 · First Schedule Art. 5",tier:"premium"},
+    {id:238,q:"When does a business stop qualifying for PTR?",a:"A business loses PTR eligibility when annual turnover exceeds USD 50,000 (rolling 3-year average) and must register for standard PIT. The Revenue Directorate may also deregister a taxpayer who can maintain adequate records.",ref:"ITA 2025 · Arts. 9, 97",tier:"premium"},
+    {id:239,q:"How are GIA gains taxed when total income exceeds USD 18,000?",a:"The first USD 18,000 is taxed under standard progressive PIT rates. The excess is taxed at 15% to the extent attributable to GIA. Any further excess beyond the GIA amount is taxed at 18%.",ref:"ITA 2025 · Arts. 6, 39",tier:"premium"},
+    {id:240,q:"What is the withholding tax rate on insurance premiums?",a:"Reinsurance and insurance premium payments are subject to 5% withholding tax deducted at source. This applies to both domestic and international insurance premium payments sourced from Somalia.",ref:"ITA 2025 · First Schedule Art. 5",tier:"premium"},
   ]
-};
 
 const AREA_META = {
   civil:     {label:'🟣 Civil Law',      tagClass:'tag-civil',   },
   labor:     {label:'🟢 Labor Law',      tagClass:'tag-labor',   },
   company:   {label:'🔵 Company Law',    tagClass:'tag-company', },
   investment:{label:'🟡 Investment Law', tagClass:'tag-invest',  },
+  tax:       {label:'🔷 Tax Law',        tagClass:'tag-tax',     },
 };
 
 function showPage(name) {
