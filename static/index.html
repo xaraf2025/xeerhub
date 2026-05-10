@@ -8,16 +8,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --gold: #C9A84C; --gold-dim: rgba(201,168,76,0.18); --gold-border: rgba(201,168,76,0.35);
-  --ink: #0F0F1A; --ink-2: #181828; --ink-3: #222236;
-  --cream: #F5F0E8; --cream-dim: rgba(245,240,232,0.7); --cream-mute: rgba(245,240,232,0.38);
-  --labor: #2ECC8A; --labor-bg: rgba(46,204,138,0.1);
-  --company: #5B9CF6; --company-bg: rgba(91,156,246,0.1);
-  --invest: #C9A84C; --invest-bg: rgba(201,168,76,0.1);
-  --civil: #B07FD4; --civil-bg: rgba(176,127,212,0.1);
+  /* ── GOLD: brighter, more saturated for better CTA pop ── */
+  --gold: #E0A825; --gold-dim: rgba(224,168,37,0.18); --gold-border: rgba(224,168,37,0.4);
+  /* ── TEAL: new accent for secondary CTAs & trust signals ── */
+  --teal: #0D9488; --teal-dim: rgba(13,148,136,0.15); --teal-border: rgba(13,148,136,0.4);
+  /* ── BACKGROUNDS: deep forest green ── */
+  --ink: #0A1A0F; --ink-2: #112217; --ink-3: #1A3020;
+  --cream: #F0F5EC; --cream-dim: rgba(240,245,236,0.72); --cream-mute: rgba(240,245,236,0.38);
+  /* ── LAW AREA COLOURS ── */
+  --labor: #2ECC8A; --labor-bg: rgba(46,204,138,0.12);
+  --company: #5B9CF6; --company-bg: rgba(91,156,246,0.12);
+  --invest: #F0B429; --invest-bg: rgba(240,180,41,0.12);
+  --civil: #B07FD4; --civil-bg: rgba(176,127,212,0.12);
   --success: #2ECC8A; --danger: #E05C6A;
   --r: 10px; --r-sm: 6px;
-  --shadow: 0 8px 40px rgba(0,0,0,0.45); --shadow-sm: 0 2px 16px rgba(0,0,0,0.3);
+  --shadow: 0 8px 40px rgba(0,0,0,0.5); --shadow-sm: 0 2px 16px rgba(0,0,0,0.35);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -49,7 +54,7 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:700;line-height:1.15
 .select:focus{border-color:var(--gold)}select option{background:var(--ink-2)}
 textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 /* NAV */
-#nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(15,15,26,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06);}
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,26,15,.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(46,204,138,.10);}
 .nav-inner{max-width:1160px;margin:0 auto;padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--gold);cursor:pointer;}
 .nav-logo span{color:var(--cream);font-weight:400}
@@ -62,7 +67,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 .page{display:none;min-height:100vh;padding-top:64px}.page.active{display:block}
 /* HERO */
 .hero{position:relative;overflow:hidden;padding:7rem 0 5rem;text-align:center;}
-.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(201,168,76,.12) 0%,transparent 70%),radial-gradient(ellipse 40% 30% at 20% 80%,rgba(46,204,138,.06) 0%,transparent 60%),radial-gradient(ellipse 40% 30% at 80% 60%,rgba(91,156,246,.06) 0%,transparent 60%);}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(224,168,37,.13) 0%,transparent 70%),radial-gradient(ellipse 40% 30% at 15% 85%,rgba(46,204,138,.10) 0%,transparent 60%),radial-gradient(ellipse 35% 30% at 85% 55%,rgba(46,180,100,.07) 0%,transparent 60%);}
 .hero-grid{position:absolute;inset:0;z-index:0;opacity:.04;background-image:linear-gradient(rgba(245,240,232,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(245,240,232,.5) 1px,transparent 1px);background-size:60px 60px;}
 .hero-inner{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:0 2rem}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold-dim);border:1px solid var(--gold-border);color:var(--gold);padding:.35rem 1rem;border-radius:100px;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2rem;}
@@ -90,7 +95,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 .preview-a{font-size:.85rem;color:var(--cream-dim);line-height:1.7}
 .preview-ref{margin-top:.9rem;font-size:.75rem;color:var(--gold);background:var(--gold-dim);display:inline-block;padding:.2rem .6rem;border-radius:4px}
 /* EMAIL SIGNUP SECTION */
-.email-signup-section{padding:5rem 0;background:linear-gradient(135deg,rgba(201,168,76,.07) 0%,var(--ink) 50%,rgba(46,204,138,.04) 100%);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);}
+.email-signup-section{padding:5rem 0;background:linear-gradient(135deg,rgba(224,168,37,.07) 0%,var(--ink) 50%,rgba(46,204,138,.06) 100%);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);}
 .email-signup-inner{max-width:600px;margin:0 auto;text-align:center;padding:0 2rem;}
 .email-signup-icon{width:64px;height:64px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 1.25rem;}
 .email-signup-title{font-size:clamp(1.6rem,4vw,2.4rem);margin-bottom:.75rem}
@@ -254,6 +259,94 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 @media(max-width:900px){.pricing-grid{grid-template-columns:1fr;max-width:420px}.steps-grid{grid-template-columns:1fr}.dash-grid{grid-template-columns:1fr}.dash-stat-cards{grid-template-columns:repeat(2,1fr)}.footer-email-strip{flex-direction:column;text-align:center}.footer-strip-form{justify-content:center}.footer-strip-form .input{width:180px}}
 @media(max-width:700px){.nav-links{display:none}.nav-mobile-toggle{display:block}.grid-4{grid-template-columns:1fr}.hero h1{font-size:2.6rem}.hero-stats{gap:2rem}.ask-form-row{grid-template-columns:1fr;gap:.75rem}.container{padding:0 1.25rem}.dash-stat-cards{grid-template-columns:1fr}.email-signup-form{flex-direction:column}.newsletter-input-row{flex-direction:column}.newsletter-submit{width:100%}.footer-strip-form{flex-direction:column;width:100%}.footer-strip-form .input{width:100%}}
 @media(max-width:480px){.qa-grid{grid-template-columns:1fr}}
+
+/* ── TRUST BAR ── */
+.trust-bar{background:var(--ink-3);border-bottom:1px solid rgba(255,255,255,.06);padding:14px 0;}
+.trust-bar-inner{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:24px;}
+.trust-item{display:flex;align-items:center;gap:7px;font-size:.78rem;color:var(--cream-mute);font-weight:500;}
+.trust-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.15);}
+
+/* ── TEAL BUTTON ── */
+.btn-teal{background:var(--teal);color:#fff;border:none;}
+.btn-teal:hover{background:#0b8077;transform:translateY(-1px);box-shadow:0 4px 20px rgba(13,148,136,.4)}
+
+/* ── ABOUT PAGE ── */
+.about-page{max-width:1000px;margin:0 auto;padding:4rem 2rem 6rem}
+.about-hero{display:grid;grid-template-columns:1fr 340px;gap:4rem;align-items:center;margin-bottom:5rem;padding-bottom:4rem;border-bottom:1px solid rgba(255,255,255,.07);}
+.about-mission-label{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:.6rem;font-weight:600}
+.about-mission-text{font-size:1.15rem;color:var(--cream-dim);line-height:1.8;font-weight:300;margin-top:1rem}
+.founder-card{background:var(--ink-2);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:2rem;text-align:center;}
+.founder-avatar{width:80px;height:80px;border-radius:50%;background:var(--gold-dim);border:2px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 1rem;}
+.founder-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--cream);margin-bottom:.2rem}
+.founder-title{font-size:.8rem;color:var(--cream-mute);margin-bottom:1rem}
+.founder-bio{font-size:.85rem;color:var(--cream-dim);line-height:1.65;text-align:left}
+.about-values{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:4rem}
+.value-card{background:var(--ink-2);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:1.75rem;}
+.value-icon{font-size:1.6rem;margin-bottom:.9rem}
+.value-title{font-size:1rem;font-weight:600;margin-bottom:.4rem}
+.value-text{font-size:.855rem;color:var(--cream-dim);line-height:1.65}
+.about-timeline{margin-bottom:4rem}
+.timeline-item{display:flex;gap:1.5rem;padding-bottom:2rem;position:relative;}
+.timeline-item::before{content:'';position:absolute;left:19px;top:40px;bottom:0;width:1px;background:rgba(255,255,255,.08);}
+.timeline-item:last-child::before{display:none}
+.timeline-dot{width:40px;height:40px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem;font-weight:700;color:var(--gold);font-family:'Cormorant Garamond',serif;}
+.timeline-content{padding-top:.4rem}
+.timeline-date{font-size:.75rem;color:var(--cream-mute);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.3rem}
+.timeline-title{font-size:.95rem;font-weight:600;margin-bottom:.3rem}
+.timeline-text{font-size:.855rem;color:var(--cream-dim);line-height:1.6}
+@media(max-width:700px){.about-hero{grid-template-columns:1fr}.about-values{grid-template-columns:1fr}}
+
+/* ── TESTIMONIALS PAGE ── */
+.testimonials-page{padding:4rem 0 6rem}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-top:2.5rem}
+.testi-card{background:var(--ink-2);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:2rem;transition:all .2s;position:relative;}
+.testi-card:hover{border-color:var(--gold-border);transform:translateY(-3px)}
+.testi-card.featured{border-color:var(--teal-border);background:linear-gradient(145deg,rgba(13,148,136,.07),var(--ink-2));}
+.testi-stars{color:var(--gold);font-size:.9rem;letter-spacing:3px;margin-bottom:1rem}
+.testi-quote{font-size:.95rem;color:var(--cream-dim);line-height:1.75;font-style:italic;margin-bottom:1.5rem}
+.testi-quote::before{content:'\201C';font-size:2.5rem;color:var(--gold);font-family:'Cormorant Garamond',serif;line-height:0;vertical-align:-.5rem;margin-right:.1rem}
+.testi-author{display:flex;align-items:center;gap:.85rem;border-top:1px solid rgba(255,255,255,.07);padding-top:1.2rem}
+.testi-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:600;flex-shrink:0}
+.testi-name{font-size:.9rem;font-weight:600;color:var(--cream)}
+.testi-role{font-size:.75rem;color:var(--cream-mute)}
+.testi-org{font-size:.72rem;color:var(--teal);font-weight:600;margin-top:.1rem}
+.testi-feature-pill{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--teal);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .9rem;border-radius:0 0 7px 7px;}
+.logos-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2rem;margin-top:3rem;padding:2.5rem 2rem;background:var(--ink-2);border-radius:var(--r);border:1px solid rgba(255,255,255,.07);}
+.logo-pill{font-size:.8rem;color:var(--cream-mute);font-weight:500;background:var(--ink-3);border:1px solid rgba(255,255,255,.08);padding:.45rem 1.2rem;border-radius:100px;}
+
+/* ── BLOG PAGE ── */
+.blog-page{padding:4rem 0 6rem}
+.blog-grid{display:grid;grid-template-columns:2fr 1fr;gap:2rem;margin-top:2.5rem}
+.blog-card{background:var(--ink-2);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);overflow:hidden;transition:all .25s;cursor:pointer;}
+.blog-card:hover{border-color:var(--gold-border);box-shadow:var(--shadow-sm);transform:translateY(-3px)}
+.blog-card.featured{grid-column:1/-1}
+.blog-thumb{height:200px;display:flex;align-items:flex-end;padding:1.5rem;position:relative;}
+.blog-thumb.featured{height:280px}
+.blog-thumb-bg{position:absolute;inset:0;opacity:.25}
+.blog-category{display:inline-flex;align-items:center;gap:.4rem;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .8rem;border-radius:100px;margin-bottom:.75rem;position:relative;z-index:1}
+.blog-card-body{padding:1.5rem}
+.blog-title{font-size:1.05rem;font-weight:600;line-height:1.4;margin-bottom:.6rem;color:var(--cream)}
+.blog-excerpt{font-size:.855rem;color:var(--cream-dim);line-height:1.65;margin-bottom:1rem}
+.blog-meta{font-size:.75rem;color:var(--cream-mute);display:flex;align-items:center;gap:1rem}
+.blog-tag-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:3rem}
+.blog-subscribe-strip{background:linear-gradient(135deg,rgba(224,168,37,.08),rgba(13,148,136,.06));border:1px solid var(--gold-border);border-radius:var(--r);padding:2rem;margin-top:3rem;text-align:center;}
+@media(max-width:800px){.blog-grid{grid-template-columns:1fr}.blog-card.featured{grid-column:auto}}
+
+/* ── CONTACT PAGE ── */
+.contact-page{max-width:900px;margin:0 auto;padding:4rem 2rem 6rem}
+.contact-grid{display:grid;grid-template-columns:1fr 380px;gap:3rem;margin-top:2.5rem}
+.contact-form-card{background:var(--ink-2);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:2rem}
+.contact-info-card{display:flex;flex-direction:column;gap:1rem}
+.contact-info-item{background:var(--ink-2);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:1.5rem;display:flex;gap:1rem;align-items:flex-start;}
+.contact-info-icon{font-size:1.3rem;margin-top:.1rem;flex-shrink:0}
+.contact-info-label{font-size:.75rem;color:var(--cream-mute);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem}
+.contact-info-val{font-size:.9rem;color:var(--cream);font-weight:500}
+.contact-info-sub{font-size:.8rem;color:var(--cream-dim);margin-top:.2rem;line-height:1.5}
+.contact-submit{width:100%;padding:.95rem;background:var(--gold);color:var(--ink);border:none;border-radius:var(--r-sm);font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif;letter-spacing:.02em;}
+.contact-submit:hover{background:#f0b825;transform:translateY(-1px);box-shadow:0 4px 20px rgba(224,168,37,.4)}
+.contact-map{background:var(--ink-3);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1rem;}
+.contact-map-icon{font-size:2.5rem;margin-bottom:.5rem}
+@media(max-width:700px){.contact-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -264,7 +357,10 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <button class="nav-link active" onclick="showPage('home')" id="nav-home">Home</button>
       <button class="nav-link" onclick="showPage('library')" id="nav-library">Q&A Library</button>
       <button class="nav-link" onclick="showPage('ask')" id="nav-ask">Ask AI</button>
+      <button class="nav-link" onclick="showPage('about')" id="nav-about">About</button>
+      <button class="nav-link" onclick="showPage('blog')" id="nav-blog">Blog</button>
       <button class="nav-link" onclick="showPage('pricing')" id="nav-pricing">Pricing</button>
+      <button class="nav-link" onclick="showPage('contact')" id="nav-contact">Contact</button>
       <button class="nav-link" onclick="showPage('dashboard')" id="nav-dashboard">Dashboard</button>
       <button class="nav-cta" onclick="openModal('signup')">Start Free</button>
     </div>
@@ -282,13 +378,29 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <p class="hero-sub">Instant, verified answers on Somali Labor Law, Company Law, and Foreign Investment Law — built for NGOs, lawyers, and business professionals.</p>
       <div class="hero-ctas">
         <button class="btn btn-gold btn-lg" onclick="showPage('library')">Browse Q&A Library →</button>
-        <button class="btn btn-outline btn-lg" onclick="showPage('ask')">Ask a Legal Question</button>
+        <button class="btn btn-teal btn-lg" onclick="showPage('ask')">Ask a Legal Question</button>
       </div>
       <div class="hero-stats stagger">
         <div><div class="hero-stat-num">200</div><div class="hero-stat-label">Verified Q&As</div></div>
         <div><div class="hero-stat-num">3</div><div class="hero-stat-label">Laws Covered</div></div>
         <div><div class="hero-stat-num">4</div><div class="hero-stat-label">Target Audiences</div></div>
         <div><div class="hero-stat-num">AI</div><div class="hero-stat-label">Powered Answers</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="who-section">
+    <div class="trust-bar">
+      <div class="trust-bar-inner container">
+        <div class="trust-item">🔒 SSL Encrypted</div>
+        <div class="trust-dot"></div>
+        <div class="trust-item">⚖️ 200+ Verified Q&As</div>
+        <div class="trust-dot"></div>
+        <div class="trust-item">🇸🇴 Official Somali Legislation</div>
+        <div class="trust-dot"></div>
+        <div class="trust-item">👥 Trusted by NGOs & Law Firms</div>
+        <div class="trust-dot"></div>
+        <div class="trust-item">📧 team@xeerhub.com</div>
       </div>
     </div>
   </section>
@@ -379,7 +491,11 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <div class="footer-links">
         <span class="footer-link" onclick="showPage('library')">Q&A Library</span>
         <span class="footer-link" onclick="showPage('ask')">Ask AI</span>
+        <span class="footer-link" onclick="showPage('about')">About Us</span>
+        <span class="footer-link" onclick="showPage('testimonials')">Testimonials</span>
+        <span class="footer-link" onclick="showPage('blog')">Blog</span>
         <span class="footer-link" onclick="showPage('pricing')">Pricing</span>
+        <span class="footer-link" onclick="showPage('contact')">Contact</span>
         <span class="footer-link" onclick="showPage('dashboard')">Dashboard</span>
       </div>
       <div class="footer-copy">© 2025 XeerHub AI · xeerhub.com</div>
@@ -481,6 +597,384 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
   </div></div>
 </div>
 
+<!-- ══════════════════════════════════════════════
+     ABOUT PAGE
+══════════════════════════════════════════════ -->
+<div class="page" id="page-about">
+  <div class="about-page">
+    <div class="section-eyebrow">Our story</div>
+    <h1 style="font-size:2.6rem;margin-bottom:.5rem">Built for Somalia.<br>By people who know it.</h1>
+
+    <div class="about-hero">
+      <div>
+        <div class="about-mission-label">Mission</div>
+        <h2 style="font-size:1.8rem;margin-bottom:.75rem">Making Somali law accessible to everyone who needs it</h2>
+        <p class="about-mission-text">Somalia's legal system has been rebuilt from the ground up. New company laws, investment protections, and labour codes now exist — but they're locked inside dense PDF documents that most professionals never read.<br><br>XeerHub was built to change that. We translate official Somali legislation into plain English, cite every article, and put it in the hands of the lawyers, NGOs, and business founders who need it most.<br><br>Every Q&A is manually verified. Every answer cites the exact article. No guesswork.</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem">
+          <button class="btn btn-gold" onclick="showPage('library')">Browse the Library →</button>
+          <button class="btn btn-outline" onclick="showPage('contact')">Get in touch</button>
+        </div>
+      </div>
+      <div class="founder-card">
+        <div class="founder-avatar">👤</div>
+        <div class="founder-name">The XeerHub Team</div>
+        <div class="founder-title">Mogadishu, Somalia</div>
+        <div class="founder-bio">We are a team of legal researchers, technologists, and Somalia specialists committed to closing the legal information gap across the Horn of Africa.<br><br>The platform started with one question: <em>"Why is it so hard to find a simple answer to a simple legal question in Somalia?"</em><br><br>XeerHub is our answer to that.</div>
+      </div>
+    </div>
+
+    <div class="section-eyebrow">What we stand for</div>
+    <h2 style="font-size:1.6rem;margin-bottom:1.5rem">Our values</h2>
+    <div class="about-values">
+      <div class="value-card">
+        <div class="value-icon">📜</div>
+        <div class="value-title">Accuracy first</div>
+        <div class="value-text">Every answer cites the exact article. We never guess. If it isn't in the official legislation, we don't include it. The Q&A library is manually reviewed before publication.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🌍</div>
+        <div class="value-title">Built for Somalia</div>
+        <div class="value-text">We are not a generic legal AI. We focus exclusively on Somali law because depth matters more than breadth. Somalia's legal system deserves its own dedicated tool.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🔓</div>
+        <div class="value-title">Access for all</div>
+        <div class="value-text">The free tier is genuinely useful — not a teaser. We believe access to legal information is a foundation for fair business and good governance. Start free, forever.</div>
+      </div>
+    </div>
+
+    <div class="section-eyebrow" style="margin-top:1rem">How we got here</div>
+    <h2 style="font-size:1.6rem;margin-bottom:2rem">Our journey</h2>
+    <div class="about-timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot">Q1</div>
+        <div class="timeline-content">
+          <div class="timeline-date">Early 2024</div>
+          <div class="timeline-title">Research & legal verification</div>
+          <div class="timeline-text">Months of reading, cross-referencing, and manually verifying Somalia's key commercial laws — Labour Code, Companies Law (No. 18/2019), and the Foreign Investment Law.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">Q3</div>
+        <div class="timeline-content">
+          <div class="timeline-date">Mid 2024</div>
+          <div class="timeline-title">200 Q&As built and verified</div>
+          <div class="timeline-text">Each question written in plain English, every answer checked against the official legislation, every article reference confirmed. No hallucinated articles.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">Q4</div>
+        <div class="timeline-content">
+          <div class="timeline-date">Late 2024</div>
+          <div class="timeline-title">AI answer engine integrated</div>
+          <div class="timeline-text">Integrated the AI engine with strict guardrails: only answer from covered laws, always cite articles, never give legal opinions. Tested with Somali lawyers.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">🚀</div>
+        <div class="timeline-content">
+          <div class="timeline-date">2025</div>
+          <div class="timeline-title">XeerHub goes live</div>
+          <div class="timeline-text">xeerhub.com launches. Phase 2 roadmap underway: Tax Law, Maritime Law, and a Somali-language interface. Somalia's legal intelligence platform — now open for everyone.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--ink-2);border:1px solid var(--gold-border);border-radius:var(--r);padding:2.5rem;text-align:center;">
+      <div class="section-eyebrow">Join the platform</div>
+      <h2 style="font-size:1.6rem;margin-bottom:.75rem">Start with a free account</h2>
+      <p style="color:var(--cream-dim);font-size:.95rem;max-width:480px;margin:0 auto 1.75rem">5 free Q&A answers per month. No credit card. Cancel anytime. Every answer cites official Somali law.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-gold btn-lg" onclick="openModal('signup')">Create free account →</button>
+        <button class="btn btn-outline" onclick="showPage('contact')">Talk to us first</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TESTIMONIALS PAGE
+══════════════════════════════════════════════ -->
+<div class="page" id="page-testimonials">
+  <div class="testimonials-page"><div class="container">
+    <div style="text-align:center;margin-bottom:3rem">
+      <div class="section-eyebrow">Testimonials</div>
+      <h1 style="font-size:2.6rem;margin-bottom:.75rem">Trusted by legal professionals across Somalia</h1>
+      <p style="color:var(--cream-dim);max-width:500px;margin:0 auto;font-size:.95rem">Lawyers, NGO compliance teams, and business founders share their experience with XeerHub AI.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card featured">
+        <div class="testi-feature-pill">Featured</div>
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">XeerHub saved us days of work when we were onboarding 30 local staff. We needed to verify their contracts against the Labour Code — I just searched the library and had every answer in minutes. The article references meant our legal counsel could verify instantly. I've recommended it to every NGO colleague in Mogadishu.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--teal-dim);color:var(--teal)">FA</div>
+          <div>
+            <div class="testi-name">Faadumo A.</div>
+            <div class="testi-role">HR Manager</div>
+            <div class="testi-org">International NGO · Mogadishu</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">As a lawyer, I was skeptical of an AI legal tool. But XeerHub is different — it doesn't pretend to give legal advice. It gives you the article, the reference, and leaves the judgment to you. I use it daily to cross-check references when drafting contracts.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--gold-dim);color:var(--gold)">AH</div>
+          <div>
+            <div class="testi-name">Ahmed H.</div>
+            <div class="testi-role">Legal Advisor</div>
+            <div class="testi-org">Private Practice · Mogadishu</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">We were registering a subsidiary in Somalia and had no idea where to start. XeerHub's Company Law section answered every question — types of entities, founder requirements, annual reporting. Saved us several consultancy calls.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:rgba(91,156,246,.2);color:var(--company)">MO</div>
+          <div>
+            <div class="testi-name">Mohamed O.</div>
+            <div class="testi-role">Business Development Director</div>
+            <div class="testi-org">Regional Investment Group</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★☆</div>
+        <div class="testi-quote">The weekly digest is genuinely valuable. I don't always have time to read new legislation, but XeerHub surfaces what matters. The Investment Law section especially — we track Somalia closely for our clients.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--labor-bg);color:var(--labor)">KA</div>
+          <div>
+            <div class="testi-name">Khadija A.</div>
+            <div class="testi-role">Compliance Officer</div>
+            <div class="testi-org">East Africa Finance Group</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">Before XeerHub, our team had to request legal opinions for basic HR questions. Now we answer 80% ourselves and only escalate the complex cases. The NGO Team plan pays for itself in the first week.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:rgba(176,127,212,.2);color:var(--civil)">NI</div>
+          <div>
+            <div class="testi-name">Nasra I.</div>
+            <div class="testi-role">Country Director</div>
+            <div class="testi-org">Humanitarian Organisation · Somalia</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">I used the foreign investment Q&As to brief our board before entering Somalia. Having article-level references gave our legal team something concrete to work from. The quality and depth surprised me.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--gold-dim);color:var(--gold)">DK</div>
+          <div>
+            <div class="testi-name">David K.</div>
+            <div class="testi-role">Head of Market Entry</div>
+            <div class="testi-org">International Investor · London</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:3.5rem;text-align:center">
+      <div class="section-eyebrow">Trusted by organisations across the sector</div>
+      <div class="logos-row">
+        <div class="logo-pill">International NGOs</div>
+        <div class="logo-pill">Somali Law Firms</div>
+        <div class="logo-pill">UN Agencies</div>
+        <div class="logo-pill">Investment Groups</div>
+        <div class="logo-pill">HR Consultancies</div>
+        <div class="logo-pill">Development Finance</div>
+      </div>
+    </div>
+
+    <div style="background:var(--ink-2);border:1px solid var(--gold-border);border-radius:var(--r);padding:2.5rem;text-align:center;margin-top:3rem">
+      <h2 style="font-size:1.5rem;margin-bottom:.6rem">Share your experience</h2>
+      <p style="color:var(--cream-dim);font-size:.9rem;max-width:400px;margin:0 auto 1.5rem">Using XeerHub? We'd love to feature your story. Contact us and we'll be in touch.</p>
+      <button class="btn btn-gold" onclick="showPage('contact')">Get in touch →</button>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     BLOG PAGE
+══════════════════════════════════════════════ -->
+<div class="page" id="page-blog">
+  <div class="blog-page"><div class="container">
+    <div style="margin-bottom:3rem">
+      <div class="section-eyebrow">Legal Insights</div>
+      <h1 style="font-size:2.4rem;margin-bottom:.6rem">Somalia Law Blog</h1>
+      <p style="color:var(--cream-dim);font-size:.95rem;max-width:500px">Plain-English explainers on Somali business law, written for professionals who need clarity, not jargon.</p>
+    </div>
+
+    <div class="blog-grid">
+      <!-- Featured post -->
+      <div class="blog-card featured" onclick="showToast('Full article coming soon — subscribe for updates','success')">
+        <div class="blog-thumb featured" style="background:linear-gradient(135deg,var(--ink-3),rgba(13,148,136,.2));">
+          <div style="position:relative;z-index:1">
+            <div class="blog-category" style="background:var(--teal-dim);color:var(--teal);border:1px solid var(--teal-border)">📋 Company Law</div>
+          </div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-title" style="font-size:1.25rem">How to register a company in Somalia in 2025: a step-by-step guide</div>
+          <div class="blog-excerpt">Everything you need to know about registering a private limited company under the Companies Law (No. 18/2019) — from choosing your entity type to filing your founding documents with the Registrar.</div>
+          <div class="blog-meta">
+            <span>📅 May 2025</span>
+            <span>⏱ 8 min read</span>
+            <span class="tag tag-labor" style="font-size:.68rem">Companies Law</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" onclick="showToast('Full article coming soon — subscribe for updates','success')">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,var(--ink-3),rgba(46,204,138,.15));">
+          <div style="position:relative;z-index:1">
+            <div class="blog-category" style="background:var(--labor-bg);color:var(--labor);border:1px solid rgba(46,204,138,.3)">⚖️ Labor Law</div>
+          </div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-title">What every NGO needs to know about Somali employment contracts</div>
+          <div class="blog-excerpt">Local staff protections, termination rules, and the 10 contract clauses every INGO must include under the Labour Code.</div>
+          <div class="blog-meta"><span>📅 April 2025</span><span>⏱ 6 min read</span></div>
+        </div>
+      </div>
+
+      <div class="blog-card" onclick="showToast('Full article coming soon — subscribe for updates','success')">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,var(--ink-3),rgba(201,168,76,.15));">
+          <div style="position:relative;z-index:1">
+            <div class="blog-category" style="background:var(--invest-bg);color:var(--invest);border:1px solid rgba(240,180,41,.3)">💰 Investment Law</div>
+          </div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-title">Foreign investor protections in Somalia: what Article 18 actually guarantees</div>
+          <div class="blog-excerpt">A plain-English breakdown of Somalia's expropriation protections, profit repatriation rights, and ICSID arbitration access under the Foreign Investment Law.</div>
+          <div class="blog-meta"><span>📅 March 2025</span><span>⏱ 5 min read</span></div>
+        </div>
+      </div>
+
+      <div class="blog-card" onclick="showToast('Full article coming soon — subscribe for updates','success')">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,var(--ink-3),rgba(91,156,246,.15));">
+          <div style="position:relative;z-index:1">
+            <div class="blog-category" style="background:var(--company-bg);color:var(--company);border:1px solid rgba(91,156,246,.3)">🏛 Civil Law</div>
+          </div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-title">Somali Civil Law basics: contracts, obligations, and liability explained</div>
+          <div class="blog-excerpt">The foundations every business founder and legal professional needs before entering commercial agreements in Somalia.</div>
+          <div class="blog-meta"><span>📅 February 2025</span><span>⏱ 7 min read</span></div>
+        </div>
+      </div>
+
+      <div class="blog-card" onclick="showToast('Full article coming soon — subscribe for updates','success')">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,var(--ink-3),rgba(46,204,138,.1));">
+          <div style="position:relative;z-index:1">
+            <div class="blog-category" style="background:var(--labor-bg);color:var(--labor);border:1px solid rgba(46,204,138,.3)">⚖️ Labor Law</div>
+          </div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-title">Maternity leave, overtime, and public holidays: Somali HR compliance checklist</div>
+          <div class="blog-excerpt">The 15 most common Labour Code violations we see in Mogadishu — and how to fix them before they become disputes.</div>
+          <div class="blog-meta"><span>📅 January 2025</span><span>⏱ 4 min read</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="blog-subscribe-strip">
+      <div class="section-eyebrow">Weekly digest</div>
+      <h2 style="font-size:1.4rem;margin-bottom:.6rem">New articles straight to your inbox</h2>
+      <p style="color:var(--cream-dim);font-size:.875rem;max-width:400px;margin:0 auto 1.5rem">Join lawyers, NGOs and business founders getting free weekly Somali law updates every week.</p>
+      <div style="display:flex;gap:.75rem;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center">
+        <input class="input" type="email" id="blogEmail" placeholder="your@email.com" style="flex:1;min-width:200px">
+        <button class="email-signup-btn" onclick="subscribeMailchimp('blog')" id="blogBtn">Subscribe free →</button>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     CONTACT PAGE
+══════════════════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <div class="contact-page">
+    <div class="section-eyebrow">Get in touch</div>
+    <h1 style="font-size:2.4rem;margin-bottom:.5rem">We'd love to hear from you</h1>
+    <p style="color:var(--cream-dim);font-size:.95rem;margin-bottom:0">Questions, partnership enquiries, NGO discounts, or just a hello — we respond within 24 hours.</p>
+
+    <div class="contact-grid">
+      <div class="contact-form-card">
+        <h2 style="font-size:1.3rem;margin-bottom:1.5rem">Send us a message</h2>
+        <div style="display:flex;flex-direction:column;gap:1rem">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+            <div><label class="label">First name</label><input class="input" type="text" placeholder="Ahmed"></div>
+            <div><label class="label">Last name</label><input class="input" type="text" placeholder="Hassan"></div>
+          </div>
+          <div><label class="label">Email address</label><input class="input" type="email" placeholder="you@organisation.com"></div>
+          <div><label class="label">Organisation (optional)</label><input class="input" type="text" placeholder="Law firm, NGO, or company name"></div>
+          <div>
+            <label class="label">I'm enquiring about</label>
+            <select class="select">
+              <option>Professional plan (lawyers & advisors)</option>
+              <option>NGO / Team plan</option>
+              <option>Enterprise / API access</option>
+              <option>Partnership or press</option>
+              <option>Technical support</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div><label class="label">Message</label><textarea class="input" rows="5" placeholder="Tell us what you need. We read every message and reply within 24 hours."></textarea></div>
+          <button class="contact-submit" onclick="showToast('Message sent! We\'ll reply within 24 hours.','success')">Send message →</button>
+        </div>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📧</div>
+          <div>
+            <div class="contact-info-label">Email</div>
+            <div class="contact-info-val">team@xeerhub.com</div>
+            <div class="contact-info-sub">We respond within 24 hours, Monday to Friday.</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">💬</div>
+          <div>
+            <div class="contact-info-label">WhatsApp</div>
+            <div class="contact-info-val">Available on request</div>
+            <div class="contact-info-sub">For NGO and enterprise clients. Email us first to connect.</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">🤝</div>
+          <div>
+            <div class="contact-info-label">NGO discounts</div>
+            <div class="contact-info-val">Contact us for special pricing</div>
+            <div class="contact-info-sub">Registered NGOs and humanitarian organisations qualify for reduced rates on the Team plan.</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">🇸🇴</div>
+          <div>
+            <div class="contact-info-label">Based in</div>
+            <div class="contact-info-val">Mogadishu, Somalia</div>
+            <div class="contact-info-sub">Serving Somalia-focused professionals globally, from Mogadishu to London.</div>
+          </div>
+        </div>
+        <div class="contact-map">
+          <div class="contact-map-icon">🗺️</div>
+          <div style="font-size:.9rem;font-weight:600;margin-bottom:.25rem">Somalia's Legal Intelligence Platform</div>
+          <div style="font-size:.8rem;color:var(--cream-mute)">Mogadishu · Federal Republic of Somalia</div>
+        </div>
+        <div style="background:var(--ink-2);border:1px solid var(--gold-border);border-radius:var(--r);padding:1.25rem;text-align:center;">
+          <div style="font-size:.8rem;color:var(--cream-mute);margin-bottom:.6rem">Prefer to explore first?</div>
+          <button class="btn btn-gold btn-sm" style="width:100%;justify-content:center" onclick="showPage('library')">Browse free Q&As →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ══ MAILCHIMP NEWSLETTER POPUP ══ -->
 <div class="modal-overlay" id="modal-newsletter" onclick="closeModalOutside(event,'newsletter')">
   <div class="modal">
@@ -546,7 +1040,8 @@ async function subscribeMailchimp(source) {
   const ids = {
     popup:    {email:'popupEmail',    btn:'popupBtn',    success:'newsletterSuccessPopup', form:'newsletterFormPopup'},
     homepage: {email:'homepageEmail', btn:'homepageBtn', success:'homepageSuccess',        form:'homepageSignupForm'},
-    footer:   {email:'footerEmail',   btn:'footerBtn',   success:null,                     form:null}
+    footer:   {email:'footerEmail',   btn:'footerBtn',   success:null,                     form:null},
+    blog:     {email:'blogEmail',     btn:'blogBtn',     success:null,                     form:null}
   };
   const cfg = ids[source];
   const emailEl = document.getElementById(cfg.email);
@@ -588,7 +1083,7 @@ function handleSuccess(source, cfg, emailEl, btn) {
   } else if(source==='homepage') {
     document.getElementById(cfg.form).style.display='none';
     document.getElementById(cfg.success).style.display='block';
-  } else if(source==='footer') {
+  } else if(source==='footer' || source==='blog') {
     showToast('✅ Subscribed! Check your inbox.','success');
     if(emailEl) emailEl.value='';
     if(btn){ btn.textContent='Subscribed ✓'; }
@@ -656,7 +1151,8 @@ const AREA_META = {
 function showPage(name) {
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
+  const pg = document.getElementById('page-'+name);
+  if(pg) pg.classList.add('active');
   const n=document.getElementById('nav-'+name); if(n) n.classList.add('active');
   state.currentPage=name; window.scrollTo(0,0);
   if(name==='library') renderQA();
