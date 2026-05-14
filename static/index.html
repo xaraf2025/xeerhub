@@ -885,20 +885,120 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 ══════════════════════════════════════════════ -->
 <div class="page" id="page-pricing">
   <div class="pricing-page"><div class="container">
-    <div style="text-align:center;margin-bottom:3rem"><div class="section-eyebrow" style="justify-content:center">Pricing</div><h1 style="font-size:2.8rem;font-family:'Playfair Display',serif;margin-bottom:.75rem">Simple, honest pricing</h1><p style="color:var(--muted);font-size:1rem;max-width:480px;margin:0 auto">Start free. Upgrade when you need unlimited access, AI answers, and team features.</p></div>
-    <div class="pricing-toggle"><span>Monthly</span><div class="toggle-track" id="billingToggle" onclick="toggleBilling()"><div class="toggle-thumb"></div></div><span>Annual <span class="save-badge">Save 2 months</span></span></div>
-    <div class="pricing-grid">
-      <div class="price-card"><div class="plan-name">Free</div><div class="plan-price"><sup>$</sup><span class="price-val" data-monthly="0" data-annual="0">0</span></div><div class="plan-period">forever free</div><div class="plan-desc">Explore the library and build the habit. No card required.</div><ul class="plan-features"><li><span class="feat-check">✓</span>5 Q&A answers per month</li><li><span class="feat-check">✓</span>Browse all 5 law categories</li><li><span class="feat-check">✓</span>Article references included</li><li><span class="feat-check">✓</span>Weekly legal digest email</li><li><span class="feat-x">–</span>AI answer engine</li><li><span class="feat-x">–</span>Unlimited Q&A access</li></ul><button class="plan-btn plan-btn-outline" onclick="openModal('signup')">Get started free</button></div>
-      <div class="price-card featured"><div class="featured-pill">Most Popular</div><div class="plan-name">Professional</div><div class="plan-price"><sup>$</sup><span class="price-val" data-monthly="29" data-annual="24">29</span></div><div class="plan-period"><span class="period-label">per month</span></div><div class="plan-desc">For individual lawyers, advisors, and business owners who need daily answers.</div><ul class="plan-features"><li><span class="feat-check">✓</span>Unlimited Q&A access</li><li><span class="feat-check">✓</span>AI-powered answer engine</li><li><span class="feat-check">✓</span>Full article cross-reference</li><li><span class="feat-check">✓</span>Ask your own legal question</li><li><span class="feat-check">✓</span>Save &amp; download PDF answers</li><li><span class="feat-check">✓</span>Priority email support</li></ul><button class="plan-btn plan-btn-gold" onclick="openModal('signup')">Start 7-day free trial</button></div>
-      <div class="price-card"><div class="plan-name">NGO / Team</div><div class="plan-price"><sup>$</sup><span class="price-val" data-monthly="79" data-annual="66">79</span></div><div class="plan-period"><span class="period-label">per month</span></div><div class="plan-desc">For organisations with multiple staff needing legal compliance support.</div><ul class="plan-features"><li><span class="feat-check">✓</span>Everything in Professional</li><li><span class="feat-check">✓</span>Up to 10 team seats</li><li><span class="feat-check">✓</span>HR compliance checklists</li><li><span class="feat-check">✓</span>Contract clause library</li><li><span class="feat-check">✓</span>Quarterly law update briefings</li><li><span class="feat-check">✓</span>Dedicated account manager</li></ul><button class="plan-btn plan-btn-outline" onclick="contactTeam()">Contact us</button></div>
+
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:2.5rem">
+      <div class="section-eyebrow" style="justify-content:center">Pricing</div>
+      <h1 style="font-size:2.8rem;font-family:'Playfair Display',serif;margin-bottom:.75rem">Simple, honest pricing</h1>
+      <p style="color:var(--muted);font-size:1rem;max-width:500px;margin:0 auto .9rem">Start free. Upgrade when you need unlimited access, AI answers, and team features.</p>
+      <p style="font-size:.85rem;color:var(--teal-mid);font-weight:500">💡 Less than one hour of legal consultation — answers available 24/7.</p>
     </div>
+
+    <!-- Billing toggle -->
+    <div class="pricing-toggle">
+      <span style="font-weight:500;color:var(--ink)">Monthly</span>
+      <div class="toggle-track" id="billingToggle" onclick="toggleBilling()"><div class="toggle-thumb"></div></div>
+      <span>Annual <span class="save-badge">Save 2 months</span></span>
+    </div>
+
+    <!-- Annual price callout — shown when toggle is ON -->
+    <div id="annualCallout" style="display:none;text-align:center;margin:-1rem 0 2rem">
+      <span style="display:inline-block;background:var(--teal-pale);color:var(--teal-deep);font-size:.82rem;font-weight:600;padding:.35rem 1.1rem;border-radius:100px;border:1px solid var(--border-strong)">
+        Annual billing: Professional $288/yr · NGO/Team $792/yr — 2 months free
+      </span>
+    </div>
+
+    <!-- Cards -->
+    <div class="pricing-grid">
+
+      <!-- FREE -->
+      <div class="price-card">
+        <div class="plan-name">Free</div>
+        <div class="plan-price"><sup>$</sup><span class="price-val" data-monthly="0" data-annual="0">0</span></div>
+        <div class="plan-period">forever free</div>
+        <div class="plan-desc">Explore the library and build the habit. No card required.</div>
+        <ul class="plan-features">
+          <li><span class="feat-check">✓</span>5 Q&amp;A answers per month</li>
+          <li><span class="feat-check">✓</span>Browse all 5 law categories</li>
+          <li><span class="feat-check">✓</span>Article references included</li>
+          <li><span class="feat-check">✓</span>Weekly legal digest email</li>
+          <li><span class="feat-x">–</span>AI answer engine</li>
+          <li><span class="feat-x">–</span>Unlimited Q&amp;A access</li>
+        </ul>
+        <button class="plan-btn plan-btn-outline" onclick="openModal('signup')">Get started free</button>
+        <p style="text-align:center;font-size:.75rem;color:var(--muted);margin-top:.65rem">No credit card · No expiry</p>
+      </div>
+
+      <!-- PROFESSIONAL -->
+      <div class="price-card featured">
+        <div class="featured-pill">Most Popular</div>
+        <div class="plan-name">Professional</div>
+        <div class="plan-price"><sup>$</sup><span class="price-val" data-monthly="29" data-annual="24">29</span></div>
+        <div class="plan-period"><span class="period-label">per month</span></div>
+        <div class="plan-desc">For individual lawyers, advisors, and business owners who need daily answers.</div>
+        <ul class="plan-features">
+          <li><span class="feat-check">✓</span>Unlimited Q&amp;A access</li>
+          <li><span class="feat-check">✓</span>AI-powered answer engine</li>
+          <li><span class="feat-check">✓</span>Full article cross-reference</li>
+          <li><span class="feat-check">✓</span>Ask your own legal question</li>
+          <li><span class="feat-check">✓</span>Save &amp; download PDF answers</li>
+          <li><span class="feat-check">✓</span>Priority email support</li>
+        </ul>
+        <button class="plan-btn plan-btn-gold" onclick="openModal('signup')">Start 7-day free trial</button>
+        <p style="text-align:center;font-size:.75rem;color:var(--teal-light);margin-top:.65rem">No card required · Cancel anytime</p>
+      </div>
+
+      <!-- NGO / TEAM — fixed CTA + seat clarity + payment note -->
+      <div class="price-card">
+        <div class="plan-name">NGO / Team</div>
+        <div class="plan-price"><sup>$</sup><span class="price-val" data-monthly="79" data-annual="66">79</span></div>
+        <div class="plan-period"><span class="period-label">per month</span></div>
+        <div class="plan-desc">For organisations with multiple staff needing legal compliance support.</div>
+        <ul class="plan-features">
+          <li><span class="feat-check">✓</span>Everything in Professional</li>
+          <li><span class="feat-check">✓</span>Up to 10 team seats <span style="font-size:.72rem;color:var(--muted)">(need more? contact us)</span></li>
+          <li><span class="feat-check">✓</span>HR compliance checklists</li>
+          <li><span class="feat-check">✓</span>Contract clause library</li>
+          <li><span class="feat-check">✓</span>Quarterly law update briefings</li>
+          <li><span class="feat-check">✓</span>Dedicated account manager</li>
+        </ul>
+        <!-- Primary: trial. Secondary: contact for NGO discount -->
+        <button class="plan-btn plan-btn-gold" onclick="openModal('signup')" style="margin-bottom:.55rem">Start 14-day free trial</button>
+        <button class="plan-btn plan-btn-outline" onclick="contactTeam()" style="font-size:.82rem;padding:.55rem">Need organization pricing? Contact us →</button>
+        <p style="text-align:center;font-size:.75rem;color:var(--muted);margin-top:.65rem">Accepts EVC Plus · Zaad · Bank transfer</p>
+      </div>
+
+    </div>
+
+    <!-- Payment methods strip -->
+    <div style="max-width:680px;margin:2rem auto 0;text-align:center;background:var(--parchment);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem 1.5rem">
+      <p style="font-size:.82rem;color:var(--muted);line-height:1.7">
+        <strong style="color:var(--ink)">Payment methods:</strong> Visa / Mastercard &nbsp;·&nbsp; EVC Plus &nbsp;·&nbsp; Zaad &nbsp;·&nbsp; Bank transfer (NGO/Team)
+        &nbsp;·&nbsp; <button onclick="showPage('contact')" style="background:none;border:none;color:var(--teal-mid);font-weight:500;font-size:.82rem;cursor:pointer;padding:0;font-family:'DM Sans',sans-serif">Other arrangements →</button>
+      </p>
+    </div>
+
+    <!-- FAQ — two new entries added -->
     <div class="pricing-faq"><h2 class="faq-title">Common questions</h2>
       <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is this legal advice? <span class="faq-icon">+</span></div><div class="faq-a">No. XeerHub provides legal information — verified answers referencing official legislation. Always consult a qualified Somali lawyer for case-specific advice.</div></div>
       <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What laws are covered? <span class="faq-icon">+</span></div><div class="faq-a">XeerHub covers: Somalia Labour Code, Companies Law (Law No. 18/2019), Foreign Investment Law, Civil Law, and the Income Tax Law 2025 (ITA 2025). Maritime Law and a Somali-language interface are planned for future phases.</div></div>
       <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How accurate are the AI answers? <span class="faq-icon">+</span></div><div class="faq-a">For Income Tax questions, the AI is strictly grounded in the Income Tax Regulation 2025 (Reg No. 0142-2025). It cites specific Regulation numbers alongside the relevant Article. The Q&amp;A library answers are manually verified. The AI is instructed never to fabricate provisions.</div></div>
       <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Can I cancel anytime? <span class="faq-icon">+</span></div><div class="faq-a">Yes. Cancel at any time from your dashboard. Your access continues until the end of the billing period. No questions asked.</div></div>
-      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Do you offer NGO discounts? <span class="faq-icon">+</span></div><div class="faq-a">Yes. Registered NGOs and humanitarian organisations can contact us for special pricing.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Do you offer NGO discounts? <span class="faq-icon">+</span></div><div class="faq-a">Yes. Registered NGOs and humanitarian organisations can contact us for special pricing on the NGO/Team plan. Email info@xeerhub.com with your organisation name and registration details and we'll respond within one business day.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What payment methods do you accept? <span class="faq-icon">+</span></div><div class="faq-a">We accept Visa and Mastercard internationally, EVC Plus and Zaad for users in Somalia, and bank transfer for NGO/Team plan customers. If you need a different arrangement, contact us at info@xeerhub.com.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What happens after the NGO/Team trial ends? <span class="faq-icon">+</span></div><div class="faq-a">After your 14-day free trial you'll be prompted to add payment details to continue. All saved answers and team settings are preserved. If your organisation qualifies for an NGO discount, contact us before the trial ends and we'll apply it to your first invoice.</div></div>
     </div>
+
+    <!-- Bottom CTA strip -->
+    <div style="background:var(--teal-deep);border-radius:var(--r);padding:2.75rem 2rem;text-align:center;margin-top:3.5rem;max-width:680px;margin-left:auto;margin-right:auto">
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.65rem;color:#fff;margin-bottom:.5rem">Not sure which plan fits?</h3>
+      <p style="color:rgba(255,255,255,.6);font-size:.9rem;margin-bottom:1.6rem">Start free — no card needed. Upgrade only when you're ready.</p>
+      <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-gold btn-lg" onclick="openModal('signup')">Start free →</button>
+        <button onclick="showPage('contact')" style="display:inline-flex;align-items:center;padding:1rem 2.2rem;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:var(--r-sm);font-size:1rem;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background .2s" onmouseover="this.style.background='rgba(255,255,255,.18)'" onmouseout="this.style.background='rgba(255,255,255,.1)'">Talk to us first</button>
+      </div>
+    </div>
+
   </div></div>
 </div>
 
@@ -1391,6 +1491,7 @@ function toggleBilling(){
   document.getElementById('billingToggle').classList.toggle('on',state.billingAnnual);
   document.querySelectorAll('.price-val').forEach(el=>{el.textContent=state.billingAnnual?el.dataset.annual:el.dataset.monthly;});
   document.querySelectorAll('.period-label').forEach(el=>{el.textContent=state.billingAnnual?'per month, billed annually':'per month';});
+  const c=document.getElementById('annualCallout');if(c)c.style.display=state.billingAnnual?'block':'none';
 }
 function toggleFaq(el){el.classList.toggle('open');}
 function contactTeam(){showToast('Opening email to info@xeerhub.com...','success');setTimeout(()=>{window.location.href='mailto:info@xeerhub.com';},400);}
