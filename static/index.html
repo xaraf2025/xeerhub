@@ -1336,7 +1336,7 @@ function renderQA(){
         <div class="qa-a">${item.a}</div>
         ${!free?`<div class="qa-lock-overlay"><button class="qa-lock-btn" onclick="openModal('signup')">🔒 Unlock with free account</button></div>`:''}
       </div>
-      <div class="qa-footer"><span class="qa-ref">${item.ref}</span></div>
+      <div class="qa-footer">${free?`<span class="qa-ref">${item.ref}</span>`:'<span class="qa-ref" style="filter:blur(4px);user-select:none;pointer-events:none;opacity:.5">Unlock to see reference</span>'}</div>
     </div>`;
   }).join('');
 }
