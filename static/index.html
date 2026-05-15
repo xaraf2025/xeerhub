@@ -43,6 +43,7 @@ html{scroll-behavior:smooth}
   --invest:#C8991A;--invest-bg:rgba(200,153,26,0.08);
   --civil:#7C3AED;--civil-bg:rgba(124,58,237,0.08);
   --tax:#0A4A3A;--tax-bg:rgba(10,74,58,0.08);
+  --env:#1A7A2E;--env-bg:rgba(26,122,46,0.08);
 
   --success:#1D7A5E;--danger:#DC2626;
 
@@ -95,6 +96,7 @@ h1,h2,h3{font-family:'Playfair Display',serif;line-height:1.1}
 .tag-invest{background:var(--invest-bg);color:var(--invest)}
 .tag-civil{background:var(--civil-bg);color:var(--civil)}
 .tag-tax{background:var(--tax-bg);color:var(--tax)}
+.tag-env{background:var(--env-bg);color:var(--env)}
 .tag-free{background:var(--labor-bg);color:var(--labor)}
 .tag-premium{background:var(--parchment);color:var(--muted);border:1px solid var(--border)}
 
@@ -203,9 +205,10 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 .card-company::before{background:var(--gold)}
 .card-invest::before{background:var(--company)}
 .card-tax::before{background:#E24B4A}
+.card-env::before{background:var(--env)}
 .card-area{display:flex;align-items:center;gap:6px;margin-bottom:6px}
 .dot{width:6px;height:6px;border-radius:50%;display:inline-block}
-.dot-teal{background:var(--teal-light)}.dot-gold{background:var(--gold)}.dot-blue{background:var(--company)}.dot-red{background:#E24B4A}
+.dot-teal{background:var(--teal-light)}.dot-gold{background:var(--gold)}.dot-blue{background:var(--company)}.dot-red{background:#E24B4A}.dot-env{background:var(--env)}
 .card-area-label{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
 .card-q{font-size:.875rem;font-weight:600;color:var(--ink);margin-bottom:4px;line-height:1.45}
 .card-ref{font-size:.7rem;color:var(--muted);font-family:'DM Mono',monospace}
@@ -621,14 +624,18 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
     <div class="hero-left">
       <div class="hero-eyebrow">Somalia's Legal Intelligence Platform</div>
       <h1 class="hero-headline">Clear answers to<br><em>real legal questions</em></h1>
-      <p class="hero-sub">Instant, verified answers on Somali Labour Law, Company Law, Foreign Investment Law, and Income Tax Law — built for NGOs, lawyers, and business professionals.</p>
+      <p class="hero-sub">Instant, verified answers on Somali Labour Law, Company Law, Foreign Investment Law, Income Tax Law, and the <strong style="color:var(--teal-light)">Environmental Protection &amp; Management Act 2024</strong> — built for NGOs, lawyers, and business professionals.</p>
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(43,174,135,0.13);border:1px solid rgba(43,174,135,0.28);border-radius:100px;padding:.35rem 1rem .35rem .6rem;margin-bottom:1.5rem;position:relative;z-index:2">
+        <span style="background:var(--teal-light);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .55rem;border-radius:100px">NEW</span>
+        <span style="font-size:.8rem;color:rgba(255,255,255,0.8);font-weight:400">🌿 Environmental Law — 50 Q&amp;As now live</span>
+      </div>
       <div class="hero-actions">
         <button class="hero-btn-gold" onclick="showPage('library')">Browse Q&A Library →</button>
         <button class="hero-btn-ghost" onclick="showPage('ask')">Ask a Legal Question</button>
       </div>
       <div class="hero-stats stagger">
-        <div><div class="stat-num">240</div><div class="stat-label">Verified Q&As</div></div>
-        <div><div class="stat-num">5</div><div class="stat-label">Laws Covered</div></div>
+        <div><div class="stat-num">290</div><div class="stat-label">Verified Q&As</div></div>
+        <div><div class="stat-num">6</div><div class="stat-label">Laws Covered</div></div>
         <div><div class="stat-num">AI</div><div class="stat-label">Powered Answers</div></div>
         <div><div class="stat-num">Free</div><div class="stat-label">To Start</div></div>
       </div>
@@ -656,6 +663,11 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
           <div class="card-area"><span class="dot dot-red"></span><span class="card-area-label" style="color:#E24B4A">Income Tax Law</span></div>
           <div class="card-q">What is the Presumptive Tax Regime and who qualifies?</div>
           <div class="card-ref">ITR 2025 · Reg 9-1, Reg 9-2 · ITA 2025 · Art. 9</div>
+        </div>
+        <div class="sample-card card-env" style="border-left-color:var(--env)">
+          <div class="card-area"><span class="dot dot-env"></span><span class="card-area-label" style="color:var(--env)">Environmental Law 🌿 New</span></div>
+          <div class="card-q">Is the import and export of charcoal legal in Somalia?</div>
+          <div class="card-ref">EPMA 2024 · Art. 48(1),(5)</div>
         </div>
       </div>
     </div>
@@ -835,12 +847,13 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <div class="library-controls">
         <div class="search-wrap"><span class="search-icon">🔍</span><input class="input search-input" type="text" placeholder="Search questions..." id="searchInput" oninput="filterQA()"></div>
         <div class="filter-tabs">
-          <button class="filter-tab active" onclick="setFilter('all',this)">All (240)</button>
+          <button class="filter-tab active" onclick="setFilter('all',this)">All (290)</button>
           <button class="filter-tab" onclick="setFilter('labor',this)">🟢 Labor (50)</button>
           <button class="filter-tab" onclick="setFilter('company',this)">🔵 Company (50)</button>
           <button class="filter-tab" onclick="setFilter('investment',this)">🟡 Investment (50)</button>
           <button class="filter-tab" onclick="setFilter('civil',this)">🟣 Civil (50)</button>
           <button class="filter-tab" onclick="setFilter('tax',this)">🔷 Tax (40)</button>
+          <button class="filter-tab" onclick="setFilter('environment',this)">🌿 Environment (50)</button>
         </div>
       </div>
     </div>
@@ -1374,6 +1387,58 @@ const QA={
     {id:210,q:"Is rental income taxable in Somalia?",a:"Yes. Rental income from property located in Somalia is taxable. Under Regulation 93-1, payers of rent above the cash payment threshold must withhold tax and report the payment.",ref:"ITR 2025 · Reg 93-1 · ITA 2025 · Art. 14",tier:"free"},
     {id:211,q:"What is the accommodation benefit calculation for employees?",a:"Under Regulation 32-3: for qualified employees — lesser of 15% of basic salary or actual rent charged (A or B, whichever is lower). For other employees — 15% of basic salary or actual rent charged (A only).",ref:"ITR 2025 · Reg 32-3 · ITA 2025 · Art. 32",tier:"premium"},
     {id:212,q:"How is primary residence gain treated for tax purposes?",a:"Under Regulation 6-1, the first USD 100,000 of gain on disposal of a primary private residence is not included in income. Any remainder is investment income. A loss on disposal is not deductible. The USD 100,000 is proportionately reduced for days the property was not the primary residence.",ref:"ITR 2025 · Reg 6-1 · ITA 2025 · Art. 6",tier:"premium"}
+  ],
+  environment:[
+    {id:301,q:"Does every person in Somalia have a legal right to a clean environment?",a:"Yes. Under Article 5 of the Environmental Protection and Management Act (EPMA) 2024, every person living in Somalia has the right to a clean, safe and healthy environment. This is a foundational right underpinning the entire Act.",ref:"EPMA 2024 · Art. 5",tier:"free"},
+    {id:302,q:"What is the Polluter Pays Principle under Somali law?",a:"Article 7 of the EPMA establishes that anyone who produces pollution must bear the full cost of managing it. This means polluters are financially responsible for damage to human health or the environment, including cleanup costs and compensation to affected parties.",ref:"EPMA 2024 · Art. 7",tier:"free"},
+    {id:303,q:"Which government body is primarily responsible for environmental protection in Somalia?",a:"The Ministry of Environment and Climate Change (MECC) is the national institution responsible for managing and protecting the Somali environment and addressing climate change impacts, as established by Article 12 of the EPMA 2024.",ref:"EPMA 2024 · Art. 12",tier:"free"},
+    {id:304,q:"Is an Environmental and Social Impact Assessment (ESIA) mandatory before starting a project?",a:"Yes. Under Article 57, any person wishing to carry out a project must conduct an ESIA before commencement. This applies regardless of any other approval, permit or licence already granted. Operating without an ESIA certificate is a criminal offence under Article 79.",ref:"EPMA 2024 · Arts. 57–58",tier:"free"},
+    {id:305,q:"What types of projects always require an ESIA?",a:"Article 57(2) and Schedule 1 of the EPMA list mandatory ESIA projects including oil refineries and offshore installations, aluminium plants, power stations, communication antennas, plants with inter-regional environmental impacts, oil exploration, urban development, dams, mining, nuclear reactors, and waste disposal facilities.",ref:"EPMA 2024 · Art. 57(2), Schedule 1",tier:"free"},
+    {id:306,q:"Is the import and export of charcoal legal in Somalia?",a:"No. Article 48(1) of the EPMA expressly prohibits the import and export of charcoal to and from Somalia. Anyone who violates this ban commits an offence and is liable to imprisonment of not less than two years and not more than five years, or a fine equivalent to the environmental damage caused.",ref:"EPMA 2024 · Art. 48(1),(5)",tier:"free"},
+    {id:307,q:"What are the penalties for discharging hazardous substances into the environment?",a:"Under Article 41, no person may discharge any hazardous substance, chemical, oil or oil mixture into any waters or other environmental segment. Conviction results in payment of cleanup and restoration costs plus compensation to third parties. Failure to begin cleanup immediately after a spill is itself a separate offence.",ref:"EPMA 2024 · Art. 41",tier:"free"},
+    {id:308,q:"Can Environment Inspectors enter private premises without permission?",a:"Inspectors may enter any land or building (other than a dwelling house) and any vessel, vehicle or aircraft at any time for monitoring or enforcement purposes. Entry to private premises requires either reasonable prior notice to the owner or a search warrant issued by a court in accordance with the Criminal Procedure Code.",ref:"EPMA 2024 · Art. 21(1)–(4)",tier:"free"},
+    {id:309,q:"What is the Precautionary Principle and does it apply in Somalia?",a:"Yes. Article 10 of the EPMA codifies the Precautionary Principle: where a project or activity raises threats of harm to human health or the environment, decision-makers must adopt precautionary measures even if the cause-and-effect relationship is not fully scientifically established.",ref:"EPMA 2024 · Art. 10",tier:"free"},
+    {id:310,q:"What happens if an ESIA report is found inadequate by the Ministry?",a:"Under Article 62(2), if the Ministry is unsatisfied with the ESIA report, the proposed project must be abandoned and no licence shall be issued. The Ministry may also cancel, revoke or suspend a licence already issued if the holder breaches its terms.",ref:"EPMA 2024 · Art. 62(2)–(3)",tier:"free"},
+    {id:311,q:"Who pays for environmental restoration when pollution occurs?",a:"Article 66 places the cost of investigation, monitoring and remediation on the responsible person. Where two or more persons are responsible, costs are allocated according to their respective shares of responsibility. Where the responsible party cannot be identified or cannot pay, the public authority bears those costs.",ref:"EPMA 2024 · Art. 66",tier:"free"},
+    {id:312,q:"Can single-use plastic products be used or sold in Somalia?",a:"No. Article 72 of the EPMA expressly prohibits lightweight single-use plastic products due to the harm they cause to the environment. This is an absolute prohibition with no exceptions stated in the Act.",ref:"EPMA 2024 · Art. 72",tier:"free"},
+    {id:313,q:"What emission licence is required for industrial operations?",a:"Under Article 28, any owner or operator of a trade or industrial undertaking that emits a substance causing or likely to cause air pollution must apply to the Ministry for an emission licence. New businesses must apply before commencing; existing businesses had 12 months from the Act coming into force to apply.",ref:"EPMA 2024 · Art. 28",tier:"free"},
+    {id:314,q:"What criminal penalty applies for causing air pollution?",a:"Article 27(2) states that any person who emits substances causing air pollution in contravention of emission standards is guilty of an offence liable to imprisonment of not more than two years, a court-determined fine, or both. The convicted person must also pay removal costs and third-party compensation.",ref:"EPMA 2024 · Art. 27(2)–(3)",tier:"free"},
+    {id:315,q:"Is deforestation and tree-cutting regulated under Somali law?",a:"Yes. Article 48(2) of the EPMA prohibits cutting trees and forest resources except in accordance with the Act and other forest protection laws. The only exception is invasive plants. The government must incentivise alternative energy to reduce dependence on charcoal and firewood.",ref:"EPMA 2024 · Art. 48(2)–(4)",tier:"free"},
+    {id:316,q:"What is an Environmental Restoration Order and who can issue one?",a:"The Ministry may issue an Environmental Restoration Order (ERO) under Article 67 to require a person to restore the environment to its prior state, stop polluting activities, pay compensation to affected parties, or pay a levy representing restoration costs. An ERO may also require replanting trees, replacing soil, and removing deposited waste.",ref:"EPMA 2024 · Art. 67",tier:"free"},
+    {id:317,q:"Must businesses notify the Ministry if they discharge pollutants?",a:"Yes. Article 22 requires all owners or operators of installations discharging effluents or pollutants into the environment to notify the Ministry within 30 days of the Act coming into force, and to submit accurate reports on the quantity and quality of such discharges. Article 33 imposes a similar 90-day obligation for irrigation projects, sewerage systems, and industrial workshops.",ref:"EPMA 2024 · Arts. 22–23, 33",tier:"free"},
+    {id:318,q:"What protection does the EPMA provide for wildlife and endangered species?",a:"Article 74 requires that all wild animals, birds and their habitats — particularly rare, threatened and endangered species — be preserved and protected. Illegal Wildlife Trade and poaching are expressly prohibited. Convictions carry imprisonment from six months to six years, confiscation of wildlife and materials used, and cancellation of any licence held.",ref:"EPMA 2024 · Art. 74(4)–(6)",tier:"free"},
+    {id:319,q:"Are companies engaged in petroleum operations subject to environmental law?",a:"Yes. Article 42 requires every person engaged in exploration, extraction, production, manufacturing and other petroleum activities to protect the environment in accordance with the EPMA, other Somali environmental laws, and applicable international environmental law. Oil spill owners or masters are held personally responsible for contamination.",ref:"EPMA 2024 · Art. 42",tier:"free"},
+    {id:320,q:"Does the public have a right to access environmental information?",a:"Yes. Article 25 establishes that every person has the right to obtain environmental information in official documents. Article 23 further requires the Ministry to inform the public adequately about environmental protection and pollution levels, including publishing pollution studies and impact assessment results.",ref:"EPMA 2024 · Arts. 23–25",tier:"free"},
+    {id:321,q:"What is the National Environmental Council and what does it do?",a:"Article 14 establishes the National Environmental Council, chaired by the Minister of Environment. It includes representatives from line ministries, federal member state environment ministries, NGOs, trade unions, and parliament. Under Article 15 it advises on national environmental goals, evaluates policy implementation, and meets at least every six months.",ref:"EPMA 2024 · Arts. 14–15",tier:"free"},
+    {id:322,q:"How does the EPMA address climate change?",a:"Chapter 9 (Articles 54–55) requires the Ministry to formulate programs to raise awareness of climate change, address its effects on Somalia's water, coasts, land, food security and biodiversity, implement adaptation and mitigation measures, and participate in international conventions. A Just Transition Policy must also be developed to maximise social and economic opportunities.",ref:"EPMA 2024 · Arts. 54–55",tier:"free"},
+    {id:323,q:"Can a person appeal a Ministry decision on an environmental licence?",a:"Yes. Article 85 provides that anyone dissatisfied with a Ministry decision under the Act or its regulations may appeal to court. Article 62(5) similarly allows any person dissatisfied with an ESIA licence decision to appeal to the relevant court under Article 86.",ref:"EPMA 2024 · Arts. 62(5), 85",tier:"free"},
+    {id:324,q:"What is a Precautionary Notice and when can it be issued?",a:"Under Article 68, an Environment Inspector who suspects an activity may be impacting the environment may issue a Precautionary Notice requiring the provision of information, adoption of alternative techniques, or improvements to avoid environmental harm. Failure to comply is an offence carrying a fine equivalent to the damage caused or up to six months imprisonment.",ref:"EPMA 2024 · Art. 68",tier:"free"},
+    {id:325,q:"Who is responsible for waste management in Somalia?",a:"Under Article 70, member states are responsible for managing and disposing of waste generated within their respective territories. Waste from one state must not pollute another. Disputes between states on waste matters are first settled between them; if unresolved, they are submitted to the Ministry for determination.",ref:"EPMA 2024 · Art. 70",tier:"free"},
+    {id:326,q:"What are the penalties for carrying out a project without ESIA approval?",a:"Article 79 provides that any person carrying out a project without required approval is liable upon conviction to a fine or imprisonment not exceeding two years. The court may additionally order the offender to meet the full costs of reinstating the affected site to its original condition.",ref:"EPMA 2024 · Art. 79",tier:"free"},
+    {id:327,q:"What activities are prohibited in relation to wetlands?",a:"Article 49(3) prohibits — without Ministry authorisation — reclaiming or draining any wetland, disturbing a wetland by drilling or tunnelling in a way likely to cause adverse impact, and introducing animal or plant species into a wetland. Contraventions carry a fine or imprisonment not exceeding two years, or both.",ref:"EPMA 2024 · Art. 49(3),(5)",tier:"free"},
+    {id:328,q:"Does the EPMA apply to both federal and state levels of government?",a:"Yes. The Act applies to the entire territory of the Federal Republic of Somalia (Article 3). Federal enforcement is the responsibility of the Ministry (Article 88), while member states must enforce the Act within their territories (Article 89). State environmental laws must align with federal standards and cannot impose less stringent standards than those at federal level.",ref:"EPMA 2024 · Arts. 3, 17(5), 88–89",tier:"free"},
+    {id:329,q:"What noise pollution controls exist under the EPMA?",a:"Article 35 requires the Ministry to establish minimum noise and vibration emission standards, set measurement procedures, and order relocation of noise-generating installations away from population centres, schools, health centres and livestock areas. Article 36 makes exceeding noise emission standards a criminal offence.",ref:"EPMA 2024 · Arts. 35–36",tier:"free"},
+    {id:330,q:"What is the Environmental Trust Fund and how is it funded?",a:"Article 13 creates the National Environment Fund, administered by the Ministry. It is funded from the national budget allocation for environmental protection, donor and international organisation grants (including climate funds), fees for use of environmental resources, fines collected for Act violations, and other domestic and foreign contributions.",ref:"EPMA 2024 · Art. 13",tier:"free"},
+    {id:331,q:"Can the Ministry issue a Notice to Cease Activity on an ongoing project?",a:"Yes. Under Article 69, if the Ministry believes an act or activity poses an immediate threat or risk to the environment, it may issue a Notice to Cease Activity — even if the project already holds a valid approval or licence. Failure to comply is an offence carrying a fine or imprisonment up to three months, plus possible orders to reinstate the environment.",ref:"EPMA 2024 · Art. 69",tier:"premium"},
+    {id:332,q:"How often must the Ministry report on the state of Somalia's environment?",a:"Article 24 requires the Ministry to assess the state of Somalia's environment at least every two years and submit a report to the Council of Ministers, the House of Representatives, and the Senate of the Federal Parliament.",ref:"EPMA 2024 · Art. 24",tier:"premium"},
+    {id:333,q:"Who prepares an ESIA report and what must it contain?",a:"Under Article 60, the ESIA report must be prepared by an independent expert at the project owner's expense. It must cover existing conditions, the proposed project and its environmental protection measures, mitigation measures, and foreseeable residual environmental and social impacts. The Ministry may request further information or commission its own expert reports.",ref:"EPMA 2024 · Art. 60",tier:"premium"},
+    {id:334,q:"What obligations apply to motor vehicles regarding air emissions?",a:"Article 29 prohibits any owner or operator of a motor vehicle, train, ship, aircraft or similar conveyance from operating it in a manner that causes air pollution in contravention of established emission standards. It is also prohibited to import machinery or equipment that would cause emissions exceeding prescribed standards set by the Ministry of Transport.",ref:"EPMA 2024 · Art. 29",tier:"premium"},
+    {id:335,q:"What are the protections for rivers under the EPMA?",a:"Article 50 prohibits — without authorisation — erecting structures over or under a riverbed, excavating or tunnelling the riverbed, introducing plants or animals into a river, depositing substances likely to harm the environment, diverting or blocking a river, or draining a river. Violation is an offence punishable by fine or imprisonment not more than three years, or both.",ref:"EPMA 2024 · Art. 50",tier:"premium"},
+    {id:336,q:"What is the EPMA's approach to hazardous substance management?",a:"Article 38 requires the Ministry to regulate the manufacture and importation of hazardous substances — including herbicides, pesticides, fertilisers, chlorinated organic compounds and heavy metals — that may endanger the environment or people. Article 39 requires a licence for importing, exporting, using, manufacturing, storing or selling hazardous chemicals.",ref:"EPMA 2024 · Arts. 38–39",tier:"premium"},
+    {id:337,q:"What is the Just Transition obligation under the EPMA?",a:"Article 55 requires the Ministry to develop and implement a Just Transition Policy aimed at maximising social and economic opportunities from climate change while minimising associated risks. It must be realised through social dialogue with the private sector, workers, federal government and member states, with adherence to fundamental labour rights principles.",ref:"EPMA 2024 · Art. 55",tier:"premium"},
+    {id:338,q:"Are there special obligations for protecting Somalia's coastal zone?",a:"Yes. Article 76 requires the Ministry to prepare a coastal zone survey and an integrated national coastal zone management plan. Prohibited activities without authorisation include constructing structures on the seabed, excavating or drilling the coastal zone, introducing alien plants or animals, and depositing substances likely to have adverse environmental effects.",ref:"EPMA 2024 · Art. 76",tier:"premium"},
+    {id:339,q:"What are the penalties for obstructing an Environment Inspector?",a:"Article 81 provides that anyone who hinders an Inspector, fails to comply with a lawful order, refuses entry, impersonates an Inspector, refuses access to documents, provides false information, or fails to carry out an improvement order commits an offence and is liable to a fine or imprisonment not exceeding three months on conviction.",ref:"EPMA 2024 · Art. 81",tier:"premium"},
+    {id:340,q:"Is radiation pollution regulated under the EPMA?",a:"Yes. Article 40 requires the Ministry to establish standards for acceptable levels of ionizing and other radiation in the environment, and to establish criteria and procedures for measurement. Article 38(4)(j) also allows regulations to specifically govern or prohibit importation of equipment that may generate or become radioactive waste.",ref:"EPMA 2024 · Arts. 38(4)(j), 40",tier:"premium"},
+    {id:341,q:"What obligations apply to petroleum companies after an oil spill?",a:"Article 41(4) requires the owner or operator of any facility from which a discharge occurs to immediately notify the relevant government authorities, begin cleanup using the best available methods, and comply with Ministry directions. Failure to act is itself a separate offence. The court also takes compliance measures into account when sentencing.",ref:"EPMA 2024 · Art. 41(4)–(6)",tier:"premium"},
+    {id:342,q:"What environmental obligations apply to mining operations?",a:"Article 51(5)–(6) requires that operations related to mineral exploration, mining and exploitation protect the natural environment, reduce or control waste, and act immediately if pollution occurs. Every person engaged in mineral exploitation has a duty to repair and revitalise the excavated land, returning it as far as possible to its original condition.",ref:"EPMA 2024 · Art. 51(5)–(6)",tier:"premium"},
+    {id:343,q:"Can environmental taxes be imposed on imported goods in Somalia?",a:"Article 30 allows the Ministry, in consultation with the Ministry of Finance and health and environmental experts, to propose environmental taxes on the importation or production of certain goods, and to propose banning imports of goods harmful to the environment. The imposition of such taxes must comply with public financial management rules, with revenue collected by the Ministry of Finance.",ref:"EPMA 2024 · Art. 30",tier:"premium"},
+    {id:344,q:"What must happen to polluted sites under the EPMA?",a:"Article 65 requires member states to ensure that polluted sites are remediated if they cause or risk harmful effects. The Ministry must maintain a publicly accessible register of polluted sites. If the responsible party fails to act, the Ministry may carry out or commission investigation, monitoring and remediation itself and recover costs.",ref:"EPMA 2024 · Art. 65",tier:"premium"},
+    {id:345,q:"What is the legal status of international environmental conventions ratified by Somalia?",a:"Article 99 states that the conventions listed in Schedule 2 — including CITES, UNCCD, UNFCCC, the Kyoto Protocol, the Convention on Biological Diversity, the Basel/Stockholm/Rotterdam Conventions, and the Montreal Protocol — apply under the Act. Somali environmental law must be aligned with these conventions.",ref:"EPMA 2024 · Art. 99, Schedule 2",tier:"premium"},
+    {id:346,q:"What is required to release pathogenic organisms for experimental purposes?",a:"Article 45 requires any person who wishes to experimentally release pathogenic organisms that may not otherwise be put into circulation to obtain prior authorisation from the Ministry. The Ministry issues such authorisation in consultation with the Ministry of Health.",ref:"EPMA 2024 · Art. 45",tier:"premium"},
+    {id:347,q:"Who establishes water quality standards in Somalia?",a:"Article 32 requires the Ministry, in consultation with relevant ministries, to establish water quality standards for drinking water, industrial use, agricultural use, fisheries and wildlife, and any other prescribed use. Article 31 makes discharging waste into the aquatic ecosystem in contravention of the Act a criminal offence.",ref:"EPMA 2024 · Arts. 31–32",tier:"premium"},
+    {id:348,q:"Are there obligations to protect biodiversity in Somalia?",a:"Yes. Article 73 requires the Ministry to formulate and enforce policies for protecting Somalia's biodiversity, including controlling invasive species, protecting endemic species, managing protected areas, monitoring biological diversity, and taking special measures to protect endangered species. Regulations may be made on any of these matters.",ref:"EPMA 2024 · Art. 73",tier:"premium"},
+    {id:349,q:"What penalties apply for pollution-related offences under the EPMA?",a:"Article 84 provides that any person who discharges waste into the aquatic environment, pollutes the environment, or discharges pollutants contrary to the Act commits an offence liable to a fine or imprisonment of three months. In addition the court may order the polluter to pay full cleanup costs, clean the environment to the Ministry's satisfaction, and compensate third parties through adequate reparation or restitution.",ref:"EPMA 2024 · Art. 84",tier:"premium"},
+    {id:350,q:"What is the EPMA's general penalty clause for unlisted offences?",a:"Article 86 provides that any person who commits an offence against any provision of the Act or its regulations for which no other specific penalty is provided, or where the specified punishment is not considered severe enough, shall be punished in accordance with the Somali Civil Law and Penal Code.",ref:"EPMA 2024 · Art. 86",tier:"premium"}
   ]
 };
 
@@ -1410,7 +1475,7 @@ function renderQA(){
   const filter=state.currentFilter;
 
   let items=[];
-  const cats=filter==='all'?Object.keys(QA):(filter==='investment'?['investment']:filter==='labor'?['labor']:filter==='company'?['company']:filter==='civil'?['civil']:['tax']);
+  const cats=filter==='all'?Object.keys(QA):(filter==='investment'?['investment']:filter==='labor'?['labor']:filter==='company'?['company']:filter==='civil'?['civil']:filter==='environment'?['environment']:['tax']);
   cats.forEach(cat=>{
     if(QA[cat])QA[cat].forEach(q=>{
       if(!search||q.q.toLowerCase().includes(search)||q.a.toLowerCase().includes(search))items.push({...q,cat});
@@ -1420,15 +1485,15 @@ function renderQA(){
   if(!items.length){grid.innerHTML='';empty.style.display='block';return;}
   empty.style.display='none';
 
-  const catColors={labor:'var(--labor)',company:'var(--company)',investment:'var(--invest)',civil:'var(--civil)',tax:'var(--tax)'};
-  const catLabels={labor:'Labor Law',company:'Company Law',investment:'Investment Law',civil:'Civil Law',tax:'Income Tax'};
-  const catEmojis={labor:'🟢',company:'🔵',investment:'🟡',civil:'🟣',tax:'🔷'};
+  const catColors={labor:'var(--labor)',company:'var(--company)',investment:'var(--invest)',civil:'var(--civil)',tax:'var(--tax)',environment:'var(--env)'};
+  const catLabels={labor:'Labor Law',company:'Company Law',investment:'Investment Law',civil:'Civil Law',tax:'Income Tax',environment:'Environment Law'};
+  const catEmojis={labor:'🟢',company:'🔵',investment:'🟡',civil:'🟣',tax:'🔷',environment:'🌿'};
 
   grid.innerHTML=items.map(item=>{
     const free=item.tier==='free';
     return`<div class="qa-card${free?'':' qa-locked'}">
       <div class="qa-card-top">
-        <span class="tag tag-${item.cat}" style="color:${catColors[item.cat]}">${catEmojis[item.cat]} ${catLabels[item.cat]}</span>
+        <span class="tag tag-${item.cat==='environment'?'env':item.cat}" style="color:${catColors[item.cat]}">${catEmojis[item.cat]} ${catLabels[item.cat]}</span>
         ${free?'<span class="tag tag-free">Free</span>':'<span class="tag tag-premium">Premium</span>'}
       </div>
       <div class="qa-q">${item.q}</div>
