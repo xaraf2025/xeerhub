@@ -1701,37 +1701,144 @@ function filterQA(){renderQA();}
 // ── ASK AI ─────────────────────────────────────────────────────
 function setSample(el){document.getElementById('questionInput').value=el.textContent;}
 
-const TAX_SYSTEM_PROMPT=`You are XeerHub AI — a legal information assistant specializing in Somali law. You have expertise in:
-1. Somalia Labour Code
-2. Companies Law No. 18/2019
-3. Foreign Investment Law
-4. Civil Law
-5. Income Tax Law 2025 (ITA 2025) and Income Tax Regulation 2025 (Reg No. 0142-2025)
-6. Environmental Protection and Management Act 2024 (EPMA 2024)
+// Build a grounding context string from the QA knowledge base.
+// This is the anti-hallucination core: the model only sees verified Q&A pairs
+// and is strictly forbidden from going beyond them.
+function buildGroundingContext(lawArea){
+  const catMap={
+    'Labor Law':['labor'],
+    'Company Law':['company'],
+    'Foreign Investment Law':['investment'],
+    'Civil Law':['civil'],
+    'Income Tax Law':['tax'],
+    'Environmental Law':['environment'],
+    'General':Object.keys(QA)
+  };
+  const cats=catMap[lawArea]||Object.keys(QA);
+  let entries=[];
+  cats.forEach(cat=>{
+    if(QA[cat])QA[cat].forEach(item=>{
+      entries.push(`Q: ${item.q}\nA: ${item.a}\nREF: ${item.ref}`);
+    });
+  });
+  return entries.join('\n\n---\n\n');
+}
 
-INSTRUCTIONS:
-1. Only cite provisions from official legislation. For tax questions, cite specific Regulation numbers (e.g., "Reg 9-1", "Reg 20-2(4)") AND the Article number.
-2. Always end answers with: "📎 [Regulation/Article reference]"
-3. Never give legal advice. Give legal information only. Conclude with: "For advice on your specific situation, consult a qualified Somali lawyer."
-4. If a question is outside the covered laws, say so clearly.
-5. Do not fabricate article numbers or provisions.`;
+// Semantic similarity: score a QA entry against the user question
+// using simple word-overlap (no embeddings needed for this scale)
+function scoreRelevance(item, question){
+  const q=question.toLowerCase();
+  const words=q.split(/\s+/).filter(w=>w.length>3);
+  const haystack=(item.q+' '+item.a).toLowerCase();
+  let score=0;
+  words.forEach(w=>{if(haystack.includes(w))score++;});
+  // Bonus for question words appearing in item question (not just answer)
+  words.forEach(w=>{if(item.q.toLowerCase().includes(w))score+=0.5;});
+  return score;
+}
+
+// Retrieve the top-K most relevant Q&A entries for the question
+function retrieveRelevant(question, lawArea, topK=15){
+  const catMap={
+    'Labor Law':['labor'],
+    'Company Law':['company'],
+    'Foreign Investment Law':['investment'],
+    'Civil Law':['civil'],
+    'Income Tax Law':['tax'],
+    'Environmental Law':['environment'],
+    'General':Object.keys(QA)
+  };
+  const cats=catMap[lawArea]||Object.keys(QA);
+  let pool=[];
+  cats.forEach(cat=>{if(QA[cat])QA[cat].forEach(item=>pool.push({...item,cat}));});
+  return pool
+    .map(item=>({...item,score:scoreRelevance(item,question)}))
+    .filter(item=>item.score>0)
+    .sort((a,b)=>b.score-a.score)
+    .slice(0,topK);
+}
+
+const SYSTEM_PROMPT=`You are XeerHub AI — a legal information assistant for Somali law.
+
+STRICT RULES — follow every one without exception:
+
+1. ONLY use the verified Q&A entries provided in the KNOWLEDGE BASE below.
+   Do not draw on any outside knowledge, training data, or general legal principles.
+
+2. If the answer is clearly covered by one or more entries in the KNOWLEDGE BASE,
+   synthesise a clear answer and cite the exact REF tags from those entries.
+
+3. If the question is NOT covered by the KNOWLEDGE BASE entries, respond with exactly:
+   "I don't have verified information on that specific question in my current knowledge base.
+    Please browse the full Q&A library or consult a qualified Somali lawyer."
+   Do NOT attempt to answer from general knowledge.
+
+4. Never invent, guess, or extrapolate article numbers, penalty amounts, or legal rules
+   that are not explicitly stated in the KNOWLEDGE BASE.
+
+5. Format: answer in plain paragraphs. End every answer with:
+   📎 Reference: [paste the REF value(s) from the relevant entries]
+
+6. Close every answer with this exact line:
+   ⚠ Legal information only — not legal advice. Consult a qualified Somali lawyer for your specific situation.`;
 
 async function submitQuestion(){
   const question=document.getElementById('questionInput').value.trim();
   const lawArea=document.getElementById('lawAreaSelect').value;
   if(!question){showToast('Please enter a question','error');return;}
-  const btn=document.getElementById('askBtn');const area=document.getElementById('answerArea');
+
+  const btn=document.getElementById('askBtn');
+  const area=document.getElementById('answerArea');
   btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Thinking...';
-  area.innerHTML=`<div class="answer-card"><div class="thinking"><div class="dots"><span></span><span></span><span></span></div>XeerHub AI is reading the Somali legislation...</div></div>`;
+  area.innerHTML=`<div class="answer-card"><div class="thinking"><div class="dots"><span></span><span></span><span></span></div>XeerHub AI is searching the verified knowledge base...</div></div>`;
+
+  // Retrieve relevant verified Q&A pairs
+  const relevant=retrieveRelevant(question,lawArea,15);
+  const knowledgeBase=relevant.length>0
+    ? relevant.map(item=>`Q: ${item.q}\nA: ${item.a}\nREF: ${item.ref}`).join('\n\n---\n\n')
+    : '[No closely matching entries found for this question in the current law area]';
+
+  const userMessage=`KNOWLEDGE BASE (verified Somali law Q&A entries — use ONLY these):\n\n${knowledgeBase}\n\n---\n\nUSER QUESTION: ${question}\n\nLaw area selected: ${lawArea}`;
+
   try{
-    const r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question,lawArea,systemPrompt:TAX_SYSTEM_PROMPT})});
+    const r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:SYSTEM_PROMPT,
+        messages:[{role:'user',content:userMessage}]
+      })
+    });
     const d=await r.json();
-    if(d.error){area.innerHTML=`<div class="answer-card"><div class="answer-header"><span class="answer-header-icon">⚠️</span><span class="answer-header-text">Error</span></div><div class="answer-body" style="color:var(--danger)">${d.error}</div></div>`;}
-    else{
-      const fmt=d.answer.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
-      area.innerHTML=`<div class="answer-card fade-in"><div class="answer-header"><span class="answer-header-icon">✦</span><span class="answer-header-text">XeerHub AI Answer — ${lawArea}</span></div><div class="answer-body">${fmt}</div><div class="answer-disclaimer">⚠ Legal information only — not legal advice. Consult a qualified Somali lawyer.</div></div><div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap"><button class="btn btn-ghost btn-sm" onclick="showToast('Saved ✓','success')">💾 Save answer</button><button class="btn btn-ghost btn-sm" onclick="document.getElementById('questionInput').value='';document.getElementById('answerArea').innerHTML=''">✕ Clear</button></div>`;
+    if(d.error||!d.content){
+      const msg=d.error?.message||'Unexpected response from AI.';
+      area.innerHTML=`<div class="answer-card"><div class="answer-header"><span class="answer-header-icon">⚠️</span><span class="answer-header-text">Error</span></div><div class="answer-body" style="color:var(--danger)">${msg}</div></div>`;
+    } else {
+      const raw=d.content.map(b=>b.type==='text'?b.text:'').join('');
+      const fmt=raw
+        .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+        .replace(/📎/g,'<span style="color:var(--teal-mid)">📎</span>')
+        .replace(/⚠/g,'<span style="color:var(--gold)">⚠</span>')
+        .replace(/\n/g,'<br>');
+      // Show how many verified entries were used
+      const sourceLabel=relevant.length>0
+        ? `<div style="font-size:.72rem;color:var(--muted);margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--border)">🔎 Grounded on <strong>${relevant.length}</strong> verified Q&A entries from the XeerHub knowledge base</div>`
+        : '';
+      area.innerHTML=`<div class="answer-card fade-in">
+        <div class="answer-header"><span class="answer-header-icon">✦</span><span class="answer-header-text">XeerHub AI — ${lawArea}</span></div>
+        <div class="answer-body">${fmt}</div>
+        ${sourceLabel}
+      </div>
+      <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap">
+        <button class="btn btn-ghost btn-sm" onclick="showToast('Saved ✓','success')">💾 Save answer</button>
+        <button class="btn btn-ghost btn-sm" onclick="document.getElementById('questionInput').value='';document.getElementById('answerArea').innerHTML=''">✕ Clear</button>
+      </div>`;
     }
-  }catch(e){area.innerHTML=`<div class="answer-card"><div class="answer-header"><span class="answer-header-icon">⚠️</span><span class="answer-header-text">Connection Error</span></div><div class="answer-body" style="color:var(--danger)">Could not reach the server.</div></div>`;}
+  }catch(e){
+    area.innerHTML=`<div class="answer-card"><div class="answer-header"><span class="answer-header-icon">⚠️</span><span class="answer-header-text">Connection Error</span></div><div class="answer-body" style="color:var(--danger)">Could not reach the AI. Please try again.</div></div>`;
+  }
   btn.disabled=false;btn.innerHTML='Get Answer →';
 }
 
