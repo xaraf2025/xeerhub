@@ -3,14 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XeerHub AI — Somalia's Legal Intelligence Platform</title>
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wrm3vllhdw");
-</script>
+<title>XeerHub AI — Built for Somalia. Designed for clarity.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -223,10 +216,19 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 /* ═══════════════════════════════════════════
    TRUST BAR
 ═══════════════════════════════════════════ */
-.trust-bar{background:var(--parchment);border-bottom:1px solid var(--border);padding:12px 0}
-.trust-bar-inner{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:20px}
-.trust-item{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);font-weight:400}
-.trust-dot{width:4px;height:4px;border-radius:50%;background:var(--border-strong)}
+.trust-bar{background:var(--teal-deep);border-bottom:2px solid rgba(255,255,255,0.07);padding:0;overflow:hidden;position:relative}
+.trust-bar::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.03) 50%,transparent 100%);animation:trust-shimmer 4s ease-in-out infinite}
+@keyframes trust-shimmer{0%,100%{opacity:0;transform:translateX(-100%)}50%{opacity:1;transform:translateX(100%)}}
+.trust-bar-inner{display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:10px;padding:14px 28px;font-size:.78rem;color:rgba(255,255,255,0.65);font-weight:500;letter-spacing:.02em;border-right:1px solid rgba(255,255,255,0.07);transition:background .2s,color .2s;cursor:default;position:relative}
+.trust-item:last-child{border-right:none}
+.trust-item:hover{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.95)}
+.trust-item-icon{width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.95rem;transition:background .2s}
+.trust-item:hover .trust-item-icon{background:rgba(255,255,255,0.14)}
+.trust-item-text{display:flex;flex-direction:column;gap:1px}
+.trust-item-label{font-size:.72rem;color:rgba(255,255,255,0.35);font-weight:400;line-height:1}
+.trust-item-value{font-size:.83rem;color:rgba(255,255,255,0.82);font-weight:600;line-height:1.2;font-family:'DM Sans',sans-serif}
+.trust-dot{display:none}
 
 /* ═══════════════════════════════════════════
    WHO SECTION
@@ -573,6 +575,8 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
   .steps-grid{grid-template-columns:1fr}
   .dash-grid{grid-template-columns:1fr}
   .dash-stat-cards{grid-template-columns:repeat(2,1fr)}
+  .trust-item{padding:11px 18px;font-size:.73rem}
+  .trust-item-icon{width:24px;height:24px;font-size:.85rem}
   .footer-email-strip{flex-direction:column;text-align:center}
   .footer-strip-form{justify-content:center}
   .footer-strip-form .input{width:180px}
@@ -683,16 +687,56 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
   <!-- TRUST BAR -->
   <section>
     <div class="trust-bar">
-      <div class="trust-bar-inner container">
-        <div class="trust-item">🔒 SSL Encrypted</div>
-        <div class="trust-dot"></div>
-        <div class="trust-item">⚖️ 240+ Verified Q&As</div>
-        <div class="trust-dot"></div>
-        <div class="trust-item">⚖️ Official Legislation</div>
-        <div class="trust-dot"></div>
-        <div class="trust-item">👥 Trusted by NGOs & Law Firms</div>
-        <div class="trust-dot"></div>
-        <div class="trust-item">📧 info@xeerhub.com</div>
+      <div class="trust-bar-inner">
+
+        <div class="trust-item">
+          <div class="trust-item-icon">📋</div>
+          <div class="trust-item-text">
+            <span class="trust-item-label">Knowledge base</span>
+            <span class="trust-item-value">240+ Verified Q&amp;As</span>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <div class="trust-item-icon">📚</div>
+          <div class="trust-item-text">
+            <span class="trust-item-label">Laws covered</span>
+            <span class="trust-item-value">6 Official Somali Laws</span>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <div class="trust-item-icon">🔒</div>
+          <div class="trust-item-text">
+            <span class="trust-item-label">Security</span>
+            <span class="trust-item-value">SSL Encrypted</span>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <div class="trust-item-icon">🏛️</div>
+          <div class="trust-item-text">
+            <span class="trust-item-label">Sources</span>
+            <span class="trust-item-value">Official Legislation Only</span>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <div class="trust-item-icon">👥</div>
+          <div class="trust-item-text">
+            <span class="trust-item-label">Trusted by</span>
+            <span class="trust-item-value">NGOs &amp; Law Firms</span>
+          </div>
+        </div>
+
+        <div class="trust-item" onclick="window.location.href='mailto:info@xeerhub.com'" style="cursor:pointer">
+          <div class="trust-item-icon">✉️</div>
+          <div class="trust-item-text">
+            <span class="trust-item-label">Contact</span>
+            <span class="trust-item-value">info@xeerhub.com</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -726,7 +770,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
         <div class="preview-card"><div class="preview-card-header"><span class="tag tag-invest">🟡 Investment Law</span></div><div class="preview-card-body"><div class="preview-q">Can the government seize my foreign investment?</div><div class="preview-a">Registered foreign investment is protected from expropriation except in cases of overriding public interest. Adequate compensation at fair market value is required.</div><div class="preview-ref">Foreign Investment Law · Art. 18</div></div></div>
         <div class="preview-card"><div class="preview-card-header"><span class="tag tag-tax">🔷 Income Tax Law</span></div><div class="preview-card-body"><div class="preview-q">What is the Presumptive Tax Regime and who qualifies?</div><div class="preview-a">Under Regulation 9-1, PTR applies to residents whose turnover does not exceed USD 50,000/year. Quarterly tax = higher of USD 37.50 or 1.5% of quarterly turnover. Professionals are excluded.</div><div class="preview-ref">ITR 2025 · Reg 9-1, Reg 9-2 · ITA 2025 · Art. 9</div></div></div>
       </div>
-      <div style="text-align:center;margin-top:2.5rem"><button class="btn btn-teal btn-lg" onclick="showPage('library')">View All 240 Q&As →</button></div>
+      <div style="text-align:center;margin-top:2.5rem"><button class="btn btn-teal btn-lg" onclick="showPage('library')">View All 240+ Q&As →</button></div>
     </div>
   </section>
 
@@ -804,7 +848,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
         </div>
       </div>
       <div style="text-align:center">
-        <button class="btn btn-outline" onclick="showPage('testimonials')">Read all reviews →</button>
+        <button class="btn btn-outline" onclick="showPage('pricing')">See our plans →</button>
       </div>
     </div>
   </section>
@@ -834,8 +878,10 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
         <span class="footer-link" onclick="showPage('pricing')">Pricing</span>
         <span class="footer-link" onclick="showPage('contact')">Contact</span>
         <span class="footer-link" onclick="showPage('dashboard')">Dashboard</span>
+        <span class="footer-link" onclick="showToast('Privacy Policy — contact info@xeerhub.com','success')">Privacy Policy</span>
+        <span class="footer-link" onclick="showToast('Terms of Service — contact info@xeerhub.com','success')">Terms of Service</span>
       </div>
-      <div class="footer-copy">© 2025 XeerHub · xeerhub.com</div>
+      <div class="footer-copy">© 2026 XeerHub · xeerhub.com</div>
       <div class="footer-disclaimer">Legal information only — not legal advice. All answers reference official legislation. Consult a qualified Somali lawyer for case-specific guidance.</div>
     </div>
   </footer>
@@ -848,7 +894,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
   <div class="library-header">
     <div class="container">
       <div class="library-title-row">
-        <div><div class="section-eyebrow">Q&A Library</div><h1 style="font-size:2.2rem;font-family:'Playfair Display',serif">Verified Legal Q&As</h1><p style="color:var(--muted);font-size:.9rem;margin-top:.3rem">240 questions · 5 laws · all article references included</p></div>
+        <div><div class="section-eyebrow">Q&A Library</div><h1 style="font-size:2.2rem;font-family:'Playfair Display',serif">Verified Legal Q&As</h1><p style="color:var(--muted);font-size:.9rem;margin-top:.3rem">240+ questions · 6 laws · all article references included</p></div>
         <button class="btn btn-teal" onclick="showPage('ask')">✦ Ask Your Own Question</button>
       </div>
       <div class="library-controls">
@@ -874,7 +920,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 <div class="page" id="page-ask">
   <div class="ask-page">
     <div class="ask-header"><div class="section-eyebrow">AI Answer Engine</div><h1 style="font-size:2.2rem;font-family:'Playfair Display',serif">Ask a Legal Question</h1><p style="color:var(--muted);margin-top:.5rem;font-size:.95rem">Instant answers grounded strictly in Somali Labour Code, Companies Law, Foreign Investment Law, and the <strong>Income Tax Law 2025 &amp; Regulation No. 0142-2025</strong>.</p></div>
-    <div id="noKeyBanner" class="no-key-banner" style="display:none"><span class="no-key-banner-icon">⚠️</span><div class="no-key-banner-text"><strong>API Key Required</strong> — Set the <code>ANTHROPIC_API_KEY</code> environment variable.</div></div>
+    <div id="noKeyBanner" class="no-key-banner" style="display:none"><span class="no-key-banner-icon">⚠️</span><div class="no-key-banner-text"><strong>AI temporarily unavailable</strong> — You can still browse the full Q&amp;A library below.</div></div>
     <div class="ask-card">
       <div class="ask-select-row"><label class="label">Law area (optional)</label><select class="select" id="lawAreaSelect"><option value="General">All areas / General</option><option value="Labor Law">Labor Law</option><option value="Company Law">Company Law</option><option value="Foreign Investment Law">Foreign Investment Law</option><option value="Civil Law">Civil Law</option><option value="Income Tax Law">Income Tax Law</option><option value="Environmental Law">Environmental Law (EPMA 2024)</option></select></div>
       <label class="label">Your question</label>
@@ -1056,8 +1102,8 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
     <div style="margin-bottom:2rem"><div class="section-eyebrow">Dashboard</div><h1 style="font-size:2rem;font-family:'Playfair Display',serif">Welcome back</h1></div>
     <div class="dash-grid">
       <div>
-        <div class="plan-dash-card"><div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.4rem">Current Plan</div><div class="plan-dash-name">Free</div><div class="plan-dash-meta">10 questions/month · Resets monthly</div><button class="btn btn-gold btn-sm" style="margin-top:1rem;width:100%;justify-content:center" onclick="showPage('pricing')">Upgrade to Professional</button></div>
-        <div class="card"><div style="text-align:center;padding:.5rem 0"><div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:1rem">Monthly Usage</div><svg width="100" height="100" viewBox="0 0 100 100" style="display:block;margin:0 auto"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--border)" stroke-width="8"/><circle id="usageRing" cx="50" cy="50" r="40" fill="none" stroke="var(--teal-light)" stroke-width="8" stroke-dasharray="251" stroke-dashoffset="251" stroke-linecap="round" transform="rotate(-90 50 50)"/></svg><div style="margin-top:.75rem"><div style="font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--teal-mid);font-weight:700"><span id="usageCount">0</span> / 10</div><div style="font-size:.75rem;color:var(--muted)">questions used this month</div></div></div></div>
+        <div class="plan-dash-card"><div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.4rem">Current Plan</div><div class="plan-dash-name">Free</div><div class="plan-dash-meta">10 free AI questions/month · Resets 1st of month</div><button class="btn btn-gold btn-sm" style="margin-top:1rem;width:100%;justify-content:center" onclick="showPage('pricing')">Upgrade to Professional</button></div>
+        <div class="card"><div style="text-align:center;padding:.5rem 0"><div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:1rem">Monthly Usage</div><svg width="100" height="100" viewBox="0 0 100 100" style="display:block;margin:0 auto"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--border)" stroke-width="8"/><circle id="usageRing" cx="50" cy="50" r="40" fill="none" stroke="var(--teal-light)" stroke-width="8" stroke-dasharray="251" stroke-dashoffset="251" stroke-linecap="round" transform="rotate(-90 50 50)"/></svg><div style="margin-top:.75rem"><div style="font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--teal-mid);font-weight:700"><span id="usageCount">0</span> / 10</div><div style="font-size:.75rem;color:var(--muted)">questions used this month · resets 1st of each month</div></div></div></div>
         <div class="card" style="margin-top:1rem"><div style="font-size:.72rem;color:var(--muted);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.08em">Quick Actions</div><div style="display:flex;flex-direction:column;gap:.5rem"><button class="btn btn-ghost btn-sm" style="justify-content:flex-start;gap:.6rem" onclick="showPage('ask')">✦ Ask a question</button><button class="btn btn-ghost btn-sm" style="justify-content:flex-start;gap:.6rem" onclick="showPage('library')">📚 Browse library</button><button class="btn btn-ghost btn-sm" style="justify-content:flex-start;gap:.6rem" onclick="showPage('pricing')">⬆ Upgrade plan</button></div></div>
       </div>
       <div>
@@ -1210,23 +1256,23 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
     <div class="blog-grid">
       <div class="blog-card featured" onclick="showToast('Full article coming soon — subscribe for updates','success')">
         <div class="blog-thumb featured" style="background:linear-gradient(135deg,var(--parchment),var(--teal-pale))"><div class="blog-category" style="background:var(--primary-dim);color:var(--teal-deep);border:1px solid var(--border)">📋 Company Law</div></div>
-        <div class="blog-card-body"><div class="blog-title" style="font-size:1.2rem">How to register a company in Somalia in 2025: a step-by-step guide</div><div class="blog-excerpt">Everything you need to know about registering a private limited company under the Companies Law (No. 18/2019) — from choosing your entity type to filing your founding documents.</div><div class="blog-meta"><span>📅 May 2025</span><span>⏱ 8 min read</span></div></div>
+        <div class="blog-card-body"><div class="blog-title" style="font-size:1.2rem">How to register a company in Somalia in 2025: a step-by-step guide</div><div class="blog-excerpt">Everything you need to know about registering a private limited company under the Companies Law (No. 18/2019) — from choosing your entity type to filing your founding documents.</div><div class="blog-meta"><span>📅 January 2026</span><span>⏱ 8 min read</span></div></div>
       </div>
       <div class="blog-card" onclick="showToast('Full article coming soon — subscribe for updates','success')">
         <div class="blog-thumb" style="background:linear-gradient(135deg,var(--parchment),var(--labor-bg))"><div class="blog-category" style="background:var(--labor-bg);color:var(--labor);border:1px solid rgba(29,122,94,.25)">⚖️ Labor Law</div></div>
-        <div class="blog-card-body"><div class="blog-title">What every NGO needs to know about Somali employment contracts</div><div class="blog-excerpt">Local staff protections, termination rules, and the 10 contract clauses every INGO must include under the Labour Code.</div><div class="blog-meta"><span>📅 April 2025</span><span>⏱ 6 min read</span></div></div>
+        <div class="blog-card-body"><div class="blog-title">What every NGO needs to know about Somali employment contracts</div><div class="blog-excerpt">Local staff protections, termination rules, and the 10 contract clauses every INGO must include under the Labour Code.</div><div class="blog-meta"><span>📅 December 2025</span><span>⏱ 6 min read</span></div></div>
       </div>
       <div class="blog-card" onclick="showToast('Full article coming soon — subscribe for updates','success')">
         <div class="blog-thumb" style="background:linear-gradient(135deg,var(--parchment),var(--invest-bg))"><div class="blog-category" style="background:var(--invest-bg);color:var(--invest);border:1px solid var(--gold-border)">💰 Investment Law</div></div>
-        <div class="blog-card-body"><div class="blog-title">Foreign investor protections in Somalia: what Article 18 actually guarantees</div><div class="blog-excerpt">A plain-English breakdown of Somalia's expropriation protections, profit repatriation rights, and ICSID arbitration access.</div><div class="blog-meta"><span>📅 March 2025</span><span>⏱ 5 min read</span></div></div>
+        <div class="blog-card-body"><div class="blog-title">Foreign investor protections in Somalia: what Article 18 actually guarantees</div><div class="blog-excerpt">A plain-English breakdown of Somalia's expropriation protections, profit repatriation rights, and ICSID arbitration access.</div><div class="blog-meta"><span>📅 November 2025</span><span>⏱ 5 min read</span></div></div>
       </div>
       <div class="blog-card" onclick="showToast('Full article coming soon — subscribe for updates','success')">
         <div class="blog-thumb" style="background:linear-gradient(135deg,var(--parchment),var(--company-bg))"><div class="blog-category" style="background:var(--company-bg);color:var(--company);border:1px solid rgba(30,92,158,.2)">🏛 Civil Law</div></div>
-        <div class="blog-card-body"><div class="blog-title">Somali Civil Law basics: contracts, obligations, and liability explained</div><div class="blog-excerpt">The foundations every business founder and legal professional needs before entering commercial agreements in Somalia.</div><div class="blog-meta"><span>📅 February 2025</span><span>⏱ 7 min read</span></div></div>
+        <div class="blog-card-body"><div class="blog-title">Somali Civil Law basics: contracts, obligations, and liability explained</div><div class="blog-excerpt">The foundations every business founder and legal professional needs before entering commercial agreements in Somalia.</div><div class="blog-meta"><span>📅 October 2025</span><span>⏱ 7 min read</span></div></div>
       </div>
       <div class="blog-card" onclick="showToast('Full article coming soon — subscribe for updates','success')">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,var(--parchment),var(--tax-bg))"><div class="blog-category" style="background:var(--tax-bg);color:var(--tax);border:1px solid var(--border-strong)">💼 Income Tax</div></div>
-        <div class="blog-card-body"><div class="blog-title">Maternity leave, overtime, and public holidays: Somali HR compliance checklist</div><div class="blog-excerpt">The 15 most common Labour Code violations we see in Mogadishu — and how to fix them before they become disputes.</div><div class="blog-meta"><span>📅 January 2025</span><span>⏱ 4 min read</span></div></div>
+        <div class="blog-thumb" style="background:linear-gradient(135deg,var(--parchment),var(--tax-bg))"><div class="blog-category" style="background:var(--labor-bg);color:var(--labor);border:1px solid rgba(29,122,94,.25)">⚖️ Labour Law</div></div>
+        <div class="blog-card-body"><div class="blog-title">Maternity leave, overtime, and public holidays: Somali HR compliance checklist</div><div class="blog-excerpt">The 15 most common Labour Code violations we see in Mogadishu — and how to fix them before they become disputes.</div><div class="blog-meta"><span>📅 September 2025</span><span>⏱ 4 min read</span></div></div>
       </div>
     </div>
     <div class="blog-subscribe-strip">
@@ -1260,7 +1306,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
           <div><label class="label">Email address</label><input class="input" type="email" placeholder="you@organisation.com"></div>
           <div><label class="label">Organisation (optional)</label><input class="input" type="text" placeholder="Law firm, NGO, or company name"></div>
           <div><label class="label">I'm enquiring about</label><select class="select"><option>Professional plan (lawyers &amp; advisors)</option><option>NGO / Team plan</option><option>Enterprise / API access</option><option>Partnership or press</option><option>Technical support</option><option>Something else</option></select></div>
-          <div><label class="label">Message</label><textarea class="input" rows="5" placeholder="Tell us what you need. We read every message and reply within 24 hours."></textarea></div>
+          <div><label class="label">Message</label><textarea class="input" rows="5" placeholder="Tell us what you need — a legal question, partnership enquiry, or feedback. We read every message and reply within one business day."></textarea></div>
           <button class="contact-submit" onclick="showToast('Message sent! We\'ll reply within 24 hours.','success')">Send message →</button>
         </div>
       </div>
