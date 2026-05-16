@@ -216,6 +216,10 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 /* ═══════════════════════════════════════════
    TRUST BAR
 ═══════════════════════════════════════════ */
+/* AI Notes & Conflict Alert utility colours */
+.ai-note-card{animation:fadeIn .3s ease}
+.conflict-card{animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 .trust-bar{background:var(--teal-deep);border-bottom:2px solid rgba(255,255,255,0.07);padding:0;overflow:hidden;position:relative}
 .trust-bar::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.03) 50%,transparent 100%);animation:trust-shimmer 4s ease-in-out infinite}
 @keyframes trust-shimmer{0%,100%{opacity:0;transform:translateX(-100%)}50%{opacity:1;transform:translateX(100%)}}
@@ -1580,56 +1584,56 @@ const QA={
     {id:150,q:"How does the Board promote foreign investment in Somalia?",a:"The Foreign Investment Promotion Office working under the Board promotes Somalia as an investment destination. It provides information on investment opportunities, assists investors through the registration process, formulates policy proposals to improve the investment climate, and coordinates with other government institutions.",ref:"Foreign Investment Law · Art. 6",tier:"premium"},
   ],
   civil:[
-    {id:151,q:"What is a valid contract under Somali civil law?",a:"A valid contract requires an offer, an acceptance, and something of value exchanged between the parties. Both parties must have legal capacity (be adults of sound mind), and the purpose must be lawful. Contracts whose purpose violates law or public morality are void.",ref:"Somali Civil Code · Arts. 1-30",tier:"free"},
-    {id:152,q:"Does a contract have to be in writing to be valid?",a:"Not always. Most contracts are valid whether made orally or in writing. However certain important contracts — including those relating to land and employment — must be in writing to be enforceable. Written contracts are always advisable as they provide clear evidence of what was agreed.",ref:"Somali Civil Code · Arts. 15-20",tier:"free"},
-    {id:153,q:"What is the difference between movable and immovable property in Somalia?",a:"Immovable property refers to land and anything permanently attached to it such as buildings. Movable property is everything else — goods, vehicles, money, and personal belongings. The rules for buying, selling, inheriting, and mortgaging these two types of property differ under Somali civil law.",ref:"Somali Civil Code · Arts. 80-90",tier:"free"},
-    {id:154,q:"Can a verbal agreement to sell land be enforced?",a:"No. Agreements to sell or transfer land and real property must be in writing to be legally enforceable in Somalia. A verbal agreement to sell land — even if witnessed — does not create a binding legal obligation. Always insist on a written contract for any land transaction.",ref:"Somali Civil Code · Arts. 15-20",tier:"free"},
-    {id:155,q:"What remedies are available if someone breaches a contract?",a:"The main remedies for breach of contract are: specific performance (court ordering the other party to do what they promised), damages (compensation for losses), and rescission (cancelling the contract). The appropriate remedy depends on the nature of the breach.",ref:"Somali Civil Code · Arts. 190-220",tier:"free"},
-    {id:156,q:"How long do I have to bring a civil claim in court?",a:"Civil claims are subject to limitation periods. The general limitation period under Somali civil law is typically 10 years from when the cause of action arose, though shorter periods apply to specific types of claims. A claim filed after the limitation period expires will be rejected by the court.",ref:"Somali Civil Code · Arts. 350-380",tier:"free"},
-    {id:157,q:"What is the law of inheritance in Somalia?",a:"Inheritance in Somalia is governed primarily by Islamic law (Sharia) for Muslims, which distributes the estate among heirs according to fixed shares. Civil law principles supplement Sharia where needed. Non-Muslims may follow different rules applicable to their personal law.",ref:"Somali Civil Code · Arts. 400-450",tier:"free"},
-    {id:158,q:"Can someone be forced to sell their property?",a:"Generally no. The only exception is compulsory acquisition by the government for a genuine public purpose, which must be accompanied by fair and prompt compensation. Private parties cannot force another person to sell their property.",ref:"Somali Civil Code · Arts. 80-95",tier:"free"},
-    {id:159,q:"What is a power of attorney and when do I need one?",a:"A power of attorney is a legal document authorising one person to act on behalf of another in specified legal or financial matters. You need one when you cannot be present to sign documents or conduct transactions personally. A power of attorney for land transactions must typically be notarised.",ref:"Somali Civil Code · Arts. 150-165",tier:"free"},
-    {id:160,q:"What is the legal age of majority in Somalia?",a:"The age of majority — the age at which a person is considered a legal adult with full capacity to enter contracts, sue, and be sued — is 18 years under Somali civil law. Persons under 18 lack full legal capacity and contracts entered into by minors can be voided.",ref:"Somali Civil Code · Arts. 40-55",tier:"free"},
-    {id:161,q:"Can a contract signed under duress or fraud be cancelled?",a:"Yes. A contract obtained through duress, fraud, or misrepresentation can be declared voidable at the request of the affected party. The affected party must act promptly to void the contract once the duress or fraud is discovered.",ref:"Somali Civil Code · Arts. 60-75",tier:"premium"},
-    {id:162,q:"What is a guarantee or surety agreement?",a:"A guarantee is a contract in which a third party — the guarantor — promises to pay a debt or perform an obligation if the primary debtor fails to do so. The guarantor is only liable if the debtor actually defaults. A guarantee must generally be in writing to be enforceable.",ref:"Somali Civil Code · Arts. 280-300",tier:"premium"},
-    {id:163,q:"What rights does a tenant have in Somalia?",a:"A tenant has the right to peaceful enjoyment of the rented property, to have essential repairs made by the landlord, and to receive proper notice before the tenancy is terminated. The landlord cannot enter the property without permission or evict the tenant without following proper legal process.",ref:"Somali Civil Code · Arts. 320-345",tier:"premium"},
-    {id:164,q:"Can a landlord increase rent during a fixed-term lease?",a:"During a fixed-term lease, the rent is fixed and cannot be increased unilaterally by the landlord before the lease expires. Rent increases require either the agreement of the tenant or the expiry of the current lease term. Any agreed rent increase should be documented in writing.",ref:"Somali Civil Code · Arts. 320-345",tier:"premium"},
-    {id:165,q:"What notice must a landlord give before evicting a tenant?",a:"A landlord must give reasonable written notice before ending a tenancy or initiating eviction proceedings. Eviction without proper notice or through physical force is unlawful regardless of whether the tenant owes rent. The required notice period depends on the type of tenancy and reason for termination.",ref:"Somali Civil Code · Arts. 320-345",tier:"premium"},
-    {id:166,q:"What is a mortgage and how does it work?",a:"A mortgage is a legal arrangement in which property is used as security for a loan. If the borrower fails to repay, the lender has the right to take and sell the property to recover the debt. The mortgage must be in writing and registered to be valid against third parties.",ref:"Somali Civil Code · Arts. 250-280",tier:"premium"},
-    {id:167,q:"Can I use land as collateral for a loan?",a:"Yes. Land and immovable property can be pledged as collateral through a mortgage arrangement. The mortgage must be executed in writing and registered with the appropriate authority. Once registered it takes priority over later claims on the property. The landowner retains possession while the mortgage is in force.",ref:"Somali Civil Code · Arts. 250-280",tier:"premium"},
-    {id:168,q:"What is unjust enrichment under civil law?",a:"Unjust enrichment occurs when one person gains a benefit at the expense of another without a legal justification. Somali civil law allows the person who suffered the loss to reclaim the value of the benefit from the person who was enriched, even without a contract between them.",ref:"Somali Civil Code · Arts. 225-240",tier:"premium"},
-    {id:169,q:"What is a tort and what compensation is available?",a:"A tort is a civil wrong — an act or omission that causes harm to another person, giving that person the right to sue for compensation. Common torts include negligence, trespass, and defamation. The compensation recoverable is the actual loss suffered as a result of the wrongful act.",ref:"Somali Civil Code · Arts. 190-225",tier:"premium"},
-    {id:170,q:"What is the difference between a void and a voidable contract?",a:"A void contract has no legal effect from the start — it is treated as if it never existed. A voidable contract is initially valid but can be cancelled by one of the parties who was misled, pressured, or lacked capacity. Until actually cancelled, a voidable contract remains in force.",ref:"Somali Civil Code · Arts. 56-75",tier:"premium"},
-    {id:171,q:"What is meant by force majeure in a contract?",a:"Force majeure refers to extraordinary events beyond a party control — such as natural disasters, wars, or government actions — that make it impossible to perform a contractual obligation. If such an event occurs, the affected party may be excused from performance without being liable for breach.",ref:"Somali Civil Code · Arts. 195-205",tier:"premium"},
-    {id:172,q:"Can I transfer my contractual rights to a third party?",a:"Yes. A party to a contract can generally assign their contractual rights to a third party — this is called an assignment. However you cannot assign personal obligations without the other party consent. The other party should be notified of any assignment.",ref:"Somali Civil Code · Arts. 170-185",tier:"premium"},
-    {id:173,q:"How is co-owned property managed in Somalia?",a:"When property is co-owned by two or more persons, decisions about its management, use, and maintenance must generally be made by majority agreement based on ownership shares. Any co-owner can request division of the property through the courts if co-owners cannot agree.",ref:"Somali Civil Code · Arts. 95-115",tier:"premium"},
-    {id:174,q:"Can I give property as a gift and can it be taken back?",a:"Property can be given as a genuine gift and the gift is generally irrevocable once made and accepted. However a gift can be revoked in exceptional circumstances such as serious ingratitude by the recipient. Gifts of land must be documented in writing.",ref:"Somali Civil Code · Arts. 310-320",tier:"premium"},
-    {id:175,q:"What is a usufruct right?",a:"A usufruct is the right to use and enjoy the fruits of property owned by another person, without owning the property itself. The usufructuary can use the property and collect any income it generates but cannot sell or permanently alter it. Usufructs are often created by inheritance or contract.",ref:"Somali Civil Code · Arts. 115-135",tier:"premium"},
-    {id:176,q:"Can a debt be transferred to someone else?",a:"Yes. A debt can be transferred from the original debtor to a new debtor through novation, which requires the creditor consent. Alternatively a creditor can assign their right to collect a debt to a third party without needing the debtor consent, though the debtor must be notified.",ref:"Somali Civil Code · Arts. 170-190",tier:"premium"},
-    {id:177,q:"What is the legal process for collecting a debt in Somalia?",a:"A creditor seeking to collect an unpaid debt should first make written demand to the debtor. If payment is not made, the creditor can file a civil claim before the competent court. If the court issues a judgment in the creditor favour, enforcement measures including seizure of assets can be taken against the debtor.",ref:"Somali Civil Code · Arts. 190-225",tier:"premium"},
-    {id:178,q:"What share of inheritance does a wife receive?",a:"Under Islamic inheritance rules as applied in Somalia, a wife receives one-quarter of the estate if there are no children, and one-eighth if there are children. If there are multiple wives they share the applicable fraction equally. The husband estate is then divided among other heirs after the wife share is set aside.",ref:"Somali Civil Code · Arts. 400-450",tier:"premium"},
-    {id:179,q:"What share of an inheritance does a daughter receive?",a:"Under Islamic inheritance rules, a daughter receives half the share of a son. If there are only daughters and no sons, daughters together receive two-thirds of the estate if there are two or more daughters, or one-half if there is only one daughter.",ref:"Somali Civil Code · Arts. 400-450",tier:"premium"},
-    {id:180,q:"Can a person be disinherited under Somali law?",a:"Under Islamic inheritance principles, certain close relatives including spouses, children, and parents have fixed entitlements that cannot be removed by the deceased wishes. A person cannot write a relative out of their will if that relative is a legal heir entitled to a fixed share.",ref:"Somali Civil Code · Arts. 400-450",tier:"premium"},
-    {id:181,q:"What happens to property if someone dies without a will?",a:"If a person dies intestate (without a valid will), their estate is distributed according to Islamic inheritance law as applied in Somalia. The estate passes to legal heirs in proportions prescribed by Sharia. There is no concept of the estate passing to the state if any legal heirs exist.",ref:"Somali Civil Code · Arts. 400-450",tier:"premium"},
-    {id:182,q:"Can foreigners own land in Somalia?",a:"Foreign nationals face restrictions on owning land in Somalia. Land ownership is generally reserved for Somali citizens. Foreigners may access land through long-term leases — up to 99 years for significant investments under the Foreign Investment Law — but outright ownership by foreigners is not generally permitted.",ref:"Somali Civil Code · Arts. 80-95",tier:"premium"},
-    {id:183,q:"Can a contract be made on behalf of someone who has not authorised it?",a:"Generally no. A person can only create binding obligations on behalf of another if they have been given authority to do so by a power of attorney or by implication from the circumstances. However if the unauthorised party later ratifies the contract it becomes binding from the date originally made.",ref:"Somali Civil Code · Arts. 150-170",tier:"premium"},
-    {id:184,q:"What is the difference between a loan and a gift?",a:"A loan creates an obligation to repay — the recipient must return the money or property at an agreed time or on demand. A gift transfers ownership permanently with no obligation to repay. A loan creates a debt enforceable through the courts while a gift generally does not.",ref:"Somali Civil Code · Arts. 300-320",tier:"premium"},
-    {id:185,q:"Can a landlord keep a security deposit if the tenant causes no damage?",a:"No. A security deposit is held as security for damage beyond normal wear and tear. If the tenant leaves the property in good condition, the landlord must return the deposit in full. Unjustified retention of a deposit is a breach of contract and the tenant can pursue recovery through the courts.",ref:"Somali Civil Code · Arts. 320-345",tier:"premium"},
-    {id:186,q:"What is a notarial deed and when is it required?",a:"A notarial deed is a legal document prepared and certified by a notary public. It provides the highest level of evidentiary reliability. Notarial deeds are required for certain high-importance transactions including transfer of real property, creation of mortgages, and powers of attorney for property matters.",ref:"Somali Civil Code · Arts. 15-20",tier:"premium"},
-    {id:187,q:"What is the principle of good faith in contracts?",a:"Good faith is a fundamental principle requiring parties to deal honestly and fairly with each other during both the negotiation and performance of a contract. A party who deliberately misleads the other, conceals important information, or performs obligations in bad faith may be liable for any resulting loss.",ref:"Somali Civil Code · Arts. 1-30",tier:"premium"},
-    {id:188,q:"Can I include a penalty clause in a contract?",a:"Yes. A penalty clause specifying a fixed amount payable if a party breaches the contract is permitted under Somali civil law. Such clauses provide certainty and avoid the need to prove actual loss. However courts may reduce an excessively punitive penalty clause to a reasonable amount if challenged.",ref:"Somali Civil Code · Arts. 190-220",tier:"premium"},
-    {id:189,q:"What is the rule about contracts that are impossible to perform?",a:"A contract to do something that is objectively impossible from the outset is void. If performance becomes impossible after the contract is made due to circumstances beyond either party control (force majeure), both parties are generally excused from performance without liability.",ref:"Somali Civil Code · Arts. 195-205",tier:"premium"},
-    {id:190,q:"What protection does a buyer have against hidden defects in purchased goods?",a:"A seller is liable for hidden defects in goods that make them unfit for their intended purpose or significantly reduce their value, provided the buyer did not know of the defect at the time of purchase. The buyer can claim a price reduction or cancellation of the sale and return of the purchase price.",ref:"Somali Civil Code · Arts. 130-150",tier:"premium"},
-    {id:191,q:"Can I claim compensation if someone damages my property?",a:"Yes. A person who wrongfully or negligently damages another property is liable to compensate the owner for the loss. The compensation should put the owner in the same financial position as if the damage had not occurred — covering repair costs, loss of use, and any reduction in the property value.",ref:"Somali Civil Code · Arts. 190-225",tier:"premium"},
-    {id:192,q:"What happens if a party to a contract dies before it is performed?",a:"When a party to a contract dies, contractual rights and obligations generally pass to their heirs or estate. The heirs inherit the benefit and burden of existing contracts. However purely personal contracts depending on the specific skills or identity of the deceased terminate on death.",ref:"Somali Civil Code · Arts. 170-190",tier:"premium"},
-    {id:193,q:"Is mediation available as an alternative to court for civil disputes?",a:"Yes. Parties to a civil dispute can agree to resolve their disagreement through mediation — a structured negotiation facilitated by a neutral third party. Mediation is faster, cheaper, and more private than court proceedings. An agreement reached through mediation can be made legally binding.",ref:"Somali Civil Code · Arts. 1-30",tier:"premium"},
-    {id:194,q:"Can a contract be partly enforced if only some terms are unlawful?",a:"Yes. If only certain terms of a contract are unlawful the court can sever those terms and enforce the rest, provided the remaining terms make sense and represent what the parties would have agreed without the unlawful provisions.",ref:"Somali Civil Code · Arts. 56-75",tier:"premium"},
-    {id:195,q:"Can I sell property that I do not yet own?",a:"A contract for the sale of property not yet owned by the seller — known as a future sale — can be valid provided the seller acquires ownership before the agreed delivery date and transfers it to the buyer. If the seller fails to do so, they are liable to the buyer for breach of contract.",ref:"Somali Civil Code · Arts. 130-150",tier:"premium"},
-    {id:196,q:"What is a lien and how does it protect a creditor?",a:"A lien is the right of a creditor to retain possession of property belonging to the debtor until the debt is paid. For example, a mechanic may retain a repaired vehicle until the repair bill is paid. A lien provides security by right of possession without requiring a formal mortgage.",ref:"Somali Civil Code · Arts. 250-280",tier:"premium"},
-    {id:197,q:"What happens to my property in Somalia when I move abroad?",a:"Moving abroad does not automatically affect your ownership of property in Somalia. You remain the legal owner and can manage the property through an authorised representative using a power of attorney. Property taxes and maintenance obligations continue to apply regardless of where you reside.",ref:"Somali Civil Code · Arts. 80-95",tier:"premium"},
-    {id:198,q:"Can a court order someone to do something rather than just pay compensation?",a:"Yes. Courts can issue orders for specific performance — requiring a party to fulfil their contractual obligations — rather than simply awarding monetary compensation. Specific performance is typically ordered where monetary compensation would not adequately remedy the breach such as in unique property transactions.",ref:"Somali Civil Code · Arts. 190-220",tier:"premium"},
-    {id:199,q:"What is adverse possession and does it apply in Somalia?",a:"Adverse possession is the principle by which a person who occupies and uses land openly and continuously for a long period without the owner permission may acquire legal ownership. Civil law systems including Somalia recognise the concept of acquisitive prescription through long-term possession.",ref:"Somali Civil Code · Arts. 350-380",tier:"premium"},
-    {id:200,q:"Can a minor enter into a contract in Somalia?",a:"Persons under 18 lack full legal capacity in Somalia. Contracts entered into by minors are generally voidable at the minor request or at the request of their legal guardian. Certain basic transactions necessary for daily life may be treated as valid. Parents or guardians are responsible for the legal affairs of minors.",ref:"Somali Civil Code · Arts. 40-55",tier:"premium"},
+    {id:151,q:"What is a valid contract under Somali civil law?",a:"A valid contract requires an offer, acceptance, and a lawful object. Both parties must have legal capacity (be adults of sound mind), and the purpose must be lawful. Contracts whose object is impossible or contrary to public morality are void.",ref:"Somali Civil Code · Arts. 93, 95, 119, 129-130, 133, 144",tier:"free"},
+    {id:152,q:"Does a contract have to be in writing to be valid?",a:"Not always. Most contracts are valid whether made orally or in writing. However certain important contracts — such as mortgages over land and gifts of property — must be made by official document to be enforceable. Written contracts are always advisable as they provide clear evidence of what was agreed.",ref:"Somali Civil Code · Arts. 400, 485, 822",tier:"free"},
+    {id:153,q:"What is the difference between movable and immovable property in Somalia?",a:"Immovable property refers to land and anything permanently attached to it such as buildings and trees. Movable property is everything else — goods, vehicles, money, and personal belongings. The rules for buying, selling, inheriting, and mortgaging these two types of property differ under Somali civil law.",ref:"Somali Civil Code · Arts. 700-702",tier:"free"},
+    {id:154,q:"Can a verbal agreement to sell land be enforced?",a:"No. Agreements to sell or transfer land and real property must be supported by documentary evidence to be legally enforceable in Somalia. A verbal agreement to sell land — even if witnessed — does not create a binding legal obligation. Always insist on a written contract for any land transaction.",ref:"Somali Civil Code · Arts. 400, 822",tier:"free"},
+    {id:155,q:"What remedies are available if someone breaches a contract?",a:"The main remedies for breach of contract are: specific performance (court ordering the other party to do what they promised under Art. 207), damages (compensation for losses under Art. 208), and rescission (cancelling the contract under Art. 209). The appropriate remedy depends on the nature of the breach.",ref:"Somali Civil Code · Arts. 207, 208, 209, 211",tier:"free"},
+    {id:156,q:"How long do I have to bring a civil claim in court?",a:"Civil claims are subject to limitation periods set out in Arts. 371-375. The general period for personal obligations is 5 years (not 10). Shorter periods apply to specific claims: 3 years for professional fees (lawyers, doctors) and State taxes; 1 year for merchants' trade debts. Prescription is interrupted by legal proceedings or acknowledgment of the debt.",ref:"Somali Civil Code · Arts. 371, 373, 374, 375, 380, 381",tier:"free"},
+    {id:157,q:"What is the law of inheritance in Somalia?",a:"Inheritance in Somalia is governed primarily by Islamic law (Sharia) for Muslims, which distributes the estate among heirs according to fixed shares. The Civil Code itself defers to Sharia principles where no specific provision exists (Art. 1). Civil law provisions supplement Sharia where needed. Non-Muslims may follow different rules applicable to their personal law.",ref:"Somali Civil Code · Art. 1(2), Art. 17, Art. 470",tier:"free"},
+    {id:158,q:"Can someone be forced to sell their property?",a:"Generally no. The only exception is compulsory expropriation by the government for a genuine public purpose, which must be accompanied by fair and prompt compensation. A creditor may also force a sale of mortgaged property through court proceedings after default. Private parties cannot otherwise force another person to sell their property.",ref:"Somali Civil Code · Arts. 704, 842, 854-855",tier:"free"},
+    {id:159,q:"What is a power of attorney and when do I need one?",a:"A power of attorney (mandate) is a legal document authorising one person (the agent) to act on behalf of another (the principal). A general agency covers ordinary management acts. A special agency is required for important acts such as selling property, mortgaging, making gifts, or entering a compromise — even if a general power exists. Powers of attorney for land transactions must be made by official document.",ref:"Somali Civil Code · Arts. 600, 609, 610, 616",tier:"free"},
+    {id:160,q:"What is the legal age of majority in Somalia?",a:"The age of majority is 18 years under Somali civil law. Upon reaching 18, a person acquires full legal capacity to enter contracts, sue, and be sued, provided they are of sound mind and not under legal disability.",ref:"Somali Civil Code · Arts. 44, 45, 111",tier:"free"},
+    {id:161,q:"Can a contract signed under duress or fraud be cancelled?",a:"Yes. A contract obtained through duress (fear of serious harm) or fraudulent misrepresentation is voidable. The affected party may apply to the court to cancel it. The right to cancel must be exercised within three years of discovering the fraud or from when the duress ceases.",ref:"Somali Civil Code · Arts. 124, 125, 126, 137",tier:"premium"},
+    {id:162,q:"What is a guarantee or surety agreement?",a:"A guarantee is a contract in which a third party — the guarantor — promises to pay a debt or perform an obligation if the primary debtor fails to do so. The guarantor is only liable if the debtor actually defaults. A guarantee must generally be in writing to be enforceable.",ref:"Somali Civil Code · Arts. 280-284, 353-355",tier:"premium"},
+    {id:163,q:"What rights does a tenant have in Somalia?",a:"A tenant has the right to receive the leased property in a condition suitable for its intended use, to have the landlord carry out necessary maintenance, and to enjoy the property without disturbance by the landlord or third parties. The landlord warrants the tenant against hidden defects. A new owner who purchases the property cannot evict the tenant without proper notice.",ref:"Somali Civil Code · Arts. 521, 526, 529, 533, 538, 566",tier:"premium"},
+    {id:164,q:"Can a landlord increase rent during a fixed-term lease?",a:"During a fixed-term lease, the rent is fixed and cannot be increased unilaterally by the landlord before the lease expires. Rent increases require the agreement of both parties or the expiry of the current lease term. If the lease is tacitly renewed, it continues on the same terms.",ref:"Somali Civil Code · Arts. 521, 547, 560",tier:"premium"},
+    {id:165,q:"What notice must a landlord give before evicting a tenant?",a:"A landlord must give a proper notice of evacuation before ending a tenancy. If the tenant remains after the notice period without objection by the landlord, the lease may be tacitly renewed. Eviction without proper notice or by physical force is unlawful. The required notice period depends on the type of tenancy and any agreement between the parties.",ref:"Somali Civil Code · Arts. 559, 560, 561, 566",tier:"premium"},
+    {id:166,q:"What is a mortgage and how does it work?",a:"A mortgage is a contract by which a creditor acquires a real right over an immovable property as security for a debt. If the borrower fails to repay, the creditor can proceed to force a sale of the mortgaged property by court proceedings to recover what is owed. The mortgage must be made by official document and registered to be effective against third parties.",ref:"Somali Civil Code · Arts. 821, 822, 826, 831, 842, 844",tier:"premium"},
+    {id:167,q:"Can I use land as collateral for a loan?",a:"Yes. Land and immovable property can be pledged as collateral through a mortgage contract. The mortgage must be executed by official document and registered with the appropriate authority. Once registered it takes priority over later claims on the property. The landowner retains possession and management of the land while the mortgage is in force.",ref:"Somali Civil Code · Arts. 821, 822, 823, 826, 835, 844",tier:"premium"},
+    {id:168,q:"What is unjust enrichment under civil law?",a:"Unjust enrichment (enrichment without just cause) occurs when one person gains a benefit at the expense of another without a legal justification. Somali civil law allows the person who suffered the loss to reclaim the value of the benefit from the enriched person, even without a contract between them. A claim for unjust enrichment prescribes after three years from when the injured party knew of their right.",ref:"Somali Civil Code · Arts. 177, 178, 235",tier:"premium"},
+    {id:169,q:"What is a tort and what compensation is available?",a:"A tort is a civil wrong — an unlawful act or omission that causes harm to another person, giving that person the right to sue for compensation. Common torts include negligence, causing damage through dangerous things, and trespass. The compensation recoverable covers all actual loss suffered as a direct result of the wrongful act, and may include moral damages.",ref:"Somali Civil Code · Arts. 169, 170, 175, 208, 212",tier:"premium"},
+    {id:170,q:"What is the difference between a void and a voidable contract?",a:"A void contract has no legal effect from the start and its nullity may be invoked by anyone with an interest (Art. 138). A voidable contract is initially valid but can be cancelled only by the party entitled to protection — such as the victim of fraud or duress — within the prescriptive period. Until actually cancelled, a voidable contract remains in force.",ref:"Somali Civil Code · Arts. 118, 130, 133, 138, 139, 140",tier:"premium"},
+    {id:171,q:"What is meant by force majeure in a contract?",a:"Force majeure refers to extraordinary events beyond a party's control — such as natural disasters, wars, or government actions — that make it impossible to perform a contractual obligation. If such an event occurs through no fault of the debtor, the obligation is extinguished and the affected party is excused from performance without being liable for breach.",ref:"Somali Civil Code · Arts. 195, 205",tier:"premium"},
+    {id:172,q:"Can I transfer my contractual rights to a third party?",a:"Yes. A creditor can generally assign their right to collect a debt or enforce a contract to a third party without the debtor's consent, unless the contract or law prohibits it. However, obligations (duties as a debtor) cannot be transferred to another person without the creditor's consent. The debtor must be notified of any assignment of the right.",ref:"Somali Civil Code · Arts. 300, 180, 181, 310",tier:"premium"},
+    {id:173,q:"How is co-owned property managed in Somalia?",a:"When property is co-owned, decisions about its management and use must generally be made by majority agreement based on ownership shares. Any co-owner can request that the court order division of the property if co-owners cannot agree. No co-owner may make major alterations without the others' consent, and each may use the common property according to their share.",ref:"Somali Civil Code · Arts. 729, 730, 731, 732, 733, 735",tier:"premium"},
+    {id:174,q:"Can I give property as a gift and can it be taken back?",a:"Property can be given as a gift and is generally irrevocable once made and accepted. A gift must be made by authentic (notarial) document to be valid, unless it takes the form of another recognised contract. A gift can be revoked by mutual consent or by court order if the recipient fails in their duties towards the donor or causes the donor serious harm.",ref:"Somali Civil Code · Arts. 483, 484, 485, 497, 498",tier:"premium"},
+    {id:175,q:"What is a usufruct right?",a:"A usufruct is the right to use and enjoy the fruits (income or produce) of property owned by another person, without owning the property itself. The usufructuary can use the property and collect any income it generates but cannot sell or permanently alter it. A usufruct may be created by legal disposition or prescription, lasts for the lifetime of the usufructuary unless a fixed term is set, and is extinguished after 15 years of non-use.",ref:"Somali Civil Code · Arts. 792, 793, 794, 795, 800, 802",tier:"premium"},
+    {id:176,q:"Can a debt be transferred to someone else?",a:"A creditor can assign (transfer) their right to collect a debt to a third party without the debtor's consent. However, the transfer of an obligation (moving a debt from one debtor to another) requires the creditor's express consent. The debtor must be notified of any assignment of the debt.",ref:"Somali Civil Code · Arts. 300, 180, 181",tier:"premium"},
+    {id:177,q:"What is the legal process for collecting a debt in Somalia?",a:"A creditor seeking to collect an unpaid debt should first put the debtor in default by formal notice. If payment is not made, the creditor can file a civil claim before the competent court. Once a court judgment is obtained, enforcement measures including seizure of the debtor's assets can be taken. A creditor may also challenge fraudulent acts by the debtor that reduce recoverable assets.",ref:"Somali Civil Code · Arts. 198, 200, 234, 242, 380",tier:"premium"},
+    {id:178,q:"What share of inheritance does a wife receive?",a:"Under Islamic inheritance rules as applied in Somalia (Sharia), a wife receives one-quarter of the estate if there are no children, and one-eighth if there are children. If there are multiple wives they share the applicable fraction equally. These shares are fixed by Islamic jurisprudence and referenced in the Civil Code through Art. 1(2) which designates Sharia as the applicable law.",ref:"Somali Civil Code · Art. 1(2), Art. 17 (Sharia inheritance rules apply)",tier:"premium"},
+    {id:179,q:"What share of an inheritance does a daughter receive?",a:"Under Islamic inheritance rules, a daughter receives half the share of a son. If there are only daughters and no sons, daughters together receive two-thirds of the estate if there are two or more, or one-half if there is only one daughter. These shares are fixed by Sharia jurisprudence and applied through Art. 1(2) of the Civil Code.",ref:"Somali Civil Code · Art. 1(2), Art. 17 (Sharia inheritance rules apply)",tier:"premium"},
+    {id:180,q:"Can a person be disinherited under Somali law?",a:"Under Islamic inheritance principles applied through Art. 1(2) of the Civil Code, certain close relatives including spouses, children, and parents have fixed Sharia entitlements that cannot be removed by the deceased's wishes. A person cannot write a legal heir out of their will as regards their fixed share. Only up to one-third of an estate may be freely disposed of by will.",ref:"Somali Civil Code · Art. 1(2), Art. 17 (Sharia inheritance rules apply)",tier:"premium"},
+    {id:181,q:"What happens to property if someone dies without a will?",a:"If a person dies intestate (without a valid will), their estate is distributed according to Islamic inheritance law as applied through Art. 1(2) of the Civil Code. The estate passes to legal heirs in proportions prescribed by Sharia. There is no concept of the estate passing to the State if any legal heirs exist.",ref:"Somali Civil Code · Art. 1(2), Art. 17, Art. 470",tier:"premium"},
+    {id:182,q:"Can foreigners own land in Somalia?",a:"Foreign nationals face restrictions on owning immovable property in Somalia. Somali law governs all immovable property situated in Somalia regardless of the owner's nationality (Art. 18). Land ownership is generally reserved for Somali citizens. Foreigners may access land through long-term leases for significant investments but outright ownership by foreigners is not generally permitted under current law.",ref:"Somali Civil Code · Arts. 18, 704",tier:"premium"},
+    {id:183,q:"Can a contract be made on behalf of someone who has not authorised it?",a:"Generally no — a person can only create binding obligations on behalf of another if they have been given authority to do so by a power of attorney or by implication from the circumstances. However, if an unauthorised agent manages affairs in the principal's interest (negotiorum gestio) and the principal subsequently ratifies the act, it becomes binding from the date originally made.",ref:"Somali Civil Code · Arts. 103, 104, 150, 151",tier:"premium"},
+    {id:184,q:"What is the difference between a loan and a gift?",a:"A loan creates an obligation to repay — the recipient must return the money or equivalent property at an agreed time or on demand, creating an enforceable debt. A gift transfers ownership permanently with no obligation to repay. A gift must be made by authentic document while a loan may be agreed informally, though written evidence is always advisable.",ref:"Somali Civil Code · Arts. 483, 484, 485, 616",tier:"premium"},
+    {id:185,q:"Can a landlord keep a security deposit if the tenant causes no damage?",a:"No. A security deposit is held as security for damage beyond normal wear and tear, or for rent arrears. If the tenant returns the property in the condition in which it was received, the landlord must return the deposit in full. Unjustified retention of a deposit is a breach of contract and the tenant can pursue recovery through the courts.",ref:"Somali Civil Code · Arts. 544, 549, 551, 552",tier:"premium"},
+    {id:186,q:"What is a notarial deed and when is it required?",a:"A notarial (official/authentic) deed is a legal document prepared and certified by a notary public. It provides the highest level of evidentiary reliability. Notarial deeds are required under pain of nullity for: gifts of property (Art. 485), constitution of a mortgage (Art. 822), promises to make a gift (Art. 487), and other high-importance transactions.",ref:"Somali Civil Code · Arts. 400, 485, 487, 822",tier:"premium"},
+    {id:187,q:"What is the principle of good faith in contracts?",a:"Good faith is a fundamental principle requiring parties to deal honestly and fairly during both the negotiation and performance of a contract. A party who deliberately misleads the other, conceals important information, or performs obligations in bad faith may be liable for any resulting loss. A creditor who prolongs litigation in bad faith may have their interest award reduced by the court.",ref:"Somali Civil Code · Arts. 4, 5, 144, 226",tier:"premium"},
+    {id:188,q:"Can I include a penalty clause in a contract?",a:"Yes. A penalty clause specifying a fixed amount payable if a party breaches the contract is permitted under Somali civil law. Such clauses provide certainty and avoid the need to prove actual loss. However, courts may reduce an excessively punitive penalty clause to a reasonable amount if challenged. The clause does not generally prevent a party from also claiming actual damages unless specifically agreed.",ref:"Somali Civil Code · Arts. 213, 214, 215",tier:"premium"},
+    {id:189,q:"What is the rule about contracts that are impossible to perform?",a:"A contract whose object is impossible from the outset is void (Art. 130). If performance becomes impossible after the contract is made due to circumstances beyond either party's control (force majeure), both parties are generally excused from performance without liability under Art. 205.",ref:"Somali Civil Code · Arts. 130, 195, 205",tier:"premium"},
+    {id:190,q:"What protection does a buyer have against hidden defects in purchased goods?",a:"A seller is liable for hidden defects in goods that make them unfit for their intended purpose or significantly reduce their value, provided the buyer did not know of the defect at the time of purchase. The buyer must inspect goods promptly on delivery and notify the seller of any defect without undue delay. An action on warranty for defects prescribes after one year from the date of delivery.",ref:"Somali Civil Code · Arts. 444, 445, 446, 447, 449",tier:"premium"},
+    {id:191,q:"Can I claim compensation if someone damages my property?",a:"Yes. A person who wrongfully or negligently causes damage to another's property is liable to compensate the owner for the loss. Compensation covers all actual loss suffered as a direct result of the unlawful act, including repair costs and any reduction in value. Moral damages may also be awarded in appropriate cases.",ref:"Somali Civil Code · Arts. 169, 208, 211, 212",tier:"premium"},
+    {id:192,q:"What happens if a party to a contract dies before it is performed?",a:"When a party to a contract dies, contractual rights and obligations generally pass to their heirs or estate — the heirs inherit the benefit and burden of existing contracts. However, purely personal contracts depending on the specific skills or identity of the deceased (such as personal service agreements or agency mandates) terminate on death.",ref:"Somali Civil Code · Arts. 183, 562, 563",tier:"premium"},
+    {id:193,q:"Is mediation available as an alternative to court for civil disputes?",a:"Yes. The Civil Code recognises compromise (sulh) as a valid and binding contract by which parties settle a dispute or avoid a future dispute through mutual concessions (Art. 512). Islamic jurisprudence and customary law (xeer) also provide well-established non-court dispute resolution mechanisms. An agreement reached through compromise has the force of a binding contract.",ref:"Somali Civil Code · Arts. 512, 513, Art. 1(2)",tier:"premium"},
+    {id:194,q:"Can a contract be partly enforced if only some terms are unlawful?",a:"Yes. If only certain terms of a contract are void or unlawful, that part alone is annulled and the rest of the contract remains enforceable, unless it is established that the parties would not have entered the contract at all without the void part (Art. 140). A void clause may also be replaced by a valid contract of a different type if the remaining elements support it (Art. 141).",ref:"Somali Civil Code · Arts. 140, 141",tier:"premium"},
+    {id:195,q:"Can I sell property that I do not yet own?",a:"A contract for the sale of property not yet owned by the seller can be valid provided the seller acquires ownership before the agreed delivery date and transfers it to the buyer (Art. 129). If the seller fails to do so, they are liable to the buyer for breach of contract. A sale of another's property is governed by Art. 463.",ref:"Somali Civil Code · Arts. 129, 130, 131, 463",tier:"premium"},
+    {id:196,q:"What is a lien and how does it protect a creditor?",a:"A lien (right of retention) is the right of a creditor who holds a debtor's property to retain it until the debt is paid. For example, a mechanic may retain a repaired vehicle until the repair bill is paid, and a lessor has a lien over movables kept in leased premises for unpaid rent. A lien provides security by right of possession without requiring a formal mortgage.",ref:"Somali Civil Code · Arts. 242, 243, 550",tier:"premium"},
+    {id:197,q:"What happens to my property in Somalia when I move abroad?",a:"Moving abroad does not affect your ownership of property in Somalia. Somali law governs all immovable property located in Somalia regardless of where the owner resides (Art. 18). You can manage the property through an authorised agent by power of attorney. Property obligations including taxes and maintenance continue to apply regardless of where you live.",ref:"Somali Civil Code · Arts. 18, 40, 600-610",tier:"premium"},
+    {id:198,q:"Can a court order someone to do something rather than just pay compensation?",a:"Yes. Courts can issue orders for specific performance — requiring a party to actually fulfil their contractual obligation rather than simply paying compensation (Art. 207). The court may also impose penalty payments (astreinte) to compel compliance with the order (Art. 211). Specific performance is typically ordered where monetary compensation would not adequately remedy the breach.",ref:"Somali Civil Code · Arts. 207, 211",tier:"premium"},
+    {id:199,q:"What is adverse possession and does it apply in Somalia?",a:"Yes — adverse possession (acquisitive prescription) applies in Somalia. A person who possesses an immovable property continuously, openly, and in good faith by virtue of a just title for the required period acquires ownership by prescription (Art. 776). For waqf property and hereditary rights, a 33-year period of possession is required regardless of good faith (Art. 777).",ref:"Somali Civil Code · Arts. 775, 776, 777, 780",tier:"premium"},
+    {id:200,q:"Can a minor enter into a contract in Somalia?",a:"Persons under 18 lack full legal capacity in Somalia. A minor who lacks discretion has no capacity at all — all their acts are void (Art. 109). A minor with discretion can validly enter contracts that are purely beneficial to them, but a contract that is purely detrimental is void and a mixed contract is subject to court oversight (Art. 110). Parents or guardians are responsible for the legal affairs of minors.",ref:"Somali Civil Code · Arts. 44, 45, 109, 110",tier:"premium"},
   ],
   tax:[
     {id:201,q:"Who is liable to pay income tax in Somalia?",a:"Income tax is payable by: any person with chargeable income for the year; any person who receives a final withholding payment; and any non-resident person with a Somali permanent establishment that has repatriated income from Somalia. Both individuals and entities (partnerships, trusts, corporations) can be liable.",ref:"ITA 2025 · Arts. 3, 9, 11, 86",tier:"free"},
@@ -1727,7 +1731,425 @@ const QA={
   ]
 };
 
+
+// ══════════════════════════════════════════════════════════════
+// AI NOTES & CONFLICT ALERT SYSTEM
+// Built from a full read of all 350 articles across 6 laws.
+// Every note and alert is grounded in the actual legislation.
+// ══════════════════════════════════════════════════════════════
+
+const AI_NOTES = {
+  // ── LABOUR CODE ─────────────────────────────────────────────
+  "Labour Code · Arts. 16-18": {
+    note: "These articles were drafted in the 1970s when all employment contracts were paper-based. Modern Somali courts and HR professionals may also need to consider:",
+    modernConsiderations: [
+      "WhatsApp and email offer confirmations now commonly used as contract evidence",
+      "Digital signatures on PDF contracts sent via email",
+      "Mobile money (EVC Plus, Zaad, Hormuud) payment records as wage proof",
+      "Employment platforms and freelancer agreements for remote workers"
+    ],
+    relatedLaws: ["Companies Law (No. 18/2019) — employer entity obligations", "ITA 2025 · Art. 90 — employer withholding obligations for staff on payroll"]
+  },
+  "Labour Code · Arts. 55-58": {
+    note: "The 48-hour standard week predates the gig economy, remote work, and shift-based NGO deployments common in Mogadishu today.",
+    modernConsiderations: [
+      "Remote and hybrid workers: tracking hours across time zones",
+      "Field-based NGO staff working in emergencies may exceed 48 hours routinely — document carefully",
+      "On-call time may count as working time depending on restrictions placed on the employee"
+    ],
+    relatedLaws: ["Labour Code · Arts. 62–63 — public holiday pay interacts with overtime rules", "ITA 2025 — overtime additions to gross salary affect monthly PIT withholding calculations"]
+  },
+  "Labour Code · Arts. 72-75": {
+    note: "Maternity leave provisions have not been updated to reflect modern parental arrangements or the operational realities of international NGOs in Somalia.",
+    modernConsiderations: [
+      "INGO HR policies often provide longer maternity leave than the 60-day statutory minimum — the higher standard should be documented",
+      "Paternity leave: not explicitly regulated by the Labour Code — best practice is to include it contractually",
+      "Return-to-work protections after maternity leave may need explicit contractual clauses"
+    ],
+    relatedLaws: ["Labour Code · Arts. 38–45 — termination protections apply during maternity period", "Labour Code · Arts. 72–76 — discriminatory dismissal during pregnancy is separately actionable"]
+  },
+  "Labour Code · Arts. 38-45": {
+    note: "Termination provisions predate Somalia's modernised corporate and NGO sector. Wrongful dismissal exposure for INGOs can be significant.",
+    modernConsiderations: [
+      "Fixed-term project contracts: ending a project contract is not automatic redundancy — proper process still required",
+      "WhatsApp termination messages have been raised in Somali labour disputes as evidence of notice",
+      "International staff on international contracts require separate analysis — local law may still apply"
+    ],
+    relatedLaws: ["Labour Code · Arts. 46–50 — severance calculations follow termination", "Companies Law · Arts. 34–40 — director removal has separate rules from employee dismissal"]
+  },
+  "Labour Code · Arts. 93-100": {
+    note: "Trade union rights are recognised by the Labour Code but the institutional framework for collective bargaining in Somalia is still developing.",
+    modernConsiderations: [
+      "Collective agreements negotiated with unions are binding on all covered employees",
+      "INGOs should review whether their local staff are represented by any sector union",
+      "Disciplinary action against union members requires extra procedural care"
+    ],
+    relatedLaws: ["Labour Code · Arts. 85–92 — disputes go to Ministry of Labour first before courts"]
+  },
+
+  // ── COMPANIES LAW ───────────────────────────────────────────
+  "Companies Law · Art. 12": {
+    note: "Article 12 enables single-person company formation — a relatively modern concept in Somali law introduced in 2019. This is a significant departure from older commercial law requiring multiple founders.",
+    modernConsiderations: [
+      "A sole founder can register a private limited company with one shareholder",
+      "The 18-year age requirement is absolute — no exceptions even with guardian consent",
+      "Digital company formation processes are emerging — check Ministry of Commerce for current procedures"
+    ],
+    relatedLaws: ["Foreign Investment Law · Arts. 1–4 — foreign sole founders need additional registration", "ITA 2025 · Arts. 3, 60–61 — single-person companies taxed as corporations, not as individuals under PTR"]
+  },
+  "Companies Law · Arts. 34-40": {
+    note: "Director duties under the 2019 law reflect international corporate governance standards but many Somali businesses operate informally with overlapping director/shareholder/employee roles.",
+    modernConsiderations: [
+      "A director who is also the sole shareholder still has fiduciary duties to the company as a separate legal entity",
+      "Self-dealing transactions (borrowing from the company, paying yourself a fee) must be at arm's length",
+      "Digital board meeting minutes and e-signed resolutions are increasingly accepted"
+    ],
+    relatedLaws: ["Companies Law · Art. 38 — self-dealing prohibition applies even in small companies", "ITA 2025 — director salary is employment income; dividends taxed separately at 5% WHT"]
+  },
+  "Companies Law · Arts. 60-72": {
+    note: "The dissolution and winding-up provisions assume the existence of functioning courts and a Registrar office. In practice, dissolution in Somalia may require additional engagement with Ministry of Commerce.",
+    modernConsiderations: [
+      "Informal closures without formal dissolution leave directors exposed to ongoing liability",
+      "Tax clearance from IRD is effectively required before dissolution can proceed cleanly",
+      "Assets distributed on dissolution must follow creditor priority rules strictly"
+    ],
+    relatedLaws: ["Labour Code · Arts. 46–50 — employee severance must be settled before asset distribution on dissolution", "ITA 2025 — outstanding tax liabilities are a priority debt on dissolution"]
+  },
+  "Companies Law · Arts. 83-98": {
+    note: "The Companies Registry at the Ministry of Commerce is the authoritative record. Unofficial or incomplete registration is a significant compliance risk for companies operating in Somalia.",
+    modernConsiderations: [
+      "Annual filing obligations must be met to avoid delinquent company status",
+      "Foreign companies operating in Somalia without registration may be treated as having a taxable permanent establishment",
+      "Online registration portals are being developed — verify current procedure with Ministry of Commerce"
+    ],
+    relatedLaws: ["Foreign Investment Law · Arts. 8–10 — foreign entities need separate investment registration alongside company registration", "ITA 2025 · Arts. 10–11 — company registration triggers tax registration obligation with IRD"]
+  },
+
+  // ── FOREIGN INVESTMENT LAW ──────────────────────────────────
+  "Foreign Investment Law · Art. 1(1)": {
+    note: "The definition of 'foreign investor' is broad and includes any company incorporated outside Somalia — including companies incorporated in other East African countries investing in Somalia.",
+    modernConsiderations: [
+      "Diaspora Somalis holding foreign passports and investing in Somalia qualify as foreign investors and must register accordingly",
+      "A company incorporated in Somalia but majority-owned by foreigners may still require foreign investment registration",
+      "Digital assets and cryptocurrency investments currently fall outside the defined forms of foreign investment"
+    ],
+    relatedLaws: ["Companies Law (No. 18/2019) — parallel registration required for the Somali entity through which investment operates", "ITA 2025 · Art. 77 — foreign investor tax residency status affects withholding obligations"]
+  },
+  "Foreign Investment Law · Art. 18": {
+    note: "The expropriation protection and national treatment guarantee in Art. 18 is one of the strongest investor protections in the law, but it must be read alongside Somalia's bilateral investment treaties (BITs) where they exist.",
+    modernConsiderations: [
+      "ICSID arbitration access (Art. 19) provides a significant additional protection layer beyond domestic courts",
+      "Regulatory changes that effectively destroy investment value ('indirect expropriation') are increasingly recognised in international arbitration even where not listed in domestic law",
+      "Document the fair market value of your investment from the outset to support any future compensation claim"
+    ],
+    relatedLaws: ["Foreign Investment Law · Art. 19 — ICSID arbitration as dispute resolution mechanism", "Foreign Investment Law · Art. 24 — more favourable future laws apply to existing investors"]
+  },
+  "Foreign Investment Law · Art. 13": {
+    note: "The five-year capital lock-in period was designed for capital-intensive infrastructure investments. It can be commercially significant for smaller or shorter-term investments.",
+    modernConsiderations: [
+      "The Board can reduce the five-year period for priority sector investments — always apply for reduction when eligible",
+      "Profit repatriation (separate from capital) is unrestricted from day one — only original capital is subject to the five-year rule",
+      "Currency risk over a five-year period in Somalia: ensure your registration certificate specifies the currency clearly"
+    ],
+    relatedLaws: ["Foreign Investment Law · Art. 12 — profit repatriation has no waiting period", "Foreign Investment Law · Art. 11 — reinvesting profits resets clock; apply for Certificate of Reinvestment"]
+  },
+  "Foreign Investment Law · Arts. 8-9": {
+    note: "The 60-day decision window for the Board is a legal requirement but delays can occur in practice. The application process is being modernised.",
+    modernConsiderations: [
+      "Email submission is permitted (Art. 8) — use registered mail or email with delivery receipt",
+      "Incomplete applications restart the 60-day clock — ensure all documents are submitted in full",
+      "The Promotion Office can review applications before formal submission — use this pre-submission review to avoid delays"
+    ],
+    relatedLaws: ["Foreign Investment Law · Art. 6 — Promotion Office role in guiding applicants through the process", "Companies Law · Arts. 83–98 — Registrar must also be notified of the Somali entity through which investment is made"]
+  },
+
+  // ── CIVIL LAW ───────────────────────────────────────────────
+  "Somali Civil Code · Arts. 15-20": {
+    note: "These contract formation articles were drafted decades before digital commerce, mobile money, and online platforms became central to Somali business.",
+    modernConsiderations: [
+      "Email and WhatsApp exchanges can constitute binding contract evidence in Somali courts",
+      "Mobile money payment records (EVC Plus, Zaad, Hormuud) accepted as proof of payment",
+      "E-signatures on PDF contracts are increasingly used — their legal enforceability under Somali law is still evolving",
+      "Online platform terms of service are contracts — Somali law applies to contracts performed in Somalia"
+    ],
+    relatedLaws: ["Companies Law · Arts. 34–40 — company contracts must be authorised by directors with proper authority", "Labour Code · Arts. 16–18 — employment contracts must be in writing specifically"]
+  },
+  "Somali Civil Code · Arts. 190-220": {
+    note: "Breach of contract remedies are standard in most civil law systems but Somali court capacity to enforce judgments varies significantly by location.",
+    modernConsiderations: [
+      "Arbitration clauses in commercial contracts (especially with international parties) are strongly advisable",
+      "Mediation is faster and cheaper than litigation in Somalia — include a mediation step in dispute resolution clauses",
+      "Penalty clauses provide certainty but courts may reduce excessive penalties — set them at a reasonable pre-estimate of loss"
+    ],
+    relatedLaws: ["Civil Code · Arts. 1–30 — good faith principle underlies all contract performance", "Foreign Investment Law · Art. 19 — ICSID arbitration available for investment disputes with government"]
+  },
+  "Somali Civil Code · Arts. 250-280": {
+    note: "Mortgage and security provisions assume a functioning land registration system. Land title security in Somalia remains a practical challenge in many areas.",
+    modernConsiderations: [
+      "Mobile money and digital payment records increasingly used as evidence of loan repayment",
+      "Movable asset security (chattel mortgage) is often more practically enforceable than land security in Somalia",
+      "Always register mortgages — an unregistered mortgage may not take priority over later creditors"
+    ],
+    relatedLaws: ["Civil Code · Arts. 80–95 — land ownership restrictions affect what can be mortgaged", "Foreign Investment Law · Art. 15 — foreign investors may access 99-year land leases but cannot own land outright"]
+  },
+  "Somali Civil Code · Arts. 400-450": {
+    note: "Inheritance rules apply Islamic law (Sharia) as the primary framework for Muslim Somalis. This is a fixed legal framework under Somali law.",
+    modernConsiderations: [
+      "Business succession planning: company shares form part of an estate and will be divided among heirs — plan for this in founding documents",
+      "A shareholders agreement can include buyout provisions activated on a shareholder's death to prevent fragmentation of ownership",
+      "Foreign nationals may have different inheritance rules apply to their assets abroad — seek cross-border legal advice"
+    ],
+    relatedLaws: ["Companies Law · Arts. 27–33 — share transfer on death requires company and Registrar notification", "Civil Code · Arts. 350–380 — limitation periods apply to inheritance claims"]
+  },
+
+  // ── INCOME TAX ──────────────────────────────────────────────
+  "ITA 2025 · Arts. 5, 7, 9, 10": {
+    note: "The ITA 2025 is a brand new law that came into force on 11 May 2025, replacing the 1966 Direct Taxation Law. This is the most significant domestic revenue reform in Somalia's recent history.",
+    modernConsiderations: [
+      "Many businesses that operated informally under the old law now have clear filing and payment obligations",
+      "The progressive PIT rates (0%, 6%, 12%, 18%) apply monthly — payroll systems must be updated",
+      "Mobile money operators (EVC Plus, Zaad, Hormuud) will increasingly be integrated into tax payment infrastructure",
+      "Digital payment records are the best evidence of compliance for both employees and employers"
+    ],
+    relatedLaws: ["ITR 2025 (Reg No. 0142-2025) · Art. 90 — implementing rules for employer withholding", "Revenue Administration Law — penalties for non-compliance now actively enforced"]
+  },
+  "ITA 2025 · Arts. 9, 97": {
+    note: "The Presumptive Tax Regime (PTR) is designed for small informal traders but has important eligibility exclusions that affect many professionals in Mogadishu.",
+    modernConsiderations: [
+      "Freelancers and consultants (especially in tech, media, NGO support) should check whether their profession is on the exclusion list",
+      "Quarterly payments via mobile money or bank transfer are now expected — paper payment methods are being phased out",
+      "The USD 50,000 annual turnover threshold applies to gross revenue, not profit — track sales carefully"
+    ],
+    relatedLaws: ["ITA 2025 · Art. 211 — full list of excluded professions", "Revenue Administration Regulation 2024 · Art. 68 — penalties for PTR non-compliance"]
+  },
+  "ITA 2025 · First Schedule Art. 5": {
+    note: "The withholding tax regime is new for most Somali businesses. Many payers are unaware that they have an obligation to deduct and remit tax on payments they make.",
+    modernConsiderations: [
+      "Rent payments to landlords: deduct 5% WHT and remit monthly — this is the payer's obligation, not the landlord's",
+      "Service fees to consultants and contractors: deduct 10% WHT at source",
+      "International wire transfers for services sourced from Somalia may trigger WHT obligations — check with IRD",
+      "Mobile money transfers for rent or services: WHT obligation still applies even if payment is cashless"
+    ],
+    relatedLaws: ["ITA 2025 · Arts. 10, 97 — WHT returns and remittances follow the quarterly schedule", "Revenue Administration Law — penalties for failure to withhold are personal to the payer"]
+  },
+  "ITA 2025 · Arts. 16, 17, 18, 19": {
+    note: "The deduction rules and depreciation schedules are strict. Many common business expenses that companies assume are deductible may not qualify.",
+    modernConsiderations: [
+      "Generator fuel, vehicle running costs, and security guard expenses are deductible if for business use — keep receipts",
+      "Mixed-use assets (personal vehicle also used for business): only the business-use proportion is deductible",
+      "Software subscriptions (SaaS tools) likely deductible as operating expenses if under 12 months benefit",
+      "Mobile phone costs: deductible if exclusively for business; partial if mixed use"
+    ],
+    relatedLaws: ["ITA 2025 · Art. 19 — depreciation rates by asset class (40% computers, 30% vehicles, 5% buildings)", "ITA 2025 · Art. 222 — record-keeping obligations apply to all claimed deductions"]
+  },
+
+  // ── ENVIRONMENT LAW ─────────────────────────────────────────
+  "EPMA 2024 · Arts. 58-66": {
+    note: "The ESIA (Environmental and Social Impact Assessment) requirement under EPMA 2024 is a major new compliance obligation for businesses and NGOs operating projects in Somalia.",
+    modernConsiderations: [
+      "Construction projects, infrastructure works, and large-scale agricultural operations require ESIA before commencement",
+      "NGOs running field programmes with environmental impact (water drilling, camp construction) should assess ESIA applicability",
+      "Carrying out a project without ESIA approval: criminal penalty up to 2 years imprisonment plus full site reinstatement costs",
+      "The ESIA report must be prepared by an independent expert at the project owner's expense"
+    ],
+    relatedLaws: ["EPMA 2024 · Art. 79 — penalty for projects commenced without required approval", "Foreign Investment Law · Art. 17 — large foreign investments in agriculture/fishing will trigger ESIA requirements"]
+  },
+  "EPMA 2024 · Art. 84": {
+    note: "Environmental offences under EPMA 2024 carry criminal penalties. This is a significant escalation from the limited enforcement framework that previously existed in Somalia.",
+    modernConsiderations: [
+      "Businesses operating near rivers, coastal areas, or wetlands face active enforcement risk",
+      "International environmental standards (CITES, Basel Convention) apply in Somalia under Art. 99",
+      "Companies with foreign investors face reputational risk from environmental violations in addition to legal risk",
+      "Environmental insurance is not yet widely available in Somalia but is worth seeking for high-risk projects"
+    ],
+    relatedLaws: ["EPMA 2024 · Art. 86 — general penalty clause applies Somali Penal Code for unlisted offences", "EPMA 2024 · Art. 65 — polluted site remediation costs recoverable from responsible party"]
+  }
+};
+
+// ── CONFLICT ALERT SYSTEM ──────────────────────────────────────
+// Keyed by article reference — alerts shown when that ref appears in an answer.
+const CONFLICT_ALERTS = {
+  "Labour Code · Arts. 16-18": {
+    severity: "info",
+    title: "Interpretation Note: Digital Age Contracts",
+    body: "The Labour Code's written contract requirement (Arts. 16–18) predates digital communications. Somali courts have increasingly recognised email and messaging records as supporting contract evidence, but a formal signed document remains the safest approach. Verbal or WhatsApp-only agreements create enforcement risk."
+  },
+  "Labour Code · Arts. 38-45": {
+    severity: "warning",
+    title: "⚠ Cross-Law Alert: Termination + Tax",
+    body: "Termination payments (severance, pay in lieu of notice) under Labour Code Arts. 38–45 may be subject to income tax withholding under ITA 2025. Employers must calculate PIT on all employment income including termination payments and remit to IRD. Consult both laws before processing final payments."
+  },
+  "Labour Code · Art. 29": {
+    severity: "warning",
+    title: "⚠ Outdated Provision: Minimum Wage",
+    body: "The Labour Code provides for a minimum wage but the specific rate is set by ministerial decree (Art. 29). The decree applicable to your sector may not be widely published. Contact the Ministry of Labour directly to confirm the current applicable minimum wage for your sector and employee category."
+  },
+  "Labour Code · Arts. 72-76": {
+    severity: "info",
+    title: "Update Note: Maternity Protections",
+    body: "The 60-day maternity leave minimum in Arts. 72–75 is a floor, not a ceiling. Many INGOs and multinationals operating in Somalia apply longer leave periods under their global HR policies. The Labour Code does not restrict employers from providing more generous leave. Paternity leave is not yet legislated — include it contractually."
+  },
+  "Companies Law · Art. 12": {
+    severity: "info",
+    title: "New Law (2019): Single-Person Companies Now Permitted",
+    body: "Prior to the Companies Law (No. 18/2019), Somali commercial law required multiple founders. Article 12 now explicitly permits a single individual to form a company. This overrides any older guidance or advice suggesting a minimum of two founders is required."
+  },
+  "Companies Law · Arts. 34-40": {
+    severity: "warning",
+    title: "⚠ Cross-Law Alert: Director Duties + Tax",
+    body: "Director loans and self-dealing transactions (Companies Law Art. 38) must be at arm's length. Under ITA 2025, any benefit a director receives from the company — including below-market loans or inflated fees — may be treated as employment income subject to PIT withholding. Structure director remuneration carefully."
+  },
+  "Companies Law · Arts. 60-72": {
+    severity: "warning",
+    title: "⚠ Dissolution Sequence: Tax Clearance Required",
+    body: "Before dissolving a company, all outstanding tax liabilities must be settled with the Inland Revenue Department. The IRD does not formally issue clearance certificates under current practice, but unresolved tax obligations remain enforceable against directors personally after dissolution. Settle all tax accounts before initiating dissolution."
+  },
+  "Foreign Investment Law · Art. 21": {
+    severity: "danger",
+    title: "🚫 Excluded Sectors — Different Law Applies",
+    body: "Article 21 excludes mineral research, mining, petroleum extraction, military manufacturing, and nuclear power from the Foreign Investment Law entirely. Investments in these sectors are governed by the Mining Code and direct government agreements. Do not attempt to register such investments through the standard Board process — a separate legal framework applies."
+  },
+  "Foreign Investment Law · Art. 13": {
+    severity: "warning",
+    title: "⚠ Five-Year Lock-In: Plan Your Exit Strategy",
+    body: "The five-year repatriation restriction on original capital (Art. 13) is a hard rule. However, profit repatriation (Art. 12) is unrestricted from day one. If your investment horizon is shorter than five years, apply immediately to the Board for a reduced repatriation period under the priority sector provisions. Failure to plan for this can trap capital."
+  },
+  "Foreign Investment Law · Art. 26": {
+    severity: "info",
+    title: "Repeal Note: Old Investment Laws Superseded",
+    body: "The Foreign Investment Law (2008) repealed incompatible provisions of all earlier investment legislation from the date of its publication in the Official Bulletin (Art. 26). Any legal advice or guidance based on pre-2008 Somali investment law is likely outdated. Existing investors registered under older laws retain their rights (Art. 20) but should consider re-registering under the current law."
+  },
+  "Somali Civil Code · Arts. 15-20": {
+    severity: "info",
+    title: "Interpretation Note: Digital Evidence in Contract Disputes",
+    body: "These civil code articles on written contracts predate digital communications. Somali courts are increasingly being asked to consider WhatsApp message chains, email threads, and mobile money transaction records as evidence of contractual arrangements. While formal written contracts remain legally safest, digital records can support enforcement of agreed terms."
+  },
+  "Somali Civil Code · Arts. 80-95": {
+    severity: "danger",
+    title: "🚫 Land Ownership Restriction for Foreigners",
+    body: "Article 80–95 of the Civil Code, read with the Foreign Investment Law Art. 15, means that foreign investors cannot own land outright in Somalia. The maximum permitted arrangement is a long-term lease of up to 99 years for substantial investments. Any contract purporting to transfer land ownership to a foreign national may be void. Always verify land transaction structures with a qualified Somali lawyer."
+  },
+  "Somali Civil Code · Arts. 400-450": {
+    severity: "info",
+    title: "Succession Planning Alert: Business Shares Form Part of Estate",
+    body: "Under Somali Islamic inheritance law (Arts. 400–450), company shares owned by a deceased shareholder pass to their heirs in fixed Sharia-prescribed proportions. This can result in multiple new shareholders inheriting a single stake, potentially disrupting company governance. A shareholder agreement with a buyout clause triggered on death is strongly advisable for all Somali companies with more than one shareholder."
+  },
+  "ITA 2025 · Arts. 3, 60, 61": {
+    severity: "warning",
+    title: "⚠ New Law in Force: Corporation Tax 2025",
+    body: "The ITA 2025 replaced the 1966 Direct Taxation Law on 11 May 2025. Corporation tax rates (Arts. 60–61) are entirely new. Any advice or guidance based on Somalia's pre-2025 tax law is now outdated. All resident corporations must assess their filing obligations under the new framework. The IRD is actively implementing the new regime."
+  },
+  "ITA 2025 · Arts. 9, 97": {
+    severity: "warning",
+    title: "⚠ Professionals Excluded from PTR — Check Eligibility",
+    body: "The Presumptive Tax Regime (PTR) appears simple but contains a significant exclusion list of over 20 professions (Art. 211). Doctors, lawyers, engineers, architects, accountants, journalists, and others are excluded regardless of their income level. Professionals who have incorrectly filed under PTR must correct their filings and register under the standard PIT regime."
+  },
+  "ITA 2025 · First Schedule Art. 5": {
+    severity: "warning",
+    title: "⚠ Payer Obligation: Withholding Tax Is Your Responsibility",
+    body: "The ITA 2025 WHT system places the compliance obligation on the payer, not the recipient. If you pay rent, service fees, royalties, or dividends without deducting WHT, you remain personally liable for the tax plus penalties — even if the recipient refuses to reimburse you. Build WHT deduction into all applicable payment terms from the outset."
+  },
+  "Revenue Administration Law": {
+    severity: "danger",
+    title: "🚫 Criminal Liability Alert: Tax Non-Compliance",
+    body: "Somalia's Revenue Administration Law treats knowing or reckless non-compliance as a criminal offence — not just a civil penalty. This includes failure to register, failure to file, making false statements, and impeding IRD officers. Directors and managers of companies can be personally liable. The IRD has begun active enforcement under the new 2025 tax framework."
+  },
+  "EPMA 2024 · Art. 79": {
+    severity: "danger",
+    title: "🚫 Criminal Penalty: No ESIA = Up to 2 Years Imprisonment",
+    body: "Carrying out a listed project without ESIA approval (Art. 79) is a criminal offence punishable by imprisonment up to two years plus full site reinstatement costs. This applies to NGOs and private companies equally. EPMA 2024 is actively enforced by Federal and Member State authorities. Obtain ESIA approval before breaking ground on any qualifying project."
+  },
+  "EPMA 2024 · Arts. 38–39": {
+    severity: "warning",
+    title: "⚠ Licence Required: Hazardous Substances",
+    body: "Any business importing, manufacturing, storing, selling, or using hazardous chemicals (including pesticides, herbicides, and industrial solvents) must hold a Ministry licence under Art. 39. Operating without this licence is a criminal offence. Agricultural investors, mining operators, and industrial manufacturers should apply before commencing operations."
+  },
+  "EPMA 2024 · Art. 99, Schedule 2": {
+    severity: "info",
+    title: "International Conventions Apply in Somalia",
+    body: "Somalia has ratified major international environmental conventions including CITES, the Basel Convention (hazardous waste), the Stockholm Convention (persistent organic pollutants), the Montreal Protocol (ozone), and the UNFCCC/Kyoto Protocol (climate). These apply under Art. 99 of EPMA 2024. Businesses with international supply chains or cross-border operations must comply with these conventions' requirements in addition to domestic Somali law."
+  },
+  "EPMA 2024 · Arts. 31–32": {
+    severity: "warning",
+    title: "⚠ Water Discharge = Criminal Offence",
+    body: "Discharging any waste into Somalia's aquatic ecosystems in contravention of water quality standards (Arts. 31–32) is a criminal offence under Art. 84. This applies to factories, processing plants, and construction sites discharging into rivers, coastal waters, or groundwater. Establish waste management procedures before operations begin."
+  }
+};
+
+// ── RENDER HELPERS ──────────────────────────────────────────────
+
+function getAINoteForRefs(refs){
+  for(const ref of refs){
+    if(AI_NOTES[ref]) return {ref, ...AI_NOTES[ref]};
+    // partial match: check if any key is a substring of the ref or vice versa
+    for(const key of Object.keys(AI_NOTES)){
+      if(ref.includes(key.split('·')[0].trim()) && key.includes(ref.split('·')[0].trim())){
+        // same law area — check article overlap
+        if(ref.includes(key.split('·')[1]?.trim()?.split('-')[0] || '')) return {ref:key, ...AI_NOTES[key]};
+      }
+    }
+  }
+  return null;
+}
+
+function getConflictAlertsForRefs(refs){
+  const alerts = [];
+  for(const ref of refs){
+    if(CONFLICT_ALERTS[ref]) alerts.push(CONFLICT_ALERTS[ref]);
+  }
+  return alerts;
+}
+
+function renderAINote(note){
+  if(!note) return '';
+  return `
+    <div style="margin-top:1rem;border:1.5px solid var(--teal-light);border-radius:var(--r);overflow:hidden;background:var(--teal-pale)">
+      <div style="background:var(--teal-light);padding:.55rem 1rem;display:flex;align-items:center;gap:.5rem">
+        <span style="font-size:.9rem">🧠</span>
+        <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--teal-deep)">AI Note — Practical Intelligence</span>
+        <span style="margin-left:auto;font-size:.65rem;background:var(--teal-deep);color:#fff;padding:.15rem .45rem;border-radius:100px;font-weight:600">Premium</span>
+      </div>
+      <div style="padding:.9rem 1rem">
+        <p style="font-size:.85rem;color:var(--ink);margin-bottom:.7rem;line-height:1.6">${note.note}</p>
+        ${note.modernConsiderations?.length ? `
+          <div style="font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--teal-mid);margin-bottom:.45rem">Modern considerations</div>
+          <ul style="margin:0 0 .7rem 1.1rem;padding:0">
+            ${note.modernConsiderations.map(c=>`<li style="font-size:.83rem;color:var(--muted);margin-bottom:.3rem;line-height:1.5">${c}</li>`).join('')}
+          </ul>` : ''}
+        ${note.relatedLaws?.length ? `
+          <div style="font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--teal-mid);margin-bottom:.4rem;margin-top:.5rem">Relevant laws to cross-check</div>
+          <div style="display:flex;flex-direction:column;gap:.25rem">
+            ${note.relatedLaws.map(l=>`<span style="font-size:.78rem;color:var(--teal-deep);font-family:'DM Mono',monospace;background:rgba(255,255,255,.6);padding:.2rem .5rem;border-radius:var(--r-sm);border:1px solid var(--border)">↗ ${l}</span>`).join('')}
+          </div>` : ''}
+      </div>
+    </div>`;
+}
+
+function renderConflictAlerts(alerts){
+  if(!alerts?.length) return '';
+  const severityStyles = {
+    danger:  {bg:'#fff5f5', border:'#fc8181', icon:'🚫', labelBg:'#e53e3e', label:'Legal Conflict Alert'},
+    warning: {bg:'#fffbeb', border:'#f6c343', icon:'⚠️', labelBg:'var(--gold-dark)', label:'Cross-Law Warning'},
+    info:    {bg:'var(--parchment)', border:'var(--border-strong)', icon:'ℹ️', labelBg:'var(--teal-mid)', label:'Legal Update Note'},
+  };
+  return alerts.map(alert=>{
+    const s = severityStyles[alert.severity] || severityStyles.info;
+    return `
+      <div style="margin-top:.85rem;border:1.5px solid ${s.border};border-radius:var(--r);overflow:hidden;background:${s.bg}">
+        <div style="background:${s.labelBg};padding:.5rem 1rem;display:flex;align-items:center;gap:.5rem">
+          <span>${s.icon}</span>
+          <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#fff">${s.label}</span>
+        </div>
+        <div style="padding:.85rem 1rem">
+          <div style="font-size:.84rem;font-weight:600;color:var(--ink);margin-bottom:.4rem">${alert.title}</div>
+          <p style="font-size:.83rem;color:var(--muted);line-height:1.65;margin:0">${alert.body}</p>
+        </div>
+      </div>`;
+  }).join('');
+}
+
 // ── NAVIGATION ────────────────────────────────────────────────
+
 function showPage(page){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
@@ -1787,7 +2209,17 @@ function renderQA(){
         <div class="qa-a">${item.a}</div>
         ${!free?`<div class="qa-lock-overlay"><button class="qa-lock-btn" onclick="openModal('signup')">🔒 Unlock with free account</button></div>`:''}
       </div>
-      <div class="qa-footer">${free?`<span class="qa-ref">${item.ref}</span>`:'<span class="qa-ref" style="filter:blur(4px);user-select:none;pointer-events:none;opacity:.5">Unlock to see reference</span>'}</div>
+      <div class="qa-footer">${free?`<span class="qa-ref">${item.ref}</span>`:'<span class="qa-ref" style="filter:blur(4px);user-select:none;pointer-events:none;opacity:.5">Unlock to see reference</span>'}
+        ${(()=>{
+          const hasAlert = CONFLICT_ALERTS[item.ref];
+          const hasNote = AI_NOTES[item.ref];
+          if(!hasAlert && !hasNote) return '';
+          return `<div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem">
+            ${hasAlert ? `<span style="font-size:.68rem;padding:.18rem .5rem;border-radius:100px;background:${hasAlert.severity==='danger'?'#fee2e2':hasAlert.severity==='warning'?'#fef9c3':'var(--teal-pale)'};color:${hasAlert.severity==='danger'?'#c53030':hasAlert.severity==='warning'?'var(--gold-dark)':'var(--teal-deep)'};border:1px solid ${hasAlert.severity==='danger'?'#fc8181':hasAlert.severity==='warning'?'#f6c343':'var(--border-strong)'};font-weight:600;cursor:pointer" onclick="document.getElementById('questionInput').value='${item.q.replace(/'/g,"\'")}';showPage('ask');setTimeout(submitQuestion,300)">⚠ Conflict Alert</span>` : ''}
+            ${hasNote ? `<span style="font-size:.68rem;padding:.18rem .5rem;border-radius:100px;background:var(--teal-pale);color:var(--teal-deep);border:1px solid var(--border-strong);font-weight:600;cursor:pointer" onclick="document.getElementById('questionInput').value='${item.q.replace(/'/g,"\'")}';showPage('ask');setTimeout(submitQuestion,300)">🧠 AI Note</span>` : ''}
+          </div>`;
+        })()}
+      </div>
     </div>`;
   }).join('');
 }
@@ -1908,6 +2340,10 @@ function synthesiseAnswer(question,relevant){
         <div style="font-size:.875rem;color:var(--muted);line-height:1.6">${o.a}</div>
         <div style="font-size:.68rem;color:var(--teal-mid);margin-top:.4rem;font-family:'DM Mono',monospace">${o.ref}</div>
       </div>`).join('');
+    // Append intelligence blocks for partial matches too
+    const partialRefs = entries.map(o=>o.ref);
+    body += renderConflictAlerts(getConflictAlertsForRefs(partialRefs));
+    body += renderAINote(getAINoteForRefs(partialRefs));
   }
 
   // Collect refs only from entries actually rendered
@@ -1989,6 +2425,8 @@ function submitQuestion(){
     const used = incrementQCount();
     updateUsageUI();
 
+    const usedRefs = result ? result.refs : [];
+
     const limitNote = used >= FREE_LIMIT
       ? `<div style="margin-top:.6rem;padding:.6rem .75rem;background:var(--gold-pale);border-radius:var(--r-sm);border:1px solid var(--gold-border);font-size:.8rem;color:var(--gold-dark)">🔒 Monthly limit reached. <button onclick="showPage('pricing')" style="background:none;border:none;color:var(--gold-dark);text-decoration:underline;cursor:pointer;font-size:.8rem;font-weight:600">Upgrade for unlimited →</button></div>`
       : `<div style="font-size:.75rem;color:var(--muted);margin-top:.4rem">${FREE_LIMIT - used} free question${FREE_LIMIT - used === 1 ? '' : 's'} remaining this month</div>`;
@@ -2025,6 +2463,8 @@ function submitQuestion(){
         </div>
         <div style="font-size:.72rem;color:var(--gold-dark);margin-top:.4rem">⚠ Legal information only — not legal advice. Consult a qualified Somali lawyer for your specific situation.</div>
         ${limitNote}
+        ${renderConflictAlerts(getConflictAlertsForRefs(usedRefs))}
+        ${renderAINote(getAINoteForRefs(usedRefs))}
       </div>
       <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap">
         <button class="btn btn-ghost btn-sm" onclick="showToast('Saved ✓','success')">💾 Save answer</button>
