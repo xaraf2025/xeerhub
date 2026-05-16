@@ -1,0 +1,18 @@
+# robots.txt for xeerhub.com
+# Updated: 2026-05-16
+
+User-agent: *
+Allow: /
+
+# Block private/user-specific pages
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login
+Disallow: /signup
+Disallow: /account/
+Disallow: /checkout/
+
+# Sitemap location
+Sitemap: https://xeerhub.com/sitemap.xml
