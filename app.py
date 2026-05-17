@@ -358,6 +358,15 @@ def ask():
         return jsonify({'error': 'Server error: ' + str(e)}), 500
 
 
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory('.', 'sitemap.xml', mimetype='application/xml')
+
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory('.', 'robots.txt', mimetype='text/plain')
+
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
     app.run(debug=False, host='0.0.0.0', port=port)
