@@ -883,8 +883,9 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
         <span class="footer-link" onclick="showPage('pricing')">Pricing</span>
         <span class="footer-link" onclick="showPage('contact')">Contact</span>
         <span class="footer-link" onclick="showPage('dashboard')">Dashboard</span>
-        <span class="footer-link" onclick="showToast('Privacy Policy — contact info@xeerhub.com','success')">Privacy Policy</span>
-        <span class="footer-link" onclick="showToast('Terms of Service — contact info@xeerhub.com','success')">Terms of Service</span>
+        <span class="footer-link" onclick="showPage('privacy')">Privacy Policy</span>
+        <span class="footer-link" onclick="showPage('terms')">Terms of Service</span>
+
       </div>
       <div class="footer-copy">© 2026 XeerHub · xeerhub.com</div>
       <div class="footer-disclaimer">Legal information only — not legal advice. All answers reference official legislation. Consult a qualified Somali lawyer for case-specific guidance.</div>
@@ -1379,6 +1380,191 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
     <div class="modal-footer">Don't have an account? <button onclick="switchModal('login','signup')">Sign up free</button></div>
   </div>
 </div>
+
+<!-- ══ PRIVACY POLICY PAGE ══════════════════════════════════════ -->
+<div class="page" id="page-privacy">
+  <div style="max-width:780px;margin:0 auto;padding:4rem 2rem 2rem">
+    <div class="section-eyebrow">Legal</div>
+    <h1 class="section-title" style="margin-bottom:.5rem">Privacy Policy</h1>
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:2.5rem">Last updated: 1 January 2025</p>
+    <div style="display:flex;flex-direction:column;gap:2rem">
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">1. Who We Are</h2>
+        <p style="color:var(--muted);line-height:1.8">XeerHub ("we", "us", or "our") operates the xeerhub.com platform — Somalia's legal intelligence platform. We are committed to protecting your personal information and your right to privacy. Questions? Contact us at <a href="mailto:privacy@xeerhub.com" style="color:var(--teal-mid)">privacy@xeerhub.com</a>.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">2. Information We Collect</h2>
+        <p style="color:var(--muted);line-height:1.8;margin-bottom:1rem">We collect information you provide directly, information collected automatically, and information from third parties where applicable.</p>
+        <ul style="color:var(--muted);line-height:1.9;padding-left:1.25rem">
+          <li><strong style="color:var(--ink)">Account data</strong> — name, email address, and password when you register.</li>
+          <li><strong style="color:var(--ink)">Usage data</strong> — questions you ask the AI, pages you visit, and features you use.</li>
+          <li><strong style="color:var(--ink)">Device &amp; log data</strong> — IP address, browser type, operating system, and access timestamps.</li>
+          <li><strong style="color:var(--ink)">Payment data</strong> — billing details processed securely by our payment provider; we do not store card numbers.</li>
+          <li><strong style="color:var(--ink)">Communications</strong> — emails or messages you send us for support or feedback.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">3. How We Use Your Information</h2>
+        <ul style="color:var(--muted);line-height:1.9;padding-left:1.25rem">
+          <li>To provide, operate, and improve the XeerHub platform.</li>
+          <li>To personalise your experience and remember your preferences.</li>
+          <li>To process payments and manage your subscription.</li>
+          <li>To send service-related notices and, with your consent, product updates.</li>
+          <li>To detect and prevent fraud, abuse, and security incidents.</li>
+          <li>To comply with legal obligations applicable in Somalia and internationally.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">4. Legal Basis for Processing</h2>
+        <p style="color:var(--muted);line-height:1.8">We process your personal data on the following grounds: (a) performance of a contract with you; (b) our legitimate interests in operating and improving the platform; (c) your consent where required; and (d) compliance with a legal obligation.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">5. Sharing Your Information</h2>
+        <p style="color:var(--muted);line-height:1.8;margin-bottom:1rem">We do not sell your personal information. We may share it with:</p>
+        <ul style="color:var(--muted);line-height:1.9;padding-left:1.25rem">
+          <li><strong style="color:var(--ink)">Service providers</strong> — hosting, analytics, and payment processors acting under our instructions.</li>
+          <li><strong style="color:var(--ink)">AI infrastructure partners</strong> — anonymised or aggregated query data to power legal AI responses.</li>
+          <li><strong style="color:var(--ink)">Legal authorities</strong> — where required by law, court order, or to protect rights and safety.</li>
+          <li><strong style="color:var(--ink)">Business transfers</strong> — in the event of a merger, acquisition, or sale of assets.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">6. Data Retention</h2>
+        <p style="color:var(--muted);line-height:1.8">We retain your account data for as long as your account is active and for a reasonable period thereafter to comply with legal obligations. AI query logs are retained for up to 24 months for quality and safety purposes, after which they are anonymised or deleted.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">7. Your Rights</h2>
+        <p style="color:var(--muted);line-height:1.8;margin-bottom:1rem">Depending on your location, you may have the right to:</p>
+        <ul style="color:var(--muted);line-height:1.9;padding-left:1.25rem">
+          <li>Access the personal data we hold about you.</li>
+          <li>Correct inaccurate or incomplete data.</li>
+          <li>Request deletion of your data ("right to be forgotten").</li>
+          <li>Object to or restrict certain processing activities.</li>
+          <li>Receive your data in a machine-readable format (data portability).</li>
+          <li>Withdraw consent at any time where processing is based on consent.</li>
+        </ul>
+        <p style="color:var(--muted);line-height:1.8;margin-top:1rem">To exercise any of these rights, email <a href="mailto:privacy@xeerhub.com" style="color:var(--teal-mid)">privacy@xeerhub.com</a>. We will respond within 30 days.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">8. Cookies &amp; Tracking</h2>
+        <p style="color:var(--muted);line-height:1.8">We use essential cookies to keep you signed in and remember your preferences. We may use analytics cookies to understand how users interact with the platform. You can disable non-essential cookies in your browser settings at any time.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">9. Security</h2>
+        <p style="color:var(--muted);line-height:1.8">We implement industry-standard technical and organisational measures to protect your data against unauthorised access, loss, or disclosure. However, no transmission over the internet is 100% secure.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">10. Changes to This Policy</h2>
+        <p style="color:var(--muted);line-height:1.8">We may update this Privacy Policy from time to time. When we do, we will revise the "Last updated" date and notify registered users by email for material changes. Continued use of XeerHub after changes take effect constitutes acceptance.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">11. Contact Us</h2>
+        <p style="color:var(--muted);line-height:1.8"><strong style="color:var(--ink)">XeerHub Data Privacy</strong><br>
+        <a href="mailto:privacy@xeerhub.com" style="color:var(--teal-mid)">privacy@xeerhub.com</a><br>
+        Mogadishu, Federal Republic of Somalia</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TERMS OF SERVICE PAGE ════════════════════════════════════ -->
+<div class="page" id="page-terms">
+  <div style="max-width:780px;margin:0 auto;padding:4rem 2rem 2rem">
+    <div class="section-eyebrow">Legal</div>
+    <h1 class="section-title" style="margin-bottom:.5rem">Terms of Service</h1>
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:2.5rem">Last updated: 1 January 2025</p>
+    <div style="background:var(--gold-pale);border:1px solid var(--gold-border);border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:2rem">
+      <p style="font-size:.9rem;color:var(--ink);line-height:1.75"><strong>Important notice:</strong> XeerHub provides legal <em>information</em> only — not legal advice. Nothing on this platform creates a lawyer–client relationship. Always consult a qualified Somali lawyer for advice specific to your situation.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2rem">
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">1. Acceptance of Terms</h2>
+        <p style="color:var(--muted);line-height:1.8">By accessing or using xeerhub.com (the "Platform"), you agree to be bound by these Terms of Service ("Terms") and our Privacy Policy. If you do not agree, please do not use the Platform. We may update these Terms at any time; continued use constitutes acceptance.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">2. Eligibility</h2>
+        <p style="color:var(--muted);line-height:1.8">You must be at least 18 years old and capable of entering into a legally binding agreement to use XeerHub. By using the Platform you represent that you meet these requirements.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">3. Description of Service</h2>
+        <p style="color:var(--muted);line-height:1.8;margin-bottom:1rem">XeerHub offers AI-assisted legal information relating to Somali law, including:</p>
+        <ul style="color:var(--muted);line-height:1.9;padding-left:1.25rem">
+          <li>A curated Q&amp;A library of common legal questions and general answers.</li>
+          <li>An AI assistant that generates responses based on Somali legal texts and frameworks.</li>
+          <li>Educational blog content and legal resources.</li>
+        </ul>
+        <p style="color:var(--muted);line-height:1.8;margin-top:1rem">All content is for <strong>informational purposes only</strong> and does not constitute legal advice.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">4. Accounts &amp; Security</h2>
+        <ul style="color:var(--muted);line-height:1.9;padding-left:1.25rem">
+          <li>You are responsible for maintaining the confidentiality of your login credentials.</li>
+          <li>You must provide accurate and current account information.</li>
+          <li>Notify us immediately at <a href="mailto:info@xeerhub.com" style="color:var(--teal-mid)">info@xeerhub.com</a> of any unauthorised use of your account.</li>
+          <li>We reserve the right to suspend or terminate accounts that violate these Terms.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">5. Subscriptions &amp; Payments</h2>
+        <p style="color:var(--muted);line-height:1.8;margin-bottom:1rem">For paid plans:</p>
+        <ul style="color:var(--muted);line-height:1.9;padding-left:1.25rem">
+          <li>Fees are billed monthly or annually in advance as selected at checkout.</li>
+          <li>Payments are processed securely by our third-party payment provider.</li>
+          <li>Subscriptions automatically renew unless cancelled before the renewal date.</li>
+          <li>Refunds are at our discretion; contact <a href="mailto:info@xeerhub.com" style="color:var(--teal-mid)">info@xeerhub.com</a> within 7 days of a charge if you believe an error has occurred.</li>
+          <li>We reserve the right to change pricing with 30 days' notice to existing subscribers.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">6. Acceptable Use</h2>
+        <p style="color:var(--muted);line-height:1.8;margin-bottom:1rem">You agree <strong>not</strong> to:</p>
+        <ul style="color:var(--muted);line-height:1.9;padding-left:1.25rem">
+          <li>Use the Platform for any unlawful purpose or in violation of Somali law.</li>
+          <li>Attempt to gain unauthorised access to any part of the Platform or its systems.</li>
+          <li>Scrape, copy, or redistribute Platform content commercially without written permission.</li>
+          <li>Submit false, misleading, or harmful content through the AI interface.</li>
+          <li>Impersonate any person or entity or misrepresent your affiliation.</li>
+          <li>Use the Platform in any manner that could disable, overburden, or impair its functionality.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">7. Intellectual Property</h2>
+        <p style="color:var(--muted);line-height:1.8">All content on the Platform — including text, design, AI models, software, logos, and trademarks — is owned by or licensed to XeerHub and protected under applicable intellectual property laws. You retain ownership of content you submit, but grant us a non-exclusive licence to use it to operate and improve the Platform.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">8. Disclaimer of Warranties</h2>
+        <p style="color:var(--muted);line-height:1.8">The Platform and its content are provided <strong>"as is"</strong> and <strong>"as available"</strong> without warranties of any kind. We do not warrant that AI-generated responses will be accurate, complete, or current. Legal frameworks change; always verify information with a qualified lawyer.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">9. Limitation of Liability</h2>
+        <p style="color:var(--muted);line-height:1.8">To the maximum extent permitted by law, XeerHub and its affiliates shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Platform. Our total liability for any claim shall not exceed the amount you paid us in the 12 months preceding the claim.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">10. Indemnification</h2>
+        <p style="color:var(--muted);line-height:1.8">You agree to indemnify and hold harmless XeerHub and its affiliates from any claims, damages, losses, or expenses (including reasonable legal fees) arising from your use of the Platform, your violation of these Terms, or your infringement of any third-party rights.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">11. Governing Law &amp; Disputes</h2>
+        <p style="color:var(--muted);line-height:1.8">These Terms are governed by the laws of the Federal Republic of Somalia. Any disputes shall first be referred to good-faith negotiation. If unresolved within 30 days, disputes shall be submitted to mediation in Mogadishu before any court proceedings are initiated.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">12. Termination</h2>
+        <p style="color:var(--muted);line-height:1.8">We may suspend or terminate your access at any time for breach of these Terms, suspected fraud, or any other reason at our sole discretion. Provisions that by their nature should survive termination (including disclaimers and limitations of liability) will continue to apply.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">13. Changes to These Terms</h2>
+        <p style="color:var(--muted);line-height:1.8">We may modify these Terms at any time and will provide at least 14 days' notice of material changes by email or prominent notice on the Platform. Continued use after the effective date constitutes acceptance.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">14. Contact</h2>
+        <p style="color:var(--muted);line-height:1.8"><strong style="color:var(--ink)">XeerHub Legal</strong><br>
+        <a href="mailto:info@xeerhub.com" style="color:var(--teal-mid)">info@xeerhub.com</a><br>
+        Mogadishu, Federal Republic of Somalia</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div id="toast"></div>
 
@@ -2523,13 +2709,15 @@ const MINI_FOOTER_HTML=`<div style="background:var(--teal-deep);padding:2.5rem 0
       <span onclick="showPage('pricing')" style="font-size:.8rem;color:rgba(255,255,255,0.45);cursor:pointer" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Pricing</span>
       <span onclick="showPage('contact')" style="font-size:.8rem;color:rgba(255,255,255,0.45);cursor:pointer" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Contact</span>
       <span onclick="showPage('about')" style="font-size:.8rem;color:rgba(255,255,255,0.45);cursor:pointer" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">About</span>
+      <span onclick="showPage('privacy')" style="font-size:.8rem;color:rgba(255,255,255,0.45);cursor:pointer" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Privacy</span>
+      <span onclick="showPage('terms')" style="font-size:.8rem;color:rgba(255,255,255,0.45);cursor:pointer" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Terms</span>
     </div>
     <div style="font-size:.7rem;color:rgba(255,255,255,0.2)">© 2025 XeerHub · xeerhub.com</div>
     <div style="font-size:.68rem;color:rgba(255,255,255,0.18);max-width:520px;margin:.4rem auto 0;font-style:italic;line-height:1.6">Legal information only — not legal advice. Consult a qualified Somali lawyer for case-specific guidance.</div>
   </div>
 </div>`;
 
-const INNER_PAGES=['library','ask','pricing','dashboard','about','testimonials','blog','contact'];
+const INNER_PAGES=['library','ask','pricing','dashboard','about','testimonials','blog','contact','privacy','terms'];
 INNER_PAGES.forEach(id=>{
   const el=document.getElementById('page-'+id);
   if(el&&!el.querySelector('.inner-footer')){
