@@ -883,9 +883,8 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
         <span class="footer-link" onclick="showPage('pricing')">Pricing</span>
         <span class="footer-link" onclick="showPage('contact')">Contact</span>
         <span class="footer-link" onclick="showPage('dashboard')">Dashboard</span>
-        <span class="footer-link" onclick="showPage('privacy')">Privacy Policy</span>
-        <span class="footer-link" onclick="showPage('terms')">Terms of Service</span>
-
+        <span class="footer-link" onclick="showToast('Privacy Policy — contact info@xeerhub.com','success')">Privacy Policy</span>
+        <span class="footer-link" onclick="showToast('Terms of Service — contact info@xeerhub.com','success')">Terms of Service</span>
       </div>
       <div class="footer-copy">© 2026 XeerHub · xeerhub.com</div>
       <div class="footer-disclaimer">Legal information only — not legal advice. All answers reference official legislation. Consult a qualified Somali lawyer for case-specific guidance.</div>
@@ -1381,191 +1380,6 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
   </div>
 </div>
 
-<!-- ══ PRIVACY POLICY PAGE ══════════════════════════════════════ -->
-<div class="page" id="page-privacy">
-  <div style="max-width:780px;margin:0 auto;padding:4rem 2rem 2rem">
-    <div class="section-eyebrow">Legal</div>
-    <h1 class="section-title" style="margin-bottom:.5rem">Privacy Policy</h1>
-    <p style="font-size:.85rem;color:var(--muted);margin-bottom:2.5rem">Last updated: 1 January 2025</p>
-    <div style="display:flex;flex-direction:column;gap:2rem">
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">1. Who We Are</h2>
-        <p style="color:var(--muted);line-height:1.8">XeerHub ("we", "us", or "our") operates the xeerhub.com platform — Somalia's legal intelligence platform. We are committed to protecting your personal information and your right to privacy. Questions? Contact us at <a href="mailto:privacy@xeerhub.com" style="color:var(--teal-mid)">privacy@xeerhub.com</a>.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">2. Information We Collect</h2>
-        <p style="color:var(--muted);line-height:1.8;margin-bottom:1rem">We collect information you provide directly, information collected automatically, and information from third parties where applicable.</p>
-        <ul style="color:var(--muted);line-height:1.9;padding-left:1.25rem">
-          <li><strong style="color:var(--ink)">Account data</strong> — name, email address, and password when you register.</li>
-          <li><strong style="color:var(--ink)">Usage data</strong> — questions you ask the AI, pages you visit, and features you use.</li>
-          <li><strong style="color:var(--ink)">Device &amp; log data</strong> — IP address, browser type, operating system, and access timestamps.</li>
-          <li><strong style="color:var(--ink)">Payment data</strong> — billing details processed securely by our payment provider; we do not store card numbers.</li>
-          <li><strong style="color:var(--ink)">Communications</strong> — emails or messages you send us for support or feedback.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">3. How We Use Your Information</h2>
-        <ul style="color:var(--muted);line-height:1.9;padding-left:1.25rem">
-          <li>To provide, operate, and improve the XeerHub platform.</li>
-          <li>To personalise your experience and remember your preferences.</li>
-          <li>To process payments and manage your subscription.</li>
-          <li>To send service-related notices and, with your consent, product updates.</li>
-          <li>To detect and prevent fraud, abuse, and security incidents.</li>
-          <li>To comply with legal obligations applicable in Somalia and internationally.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">4. Legal Basis for Processing</h2>
-        <p style="color:var(--muted);line-height:1.8">We process your personal data on the following grounds: (a) performance of a contract with you; (b) our legitimate interests in operating and improving the platform; (c) your consent where required; and (d) compliance with a legal obligation.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">5. Sharing Your Information</h2>
-        <p style="color:var(--muted);line-height:1.8;margin-bottom:1rem">We do not sell your personal information. We may share it with:</p>
-        <ul style="color:var(--muted);line-height:1.9;padding-left:1.25rem">
-          <li><strong style="color:var(--ink)">Service providers</strong> — hosting, analytics, and payment processors acting under our instructions.</li>
-          <li><strong style="color:var(--ink)">AI infrastructure partners</strong> — anonymised or aggregated query data to power legal AI responses.</li>
-          <li><strong style="color:var(--ink)">Legal authorities</strong> — where required by law, court order, or to protect rights and safety.</li>
-          <li><strong style="color:var(--ink)">Business transfers</strong> — in the event of a merger, acquisition, or sale of assets.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">6. Data Retention</h2>
-        <p style="color:var(--muted);line-height:1.8">We retain your account data for as long as your account is active and for a reasonable period thereafter to comply with legal obligations. AI query logs are retained for up to 24 months for quality and safety purposes, after which they are anonymised or deleted.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">7. Your Rights</h2>
-        <p style="color:var(--muted);line-height:1.8;margin-bottom:1rem">Depending on your location, you may have the right to:</p>
-        <ul style="color:var(--muted);line-height:1.9;padding-left:1.25rem">
-          <li>Access the personal data we hold about you.</li>
-          <li>Correct inaccurate or incomplete data.</li>
-          <li>Request deletion of your data ("right to be forgotten").</li>
-          <li>Object to or restrict certain processing activities.</li>
-          <li>Receive your data in a machine-readable format (data portability).</li>
-          <li>Withdraw consent at any time where processing is based on consent.</li>
-        </ul>
-        <p style="color:var(--muted);line-height:1.8;margin-top:1rem">To exercise any of these rights, email <a href="mailto:privacy@xeerhub.com" style="color:var(--teal-mid)">privacy@xeerhub.com</a>. We will respond within 30 days.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">8. Cookies &amp; Tracking</h2>
-        <p style="color:var(--muted);line-height:1.8">We use essential cookies to keep you signed in and remember your preferences. We may use analytics cookies to understand how users interact with the platform. You can disable non-essential cookies in your browser settings at any time.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">9. Security</h2>
-        <p style="color:var(--muted);line-height:1.8">We implement industry-standard technical and organisational measures to protect your data against unauthorised access, loss, or disclosure. However, no transmission over the internet is 100% secure.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">10. Changes to This Policy</h2>
-        <p style="color:var(--muted);line-height:1.8">We may update this Privacy Policy from time to time. When we do, we will revise the "Last updated" date and notify registered users by email for material changes. Continued use of XeerHub after changes take effect constitutes acceptance.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">11. Contact Us</h2>
-        <p style="color:var(--muted);line-height:1.8"><strong style="color:var(--ink)">XeerHub Data Privacy</strong><br>
-        <a href="mailto:privacy@xeerhub.com" style="color:var(--teal-mid)">privacy@xeerhub.com</a><br>
-        Mogadishu, Federal Republic of Somalia</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ TERMS OF SERVICE PAGE ════════════════════════════════════ -->
-<div class="page" id="page-terms">
-  <div style="max-width:780px;margin:0 auto;padding:4rem 2rem 2rem">
-    <div class="section-eyebrow">Legal</div>
-    <h1 class="section-title" style="margin-bottom:.5rem">Terms of Service</h1>
-    <p style="font-size:.85rem;color:var(--muted);margin-bottom:2.5rem">Last updated: 1 January 2025</p>
-    <div style="background:var(--gold-pale);border:1px solid var(--gold-border);border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:2rem">
-      <p style="font-size:.9rem;color:var(--ink);line-height:1.75"><strong>Important notice:</strong> XeerHub provides legal <em>information</em> only — not legal advice. Nothing on this platform creates a lawyer–client relationship. Always consult a qualified Somali lawyer for advice specific to your situation.</p>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:2rem">
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">1. Acceptance of Terms</h2>
-        <p style="color:var(--muted);line-height:1.8">By accessing or using xeerhub.com (the "Platform"), you agree to be bound by these Terms of Service ("Terms") and our Privacy Policy. If you do not agree, please do not use the Platform. We may update these Terms at any time; continued use constitutes acceptance.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">2. Eligibility</h2>
-        <p style="color:var(--muted);line-height:1.8">You must be at least 18 years old and capable of entering into a legally binding agreement to use XeerHub. By using the Platform you represent that you meet these requirements.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">3. Description of Service</h2>
-        <p style="color:var(--muted);line-height:1.8;margin-bottom:1rem">XeerHub offers AI-assisted legal information relating to Somali law, including:</p>
-        <ul style="color:var(--muted);line-height:1.9;padding-left:1.25rem">
-          <li>A curated Q&amp;A library of common legal questions and general answers.</li>
-          <li>An AI assistant that generates responses based on Somali legal texts and frameworks.</li>
-          <li>Educational blog content and legal resources.</li>
-        </ul>
-        <p style="color:var(--muted);line-height:1.8;margin-top:1rem">All content is for <strong>informational purposes only</strong> and does not constitute legal advice.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">4. Accounts &amp; Security</h2>
-        <ul style="color:var(--muted);line-height:1.9;padding-left:1.25rem">
-          <li>You are responsible for maintaining the confidentiality of your login credentials.</li>
-          <li>You must provide accurate and current account information.</li>
-          <li>Notify us immediately at <a href="mailto:info@xeerhub.com" style="color:var(--teal-mid)">info@xeerhub.com</a> of any unauthorised use of your account.</li>
-          <li>We reserve the right to suspend or terminate accounts that violate these Terms.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">5. Subscriptions &amp; Payments</h2>
-        <p style="color:var(--muted);line-height:1.8;margin-bottom:1rem">For paid plans:</p>
-        <ul style="color:var(--muted);line-height:1.9;padding-left:1.25rem">
-          <li>Fees are billed monthly or annually in advance as selected at checkout.</li>
-          <li>Payments are processed securely by our third-party payment provider.</li>
-          <li>Subscriptions automatically renew unless cancelled before the renewal date.</li>
-          <li>Refunds are at our discretion; contact <a href="mailto:info@xeerhub.com" style="color:var(--teal-mid)">info@xeerhub.com</a> within 7 days of a charge if you believe an error has occurred.</li>
-          <li>We reserve the right to change pricing with 30 days' notice to existing subscribers.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">6. Acceptable Use</h2>
-        <p style="color:var(--muted);line-height:1.8;margin-bottom:1rem">You agree <strong>not</strong> to:</p>
-        <ul style="color:var(--muted);line-height:1.9;padding-left:1.25rem">
-          <li>Use the Platform for any unlawful purpose or in violation of Somali law.</li>
-          <li>Attempt to gain unauthorised access to any part of the Platform or its systems.</li>
-          <li>Scrape, copy, or redistribute Platform content commercially without written permission.</li>
-          <li>Submit false, misleading, or harmful content through the AI interface.</li>
-          <li>Impersonate any person or entity or misrepresent your affiliation.</li>
-          <li>Use the Platform in any manner that could disable, overburden, or impair its functionality.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">7. Intellectual Property</h2>
-        <p style="color:var(--muted);line-height:1.8">All content on the Platform — including text, design, AI models, software, logos, and trademarks — is owned by or licensed to XeerHub and protected under applicable intellectual property laws. You retain ownership of content you submit, but grant us a non-exclusive licence to use it to operate and improve the Platform.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">8. Disclaimer of Warranties</h2>
-        <p style="color:var(--muted);line-height:1.8">The Platform and its content are provided <strong>"as is"</strong> and <strong>"as available"</strong> without warranties of any kind. We do not warrant that AI-generated responses will be accurate, complete, or current. Legal frameworks change; always verify information with a qualified lawyer.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">9. Limitation of Liability</h2>
-        <p style="color:var(--muted);line-height:1.8">To the maximum extent permitted by law, XeerHub and its affiliates shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Platform. Our total liability for any claim shall not exceed the amount you paid us in the 12 months preceding the claim.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">10. Indemnification</h2>
-        <p style="color:var(--muted);line-height:1.8">You agree to indemnify and hold harmless XeerHub and its affiliates from any claims, damages, losses, or expenses (including reasonable legal fees) arising from your use of the Platform, your violation of these Terms, or your infringement of any third-party rights.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">11. Governing Law &amp; Disputes</h2>
-        <p style="color:var(--muted);line-height:1.8">These Terms are governed by the laws of the Federal Republic of Somalia. Any disputes shall first be referred to good-faith negotiation. If unresolved within 30 days, disputes shall be submitted to mediation in Mogadishu before any court proceedings are initiated.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">12. Termination</h2>
-        <p style="color:var(--muted);line-height:1.8">We may suspend or terminate your access at any time for breach of these Terms, suspected fraud, or any other reason at our sole discretion. Provisions that by their nature should survive termination (including disclaimers and limitations of liability) will continue to apply.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">13. Changes to These Terms</h2>
-        <p style="color:var(--muted);line-height:1.8">We may modify these Terms at any time and will provide at least 14 days' notice of material changes by email or prominent notice on the Platform. Continued use after the effective date constitutes acceptance.</p>
-      </div>
-      <div class="card">
-        <h2 style="font-size:1.15rem;font-family:'Playfair Display',serif;margin-bottom:.75rem;color:var(--teal-deep)">14. Contact</h2>
-        <p style="color:var(--muted);line-height:1.8"><strong style="color:var(--ink)">XeerHub Legal</strong><br>
-        <a href="mailto:info@xeerhub.com" style="color:var(--teal-mid)">info@xeerhub.com</a><br>
-        Mogadishu, Federal Republic of Somalia</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 <div id="toast"></div>
 
 <script>
@@ -1829,30 +1643,30 @@ const QA={
     {id:204,q:"How do I pay income tax on business income?",a:"You must estimate your income tax at the start of the year and pay in four quarterly instalments by 31 March, 30 June, 30 September, and 31 December. By 31 March of the following year, reconcile the instalments paid against the total tax due. Pay any balance or apply for a refund or credit if you overpaid.",ref:"ITA 2025 · Arts. 10, 97; ITR 2025 · Art. 97",tier:"free"},
     {id:205,q:"What is chargeable income?",a:"Chargeable income is the total of a person's assessable income from employment, business, and investment for the year of assessment, minus allowed deductions. Each person's chargeable income is determined separately.",ref:"ITA 2025 · Arts. 10, 70",tier:"free"},
     {id:206,q:"Who is a resident person for income tax purposes in Somalia?",a:"An individual is resident if they have a permanent home in Somalia; are a Somali citizen without a permanent home abroad; are present in Somalia for 183 days or more in any 12-month period; or are a government official posted abroad. Corporations are resident if incorporated in Somalia or effectively managed from Somalia.",ref:"ITA 2025 · Art. 77",tier:"free"},
-    {id:207,q:"How are employees taxed in Somalia?",a:"Employers withhold Personal Income Tax (PIT) from employees' wages monthly and pay it to the IRD by the 15th of the following month. Employees with only one job do not need to file a separate tax return. Employees with additional business or investment income must file separately for those amounts.",ref:"ITR 2025 · Art. 90",tier:"free"},
+    {id:207,q:"How are employees taxed in Somalia?",a:"Employers withhold Personal Income Tax (PIT) from employees' wages monthly using Ministry-issued withholding tables and pay it to the IRD by the 15th of the following month. An employee with only one employer (primary employment) does not need to file a separate annual tax return. A second job is treated as secondary employment and tax must be withheld at the highest PIT rate. Employees with additional business or investment income must file separately for those amounts. During the initial implementation period, employers may continue prior withholding arrangements until formally notified by the Ministry or the end of the fifth year of assessment under the new law.",ref:"ITR 2025 · Regs. 90-1, 90-2, 105-8",tier:"free"},
     {id:208,q:"What are the Personal Income Tax (PIT) rates for resident individuals?",a:"Monthly PIT rates for resident individuals: USD 0–100 at 0%; USD 101–500 at 6%; USD 501–1,500 at 12%; above USD 1,500 at 18%. Annual equivalents: USD 0–1,200 at 0%; USD 1,201–6,000 at 6%; USD 6,001–18,000 at 12%; above USD 18,000 at 18%.",ref:"ITA 2025 · Arts. 5, 7, 9, 10",tier:"free"},
     {id:209,q:"What is the corporation tax rate in Somalia?",a:"Resident corporations pay: USD 150 flat for sales under USD 10,000; 1.5% for sales between USD 10,001 and USD 50,000; and 15% for sales over USD 50,000. Non-resident corporations pay a flat rate of 18%.",ref:"ITA 2025 · Arts. 3, 60, 61",tier:"free"},
-    {id:210,q:"What is the Presumptive Tax Regime (PTR)?",a:"PTR is a simplified tax regime for resident individual sole traders with annual business turnover not exceeding USD 50,000 (rolling average of three years). Quarterly tax is the higher of USD 37.50 or 1.5% of quarterly turnover. PTR does not apply to corporations, partners in partnerships, or listed professionals.",ref:"ITA 2025 · Arts. 9, 97",tier:"free"},
-    {id:211,q:"What professionals are excluded from the Presumptive Tax Regime?",a:"PTR is not available to qualified professionals including: doctors, chiropractors, dieticians, radiologists, pharmacists, surgeons, dentists, nurses, physiotherapists, psychologists, optometrists, veterinarians, architects, engineers, accountants, actuaries, auditors, economists, lawyers, journalists, teachers, lecturers, and professors.",ref:"ITA 2025 · Arts. 9, 97",tier:"premium"},
+    {id:210,q:"What is the Presumptive Tax Regime (PTR)?",a:"PTR is a simplified tax regime for resident individual sole traders whose business income is exclusively from sources within Somalia and whose annual business turnover does not exceed USD 50,000 (rolling average of the previous three years). Quarterly tax is the higher of USD 37.50 or 1.5% of quarterly turnover. PTR does not apply to corporations, partners in partnerships, businesses principally consisting of leasing immovable property, or authorised professionals listed in the Regulations.",ref:"ITA 2025 · Art. 9; ITR 2025 · Reg. 9-1, 9-2",tier:"free"},
+    {id:211,q:"What professionals are excluded from the Presumptive Tax Regime?",a:"PTR is not available to authorised professionals including: medical doctors, chiropractors, dieticians, radiologists, occupational therapists, optometrists, osteopaths, pharmacists, physicians, physiotherapists, podiatrists, psychologists, surgeons, dentists, nurses and midwives; veterinarians; architects and engineers; accountants, actuaries, auditors, economists, lawyers and journalists; and teachers, lecturers and professors. In addition, a business that principally consists of leasing immovable property is also excluded from the PTR.",ref:"ITR 2025 · Reg. 9-2",tier:"premium"},
     {id:212,q:"How is tax calculated under the Presumptive Tax Regime?",a:"Under PTR, quarterly tax is the higher of USD 37.50 or 1.5% of the quarter's business turnover. For example, if quarterly sales are USD 200, then 1.5% equals USD 3, which is less than USD 37.50, so the taxpayer pays USD 37.50. If sales are USD 10,000, then 1.5% equals USD 150, which is higher, so USD 150 is payable.",ref:"ITA 2025 · Art. 97",tier:"free"},
     {id:213,q:"What deductions can I claim against business income?",a:"Expenses incurred in producing business income may be deducted. Total deductions cannot exceed 95% of income — a minimum tax on 5% of income applies even when a business makes a loss. Capital expenses (benefits lasting more than 12 months) and private expenses are not deductible. Depreciation must be deducted at prescribed rates.",ref:"ITA 2025 · Arts. 16, 17, 18, 19",tier:"premium"},
-    {id:214,q:"What are the depreciation rates for business assets?",a:"Class 1 (computers, R&D, data handling, environmental machinery): 40%. Class 2 (vehicles, construction equipment, manufacturing plant): 30%. Class 3 (railway, aircraft, vessels, office furniture, general equipment): 20%. Class 4 (buildings and permanent structures): 5%. Class 5 (intangible assets): divided by useful life.",ref:"ITA 2025 · Art. 19",tier:"premium"},
+    {id:214,q:"What are the depreciation rates for business assets?",a:"Class 1 (computers, R&D expenses, data handling equipment, approved environmental machinery): 40% — diminishing value. Class 2 (automobiles, buses, goods vehicles, construction equipment, heavy trucks, manufacturing plant): 30% — diminishing value. Class 3 (railroad cars, locomotives, vessels, barges, aircraft, specialised public utility plant, office furniture, fixtures and equipment, and any other tangible asset not in another class): 20% — diminishing value. Class 4 (buildings, structures and permanent works): 5% — straight-line. Class 5 (intangible assets): straight-line over the asset's useful life; intangibles with no ascertainable useful life are treated as having a 15-year life. Non-commercial road vehicles are capped at a cost of USD 75,000.",ref:"ITR 2025 · Reg. 20-1, 20-2",tier:"premium"},
     {id:215,q:"What withholding tax rates apply in Somalia?",a:"WHT rates: Rental income from immovable property 5%; rental from movable property 10%; capital gains 15%; trust income 26%; dividends 5%; returns on debt claims (Murabaha profit) 10%; royalties and licensing fees 15%; service fees 10%; insurance premiums 5%.",ref:"ITA 2025 · First Schedule Art. 5",tier:"free"},
     {id:216,q:"What is withholding tax and how does it work?",a:"Withholding Tax (WHT) is a mechanism where tax is deducted at source at the point of payment and paid directly to the Revenue Directorate by the payer. The recipient receives the net amount after tax has been deducted. Different income types attract different WHT rates as set in the First Schedule.",ref:"ITA 2025 · First Schedule Art. 5",tier:"free"},
     {id:217,q:"How are partnerships taxed in Somalia?",a:"Partnerships are not directly liable for income tax. Instead, the partnership's chargeable income and losses are allocated to individual partners in proportion to their ownership percentage and taxed in each partner's hands under the PIT regime. Partnerships are also not entitled to tax credits on partnership income.",ref:"ITA 2025 · Arts. 3, 54, 55, 56, 57",tier:"premium"},
     {id:218,q:"How are trusts (Amaano) taxed?",a:"A trust is taxed as a business entity. The trust's chargeable income for each year of assessment is taxed at a flat rate of 26%. Withholding tax on trust income is also applied at 26%.",ref:"ITA 2025 · Arts. 3, 58, 59",tier:"premium"},
     {id:219,q:"What is the tax on dividends paid by corporations?",a:"Dividends paid by a resident corporation to a resident individual are subject to 5% withholding tax, which is a final tax. The individual does not declare those dividends again as taxable income. Dividends paid between resident corporations are exempt if the recipient holds more than 12.5% for a continuous period of 365 days before distribution.",ref:"ITA 2025 · Arts. 14, 61; First Schedule Art. 5",tier:"premium"},
     {id:220,q:"What is Gain on Investment Assets (GIA) and how is it taxed?",a:"GIA tax applies to gains from disposing of investment assets such as land, buildings, private residences, and shares. The gain is the difference between sale proceeds and original cost. For primary private residences, the first USD 100,000 of gain is exempt. Where total chargeable income exceeds USD 18,000, the GIA rate is 15% (with any further excess taxed at 18%).",ref:"ITA 2025 · Arts. 6, 39",tier:"premium"},
-    {id:221,q:"Is there a capital gains tax exemption for selling a home?",a:"Yes. When an individual sells their primary private residence, the first USD 100,000 of capital gain is exempt from tax. The remaining gain, if any, is included in calculating investment income. This exemption applies only to the primary private residence, not to secondary properties or investment properties.",ref:"ITA 2025 · Art. 39",tier:"premium"},
-    {id:222,q:"What records must a business keep for tax purposes?",a:"Businesses must keep: audited financial statements; purchase and sales invoices; creditor and debtor statements; receipts; payroll and wage books; petty cash book; bank statements; and asset registers with depreciation schedules. All records must relate to actual business transactions and be available for audit.",ref:"ITA 2025 · Arts. 5, 7, 9, 10",tier:"premium"},
+    {id:221,q:"Is there a capital gains tax exemption for selling a home?",a:"Yes. When an individual sells their primary private residence, the first USD 100,000 of capital gain is exempt from tax. The remaining gain, if any, is included in calculating investment income under Article 14(3)(b) of the Law. A loss on disposal of a primary private residence is not deductible. Importantly, the USD 100,000 exemption is proportionally reduced for any day the property was not the individual's primary private residence — a property is not treated as primary residence on any day the owner does not live there, unless total absences are no more than 30% of the ownership period.",ref:"ITA 2025 · Art. 39; ITR 2025 · Reg. 6-1",tier:"premium"},
+    {id:222,q:"What records must a business keep for tax purposes?",a:"Businesses must keep records sufficient to enable the IRD to verify their income tax liability. This includes: audited financial statements; purchase and sales invoices; creditor and debtor statements; receipts; payroll and wage books; bank statements; and depreciation schedules for business assets. Under the modified cash basis, expenses are only deductible if verified through prescribed verification technology. Record-keeping requirements are set by the Revenue Administration Law and the Income Tax Law.",ref:"ITA 2025; Revenue Administration Law; ITR 2025 · Reg. 9-3",tier:"premium"},
     {id:223,q:"What happens if I fail to register, file, or pay income tax?",a:"Civil penalties apply for: failing to pay tax; underestimating tax payable; failing to maintain records; failing to file a return; making false statements; and aiding and abetting non-compliance. Criminal offences arise when a person acts knowingly or recklessly, including failing to comply, failing to pay, making false statements, and impeding tax administration.",ref:"Revenue Administration Law",tier:"free"},
-    {id:224,q:"What is the PIT rate for non-resident individuals?",a:"Non-resident individuals are taxed at a flat rate of 18% on their income from Somali sources. This flat rate applies regardless of the level of income. Resident individuals are taxed on worldwide income using progressive rates. Non-resident individuals below 18 years of age are taxed at 20%.",ref:"ITA 2025 · Art. 10",tier:"premium"},
+    {id:224,q:"What is the PIT rate for non-resident individuals?",a:"Non-resident individuals are taxed at a flat rate of 18% on their income sourced from Somalia. This flat rate applies regardless of the level of income and is set in the First Schedule of the Income Tax Law 2025. Resident individuals are taxed on worldwide income using the progressive rates (0%, 6%, 12%, 18%). Non-residents are not entitled to the progressive rate bands available to residents.",ref:"ITA 2025 · First Schedule",tier:"premium"},
     {id:225,q:"What is a Somali Permanent Establishment (PE)?",a:"A Somali Permanent Establishment is a fixed place in Somalia where a non-resident person carries out business for a period of 90 days or more in any 12-month period. Non-resident persons with a PE in Somalia are liable for income tax on income attributable to that PE and on any income repatriated from Somalia.",ref:"ITA 2025 · Art. 86",tier:"premium"},
     {id:226,q:"Can a resident person claim a foreign tax credit?",a:"Yes. A resident person (other than a partnership) may claim a foreign tax credit for any foreign income tax paid on their assessable foreign income for the year of assessment. This prevents double taxation on income that has already been taxed in another country.",ref:"ITA 2025 · Art. 11",tier:"premium"},
     {id:227,q:"What is the tax rate for rental income in Somalia?",a:"Rental income from immovable property (real estate) is subject to 5% withholding tax. Rental income from movable property such as vehicles, machinery, and equipment is subject to 10% withholding tax. These are withheld at source by the payer.",ref:"ITA 2025 · First Schedule Art. 5",tier:"free"},
     {id:228,q:"What is the withholding tax on royalties?",a:"Royalties, intellectual property rights, and licensing fees paid to rights holders are subject to 15% withholding tax. This applies to payments for the use of patents, trademarks, copyrights, software licences, and similar rights whether paid to residents or non-residents.",ref:"ITA 2025 · First Schedule Art. 5",tier:"premium"},
     {id:229,q:"What are the quarterly instalment payment deadlines for income tax?",a:"Quarterly tax instalments must be paid by the end of each quarter: 31 March, 30 June, 30 September, and 31 December. By 31 March of the following year, the taxpayer must file their annual return and reconcile the total instalments paid against the total tax liability for the year.",ref:"ITA 2025 · Arts. 10, 97; ITR 2025 · Art. 97",tier:"free"},
-    {id:230,q:"Do I pay tax on insurance compensation or gifts received?",a:"No. Insurance compensation received for a loss (such as a car accident payout) and personal gifts received from friends or family are not considered income under the Income Tax Act 2025. They are therefore not subject to income tax and do not need to be declared.",ref:"ITA 2025 · Art. 70",tier:"free"},
+    {id:230,q:"Do I pay tax on insurance compensation or gifts received?",a:"Insurance compensation received as indemnity for a loss (such as a vehicle accident payout) is generally not taxable income under the Income Tax Law 2025, as it replaces a lost asset rather than producing a gain. Personal gifts received from friends or family are also generally not treated as assessable income. However, gifts or benefits received in connection with employment or a business relationship may be treated as taxable income from employment or business.",ref:"ITA 2025 · Arts. 12, 13, 14",tier:"free"},
     {id:231,q:"How is service fee income taxed in Somalia?",a:"Service fees paid to individuals or businesses are subject to 10% withholding tax deducted at source by the payer. The payer must file a WHT return and remit the withheld tax to the Revenue Directorate. This applies to all service payments including consultancy, contracting, and professional services.",ref:"ITA 2025 · First Schedule Art. 5",tier:"premium"},
     {id:232,q:"Can I use a non-calendar tax year for my business?",a:"Yes. A taxpayer may apply to the IRD to use a different tax year than the calendar year. If approved, the annual income tax return must be filed within three calendar months following the end of the agreed tax year. All quarterly instalment payment obligations continue to apply.",ref:"ITA 2025 · Arts. 10, 97",tier:"premium"},
     {id:233,q:"What qualifies as a business expense that can be deducted from taxable income?",a:"An expense is deductible if it is incurred in producing income from the business, is not capital in nature (i.e., it does not secure a benefit lasting more than 12 months), and is not a private expense. Entertainment, personal effects, and private expenses do not qualify. Depreciation on business assets is also deductible at prescribed rates.",ref:"ITA 2025 · Arts. 16, 17, 18, 19",tier:"premium"},
@@ -1860,7 +1674,7 @@ const QA={
     {id:235,q:"What is the penalty for late filing of a tax return?",a:"Under the Revenue Administration Regulation 2024, any taxpayer who fails to submit a required return within the prescribed time is liable to an administrative penalty not exceeding USD 500 or 2% of the unpaid tax per month, whichever is higher. Continued failure may lead to further enforcement actions including criminal prosecution.",ref:"Revenue Administration Regulation 2024 · Art. 68",tier:"premium"},
     {id:236,q:"What does the Income Tax Act 2025 replace?",a:"The Income Tax Act 2025 replaced the previous 1966 Direct Taxation Law. It came into effect on 11 May 2025 and was followed by the Income Tax Regulations 2025 signed on 15 May 2025. The new framework represents a major reform of Somalia's domestic revenue system.",ref:"ITA 2025 · Introduction",tier:"free"},
     {id:237,q:"Is Murabaha profit subject to withholding tax in Somalia?",a:"Yes. Returns on debt claims, including Murabaha profit and other debt claim income, are subject to 10% withholding tax. The payer is responsible for deducting this tax at source and remitting it to the Revenue Directorate.",ref:"ITA 2025 · First Schedule Art. 5",tier:"premium"},
-    {id:238,q:"When does a business stop qualifying for PTR?",a:"A business loses PTR eligibility when its annual turnover exceeds USD 50,000 (based on a rolling three-year average). It must then register for the standard Personal Income Tax (PIT) regime. The Revenue Directorate may also deregister a taxpayer from PTR if satisfied the taxpayer has the ability to maintain adequate accounting records.",ref:"ITA 2025 · Arts. 9, 97",tier:"premium"},
+    {id:238,q:"When does a business stop qualifying for PTR?",a:"A business loses PTR eligibility when its annual turnover exceeds USD 50,000 (based on a rolling three-year average), when its income is no longer exclusively from sources within Somalia, or when it becomes a partner in a partnership. Additionally, if the Ministry of Finance is satisfied that a taxpayer maintains adequate accounting records, the taxpayer may elect to disapply presumptive taxation — in which case the standard PIT regime applies for the year of election and the following two years of assessment.",ref:"ITR 2025 · Reg. 9-1, 9-2",tier:"premium"},
     {id:239,q:"How are GIA gains taxed when total income exceeds USD 18,000?",a:"If total chargeable income exceeds USD 18,000, the GIA concessional rate applies. The first USD 18,000 is taxed under the standard progressive PIT rates. The excess is taxed at 15% to the extent it is attributable to GIA; any further excess beyond the GIA amount is taxed at 18%.",ref:"ITA 2025 · Arts. 6, 39",tier:"premium"},
     {id:240,q:"What is the reinsurance premium withholding tax rate?",a:"Reinsurance and insurance premium payments are subject to 5% withholding tax. The payer deducts this at source and remits it to the Revenue Directorate. This applies to both domestic and international insurance premium payments sourced from Somalia.",ref:"ITA 2025 · First Schedule Art. 5",tier:"premium"},
   ],
@@ -2709,15 +2523,13 @@ const MINI_FOOTER_HTML=`<div style="background:var(--teal-deep);padding:2.5rem 0
       <span onclick="showPage('pricing')" style="font-size:.8rem;color:rgba(255,255,255,0.45);cursor:pointer" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Pricing</span>
       <span onclick="showPage('contact')" style="font-size:.8rem;color:rgba(255,255,255,0.45);cursor:pointer" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Contact</span>
       <span onclick="showPage('about')" style="font-size:.8rem;color:rgba(255,255,255,0.45);cursor:pointer" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">About</span>
-      <span onclick="showPage('privacy')" style="font-size:.8rem;color:rgba(255,255,255,0.45);cursor:pointer" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Privacy</span>
-      <span onclick="showPage('terms')" style="font-size:.8rem;color:rgba(255,255,255,0.45);cursor:pointer" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Terms</span>
     </div>
     <div style="font-size:.7rem;color:rgba(255,255,255,0.2)">© 2025 XeerHub · xeerhub.com</div>
     <div style="font-size:.68rem;color:rgba(255,255,255,0.18);max-width:520px;margin:.4rem auto 0;font-style:italic;line-height:1.6">Legal information only — not legal advice. Consult a qualified Somali lawyer for case-specific guidance.</div>
   </div>
 </div>`;
 
-const INNER_PAGES=['library','ask','pricing','dashboard','about','testimonials','blog','contact','privacy','terms'];
+const INNER_PAGES=['library','ask','pricing','dashboard','about','testimonials','blog','contact'];
 INNER_PAGES.forEach(id=>{
   const el=document.getElementById('page-'+id);
   if(el&&!el.querySelector('.inner-footer')){
