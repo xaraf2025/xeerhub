@@ -2236,6 +2236,109 @@ function filterQA(){renderQA();}
 // ── ASK AI ─────────────────────────────────────────────────────
 function setSample(el){document.getElementById('questionInput').value=el.textContent;}
 
+// ══════════════════════════════════════════════════════════════
+//  RAILWAY AI BACKEND INTEGRATION
+//  Primary: Railway API → Supabase vector search → Groq LLM
+//  Fallback: local keyword engine below (zero changes to it)
+// ══════════════════════════════════════════════════════════════
+const RAILWAY_API = 'https://xeerhub-api-production.up.railway.app/ask';
+const RAILWAY_TIMEOUT_MS = 12000;
+
+function renderAPIAnswer(question, lawArea, apiData, used) {
+  const area = document.getElementById('answerArea');
+  const btn  = document.getElementById('askBtn');
+
+  const limitNote = used >= FREE_LIMIT
+    ? `<div style="margin-top:.6rem;padding:.6rem .75rem;background:var(--gold-pale);border-radius:var(--r-sm);border:1px solid var(--gold-border);font-size:.8rem;color:var(--gold-dark)">🔒 Monthly limit reached. <button onclick="showPage('pricing')" style="background:none;border:none;color:var(--gold-dark);text-decoration:underline;cursor:pointer;font-size:.8rem;font-weight:600">Upgrade for unlimited →</button></div>`
+    : `<div style="font-size:.75rem;color:var(--muted);margin-top:.4rem">${FREE_LIMIT - used} free question${FREE_LIMIT - used === 1 ? '' : 's'} remaining this month</div>`;
+
+  const citationsHtml = (apiData.citations || []).map(c => {
+    const pct = c.similarity ? Math.round(c.similarity * 100) : null;
+    return `<span style="display:inline-flex;align-items:center;gap:.35rem;background:var(--teal-pale);color:var(--teal-deep);font-family:'DM Mono',monospace;font-size:.7rem;padding:.2rem .65rem;border-radius:100px;border:1px solid var(--border-strong);margin:.15rem">${c.law}${c.article ? ' · Art. ' + c.article : ''}${pct ? ' <span style="opacity:.65">'+pct+'%</span>' : ''}</span>`;
+  }).join(' ');
+
+  const formattedAnswer = (apiData.answer || '')
+    .split(/\n{2,}/)
+    .map(p => `<p style="margin-bottom:.7rem">${p.replace(/\n/g,'<br>')}</p>`)
+    .join('');
+
+  area.innerHTML = `<div class="answer-card fade-in">
+    <div class="answer-header">
+      <span class="answer-header-icon">✦</span>
+      <span class="answer-header-text">XeerHub AI — ${lawArea}</span>
+      <span style="margin-left:auto;font-size:.68rem;background:var(--teal-light);color:#fff;padding:.15rem .5rem;border-radius:100px;font-weight:600">AI-Powered</span>
+    </div>
+    <div class="answer-body">${formattedAnswer}</div>
+    ${citationsHtml ? `<div style="margin-top:.9rem;padding-top:.75rem;border-top:1px solid var(--border)">
+      <div style="font-size:.7rem;color:var(--muted);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.08em">📎 Verified references</div>
+      <div>${citationsHtml}</div>
+    </div>` : ''}
+    <div style="font-size:.72rem;color:var(--gold-dark);margin-top:.75rem;padding-top:.6rem;border-top:1px solid var(--border)">⚠ Legal information only — not legal advice. Consult a qualified Somali lawyer for your specific situation.</div>
+    ${limitNote}
+  </div>
+  <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap">
+    <button class="btn btn-ghost btn-sm" onclick="showToast('Saved ✓','success')">💾 Save answer</button>
+    <button class="btn btn-ghost btn-sm" onclick="document.getElementById('questionInput').value='';document.getElementById('answerArea').innerHTML=''">✕ Clear</button>
+  </div>`;
+
+  if (used < FREE_LIMIT) { btn.disabled = false; btn.innerHTML = 'Get Answer →'; btn.style.background = ''; }
+}
+
+function runLocalEngine(question, lawArea, used) {
+  const area = document.getElementById('answerArea');
+  const btn  = document.getElementById('askBtn');
+
+  const relevant = retrieveRelevant(question, lawArea, 8);
+  const result   = synthesiseAnswer(question, relevant);
+  const usedRefs = result ? result.refs : [];
+
+  const limitNote = used >= FREE_LIMIT
+    ? `<div style="margin-top:.6rem;padding:.6rem .75rem;background:var(--gold-pale);border-radius:var(--r-sm);border:1px solid var(--gold-border);font-size:.8rem;color:var(--gold-dark)">🔒 Monthly limit reached. <button onclick="showPage('pricing')" style="background:none;border:none;color:var(--gold-dark);text-decoration:underline;cursor:pointer;font-size:.8rem;font-weight:600">Upgrade for unlimited →</button></div>`
+    : `<div style="font-size:.75rem;color:var(--muted);margin-top:.4rem">${FREE_LIMIT - used} free question${FREE_LIMIT - used === 1 ? '' : 's'} remaining this month</div>`;
+
+  if (!result) {
+    area.innerHTML = `<div class="answer-card fade-in">
+      <div class="answer-header"><span class="answer-header-icon">🔍</span><span class="answer-header-text">No Match Found</span></div>
+      <div class="answer-body">
+        <p>No verified information found for <em>"${question}"</em> in the ${lawArea} knowledge base.</p>
+        <p style="margin-top:.6rem">Try:</p>
+        <ul style="margin:.4rem 0 0 1.2rem;font-size:.9rem;color:var(--muted)">
+          <li>Browsing the <button onclick="showPage('library')" style="background:none;border:none;color:var(--teal-mid);cursor:pointer;font-size:.9rem;text-decoration:underline">Q&amp;A Library</button> directly</li>
+          <li>Selecting "All areas / General" in the law area dropdown</li>
+          <li>Rewording your question with different keywords</li>
+        </ul>
+      </div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--border)">⚠ Legal information only — consult a qualified Somali lawyer for specific advice.</div>
+      ${limitNote}
+    </div>`;
+  } else {
+    const refsHtml = result.refs.map(r => `<span style="display:inline-block;background:var(--teal-pale);color:var(--teal-deep);font-family:'DM Mono',monospace;font-size:.7rem;padding:.2rem .55rem;border-radius:100px;border:1px solid var(--border-strong);margin:.15rem">${r}</span>`).join(' ');
+    area.innerHTML = `<div class="answer-card fade-in">
+      <div class="answer-header">
+        <span class="answer-header-icon">✦</span>
+        <span class="answer-header-text">XeerHub AI — ${lawArea}</span>
+      </div>
+      <div class="answer-body">${result.body}</div>
+      <div style="margin-top:.9rem;padding-top:.75rem;border-top:1px solid var(--border)">
+        <div style="font-size:.7rem;color:var(--muted);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.08em">📎 Verified references</div>
+        <div>${refsHtml}</div>
+      </div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:.75rem;padding-top:.6rem;border-top:1px solid var(--border)">
+        🔎 Matched <strong>${result.count}</strong> verified entr${result.count===1?'y':'ies'} · Zero hallucination — answers sourced exclusively from the XeerHub knowledge base
+      </div>
+      <div style="font-size:.72rem;color:var(--gold-dark);margin-top:.4rem">⚠ Legal information only — not legal advice. Consult a qualified Somali lawyer for your specific situation.</div>
+      ${limitNote}
+      ${renderConflictAlerts(getConflictAlertsForRefs(usedRefs))}
+      ${renderAINote(getAINoteForRefs(usedRefs))}
+    </div>
+    <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap">
+      <button class="btn btn-ghost btn-sm" onclick="showToast('Saved ✓','success')">💾 Save answer</button>
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('questionInput').value='';document.getElementById('answerArea').innerHTML=''">✕ Clear</button>
+    </div>`;
+  }
+  if (used < FREE_LIMIT) { btn.disabled = false; btn.innerHTML = 'Get Answer →'; btn.style.background = ''; }
+}
+
 // ── CLIENT-SIDE ANSWER ENGINE ──────────────────────────────────
 // Zero hallucination: all answers synthesised purely from verified QA entries.
 // No API call, no network dependency, no invented article numbers.
@@ -2410,70 +2513,38 @@ function showLimitBanner(){
 }
 
 function submitQuestion(){
-  const question=document.getElementById('questionInput').value.trim();
-  const lawArea=document.getElementById('lawAreaSelect').value;
-  if(!question){showToast('Please enter a question','error');return;}
-  if(getQCount() >= FREE_LIMIT){ showLimitBanner(); return; }
+  const question = document.getElementById('questionInput').value.trim();
+  const lawArea  = document.getElementById('lawAreaSelect').value;
+  if (!question) { showToast('Please enter a question', 'error'); return; }
+  if (getQCount() >= FREE_LIMIT) { showLimitBanner(); return; }
 
-  const btn=document.getElementById('askBtn');
-  const area=document.getElementById('answerArea');
-  btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Searching...';
-  area.innerHTML='';
+  const btn  = document.getElementById('askBtn');
+  const area = document.getElementById('answerArea');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Searching...';
+  area.innerHTML = '';
 
-  setTimeout(()=>{
-    const relevant=retrieveRelevant(question,lawArea,8);
-    const result=synthesiseAnswer(question,relevant);
-    const used = incrementQCount();
-    updateUsageUI();
+  const used = incrementQCount();
+  updateUsageUI();
 
-    const usedRefs = result ? result.refs : [];
+  const controller = new AbortController();
+  const timeoutId  = setTimeout(() => controller.abort(), RAILWAY_TIMEOUT_MS);
 
-    const limitNote = used >= FREE_LIMIT
-      ? `<div style="margin-top:.6rem;padding:.6rem .75rem;background:var(--gold-pale);border-radius:var(--r-sm);border:1px solid var(--gold-border);font-size:.8rem;color:var(--gold-dark)">🔒 Monthly limit reached. <button onclick="showPage('pricing')" style="background:none;border:none;color:var(--gold-dark);text-decoration:underline;cursor:pointer;font-size:.8rem;font-weight:600">Upgrade for unlimited →</button></div>`
-      : `<div style="font-size:.75rem;color:var(--muted);margin-top:.4rem">${FREE_LIMIT - used} free question${FREE_LIMIT - used === 1 ? '' : 's'} remaining this month</div>`;
-
-    if(!result){
-      area.innerHTML=`<div class="answer-card fade-in">
-        <div class="answer-header"><span class="answer-header-icon">🔍</span><span class="answer-header-text">No Match Found</span></div>
-        <div class="answer-body">
-          <p>No verified information found for <em>"${question}"</em> in the ${lawArea} knowledge base.</p>
-          <p style="margin-top:.6rem">Try:</p>
-          <ul style="margin:.4rem 0 0 1.2rem;font-size:.9rem;color:var(--muted)">
-            <li>Browsing the <button onclick="showPage('library')" style="background:none;border:none;color:var(--teal-mid);cursor:pointer;font-size:.9rem;text-decoration:underline">Q&amp;A Library</button> directly</li>
-            <li>Selecting "All areas / General" in the law area dropdown</li>
-            <li>Rewording your question with different keywords</li>
-          </ul>
-        </div>
-        <div style="font-size:.72rem;color:var(--muted);margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--border)">⚠ Legal information only — consult a qualified Somali lawyer for specific advice.</div>
-        ${limitNote}
-      </div>`;
-    } else {
-      const refsHtml=result.refs.map(r=>`<span style="display:inline-block;background:var(--teal-pale);color:var(--teal-deep);font-family:'DM Mono',monospace;font-size:.7rem;padding:.2rem .55rem;border-radius:100px;border:1px solid var(--border-strong);margin:.15rem">${r}</span>`).join(' ');
-      area.innerHTML=`<div class="answer-card fade-in">
-        <div class="answer-header">
-          <span class="answer-header-icon">✦</span>
-          <span class="answer-header-text">XeerHub AI — ${lawArea}</span>
-        </div>
-        <div class="answer-body">${result.body}</div>
-        <div style="margin-top:.9rem;padding-top:.75rem;border-top:1px solid var(--border)">
-          <div style="font-size:.7rem;color:var(--muted);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.08em">📎 Verified references</div>
-          <div>${refsHtml}</div>
-        </div>
-        <div style="font-size:.72rem;color:var(--muted);margin-top:.75rem;padding-top:.6rem;border-top:1px solid var(--border)">
-          🔎 Matched <strong>${result.count}</strong> verified entr${result.count===1?'y':'ies'} · Zero hallucination — answers sourced exclusively from the XeerHub knowledge base
-        </div>
-        <div style="font-size:.72rem;color:var(--gold-dark);margin-top:.4rem">⚠ Legal information only — not legal advice. Consult a qualified Somali lawyer for your specific situation.</div>
-        ${limitNote}
-        ${renderConflictAlerts(getConflictAlertsForRefs(usedRefs))}
-        ${renderAINote(getAINoteForRefs(usedRefs))}
-      </div>
-      <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap">
-        <button class="btn btn-ghost btn-sm" onclick="showToast('Saved ✓','success')">💾 Save answer</button>
-        <button class="btn btn-ghost btn-sm" onclick="document.getElementById('questionInput').value='';document.getElementById('answerArea').innerHTML=''">✕ Clear</button>
-      </div>`;
-    }
-    if(used < FREE_LIMIT){ btn.disabled=false;btn.innerHTML='Get Answer →';btn.style.background=''; }
-  },120);
+  fetch(`${RAILWAY_API}?q=${encodeURIComponent(question)}`, { signal: controller.signal })
+    .then(res => {
+      clearTimeout(timeoutId);
+      if (!res.ok) throw new Error('API ' + res.status);
+      return res.json();
+    })
+    .then(data => {
+      if (!data || !data.answer || data.answer.trim() === '') throw new Error('empty response');
+      renderAPIAnswer(question, lawArea, data, used);
+    })
+    .catch(err => {
+      clearTimeout(timeoutId);
+      console.warn('[XeerHub] Railway unavailable, using local engine:', err.message);
+      runLocalEngine(question, lawArea, used);
+    });
 }
 
 
