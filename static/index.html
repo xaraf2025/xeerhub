@@ -2704,10 +2704,6 @@ function synthesiseAnswer(question,relevant){
         <div style="font-size:.875rem;color:var(--muted);line-height:1.6">${o.a}</div>
         <div style="font-size:.68rem;color:var(--teal-mid);margin-top:.4rem;font-family:'DM Mono',monospace">${o.ref}</div>
       </div>`).join('');
-    // Append intelligence blocks for partial matches too
-    const partialRefs = entries.map(o=>o.ref);
-    body += renderConflictAlerts(getConflictAlertsForRefs(partialRefs));
-    body += renderAINote(getAINoteForRefs(partialRefs));
   }
 
   // Collect refs only from entries actually rendered
