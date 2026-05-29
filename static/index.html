@@ -2602,7 +2602,7 @@ function setSample(el){document.getElementById('questionInput').value=el.textCon
 //  Fallback: local keyword engine below (zero changes to it)
 // ══════════════════════════════════════════════════════════════
 const RAILWAY_API = 'https://xeerhub-api-production.up.railway.app/ask';
-const RAILWAY_TIMEOUT_MS = 12000;
+const RAILWAY_TIMEOUT_MS = 5000;
 
 function renderAPIAnswer(question, lawArea, apiData) {
   const area = document.getElementById('answerArea');
@@ -2833,24 +2833,33 @@ function submitQuestion(){
   btn.innerHTML = '<span class="spinner"></span> Searching...';
   area.innerHTML = '';
 
-  const controller = new AbortController();
-  const timeoutId  = setTimeout(() => controller.abort(), RAILWAY_TIMEOUT_MS);
+  // Step 1: Show local answer instantly (zero network wait).
+  // Small tick so the spinner renders before synchronous work begins.
+  setTimeout(() => {
+    runLocalEngine(question, lawArea);
 
-  fetch(`${RAILWAY_API}?q=${encodeURIComponent(question)}`, { signal: controller.signal })
-    .then(res => {
-      clearTimeout(timeoutId);
-      if (!res.ok) throw new Error('API ' + res.status);
-      return res.json();
-    })
-    .then(data => {
-      if (!data || !data.answer || data.answer.trim() === '') throw new Error('empty response');
-      renderAPIAnswer(question, lawArea, data);
-    })
-    .catch(err => {
-      clearTimeout(timeoutId);
-      console.warn('[XeerHub] Railway unavailable, using local engine:', err.message);
-      runLocalEngine(question, lawArea);
-    });
+    // Step 2: Race the Railway API in the background.
+    // If it responds within RAILWAY_TIMEOUT_MS we silently upgrade the answer.
+    const controller = new AbortController();
+    const timeoutId  = setTimeout(() => controller.abort(), RAILWAY_TIMEOUT_MS);
+
+    fetch(`${RAILWAY_API}?q=${encodeURIComponent(question)}`, { signal: controller.signal })
+      .then(res => {
+        clearTimeout(timeoutId);
+        if (!res.ok) throw new Error('API ' + res.status);
+        return res.json();
+      })
+      .then(data => {
+        if (!data || !data.answer || data.answer.trim() === '') throw new Error('empty response');
+        // Upgrade the displayed answer with the richer API result
+        renderAPIAnswer(question, lawArea, data);
+      })
+      .catch(err => {
+        clearTimeout(timeoutId);
+        // Local answer is already showing — nothing more to do
+        console.warn('[XeerHub] Railway unavailable, keeping local answer:', err.message);
+      });
+  }, 30);
 }
 
 
