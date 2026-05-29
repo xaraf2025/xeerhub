@@ -78,7 +78,8 @@
       "@type": "Offer",
       "name": "Free Plan",
       "price": "0",
-      "priceCurrency": "USD"
+      "priceCurrency": "USD",
+      "description": "Unlimited AI questions, full Q&A library access, article references included."
     },
     {
       "@type": "Offer",
@@ -1086,10 +1087,24 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 ══════════════════════════════════════════════ -->
 <div class="page" id="page-library">
   <div class="library-header">
+    <!-- Mode switcher banner -->
+    <div style="background:var(--parchment);border-bottom:1px solid var(--border);padding:.85rem 0">
+      <div class="container" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+        <span style="font-size:.78rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.08em">You are in:</span>
+        <div style="display:flex;gap:.5rem">
+          <span style="display:inline-flex;align-items:center;gap:.4rem;background:var(--teal-deep);color:#fff;padding:.35rem 1rem;border-radius:100px;font-size:.82rem;font-weight:600">📚 Browse Library <span style="font-size:.7rem;opacity:.75">— search 215+ Q&As</span></span>
+          <button onclick="showPage('ask')" style="display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--muted);padding:.35rem 1rem;border-radius:100px;font-size:.82rem;font-weight:500;border:1.5px solid var(--border);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--teal-pale)';this.style.color='var(--teal-deep)';this.style.borderColor='var(--teal-mid)'" onmouseout="this.style.background='transparent';this.style.color='var(--muted)';this.style.borderColor='var(--border)'">✦ Ask AI <span style="font-size:.7rem;opacity:.75">— type your question</span></button>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="library-title-row">
-        <div><div class="section-eyebrow">Q&A Library</div><h1 style="font-size:2.2rem;font-family:'Playfair Display',serif">Verified Legal Q&As</h1><p style="color:var(--muted);font-size:.9rem;margin-top:.3rem">215+ questions · 5 laws · all article references included</p></div>
-        <button class="btn btn-teal" onclick="showPage('ask')">✦ Ask Your Own Question</button>
+        <div>
+          <div class="section-eyebrow">Q&A Library</div>
+          <h1 style="font-size:2.2rem;font-family:'Playfair Display',serif">Verified Legal Q&As</h1>
+          <p style="color:var(--muted);font-size:.9rem;margin-top:.3rem">215+ questions · 5 laws · all article references included</p>
+          <p style="font-size:.82rem;color:var(--teal-mid);margin-top:.4rem;font-weight:500">💡 Can't find what you need? <button onclick="showPage('ask')" style="background:none;border:none;color:var(--teal-deep);font-weight:600;cursor:pointer;font-size:.82rem;text-decoration:underline;padding:0">Ask the AI instead →</button></p>
+        </div>
       </div>
       <div class="library-controls">
         <div class="search-wrap"><span class="search-icon">🔍</span><input class="input search-input" type="text" placeholder="Search questions..." id="searchInput" oninput="filterQA()"></div>
@@ -1112,35 +1127,85 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 ══════════════════════════════════════════════ -->
 <div class="page" id="page-ask">
   <div class="ask-page">
-    <div class="ask-header"><div class="section-eyebrow">AI Answer Engine</div><h1 style="font-size:2.2rem;font-family:'Playfair Display',serif">Ask a Legal Question</h1><p style="color:var(--muted);margin-top:.5rem;font-size:.95rem">Instant answers grounded strictly in Somali Labour Code, Foreign Investment Law, the <strong>Income Tax Law 2025 &amp; Regulation No. 0142-2025</strong>, the <strong>Environmental Protection &amp; Management Act 2024</strong>, and the <strong>Data Protection Act</strong>.</p></div>
-    <div id="noKeyBanner" class="no-key-banner" style="display:none"><span class="no-key-banner-icon">⚠️</span><div class="no-key-banner-text"><strong>AI temporarily unavailable</strong> — You can still browse the full Q&amp;A library below.</div></div>
-    <div class="ask-card">
-      <div class="ask-select-row"><label class="label">Law area (optional)</label><select class="select" id="lawAreaSelect"><option value="General">All areas / General</option><option value="Labor Law">Labor Law</option><option value="Foreign Investment Law">Foreign Investment Law</option><option value="Income Tax Law">Income Tax Law</option><option value="Environmental Law">Environmental Law (EPMA 2024)</option><option value="Data Protection Law">Data Protection Act</option></select></div>
-      <label class="label">Your question</label>
-      <textarea class="input" id="questionInput" placeholder="e.g. How many days of maternity leave is an employee entitled to?" rows="4"></textarea>
-      <div class="ask-form-row" style="margin-top:1rem"><div></div><button class="ask-submit" id="askBtn" onclick="submitQuestion()">Get Answer →</button></div>
-    </div>
-    <div class="sample-qs">
-      <div class="sample-label">Try a sample question</div>
-      <div class="sample-chips">
-        <span class="sample-chip" onclick="setSample(this)">Can I fire someone without notice?</span>
-        <span class="sample-chip" onclick="setSample(this)">What are my rights as a foreign investor?</span>
-        <span class="sample-chip" onclick="setSample(this)">Is maternity leave paid?</span>
-        <span class="sample-chip" onclick="setSample(this)">Can the government take my investment?</span>
-        <span class="sample-chip" onclick="setSample(this)">Do I need a written employment contract?</span>
-        <span class="sample-chip" onclick="setSample(this)">What is the Presumptive Tax Regime under Regulation 9-1?</span>
-        <span class="sample-chip" onclick="setSample(this)">What are the depreciation rates under Regulation 20-2?</span>
-        <span class="sample-chip" onclick="setSample(this)">Do I need an environmental impact assessment?</span>
-        <span class="sample-chip" onclick="setSample(this)">How is a vehicle benefit calculated under Regulation 32-1?</span>
-        <span class="sample-chip" onclick="setSample(this)">What is the Modified Cash Basis under Regulation 9-3?</span>
-        <span class="sample-chip" onclick="setSample(this)">Do I need consent to collect personal data?</span>
-        <span class="sample-chip" onclick="setSample(this)">What must I do if there is a data breach?</span>
-        <span class="sample-chip" onclick="setSample(this)">Is importing charcoal legal in Somalia?</span>
-        <span class="sample-chip" onclick="setSample(this)">When is an ESIA required before a project?</span>
-        <span class="sample-chip" onclick="setSample(this)">What are the penalties for wildlife poaching?</span>
+
+    <!-- Mode switcher banner -->
+    <div style="background:var(--parchment);border-bottom:1px solid var(--border);padding:.85rem 0;margin-bottom:0">
+      <div class="container" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+        <span style="font-size:.78rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.08em">You are in:</span>
+        <div style="display:flex;gap:.5rem">
+          <span style="display:inline-flex;align-items:center;gap:.4rem;background:var(--teal-deep);color:#fff;padding:.35rem 1rem;border-radius:100px;font-size:.82rem;font-weight:600">✦ Ask AI <span style="font-size:.7rem;opacity:.75">— type your question</span></span>
+          <button onclick="showPage('library')" style="display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--muted);padding:.35rem 1rem;border-radius:100px;font-size:.82rem;font-weight:500;border:1.5px solid var(--border);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--teal-pale)';this.style.color='var(--teal-deep)';this.style.borderColor='var(--teal-mid)'" onmouseout="this.style.background='transparent';this.style.color='var(--muted)';this.style.borderColor='var(--border)'">📚 Browse Library <span style="font-size:.7rem;opacity:.75">— search 215+ Q&As</span></button>
+        </div>
       </div>
     </div>
-    <div id="answerArea" style="margin-top:2rem"></div>
+
+    <!-- Hero explainer -->
+    <div style="background:linear-gradient(135deg,var(--teal-deep) 0%,#1D7A5E 100%);padding:3rem 0 2.5rem;position:relative;overflow:hidden">
+      <div style="position:absolute;right:-60px;top:50%;transform:translateY(-50%);font-family:'Playfair Display',serif;font-size:18rem;font-weight:900;color:rgba(255,255,255,0.04);line-height:1;pointer-events:none">✦</div>
+      <div class="container" style="position:relative;z-index:2">
+        <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(43,174,135,0.2);border:1px solid rgba(43,174,135,0.35);border-radius:100px;padding:.3rem .9rem;margin-bottom:1rem">
+          <span style="width:7px;height:7px;background:var(--teal-light);border-radius:50%;display:inline-block;animation:pulse 2s infinite"></span>
+          <span style="font-size:.72rem;color:rgba(255,255,255,.85);font-weight:500;letter-spacing:.05em">AI Answer Engine — Active</span>
+        </div>
+        <h1 style="font-size:clamp(1.8rem,4vw,2.6rem);font-family:'Playfair Display',serif;color:#fff;margin-bottom:.6rem">Ask a Legal Question</h1>
+        <p style="color:rgba(255,255,255,.65);font-size:.95rem;max-width:580px;line-height:1.7">Type any question in plain English. The AI searches Somalia's official legislation — Labour Code, Foreign Investment Law, Income Tax Law 2025, EPMA 2024, and Data Protection Act — and answers with the exact article reference.</p>
+        <div style="display:flex;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:rgba(255,255,255,.55)"><span style="color:var(--teal-light)">✓</span> No character limits</div>
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:rgba(255,255,255,.55)"><span style="color:var(--teal-light)">✓</span> Every answer cites the article</div>
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:rgba(255,255,255,.55)"><span style="color:var(--teal-light)">✓</span> Completely free to use</div>
+        </div>
+      </div>
+    </div>
+    <style>@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}</style>
+
+    <!-- How it differs from the library callout -->
+    <div style="background:#fff;border-bottom:1px solid var(--border)">
+      <div class="container" style="padding-top:1.25rem;padding-bottom:1.25rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:720px">
+          <div style="background:var(--teal-pale);border:1.5px solid var(--border-strong);border-radius:var(--r);padding:1rem 1.25rem">
+            <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--teal-deep);margin-bottom:.4rem">✦ Ask AI (here)</div>
+            <div style="font-size:.83rem;color:var(--ink);line-height:1.6">Type any question in your own words. The AI reads across all laws and writes a tailored answer for you.</div>
+          </div>
+          <div style="background:var(--parchment);border:1.5px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;cursor:pointer" onclick="showPage('library')" onmouseover="this.style.borderColor='var(--teal-mid)'" onmouseout="this.style.borderColor='var(--border)'">
+            <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.4rem">📚 Library (browse)</div>
+            <div style="font-size:.83rem;color:var(--muted);line-height:1.6">Browse 215+ pre-written Q&As. Best when you want to scan a topic or find a specific law.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Question form -->
+    <div class="container" style="padding-top:2rem;padding-bottom:2rem">
+      <div id="noKeyBanner" class="no-key-banner" style="display:none"><span class="no-key-banner-icon">⚠️</span><div class="no-key-banner-text"><strong>AI temporarily unavailable</strong> — You can still browse the full Q&amp;A library below.</div></div>
+      <div class="ask-card">
+        <div class="ask-select-row"><label class="label">Law area (optional — helps narrow the search)</label><select class="select" id="lawAreaSelect"><option value="General">All areas / General</option><option value="Labor Law">Labor Law</option><option value="Foreign Investment Law">Foreign Investment Law</option><option value="Income Tax Law">Income Tax Law</option><option value="Environmental Law">Environmental Law (EPMA 2024)</option><option value="Data Protection Law">Data Protection Act</option></select></div>
+        <label class="label" style="margin-top:.75rem">Your question <span style="color:var(--teal-mid);font-weight:400;font-size:.78rem">— write it in plain English, as if asking a colleague</span></label>
+        <textarea class="input" id="questionInput" placeholder="e.g. How many days of maternity leave is an employee entitled to?" rows="4"></textarea>
+        <div class="ask-form-row" style="margin-top:1rem"><div style="font-size:.78rem;color:var(--muted)">Ctrl+Enter to submit</div><button class="ask-submit" id="askBtn" onclick="submitQuestion()">Get Answer →</button></div>
+      </div>
+
+      <div class="sample-qs">
+        <div class="sample-label">Try a sample question</div>
+        <div class="sample-chips">
+          <span class="sample-chip" onclick="setSample(this)">Can I fire someone without notice?</span>
+          <span class="sample-chip" onclick="setSample(this)">What are my rights as a foreign investor?</span>
+          <span class="sample-chip" onclick="setSample(this)">Is maternity leave paid?</span>
+          <span class="sample-chip" onclick="setSample(this)">Can the government take my investment?</span>
+          <span class="sample-chip" onclick="setSample(this)">Do I need a written employment contract?</span>
+          <span class="sample-chip" onclick="setSample(this)">What is the Presumptive Tax Regime under Regulation 9-1?</span>
+          <span class="sample-chip" onclick="setSample(this)">What are the depreciation rates under Regulation 20-2?</span>
+          <span class="sample-chip" onclick="setSample(this)">Do I need an environmental impact assessment?</span>
+          <span class="sample-chip" onclick="setSample(this)">How is a vehicle benefit calculated under Regulation 32-1?</span>
+          <span class="sample-chip" onclick="setSample(this)">What is the Modified Cash Basis under Regulation 9-3?</span>
+          <span class="sample-chip" onclick="setSample(this)">Do I need consent to collect personal data?</span>
+          <span class="sample-chip" onclick="setSample(this)">What must I do if there is a data breach?</span>
+          <span class="sample-chip" onclick="setSample(this)">Is importing charcoal legal in Somalia?</span>
+          <span class="sample-chip" onclick="setSample(this)">When is an ESIA required before a project?</span>
+          <span class="sample-chip" onclick="setSample(this)">What are the penalties for wildlife poaching?</span>
+        </div>
+      </div>
+      <div id="answerArea" style="margin-top:2rem"></div>
+    </div>
   </div>
 </div>
 
@@ -1180,17 +1245,17 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
         <div class="plan-name">Free</div>
         <div class="plan-price"><sup>$</sup><span class="price-val" data-monthly="0" data-annual="0">0</span></div>
         <div class="plan-period">forever free</div>
-        <div class="plan-desc">Explore XeerHub with 10 free AI answers every month. No card required.</div>
+        <div class="plan-desc">Start using XeerHub right away. No card, no limit on AI questions. Great for occasional legal lookups.</div>
         <ul class="plan-features">
-          <li><span class="feat-check">✓</span>10 AI answers per month</li>
+          <li><span class="feat-check">✓</span>Unlimited AI questions</li>
           <li><span class="feat-check">✓</span>Browse all 5 law categories</li>
           <li><span class="feat-check">✓</span>Article references included</li>
           <li><span class="feat-check">✓</span>Weekly legal digest email</li>
-          <li><span class="feat-x">–</span>AI answer engine</li>
-          <li><span class="feat-x">–</span>Unlimited Q&amp;A access</li>
+          <li><span class="feat-x">–</span>Save &amp; download PDF answers</li>
+          <li><span class="feat-x">–</span>Priority email support</li>
         </ul>
         <button class="plan-btn plan-btn-outline" onclick="openModal('signup')">Get started free</button>
-        <p style="text-align:center;font-size:.75rem;color:var(--muted);margin-top:.65rem">No credit card · No expiry</p>
+        <p style="text-align:center;font-size:.75rem;color:var(--muted);margin-top:.65rem">No credit card · No expiry · No limits</p>
       </div>
 
       <!-- PROFESSIONAL -->
@@ -1258,9 +1323,9 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 
       <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How accurate are the AI answers? <span class="faq-icon">+</span></div><div class="faq-a">The AI answer engine is strictly grounded in XeerHub's verified knowledge base — it does not draw from the open internet or general AI training data. Every AI answer cites the specific article it is based on. For Income Tax questions, the engine references both the ITA 2025 and the Income Tax Regulation 2025 (Reg No. 0142-2025). The AI is instructed never to fabricate provisions, and if no verified information exists for a question, it says so rather than guessing.</div></div>
 
-      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What is the difference between the free and paid plans? <span class="faq-icon">+</span></div><div class="faq-a">The <strong>Free plan</strong> gives you 10 AI-powered answers per month, access to all 5 law categories, and article references — enough for occasional legal lookups. The <strong>Professional plan ($19/mo)</strong> gives you unlimited answers, the full AI engine, saved answers, PDF downloads, and priority support. The <strong>NGO/Team plan ($49/mo)</strong> adds up to 5 team seats, HR compliance checklists, contract clause library, quarterly law briefings, and a dedicated account manager.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What is the difference between the free and paid plans? <span class="faq-icon">+</span></div><div class="faq-a">The <strong>Free plan</strong> gives you unlimited AI-powered questions, access to all 5 law categories, and article references — everything you need for regular legal lookups. The <strong>Professional plan ($19/mo)</strong> adds saved answers, PDF downloads, and priority email support. The <strong>NGO/Team plan ($49/mo)</strong> adds up to 5 team seats, HR compliance checklists, contract clause library, quarterly law briefings, and a dedicated account manager.</div></div>
 
-      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How does the monthly limit work on the free plan? <span class="faq-icon">+</span></div><div class="faq-a">Free accounts can submit up to <strong>10 AI questions per month</strong>. The counter resets automatically on the 1st of each calendar month — no action needed. Your usage is tracked in your dashboard under Monthly Usage. When you reach the limit, you can still browse the full Q&amp;A library for free; only new AI questions are paused until the reset or until you upgrade.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is XeerHub really free to use? <span class="faq-icon">+</span></div><div class="faq-a">Yes — the Free plan is genuinely unlimited. You can ask as many AI questions as you like, browse all 215+ verified Q&As across all 5 law areas, and receive article references with every answer. No credit card is required, and there is no monthly cap. Paid plans add team features, PDF downloads, saved answers, and priority support.</div></div>
 
       <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Who is XeerHub built for? <span class="faq-icon">+</span></div><div class="faq-a">XeerHub is designed for anyone working with Somali law — without needing a law degree to navigate it. Our users include: NGO and INGO compliance and HR officers, lawyers and legal researchers, business owners and founders registering or operating companies in Somalia, tax and finance professionals dealing with ITA 2025 and withholding obligations, and HR managers handling employment contracts, leave, and termination matters.</div></div>
 
@@ -1295,8 +1360,8 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
     <div style="margin-bottom:2rem"><div class="section-eyebrow">Dashboard</div><h1 style="font-size:2rem;font-family:'Playfair Display',serif">Welcome back</h1></div>
     <div class="dash-grid">
       <div>
-        <div class="plan-dash-card"><div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.4rem">Current Plan</div><div class="plan-dash-name">Free</div><div class="plan-dash-meta">10 free AI questions/month · Resets 1st of month</div><button class="btn btn-gold btn-sm" style="margin-top:1rem;width:100%;justify-content:center" onclick="showPage('pricing')">Upgrade to Professional</button></div>
-        <div class="card"><div style="text-align:center;padding:.5rem 0"><div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:1rem">Monthly Usage</div><svg width="100" height="100" viewBox="0 0 100 100" style="display:block;margin:0 auto"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--border)" stroke-width="8"/><circle id="usageRing" cx="50" cy="50" r="40" fill="none" stroke="var(--teal-light)" stroke-width="8" stroke-dasharray="251" stroke-dashoffset="251" stroke-linecap="round" transform="rotate(-90 50 50)"/></svg><div style="margin-top:.75rem"><div style="font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--teal-mid);font-weight:700"><span id="usageCount">0</span> / 10</div><div style="font-size:.75rem;color:var(--muted)">questions used this month · resets 1st of each month</div></div></div></div>
+        <div class="plan-dash-card"><div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.4rem">Current Plan</div><div class="plan-dash-name">Free</div><div class="plan-dash-meta">Unlimited AI questions · No monthly cap</div><button class="btn btn-gold btn-sm" style="margin-top:1rem;width:100%;justify-content:center" onclick="showPage('pricing')">Upgrade to Professional</button></div>
+        <div class="card"><div style="text-align:center;padding:.5rem 0"><div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:1rem">Questions Asked</div><svg width="100" height="100" viewBox="0 0 100 100" style="display:block;margin:0 auto"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--border)" stroke-width="8"/><circle id="usageRing" cx="50" cy="50" r="40" fill="none" stroke="var(--teal-light)" stroke-width="8" stroke-dasharray="251" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 50 50)"/></svg><div style="margin-top:.75rem"><div style="font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--teal-mid);font-weight:700"><span id="usageCount">0</span></div><div style="font-size:.75rem;color:var(--muted)">total questions asked — keep going, no limit!</div></div></div></div>
         <div class="card" style="margin-top:1rem"><div style="font-size:.72rem;color:var(--muted);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.08em">Quick Actions</div><div style="display:flex;flex-direction:column;gap:.5rem"><button class="btn btn-ghost btn-sm" style="justify-content:flex-start;gap:.6rem" onclick="showPage('ask')">✦ Ask a question</button><button class="btn btn-ghost btn-sm" style="justify-content:flex-start;gap:.6rem" onclick="showPage('library')">📚 Browse library</button><button class="btn btn-ghost btn-sm" style="justify-content:flex-start;gap:.6rem" onclick="showPage('pricing')">⬆ Upgrade plan</button></div></div>
       </div>
       <div>
@@ -1380,7 +1445,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
     <div style="background:var(--parchment);border:1px solid var(--border-strong);border-radius:var(--r);padding:2.5rem;text-align:center">
       <div class="section-eyebrow" style="justify-content:center">Join the platform</div>
       <h2 style="font-size:1.6rem;font-family:'Playfair Display',serif;margin-bottom:.75rem">Start with a free account</h2>
-      <p style="color:var(--muted);font-size:.95rem;max-width:480px;margin:0 auto 1.75rem">10 free AI answers per month. No credit card. Cancel anytime. Every answer cites official law.</p>
+      <p style="color:var(--muted);font-size:.95rem;max-width:480px;margin:0 auto 1.75rem">Unlimited free AI answers. No credit card. Every answer cites the exact article of official Somali law.</p>
       <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
         <button class="btn btn-gold btn-lg" onclick="openModal('signup')">Create free account →</button>
         <button class="btn btn-outline" onclick="showPage('contact')">Talk to us first</button>
@@ -2539,13 +2604,9 @@ function setSample(el){document.getElementById('questionInput').value=el.textCon
 const RAILWAY_API = 'https://xeerhub-api-production.up.railway.app/ask';
 const RAILWAY_TIMEOUT_MS = 12000;
 
-function renderAPIAnswer(question, lawArea, apiData, used) {
+function renderAPIAnswer(question, lawArea, apiData) {
   const area = document.getElementById('answerArea');
   const btn  = document.getElementById('askBtn');
-
-  const limitNote = used >= FREE_LIMIT
-    ? `<div style="margin-top:.6rem;padding:.6rem .75rem;background:var(--gold-pale);border-radius:var(--r-sm);border:1px solid var(--gold-border);font-size:.8rem;color:var(--gold-dark)">🔒 Monthly limit reached. <button onclick="showPage('pricing')" style="background:none;border:none;color:var(--gold-dark);text-decoration:underline;cursor:pointer;font-size:.8rem;font-weight:600">Upgrade for unlimited →</button></div>`
-    : `<div style="font-size:.75rem;color:var(--muted);margin-top:.4rem">${FREE_LIMIT - used} free question${FREE_LIMIT - used === 1 ? '' : 's'} remaining this month</div>`;
 
   const citationsHtml = (apiData.citations || []).map(c => {
     const pct = c.similarity ? Math.round(c.similarity * 100) : null;
@@ -2569,27 +2630,22 @@ function renderAPIAnswer(question, lawArea, apiData, used) {
       <div>${citationsHtml}</div>
     </div>` : ''}
     <div style="font-size:.72rem;color:var(--gold-dark);margin-top:.75rem;padding-top:.6rem;border-top:1px solid var(--border)">⚠ Legal information only — not legal advice. Consult a qualified Somali lawyer for your specific situation.</div>
-    ${limitNote}
   </div>
   <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap">
     <button class="btn btn-ghost btn-sm" onclick="showToast('Saved ✓','success')">💾 Save answer</button>
     <button class="btn btn-ghost btn-sm" onclick="document.getElementById('questionInput').value='';document.getElementById('answerArea').innerHTML=''">✕ Clear</button>
   </div>`;
 
-  if (used < FREE_LIMIT) { btn.disabled = false; btn.innerHTML = 'Get Answer →'; btn.style.background = ''; }
+  btn.disabled = false; btn.innerHTML = 'Get Answer →'; btn.style.background = '';
 }
 
-function runLocalEngine(question, lawArea, used) {
+function runLocalEngine(question, lawArea) {
   const area = document.getElementById('answerArea');
   const btn  = document.getElementById('askBtn');
 
   const relevant = retrieveRelevant(question, lawArea, 8);
   const result   = synthesiseAnswer(question, relevant);
   const usedRefs = result ? result.refs : [];
-
-  const limitNote = used >= FREE_LIMIT
-    ? `<div style="margin-top:.6rem;padding:.6rem .75rem;background:var(--gold-pale);border-radius:var(--r-sm);border:1px solid var(--gold-border);font-size:.8rem;color:var(--gold-dark)">🔒 Monthly limit reached. <button onclick="showPage('pricing')" style="background:none;border:none;color:var(--gold-dark);text-decoration:underline;cursor:pointer;font-size:.8rem;font-weight:600">Upgrade for unlimited →</button></div>`
-    : `<div style="font-size:.75rem;color:var(--muted);margin-top:.4rem">${FREE_LIMIT - used} free question${FREE_LIMIT - used === 1 ? '' : 's'} remaining this month</div>`;
 
   if (!result) {
     area.innerHTML = `<div class="answer-card fade-in">
@@ -2604,7 +2660,6 @@ function runLocalEngine(question, lawArea, used) {
         </ul>
       </div>
       <div style="font-size:.72rem;color:var(--muted);margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--border)">⚠ Legal information only — consult a qualified Somali lawyer for specific advice.</div>
-      ${limitNote}
     </div>`;
   } else {
     const refsHtml = result.refs.map(r => `<span style="display:inline-block;background:var(--teal-pale);color:var(--teal-deep);font-family:'DM Mono',monospace;font-size:.7rem;padding:.2rem .55rem;border-radius:100px;border:1px solid var(--border-strong);margin:.15rem">${r}</span>`).join(' ');
@@ -2622,7 +2677,6 @@ function runLocalEngine(question, lawArea, used) {
         🔎 Matched <strong>${result.count}</strong> verified entr${result.count===1?'y':'ies'} · Zero hallucination — answers sourced exclusively from the XeerHub knowledge base
       </div>
       <div style="font-size:.72rem;color:var(--gold-dark);margin-top:.4rem">⚠ Legal information only — not legal advice. Consult a qualified Somali lawyer for your specific situation.</div>
-      ${limitNote}
       ${renderConflictAlerts(getConflictAlertsForRefs(usedRefs))}
       ${renderAINote(getAINoteForRefs(usedRefs))}
     </div>
@@ -2631,7 +2685,7 @@ function runLocalEngine(question, lawArea, used) {
       <button class="btn btn-ghost btn-sm" onclick="document.getElementById('questionInput').value='';document.getElementById('answerArea').innerHTML=''">✕ Clear</button>
     </div>`;
   }
-  if (used < FREE_LIMIT) { btn.disabled = false; btn.innerHTML = 'Get Answer →'; btn.style.background = ''; }
+  btn.disabled = false; btn.innerHTML = 'Get Answer →'; btn.style.background = '';
 }
 
 // ── CLIENT-SIDE ANSWER ENGINE ──────────────────────────────────
@@ -2752,69 +2806,32 @@ function synthesiseAnswer(question,relevant){
   return {body,refs:usedRefs,count:relevant.length,isDirect};
 }
 
-// ── QUOTA SYSTEM ─────────────────────────────────────────────
-const FREE_LIMIT = 20;
-
-function getQuotaKey(){
-  const now = new Date();
-  return 'xeerhub_q_' + now.getFullYear() + '_' + (now.getMonth()+1);
-}
-function getQCount(){ return parseInt(localStorage.getItem(getQuotaKey()) || '0'); }
-function incrementQCount(){
-  const key = getQuotaKey();
-  const next = getQCount() + 1;
-  localStorage.setItem(key, String(next));
-  return next;
-}
+// ── USAGE COUNTER (display only — no limits) ──────────────────
 function updateUsageUI(){
-  const used = getQCount();
-  const pct = Math.min(used / FREE_LIMIT, 1);
-  const offset = (251 - pct * 251).toFixed(1);
-  const ring = document.getElementById('usageRing');
   const countEl = document.getElementById('usageCount');
-  const statEl = document.getElementById('statQAsked');
-  if(ring){ ring.setAttribute('stroke-dashoffset', offset); ring.setAttribute('stroke', used >= FREE_LIMIT ? 'var(--danger)' : 'var(--teal-light)'); }
-  if(countEl) countEl.textContent = used;
-  if(statEl) statEl.textContent = used;
+  const statEl  = document.getElementById('statQAsked');
+  const count   = parseInt(localStorage.getItem('xeerhub_ask_count') || '0');
+  if(countEl) countEl.textContent = count;
+  if(statEl)  statEl.textContent  = count;
   const btn = document.getElementById('askBtn');
-  if(btn){
-    if(used >= FREE_LIMIT){ btn.disabled=true; btn.innerHTML='🔒 Limit reached — Upgrade to continue'; btn.style.background='var(--muted)'; }
-    else { btn.disabled=false; btn.innerHTML='Get Answer →'; btn.style.background=''; }
-  }
-}
-function showLimitBanner(){
-  const area = document.getElementById('answerArea');
-  if(!area) return;
-  area.innerHTML = `<div class="answer-card fade-in" style="border-color:var(--gold);background:var(--gold-pale)">
-    <div class="answer-header" style="background:var(--gold-dim);border-bottom-color:var(--gold-border)">
-      <span class="answer-header-icon">🔒</span>
-      <span class="answer-header-text" style="color:var(--gold-dark)">Monthly limit reached</span>
-    </div>
-    <div class="answer-body">
-      <p style="color:var(--ink);font-weight:500;margin-bottom:.5rem">You've used all 10 free AI questions for this month.</p>
-      <p style="color:var(--muted);font-size:.9rem">Your limit resets on the 1st of next month, or upgrade to Professional for unlimited access.</p>
-    </div>
-    <div style="padding:1rem 1.5rem;display:flex;gap:.75rem;flex-wrap:wrap">
-      <button class="btn btn-gold btn-sm" onclick="showPage('pricing')">Upgrade to Professional →</button>
-      <button class="btn btn-ghost btn-sm" onclick="showPage('library')">Browse free Q&A library</button>
-    </div>
-  </div>`;
+  if(btn){ btn.disabled=false; btn.innerHTML='Get Answer →'; btn.style.background=''; }
 }
 
 function submitQuestion(){
   const question = document.getElementById('questionInput').value.trim();
   const lawArea  = document.getElementById('lawAreaSelect').value;
   if (!question) { showToast('Please enter a question', 'error'); return; }
-  if (getQCount() >= FREE_LIMIT) { showLimitBanner(); return; }
+
+  // Increment display counter (no gate)
+  const count = parseInt(localStorage.getItem('xeerhub_ask_count') || '0') + 1;
+  localStorage.setItem('xeerhub_ask_count', String(count));
+  updateUsageUI();
 
   const btn  = document.getElementById('askBtn');
   const area = document.getElementById('answerArea');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> Searching...';
   area.innerHTML = '';
-
-  const used = incrementQCount();
-  updateUsageUI();
 
   const controller = new AbortController();
   const timeoutId  = setTimeout(() => controller.abort(), RAILWAY_TIMEOUT_MS);
@@ -2827,12 +2844,12 @@ function submitQuestion(){
     })
     .then(data => {
       if (!data || !data.answer || data.answer.trim() === '') throw new Error('empty response');
-      renderAPIAnswer(question, lawArea, data, used);
+      renderAPIAnswer(question, lawArea, data);
     })
     .catch(err => {
       clearTimeout(timeoutId);
       console.warn('[XeerHub] Railway unavailable, using local engine:', err.message);
-      runLocalEngine(question, lawArea, used);
+      runLocalEngine(question, lawArea);
     });
 }
 
