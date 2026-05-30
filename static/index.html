@@ -2610,19 +2610,24 @@ function setSample(el){document.getElementById('questionInput').value=el.textCon
 //  Fallback: local keyword engine below (zero changes to it)
 // ══════════════════════════════════════════════════════════════
 const RAILWAY_API = 'https://xeerhub-api-production.up.railway.app/ask';
-// 25 s — enough time for a Railway cold-start (typically 10–15 s)
-const RAILWAY_TIMEOUT_MS = 25000;
+// 15 s — tighter ceiling; Railway should be warm after the load-time ping
+const RAILWAY_TIMEOUT_MS = 15000;
 
 // ── Warm up Railway the moment the page loads ─────────────────
-// Sends a lightweight ping so the server is awake before the
-// user submits their first question (eliminates cold-start delay).
+// Dual ping: one immediately, one after 8 s — keeps the server
+// hot across the common "land → read → ask" user journey.
 (function warmUpRailway() {
-  try {
-    fetch(RAILWAY_API + '?q=ping&warmup=1', {
-      method: 'GET',
-      signal: AbortSignal.timeout ? AbortSignal.timeout(8000) : (()=>{const c=new AbortController();setTimeout(()=>c.abort(),8000);return c.signal;})()
-    }).catch(() => {}); // silently ignore — this is best-effort only
-  } catch(e) {}
+  function ping() {
+    try {
+      fetch(RAILWAY_API + '?q=ping&warmup=1', {
+        method: 'GET',
+        signal: AbortSignal.timeout ? AbortSignal.timeout(6000)
+          : (()=>{ const c=new AbortController(); setTimeout(()=>c.abort(),6000); return c.signal; })()
+      }).catch(()=>{});
+    } catch(e) {}
+  }
+  ping();                          // immediate — starts cold-start clock
+  setTimeout(ping, 8000);         // second ping — re-warms if first timed out
 })();
 
 function renderAPIAnswer(question, lawArea, apiData) {
@@ -2842,6 +2847,37 @@ function updateUsageUI(){
   if(btn){ btn.disabled=false; btn.innerHTML='Get Answer →'; btn.style.background=''; }
 }
 
+// ── LOADING STATUS MESSAGES ──────────────────────────────────
+// Cycles through messages while the AI request is in-flight,
+// so the user knows something is happening at every stage.
+const AI_STATUS_MESSAGES = [
+  'Searching Somali legal database…',
+  'Matching relevant provisions…',
+  'Analysing with AI…',
+  'Composing answer with citations…',
+];
+function startStatusCycle(areaEl) {
+  let i = 0;
+  const el = document.createElement('div');
+  el.id = 'aiStatusMsg';
+  el.style.cssText = 'display:flex;align-items:center;gap:.6rem;padding:.6rem .9rem;background:var(--teal-pale);border:1px solid var(--border-strong);border-radius:var(--r-sm);font-size:.82rem;color:var(--teal-deep);margin-bottom:.75rem;transition:opacity .3s';
+  el.innerHTML = `<span class="spinner" style="width:14px;height:14px;border-width:1.5px;flex-shrink:0"></span><span id="aiStatusText">${AI_STATUS_MESSAGES[0]}</span>`;
+  areaEl.appendChild(el);
+
+  const interval = setInterval(() => {
+    i = (i + 1) % AI_STATUS_MESSAGES.length;
+    const txt = document.getElementById('aiStatusText');
+    if (txt) { txt.style.opacity='0'; setTimeout(()=>{ if(txt){ txt.textContent=AI_STATUS_MESSAGES[i]; txt.style.opacity='1'; } },250); }
+    else clearInterval(interval);
+  }, 1800);
+  return interval;
+}
+function stopStatusCycle(intervalId) {
+  clearInterval(intervalId);
+  const el = document.getElementById('aiStatusMsg');
+  if (el) el.remove();
+}
+
 function submitQuestion(){
   const question = document.getElementById('questionInput').value.trim();
   const lawArea  = document.getElementById('lawAreaSelect').value;
@@ -2855,43 +2891,40 @@ function submitQuestion(){
   const btn  = document.getElementById('askBtn');
   const area = document.getElementById('answerArea');
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Searching...';
+  btn.innerHTML = '<span class="spinner"></span> Asking AI…';
+  btn.style.background = 'var(--teal-mid)';
   area.innerHTML = '';
 
-  // Step 1 — show local answer instantly (no network, no wait)
-  setTimeout(() => {
-    runLocalEngine(question, lawArea);
-    // Button re-enabled immediately after local answer shown — user is never blocked
+  // Show animated status strip immediately — user sees activity at once
+  const statusInterval = startStatusCycle(area);
 
-    // Step 2 — race Railway in the background.
-    // Show a subtle "upgrading" strip so the user knows more is coming.
-    const upgradeStrip = document.createElement('div');
-    upgradeStrip.id = 'railwayUpgradeStrip';
-    upgradeStrip.style.cssText = 'display:flex;align-items:center;gap:.5rem;margin-top:.6rem;padding:.45rem .8rem;background:var(--teal-pale);border:1px solid var(--border-strong);border-radius:var(--r-sm);font-size:.78rem;color:var(--teal-deep)';
-    upgradeStrip.innerHTML = '<span class="spinner" style="width:14px;height:14px;border-width:1.5px"></span> <span>Connecting to AI engine for a deeper answer…</span>';
-    area.appendChild(upgradeStrip);
+  const controller = new AbortController();
+  const timeoutId  = setTimeout(() => controller.abort(), RAILWAY_TIMEOUT_MS);
 
-    const controller = new AbortController();
-    const timeoutId  = setTimeout(() => controller.abort(), RAILWAY_TIMEOUT_MS);
-
-    fetch(RAILWAY_API + '?q=' + encodeURIComponent(question), { signal: controller.signal })
-      .then(res => {
-        clearTimeout(timeoutId);
-        if (!res.ok) throw new Error('API ' + res.status);
-        return res.json();
-      })
-      .then(data => {
-        if (!data || !data.answer || data.answer.trim() === '') throw new Error('empty response');
-        renderAPIAnswer(question, lawArea, data);
-        showToast('✦ AI answer ready', 'success');
-      })
-      .catch(err => {
-        clearTimeout(timeoutId);
-        const strip = document.getElementById('railwayUpgradeStrip');
-        if (strip) strip.remove();
-        console.warn('[XeerHub] Railway unavailable, keeping local answer:', err.message);
-      });
-  }, 30);
+  fetch(RAILWAY_API + '?q=' + encodeURIComponent(question), { signal: controller.signal })
+    .then(res => {
+      clearTimeout(timeoutId);
+      if (!res.ok) throw new Error('API ' + res.status);
+      return res.json();
+    })
+    .then(data => {
+      stopStatusCycle(statusInterval);
+      if (!data || !data.answer || data.answer.trim() === '') throw new Error('empty response');
+      renderAPIAnswer(question, lawArea, data);
+      showToast('✦ AI answer ready', 'success');
+    })
+    .catch(err => {
+      clearTimeout(timeoutId);
+      stopStatusCycle(statusInterval);
+      console.warn('[XeerHub] Railway unavailable, falling back to local engine:', err.message);
+      // Graceful fallback — run local keyword engine and show a note
+      runLocalEngine(question, lawArea);
+      // Add a subtle note that full AI is temporarily unavailable
+      const note = document.createElement('div');
+      note.style.cssText = 'margin-top:.5rem;padding:.4rem .75rem;background:var(--gold-pale);border:1px solid var(--gold-border);border-radius:var(--r-sm);font-size:.75rem;color:var(--gold-dark)';
+      note.textContent = '⚡ Showing local knowledge base result — AI engine temporarily unavailable.';
+      area.appendChild(note);
+    });
 }
 
 
@@ -3003,9 +3036,9 @@ document.addEventListener('DOMContentLoaded',()=>{
         }
       });
   }
-  // First probe at 4 s — warm-up ping already fired at page load,
+  // First probe at 2 s — dual warm-up pings already fired at page load,
   // so Railway should be well into its start-up sequence by now.
-  setTimeout(() => checkRailwayHealth(1), 4000);
+  setTimeout(() => checkRailwayHealth(1), 2000);
 });
 </script>
 </body>
