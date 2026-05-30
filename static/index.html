@@ -1176,7 +1176,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 
     <!-- Question form -->
     <div class="container" style="padding-top:2rem;padding-bottom:2rem">
-      <div id="noKeyBanner" class="no-key-banner" style="display:none"><span class="no-key-banner-icon">⚠️</span><div class="no-key-banner-text"><strong>AI temporarily unavailable</strong> — You can still browse the full Q&amp;A library below.</div></div>
+      <div id="noKeyBanner" class="no-key-banner" style="display:none" data-managed="1"><span class="no-key-banner-icon">⚠️</span><div class="no-key-banner-text"><strong>AI temporarily unavailable</strong> — You can still browse the full Q&amp;A library below.</div></div>
       <div class="ask-card">
         <div class="ask-select-row"><label class="label">Law area (optional — helps narrow the search)</label><select class="select" id="lawAreaSelect"><option value="General">All areas / General</option><option value="Labor Law">Labor Law</option><option value="Foreign Investment Law">Foreign Investment Law</option><option value="Income Tax Law">Income Tax Law</option><option value="Environmental Law">Environmental Law (EPMA 2024)</option><option value="Data Protection Law">Data Protection Act</option></select></div>
         <label class="label" style="margin-top:.75rem">Your question <span style="color:var(--teal-mid);font-weight:400;font-size:.78rem">— write it in plain English, as if asking a colleague</span></label>
@@ -2602,11 +2602,28 @@ function setSample(el){document.getElementById('questionInput').value=el.textCon
 //  Fallback: local keyword engine below (zero changes to it)
 // ══════════════════════════════════════════════════════════════
 const RAILWAY_API = 'https://xeerhub-api-production.up.railway.app/ask';
-const RAILWAY_TIMEOUT_MS = 5000;
+// 25 s — enough time for a Railway cold-start (typically 10–15 s)
+const RAILWAY_TIMEOUT_MS = 25000;
+
+// ── Warm up Railway the moment the page loads ─────────────────
+// Sends a lightweight ping so the server is awake before the
+// user submits their first question (eliminates cold-start delay).
+(function warmUpRailway() {
+  try {
+    fetch(RAILWAY_API + '?q=ping&warmup=1', {
+      method: 'GET',
+      signal: AbortSignal.timeout ? AbortSignal.timeout(8000) : (()=>{const c=new AbortController();setTimeout(()=>c.abort(),8000);return c.signal;})()
+    }).catch(() => {}); // silently ignore — this is best-effort only
+  } catch(e) {}
+})();
 
 function renderAPIAnswer(question, lawArea, apiData) {
   const area = document.getElementById('answerArea');
   const btn  = document.getElementById('askBtn');
+
+  // Remove the "upgrading" indicator strip if present
+  const upgradeStrip = document.getElementById('railwayUpgradeStrip');
+  if (upgradeStrip) upgradeStrip.remove();
 
   const citationsHtml = (apiData.citations || []).map(c => {
     const pct = c.similarity ? Math.round(c.similarity * 100) : null;
@@ -2833,17 +2850,23 @@ function submitQuestion(){
   btn.innerHTML = '<span class="spinner"></span> Searching...';
   area.innerHTML = '';
 
-  // Step 1: Show local answer instantly (zero network wait).
-  // Small tick so the spinner renders before synchronous work begins.
+  // Step 1 — show local answer instantly (no network, no wait)
   setTimeout(() => {
     runLocalEngine(question, lawArea);
+    // Button re-enabled immediately after local answer shown — user is never blocked
 
-    // Step 2: Race the Railway API in the background.
-    // If it responds within RAILWAY_TIMEOUT_MS we silently upgrade the answer.
+    // Step 2 — race Railway in the background.
+    // Show a subtle "upgrading" strip so the user knows more is coming.
+    const upgradeStrip = document.createElement('div');
+    upgradeStrip.id = 'railwayUpgradeStrip';
+    upgradeStrip.style.cssText = 'display:flex;align-items:center;gap:.5rem;margin-top:.6rem;padding:.45rem .8rem;background:var(--teal-pale);border:1px solid var(--border-strong);border-radius:var(--r-sm);font-size:.78rem;color:var(--teal-deep)';
+    upgradeStrip.innerHTML = '<span class="spinner" style="width:14px;height:14px;border-width:1.5px"></span> <span>Connecting to AI engine for a deeper answer…</span>';
+    area.appendChild(upgradeStrip);
+
     const controller = new AbortController();
     const timeoutId  = setTimeout(() => controller.abort(), RAILWAY_TIMEOUT_MS);
 
-    fetch(`${RAILWAY_API}?q=${encodeURIComponent(question)}`, { signal: controller.signal })
+    fetch(RAILWAY_API + '?q=' + encodeURIComponent(question), { signal: controller.signal })
       .then(res => {
         clearTimeout(timeoutId);
         if (!res.ok) throw new Error('API ' + res.status);
@@ -2851,12 +2874,13 @@ function submitQuestion(){
       })
       .then(data => {
         if (!data || !data.answer || data.answer.trim() === '') throw new Error('empty response');
-        // Upgrade the displayed answer with the richer API result
         renderAPIAnswer(question, lawArea, data);
+        showToast('✦ AI answer ready', 'success');
       })
       .catch(err => {
         clearTimeout(timeoutId);
-        // Local answer is already showing — nothing more to do
+        const strip = document.getElementById('railwayUpgradeStrip');
+        if (strip) strip.remove();
         console.warn('[XeerHub] Railway unavailable, keeping local answer:', err.message);
       });
   }, 30);
@@ -2942,6 +2966,23 @@ document.addEventListener('DOMContentLoaded',()=>{
   updateUsageUI();
   const qi=document.getElementById('questionInput');
   if(qi)qi.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.ctrlKey)submitQuestion();});
+
+  // ── Railway health-check ──────────────────────────────────────
+  // Probes the backend after a short delay so the warm-up ping has
+  // already fired first (giving Railway a head-start to wake up).
+  // Shows the "AI temporarily unavailable" banner ONLY if the server
+  // is genuinely unreachable; hides it (or keeps it hidden) otherwise.
+  function checkRailwayHealth() {
+    const banner = document.getElementById('noKeyBanner');
+    const ctrl   = new AbortController();
+    const tid    = setTimeout(() => ctrl.abort(), 6000);
+    fetch(RAILWAY_API + '?q=ping&warmup=1', { signal: ctrl.signal })
+      .then(res => { clearTimeout(tid); if (banner) banner.style.display = 'none'; })
+      .catch(() => { clearTimeout(tid); if (banner) banner.style.display = ''; });
+  }
+  // Run health-check 4 seconds after load — by then the warm-up ping
+  // will have already hit the server and Railway should be waking up.
+  setTimeout(checkRailwayHealth, 4000);
 });
 </script>
 </body>
