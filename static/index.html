@@ -2968,21 +2968,36 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(qi)qi.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.ctrlKey)submitQuestion();});
 
   // ── Railway health-check ──────────────────────────────────────
-  // Probes the backend after a short delay so the warm-up ping has
-  // already fired first (giving Railway a head-start to wake up).
-  // Shows the "AI temporarily unavailable" banner ONLY if the server
-  // is genuinely unreachable; hides it (or keeps it hidden) otherwise.
-  function checkRailwayHealth() {
+  // Always hide the banner immediately on load — it must NEVER show
+  // by default. Only show it if Railway is confirmed unreachable after
+  // two attempts (first at 4 s, retry at 18 s to cover cold-starts).
+  const _banner = document.getElementById('noKeyBanner');
+  if (_banner) _banner.style.display = 'none'; // belt-and-suspenders hide
+
+  function checkRailwayHealth(attempt) {
     const banner = document.getElementById('noKeyBanner');
     const ctrl   = new AbortController();
-    const tid    = setTimeout(() => ctrl.abort(), 6000);
+    const tid    = setTimeout(() => ctrl.abort(), 8000);
     fetch(RAILWAY_API + '?q=ping&warmup=1', { signal: ctrl.signal })
-      .then(res => { clearTimeout(tid); if (banner) banner.style.display = 'none'; })
-      .catch(() => { clearTimeout(tid); if (banner) banner.style.display = ''; });
+      .then(res => {
+        clearTimeout(tid);
+        // Railway responded — ensure banner stays hidden
+        if (banner) banner.style.display = 'none';
+      })
+      .catch(() => {
+        clearTimeout(tid);
+        if (attempt === 1) {
+          // First failure — Railway may still be cold-starting. Retry in 14 s.
+          setTimeout(() => checkRailwayHealth(2), 14000);
+        } else {
+          // Second failure — Railway is genuinely down. Show the banner.
+          if (banner) banner.style.display = '';
+        }
+      });
   }
-  // Run health-check 4 seconds after load — by then the warm-up ping
-  // will have already hit the server and Railway should be waking up.
-  setTimeout(checkRailwayHealth, 4000);
+  // First probe at 4 s — warm-up ping already fired at page load,
+  // so Railway should be well into its start-up sequence by now.
+  setTimeout(() => checkRailwayHealth(1), 4000);
 });
 </script>
 </body>
