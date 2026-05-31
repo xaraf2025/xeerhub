@@ -1513,6 +1513,23 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 <!-- ══════════════════════════════════════════════
      BLOG PAGE
 ══════════════════════════════════════════════ -->
+<!-- ══ BLOG ARTICLE MODAL ══ -->
+<div id="modal-blog-article" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(10,30,24,0.72);backdrop-filter:blur(6px);overflow-y:auto;padding:2rem 1rem" onclick="if(event.target===this)closeBlogModal()">
+  <div style="max-width:760px;margin:0 auto;background:var(--cream);border-radius:var(--r);box-shadow:0 24px 80px rgba(0,0,0,0.25);overflow:hidden">
+    <div id="blog-modal-header" style="padding:2.5rem 2.5rem 1.5rem;border-bottom:1px solid var(--border);position:relative">
+      <button onclick="closeBlogModal()" style="position:absolute;top:1.25rem;right:1.25rem;background:var(--parchment);border:1px solid var(--border);border-radius:50%;width:36px;height:36px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted)" aria-label="Close">✕</button>
+      <div id="blog-modal-category" style="margin-bottom:.9rem"></div>
+      <h1 id="blog-modal-title" style="font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);line-height:1.2;margin-bottom:.75rem;color:var(--ink)"></h1>
+      <div id="blog-modal-meta" style="display:flex;gap:1.25rem;font-size:.8rem;color:var(--muted);flex-wrap:wrap"></div>
+    </div>
+    <div id="blog-modal-body" style="padding:2.5rem;font-size:.975rem;line-height:1.85;color:var(--ink)"></div>
+    <div style="padding:1.5rem 2.5rem 2.5rem;border-top:1px solid var(--border);background:var(--parchment)">
+      <div style="font-size:.78rem;color:var(--muted);margin-bottom:.5rem;font-style:italic">⚠ This article is legal information, not legal advice. Always consult a qualified Somali lawyer for your specific situation.</div>
+      <button onclick="closeBlogModal();showPage('ask')" class="btn btn-primary btn-sm" style="margin-top:.5rem">Ask AI a related question →</button>
+    </div>
+  </div>
+</div>
+
 <div class="page" id="page-blog">
   <div class="blog-page"><div class="container">
     <div style="margin-bottom:3rem">
@@ -1521,25 +1538,29 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <p style="color:var(--muted);font-size:.95rem;max-width:500px">Plain-English explainers on Somali business law, written for professionals who need clarity, not jargon.</p>
     </div>
     <div class="blog-grid">
-      <div class="blog-card featured" onclick="showToast('Full article coming soon — subscribe for updates','success')">
+      <div class="blog-card featured" onclick="openBlog('income-tax-2025')" style="cursor:pointer">
         <div class="blog-thumb featured" style="background:linear-gradient(135deg,var(--parchment),var(--teal-pale))"><div class="blog-category" style="background:var(--primary-dim);color:var(--teal-deep);border:1px solid var(--border)">🔷 Income Tax Law</div></div>
-        <div class="blog-card-body"><div class="blog-title" style="font-size:1.2rem">Somalia's Income Tax Act 2025 explained: what businesses need to know</div><div class="blog-excerpt">A plain-English guide to the ITA 2025 and Regulation No. 0142-2025 — covering the Presumptive Tax Regime, corporate tax rates, withholding obligations, and the General Investment Allowance.</div><div class="blog-meta"><span>📅 January 2026</span><span>⏱ 8 min read</span></div></div>
+        <div class="blog-card-body"><div class="blog-title" style="font-size:1.2rem">Somalia's Income Tax Act 2025 explained: what businesses need to know</div><div class="blog-excerpt">A plain-English guide to the ITA 2025 and Regulation No. 0142-2025 — covering the Presumptive Tax Regime, corporate tax rates, withholding obligations, and the General Investment Allowance.</div><div class="blog-meta"><span>📅 January 2026</span><span>⏱ 8 min read</span><span style="color:var(--teal-mid);font-weight:500">Read article →</span></div></div>
       </div>
-      <div class="blog-card" onclick="showToast('Full article coming soon — subscribe for updates','success')">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,var(--parchment),var(--labor-bg))"><div class="blog-category" style="background:var(--labor-bg);color:var(--labor);border:1px solid rgba(29,122,94,.25)">⚖️ Labor Law</div></div>
-        <div class="blog-card-body"><div class="blog-title">What every NGO needs to know about Somali employment contracts</div><div class="blog-excerpt">Local staff protections, termination rules, and the 10 contract clauses every INGO must include under the Labour Code.</div><div class="blog-meta"><span>📅 December 2025</span><span>⏱ 6 min read</span></div></div>
+      <div class="blog-card" onclick="openBlog('ngo-employment-contracts')" style="cursor:pointer">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,var(--parchment),var(--labor-bg))"><div class="blog-category" style="background:var(--labor-bg);color:var(--labor);border:1px solid rgba(29,122,94,.25)">⚖️ Labour Law</div></div>
+        <div class="blog-card-body"><div class="blog-title">What every NGO needs to know about Somali employment contracts</div><div class="blog-excerpt">Local staff protections, termination rules, and the 10 contract clauses every INGO must include under the Labour Code.</div><div class="blog-meta"><span>📅 December 2025</span><span>⏱ 6 min read</span><span style="color:var(--teal-mid);font-weight:500">Read article →</span></div></div>
       </div>
-      <div class="blog-card" onclick="showToast('Full article coming soon — subscribe for updates','success')">
+      <div class="blog-card" onclick="openBlog('foreign-investor-protections')" style="cursor:pointer">
         <div class="blog-thumb" style="background:linear-gradient(135deg,var(--parchment),var(--invest-bg))"><div class="blog-category" style="background:var(--invest-bg);color:var(--invest);border:1px solid var(--gold-border)">💰 Investment Law</div></div>
-        <div class="blog-card-body"><div class="blog-title">Foreign investor protections in Somalia: what Article 18 actually guarantees</div><div class="blog-excerpt">A plain-English breakdown of Somalia's expropriation protections, profit repatriation rights, and ICSID arbitration access.</div><div class="blog-meta"><span>📅 November 2025</span><span>⏱ 5 min read</span></div></div>
+        <div class="blog-card-body"><div class="blog-title">Foreign investor protections in Somalia: what Article 18 actually guarantees</div><div class="blog-excerpt">A plain-English breakdown of Somalia's expropriation protections, profit repatriation rights, and ICSID arbitration access.</div><div class="blog-meta"><span>📅 November 2025</span><span>⏱ 5 min read</span><span style="color:var(--teal-mid);font-weight:500">Read article →</span></div></div>
       </div>
-      <div class="blog-card" onclick="showToast('Full article coming soon — subscribe for updates','success')">
+      <div class="blog-card" onclick="openBlog('epma-2024-business')" style="cursor:pointer">
         <div class="blog-thumb" style="background:linear-gradient(135deg,var(--parchment),var(--env-bg))"><div class="blog-category" style="background:var(--env-bg);color:var(--env);border:1px solid rgba(22,163,74,.2)">🌿 Environmental Law</div></div>
-        <div class="blog-card-body"><div class="blog-title">EPMA 2024: what Somalia's new environmental law means for your business</div><div class="blog-excerpt">When do you need an environmental impact assessment? What permits are required? A practical guide to compliance under the Environmental Protection &amp; Management Act 2024.</div><div class="blog-meta"><span>📅 October 2025</span><span>⏱ 7 min read</span></div></div>
+        <div class="blog-card-body"><div class="blog-title">EPMA 2024: what Somalia's new environmental law means for your business</div><div class="blog-excerpt">When do you need an environmental impact assessment? What permits are required? A practical guide to compliance under the Environmental Protection &amp; Management Act 2024.</div><div class="blog-meta"><span>📅 October 2025</span><span>⏱ 7 min read</span><span style="color:var(--teal-mid);font-weight:500">Read article →</span></div></div>
       </div>
-      <div class="blog-card" onclick="showToast('Full article coming soon — subscribe for updates','success')">
+      <div class="blog-card" onclick="openBlog('hr-compliance-checklist')" style="cursor:pointer">
         <div class="blog-thumb" style="background:linear-gradient(135deg,var(--parchment),var(--tax-bg))"><div class="blog-category" style="background:var(--labor-bg);color:var(--labor);border:1px solid rgba(29,122,94,.25)">⚖️ Labour Law</div></div>
-        <div class="blog-card-body"><div class="blog-title">Maternity leave, overtime, and public holidays: Somali HR compliance checklist</div><div class="blog-excerpt">The 15 most common Labour Code violations we see in Mogadishu — and how to fix them before they become disputes.</div><div class="blog-meta"><span>📅 September 2025</span><span>⏱ 4 min read</span></div></div>
+        <div class="blog-card-body"><div class="blog-title">Maternity leave, overtime, and public holidays: Somali HR compliance checklist</div><div class="blog-excerpt">The 15 most common Labour Code violations we see in Mogadishu — and how to fix them before they become disputes.</div><div class="blog-meta"><span>📅 September 2025</span><span>⏱ 4 min read</span><span style="color:var(--teal-mid);font-weight:500">Read article →</span></div></div>
+      </div>
+      <div class="blog-card" onclick="openBlog('data-protection-act')" style="cursor:pointer">
+        <div class="blog-thumb" style="background:linear-gradient(135deg,var(--parchment),var(--data-bg))"><div class="blog-category" style="background:var(--data-bg);color:var(--data);border:1px solid rgba(99,102,241,.2)">🔐 Data Protection</div></div>
+        <div class="blog-card-body"><div class="blog-title">Somalia's Data Protection Act: what organisations processing personal data must do now</div><div class="blog-excerpt">Data subject rights, consent obligations, cross-border transfer rules, and penalties — a compliance guide for NGOs, banks, and tech companies operating in Somalia.</div><div class="blog-meta"><span>📅 August 2025</span><span>⏱ 6 min read</span><span style="color:var(--teal-mid);font-weight:500">Read article →</span></div></div>
       </div>
     </div>
     <div class="blog-subscribe-strip">
@@ -2639,10 +2660,27 @@ function renderAPIAnswer(question, lawArea, apiData) {
   const upgradeStrip = document.getElementById('railwayUpgradeStrip');
   if (upgradeStrip) upgradeStrip.remove();
 
-  const citationsHtml = (apiData.citations || []).map(c => {
+  // Server returns citations as { laws: [...], blogs: [...] }
+  const cit = apiData.citations || {};
+  const lawCits  = Array.isArray(cit.laws)  ? cit.laws  : [];
+  const blogCits = Array.isArray(cit.blogs) ? cit.blogs : [];
+
+  const lawCitsHtml = lawCits.map(c => {
     const pct = c.similarity ? Math.round(c.similarity * 100) : null;
     return `<span style="display:inline-flex;align-items:center;gap:.35rem;background:var(--teal-pale);color:var(--teal-deep);font-family:'DM Mono',monospace;font-size:.7rem;padding:.2rem .65rem;border-radius:100px;border:1px solid var(--border-strong);margin:.15rem">${c.law}${c.article ? ' · Art. ' + c.article : ''}${pct ? ' <span style="opacity:.65">'+pct+'%</span>' : ''}</span>`;
-  }).join(' ');
+  }).join('');
+
+  const blogCitsHtml = blogCits.map(b => {
+    const pct = b.similarity ? Math.round(b.similarity * 100) : null;
+    const slug = b.slug || '';
+    return `<span onclick="openBlogBySlug('${slug}')" style="display:inline-flex;align-items:center;gap:.35rem;background:var(--gold-pale);color:var(--gold-dark);font-size:.7rem;padding:.2rem .65rem;border-radius:100px;border:1px solid var(--gold-border);margin:.15rem;cursor:pointer" title="Read full article">📝 ${b.title}${pct ? ' <span style="opacity:.65">'+pct+'%</span>' : ''}</span>`;
+  }).join('');
+
+  const citationsBlock = (lawCitsHtml || blogCitsHtml) ? `
+    <div style="margin-top:.9rem;padding-top:.75rem;border-top:1px solid var(--border)">
+      ${lawCitsHtml ? `<div style="margin-bottom:.5rem"><div style="font-size:.7rem;color:var(--muted);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.08em">📎 Verified legal references</div><div>${lawCitsHtml}</div></div>` : ''}
+      ${blogCitsHtml ? `<div style="margin-top:${lawCitsHtml?'.5rem':'0'}"><div style="font-size:.7rem;color:var(--muted);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.08em">📰 Related articles</div><div>${blogCitsHtml}</div></div>` : ''}
+    </div>` : '';
 
   const formattedAnswer = (apiData.answer || '')
     .split(/\n{2,}/)
@@ -2656,10 +2694,7 @@ function renderAPIAnswer(question, lawArea, apiData) {
       <span style="margin-left:auto;font-size:.68rem;background:var(--teal-light);color:#fff;padding:.15rem .5rem;border-radius:100px;font-weight:600">AI-Powered</span>
     </div>
     <div class="answer-body">${formattedAnswer}</div>
-    ${citationsHtml ? `<div style="margin-top:.9rem;padding-top:.75rem;border-top:1px solid var(--border)">
-      <div style="font-size:.7rem;color:var(--muted);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.08em">📎 Verified references</div>
-      <div>${citationsHtml}</div>
-    </div>` : ''}
+    ${citationsBlock}
     <div style="font-size:.72rem;color:var(--gold-dark);margin-top:.75rem;padding-top:.6rem;border-top:1px solid var(--border)">⚠ Legal information only — not legal advice. Consult a qualified Somali lawyer for your specific situation.</div>
   </div>
   <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap">
@@ -2995,6 +3030,412 @@ INNER_PAGES.forEach(id=>{
     el.appendChild(f);
   }
 });
+
+// ══════════════════════════════════════════════════════════════
+//  BLOG ARTICLE DATA
+// ══════════════════════════════════════════════════════════════
+const BLOG_ARTICLES = {
+  'income-tax-2025': {
+    slug: 'income-tax-2025',
+    title: "Somalia's Income Tax Act 2025 explained: what businesses need to know",
+    category: '🔷 Income Tax Law',
+    categoryStyle: 'background:var(--primary-dim);color:var(--teal-deep);border:1px solid var(--border)',
+    date: 'January 2026', readTime: '8 min read',
+    body: `
+      <p style="font-size:1.05rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.9">Somalia enacted the Income Tax Act 2025 (ITA 2025) together with implementing Regulation No. 0142-2025. Together they replace the patchwork of earlier fiscal rules and establish a unified income tax framework applicable to residents and non-residents earning Somali-sourced income. This article walks through the key provisions every business, investor, and employer needs to understand.</p>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">1. Who is a tax resident?</h2>
+      <p>Under the ITA 2025, an individual is a <strong>tax resident</strong> if they are present in Somalia for 183 days or more in a tax year, or if Somalia is their permanent home. Companies incorporated in Somalia are residents by default. Foreign companies with their effective place of management in Somalia are also treated as residents.</p>
+      <p style="margin-top:.75rem">Non-residents are taxed only on Somalia-sourced income — dividends, interest, royalties, service fees, and income from immovable property situated in Somalia.</p>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">2. Corporate tax rates</h2>
+      <div style="background:var(--parchment);border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;margin:.75rem 0 1rem">
+        <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+          <thead><tr style="background:var(--teal-deep);color:#fff"><th style="padding:.65rem 1rem;text-align:left">Category</th><th style="padding:.65rem 1rem;text-align:right">Rate</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:.6rem 1rem">Standard corporate income tax</td><td style="padding:.6rem 1rem;text-align:right;font-family:'DM Mono',monospace">20%</td></tr>
+            <tr style="border-bottom:1px solid var(--border);background:#fff"><td style="padding:.6rem 1rem">Small business (turnover &lt; USD 50,000)</td><td style="padding:.6rem 1rem;text-align:right;font-family:'DM Mono',monospace">10%</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:.6rem 1rem">Petroleum & mining extractives</td><td style="padding:.6rem 1rem;text-align:right;font-family:'DM Mono',monospace">30%</td></tr>
+            <tr style="background:#fff"><td style="padding:.6rem 1rem">Withholding tax on non-resident payments</td><td style="padding:.6rem 1rem;text-align:right;font-family:'DM Mono',monospace">10–15%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">3. The Presumptive Tax Regime (PTR)</h2>
+      <p>The PTR is aimed at small traders and sole proprietors who lack formal accounts. Instead of filing a profit-and-loss return, they pay a flat percentage of annual gross turnover:</p>
+      <ul style="margin:.75rem 0 .75rem 1.4rem;line-height:2">
+        <li>Turnover up to USD 10,000 → <strong>1% of turnover</strong></li>
+        <li>Turnover USD 10,001–50,000 → <strong>2% of turnover</strong></li>
+        <li>Above USD 50,000 → exits PTR and enters standard corporate tax</li>
+      </ul>
+      <p>Electing the PTR is voluntary but once elected, the taxpayer must remain on it for a minimum of three tax years unless the Ministry grants an exception. The PTR is <em>not</em> available to companies incorporated under the Companies Law.</p>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">4. General Investment Allowance (GIA)</h2>
+      <p>The GIA is one of the most significant incentives in the ITA 2025. Any company that invests in qualifying plant, machinery, or equipment used in production can deduct <strong>an additional 20% of the asset cost</strong> in the year of acquisition, on top of normal depreciation.</p>
+      <div style="background:var(--teal-pale);border-left:3px solid var(--teal-mid);padding:.85rem 1.1rem;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:.85rem 0">
+        <strong>Example:</strong> A manufacturer buys a USD 100,000 production line. Normal first-year depreciation (25% reducing balance) = USD 25,000. GIA adds USD 20,000. Total first-year deduction = <strong>USD 45,000</strong> — cutting taxable profit by nearly half the asset cost.
+      </div>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">5. Withholding obligations for employers</h2>
+      <p>Every employer — including NGOs, international organisations, and government contractors — must withhold income tax from employee salaries at the following progressive rates:</p>
+      <div style="background:var(--parchment);border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;margin:.75rem 0 1rem">
+        <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+          <thead><tr style="background:var(--teal-deep);color:#fff"><th style="padding:.65rem 1rem;text-align:left">Monthly salary (USD)</th><th style="padding:.65rem 1rem;text-align:right">Tax rate</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:.6rem 1rem">0 – 300</td><td style="padding:.6rem 1rem;text-align:right;font-family:'DM Mono',monospace">0% (exempt)</td></tr>
+            <tr style="border-bottom:1px solid var(--border);background:#fff"><td style="padding:.6rem 1rem">301 – 1,000</td><td style="padding:.6rem 1rem;text-align:right;font-family:'DM Mono',monospace">10%</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:.6rem 1rem">1,001 – 3,000</td><td style="padding:.6rem 1rem;text-align:right;font-family:'DM Mono',monospace">15%</td></tr>
+            <tr style="background:#fff"><td style="padding:.6rem 1rem">Above 3,000</td><td style="padding:.6rem 1rem;text-align:right;font-family:'DM Mono',monospace">20%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Withholding must be remitted to the Ministry of Finance by the <strong>15th of the following month</strong>. Failure carries a 2% per-month late penalty plus interest.</p>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">6. Filing deadlines</h2>
+      <ul style="margin:.75rem 0 .75rem 1.4rem;line-height:2">
+        <li><strong>Annual return:</strong> 90 days after the end of the tax year (31 March for calendar-year taxpayers)</li>
+        <li><strong>Estimated quarterly payments:</strong> 25% of prior-year liability due each quarter</li>
+        <li><strong>PTR annual payment:</strong> due within 30 days of the fiscal year end</li>
+      </ul>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Key takeaways</h2>
+      <ul style="margin:.75rem 0 .75rem 1.4rem;line-height:2">
+        <li>The ITA 2025 applies to <em>all</em> income earned in Somalia — including NGO employee salaries.</li>
+        <li>Small traders benefit from the PTR's simplified flat-rate regime.</li>
+        <li>Investors in productive assets should claim the GIA each year — it materially reduces taxable profit.</li>
+        <li>Employers face strict monthly withholding and remittance obligations with automatic penalties for late payment.</li>
+      </ul>
+    `
+  },
+
+  'ngo-employment-contracts': {
+    slug: 'ngo-employment-contracts',
+    title: 'What every NGO needs to know about Somali employment contracts',
+    category: '⚖️ Labour Law',
+    categoryStyle: 'background:var(--labor-bg);color:var(--labor);border:1px solid rgba(29,122,94,.25)',
+    date: 'December 2025', readTime: '6 min read',
+    body: `
+      <p style="font-size:1.05rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.9">International NGOs operating in Somalia are bound by the Somali Labour Code in their dealings with locally-hired staff. This applies whether the organisation is an INGO, UN-affiliated body, or local NGO. Failure to comply exposes organisations to labour disputes, Ministry of Labour investigations, and reputational risk. Here are the 10 clauses every contract must include — and the most common gaps we see.</p>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">The 10 mandatory contract clauses</h2>
+
+      <div style="display:flex;flex-direction:column;gap:1rem;margin:.75rem 0 1.5rem">
+        ${[
+          ['1. Identity of parties','Full legal names of the employer organisation and employee, including the employee's national ID or passport number.'],
+          ['2. Job title & duties','A clear description of the role. Vague titles like "Programme Officer" without a duties schedule create ambiguity in termination disputes.'],
+          ['3. Contract duration','Fixed-term or open-ended. Fixed-term contracts automatically become open-ended if renewed more than twice (Labour Code Art. 14).'],
+          ['4. Probation period','Maximum 3 months for general staff, 6 months for senior/specialist roles. Must be stated explicitly — it does not apply by default.'],
+          ['5. Salary & payment date','Gross monthly salary in USD or Somali Shilling, payment currency, and payment date. Deductions must be itemised.'],
+          ['6. Working hours','Standard is 48 hours per week / 8 hours per day. Any deviation requires Ministry approval.'],
+          ['7. Leave entitlements','Annual leave (minimum 15 working days per year after one year), sick leave (up to 3 months at full pay), and maternity leave (14 weeks).'],
+          ['8. Termination notice','Minimum notice by tier: less than 1 year of service = 1 week; 1–5 years = 1 month; over 5 years = 2 months.'],
+          ['9. Severance pay','Employees dismissed without cause after 1 year of service are entitled to 1 month's salary per year of service.'],
+          ['10. Dispute resolution','Disputes must first go to internal grievance, then the Ministry of Labour's conciliation unit before any court action.'],
+        ].map(([h,b])=>`<div style="border:1px solid var(--border);border-radius:var(--r-sm);padding:1rem 1.25rem;background:#fff"><div style="font-weight:600;color:var(--ink);margin-bottom:.35rem">${h}</div><div style="font-size:.9rem;color:var(--muted);line-height:1.7">${b}</div></div>`).join('')}
+      </div>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">The most common violations NGOs commit</h2>
+      <ul style="margin:.75rem 0 .75rem 1.4rem;line-height:2.1">
+        <li><strong>Rolling fixed-term contracts:</strong> Renewing 6-month contracts indefinitely to avoid severance obligations. After two renewals, the contract becomes open-ended by law.</li>
+        <li><strong>No probation clause:</strong> Dismissing staff in the first month and claiming they "hadn't started." Without a written probation clause, full termination notice and severance apply from day one.</li>
+        <li><strong>USD salary with SOS payment:</strong> Contracts denominated in USD but paid in Somali Shilling at an unfavourable rate. Courts have sided with employees in these disputes.</li>
+        <li><strong>Missing maternity leave policy:</strong> The Labour Code mandates 14 weeks of paid maternity leave (Arts. 95-98). Many NGO contracts simply say "per Somali law" — insufficient if the employee doesn't know what that means.</li>
+        <li><strong>No written termination letter:</strong> Oral dismissals are unenforceable. All terminations must be in writing with reasons stated.</li>
+      </ul>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Practical recommendations</h2>
+      <div style="background:var(--teal-pale);border-left:3px solid var(--teal-mid);padding:.85rem 1.1rem;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:.85rem 0">
+        Have your standard contract template reviewed by a qualified Somali labour lawyer at least once every two years. The Labour Code is under active revision and implementing regulations can alter compliance requirements quickly.
+      </div>
+    `
+  },
+
+  'foreign-investor-protections': {
+    slug: 'foreign-investor-protections',
+    title: "Foreign investor protections in Somalia: what Article 18 actually guarantees",
+    category: '💰 Investment Law',
+    categoryStyle: 'background:var(--invest-bg);color:var(--invest);border:1px solid var(--gold-border)',
+    date: 'November 2025', readTime: '5 min read',
+    body: `
+      <p style="font-size:1.05rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.9">Somalia's Foreign Investment Law contains one of the most investor-friendly protection frameworks in East Africa. Article 18, in particular, has drawn attention from international arbitration practitioners. This article explains exactly what the law guarantees — and where the practical limits lie.</p>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">The core Article 18 protections</h2>
+      <p>Article 18 provides four categories of guarantee to registered foreign investors:</p>
+      <div style="display:flex;flex-direction:column;gap:.85rem;margin:.75rem 0 1.5rem">
+        ${[
+          ['Protection from expropriation','The government cannot nationalise, expropriate, or take measures having equivalent effect against a foreign investment, except: (a) for a public purpose, (b) on a non-discriminatory basis, (c) in accordance with due process of law, and (d) against prompt, adequate, and effective compensation at fair market value.'],
+          ['Profit repatriation','Foreign investors are guaranteed the right to freely transfer abroad: profits, dividends, interest, royalties, management fees, and the proceeds of total or partial liquidation of the investment — subject only to payment of applicable taxes.'],
+          ['Most-Favoured-Nation treatment','If Somalia grants more favourable treatment to investors from a third country, registered investors are entitled to the same favourable treatment — unless the third-country treatment flows from a bilateral treaty or regional agreement.'],
+          ['ICSID arbitration access','Investment disputes with the Federal Government may be submitted to international arbitration under the ICSID Convention (Washington Convention). This is a significant guarantee: it removes disputes from Somali domestic courts and places them before a neutral international forum.'],
+        ].map(([h,b])=>`<div style="border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:1rem 1.25rem;background:var(--gold-pale)"><div style="font-weight:600;color:var(--ink);margin-bottom:.35rem">${h}</div><div style="font-size:.9rem;color:var(--muted);line-height:1.7">${b}</div></div>`).join('')}
+      </div>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">What Article 18 does NOT protect</h2>
+      <ul style="margin:.75rem 0 .75rem 1.4rem;line-height:2.1">
+        <li>Investments made <em>before</em> registration with the Somali Investment Promotion Authority (SIPA) — Article 18 protections only attach on registration.</li>
+        <li>Portfolio investments (shares purchased on the secondary market) — direct investment in productive assets is required.</li>
+        <li>Investments in sectors prohibited under Somali law (e.g. arms, narcotics).</li>
+        <li>Disputes with Federal Member State governments — Article 18 covers disputes with the Federal Government. Investors in Puntland or Jubaland should ensure separate state-level guarantees are negotiated.</li>
+      </ul>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Compensation standard for expropriation</h2>
+      <p>The law specifies the "Hull formula" standard — compensation must be <strong>prompt, adequate, and effective</strong>. In practice this means:</p>
+      <ul style="margin:.75rem 0 .75rem 1.4rem;line-height:2">
+        <li><strong>Prompt:</strong> paid without undue delay (generally interpreted as within 90 days)</li>
+        <li><strong>Adequate:</strong> at fair market value immediately before the expropriation decision</li>
+        <li><strong>Effective:</strong> in freely convertible currency, transferable abroad</li>
+      </ul>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Practical advice for foreign investors</h2>
+      <div style="background:var(--gold-pale);border-left:3px solid var(--gold);padding:.85rem 1.1rem;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:.85rem 0">
+        Register with SIPA before committing capital. Keep the SIPA certificate, investment plan, and all government correspondence on file — these are your primary evidence in any future arbitration. Consider also registering under any applicable bilateral investment treaty (BIT) Somalia has with your home country.
+      </div>
+    `
+  },
+
+  'epma-2024-business': {
+    slug: 'epma-2024-business',
+    title: "EPMA 2024: what Somalia's new environmental law means for your business",
+    category: '🌿 Environmental Law',
+    categoryStyle: 'background:var(--env-bg);color:var(--env);border:1px solid rgba(22,163,74,.2)',
+    date: 'October 2025', readTime: '7 min read',
+    body: `
+      <p style="font-size:1.05rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.9">Somalia's Environmental Protection and Management Act 2024 (EPMA 2024) is the country's most comprehensive environmental legislation to date. It creates new obligations for businesses, developers, extractive-industry operators, and — crucially — anyone who imports or disposes of hazardous waste. This guide explains the key compliance requirements.</p>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Who is covered?</h2>
+      <p>The EPMA applies to the <strong>entire territory of the Federal Republic of Somalia</strong> (Art. 3), including Federal Member State territories. It covers:</p>
+      <ul style="margin:.75rem 0 .75rem 1.4rem;line-height:2">
+        <li>All development projects — construction, infrastructure, extraction, agriculture</li>
+        <li>Petroleum and mining operations (Art. 42)</li>
+        <li>Industries that discharge effluents or emissions</li>
+        <li>Importers and transporters of hazardous materials</li>
+        <li>Any person who fells trees or clears forest cover (Art. 48)</li>
+      </ul>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">When do you need an Environmental Impact Assessment?</h2>
+      <p>An EIA is mandatory before commencing any "significant project." The EPMA defines significance by reference to Schedules (yet to be published by Ministry), but the Ministry has indicated the following will always require an EIA:</p>
+      <div style="background:var(--parchment);border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;margin:.75rem 0 1rem">
+        <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+          <thead><tr style="background:#166534;color:#fff"><th style="padding:.65rem 1rem;text-align:left">Project type</th><th style="padding:.65rem 1rem;text-align:right">EIA required?</th></tr></thead>
+          <tbody>
+            ${[
+              ['Oil & gas exploration and extraction','Always'],
+              ['Mining operations (any scale)','Always'],
+              ['Construction over 500 sqm in coastal zones','Always'],
+              ['Industrial facilities with air/water discharge','Always'],
+              ['Large-scale agricultural clearing (>50 ha)','Always'],
+              ['Road construction in protected areas','Always'],
+              ['Small commercial building in urban areas','Ministry discretion'],
+            ].map(([a,b],i)=>`<tr style="border-bottom:1px solid var(--border)${i%2===1?';background:#fff':''}"><td style="padding:.6rem 1rem">${a}</td><td style="padding:.6rem 1rem;text-align:right;font-family:'DM Mono',monospace;color:${b==='Always'?'var(--env)':'var(--muted)'}">${b}</td></tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">The EIA process</h2>
+      <ol style="margin:.75rem 0 .75rem 1.4rem;line-height:2.1">
+        <li>Submit a <strong>Project Notification</strong> to the Ministry of Environment (MECC)</li>
+        <li>MECC issues a scoping decision (within 30 days) identifying issues to be studied</li>
+        <li>Developer commissions a licensed EIA consultant to prepare the full EIA report</li>
+        <li>Public consultation (minimum 21-day comment period)</li>
+        <li>MECC issues an <strong>Environmental Compliance Certificate (ECC)</strong> — or refuses with reasons</li>
+        <li>Developer may appeal refusal to the National Environment Council within 30 days</li>
+      </ol>
+      <div style="background:var(--env-bg,#f0fdf4);border-left:3px solid var(--env,#16a34a);padding:.85rem 1.1rem;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:.85rem 0">
+        <strong>Critical:</strong> Commencing a significant project without an ECC is a criminal offence under Art. 78. Penalties range from fines to project shutdown. The Ministry has authority to require restoration of environmental damage at the developer's cost.
+      </div>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Hazardous waste obligations</h2>
+      <p>Articles 55-62 create a cradle-to-grave tracking system for hazardous waste:</p>
+      <ul style="margin:.75rem 0 .75rem 1.4rem;line-height:2">
+        <li>All hazardous waste generators must register with MECC</li>
+        <li>Hazardous waste must be stored in approved facilities</li>
+        <li>Transport requires a MECC-issued manifest</li>
+        <li>Import of hazardous waste is prohibited unless specifically licensed</li>
+        <li>Liability for disposal rests jointly with the generator and transporter</li>
+      </ul>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Petroleum sector — Article 42</h2>
+      <p>Oil and gas operators face the strictest obligations under the EPMA. Article 42 requires:</p>
+      <ul style="margin:.75rem 0 .75rem 1.4rem;line-height:2">
+        <li>Environmental management plans submitted with every exploration licence application</li>
+        <li>Oil spill response plans certified by MECC before commencement of offshore operations</li>
+        <li><em>Personal liability</em> of the owner or vessel master for contamination damage</li>
+        <li>Mandatory financial assurance (bond or insurance) covering estimated clean-up costs</li>
+      </ul>
+    `
+  },
+
+  'hr-compliance-checklist': {
+    slug: 'hr-compliance-checklist',
+    title: 'Maternity leave, overtime, and public holidays: Somali HR compliance checklist',
+    category: '⚖️ Labour Law',
+    categoryStyle: 'background:var(--labor-bg);color:var(--labor);border:1px solid rgba(29,122,94,.25)',
+    date: 'September 2025', readTime: '4 min read',
+    body: `
+      <p style="font-size:1.05rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.9">The Somali Labour Code contains specific, non-negotiable entitlements for employees. Many organisations — particularly those using template contracts drafted outside Somalia — routinely underpay or overlook several of these. The following is a plain-English compliance checklist covering the 15 most common violations we encounter.</p>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Maternity leave</h2>
+      <div style="display:flex;flex-direction:column;gap:.75rem;margin:.75rem 0 1.25rem">
+        ${[
+          ['✅ Duration','14 weeks of paid maternity leave (Arts. 95-98). Cannot be waived by contract.'],
+          ['✅ Pay during leave','Full salary for the first 8 weeks, 50% for the remaining 6 weeks. Some employers pay 100% throughout — this is permitted but not required.'],
+          ['✅ Timing','Employee may take leave from 6 weeks before the expected birth date.'],
+          ['❌ Common violation','Requiring a female employee to work through her maternity entitlement. Unlawful — exposes employer to a damages claim of up to 6 months\' salary.'],
+          ['❌ Common violation','Terminating employment during maternity leave. Automatic unfair dismissal under Art. 96. Reinstatement is the primary remedy.'],
+        ].map(([label,text])=>`<div style="display:flex;gap:.75rem;background:${label.startsWith('❌')?'#fef2f2':'#f0fdf4'};border:1px solid ${label.startsWith('❌')?'rgba(239,68,68,.2)':'rgba(22,163,74,.2)'};border-radius:var(--r-sm);padding:.85rem 1rem"><span style="flex-shrink:0;font-weight:700">${label}</span><span style="font-size:.9rem;color:var(--muted);line-height:1.7">${text}</span></div>`).join('')}
+      </div>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Overtime</h2>
+      <div style="display:flex;flex-direction:column;gap:.75rem;margin:.75rem 0 1.25rem">
+        ${[
+          ['✅ Rate','Overtime (work beyond 48 hours per week or 8 hours per day) must be paid at <strong>125% of the regular hourly rate</strong>.'],
+          ['✅ Night work','Work between 10pm and 6am is "night work" and attracts a 130% rate.'],
+          ['✅ Weekend','Work on the weekly rest day (Friday in Somalia) = 150% rate.'],
+          ['✅ Public holidays','Work on an official public holiday = <strong>200% of regular rate</strong>, plus the employee retains the right to a compensatory rest day.'],
+          ['❌ Common violation','Paying flat-rate monthly salaries without any overtime tracking or overtime premium. If the employee works over 48 hours per week, the employer owes overtime pay regardless of whether a monthly salary was agreed.'],
+        ].map(([label,text])=>`<div style="display:flex;gap:.75rem;background:${label.startsWith('❌')?'#fef2f2':'#f0fdf4'};border:1px solid ${label.startsWith('❌')?'rgba(239,68,68,.2)':'rgba(22,163,74,.2)'};border-radius:var(--r-sm);padding:.85rem 1rem"><span style="flex-shrink:0;font-weight:700">${label}</span><span style="font-size:.9rem;color:var(--muted);line-height:1.7">${text}</span></div>`).join('')}
+      </div>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Annual leave</h2>
+      <ul style="margin:.75rem 0 .75rem 1.4rem;line-height:2.1">
+        <li>Minimum annual leave: <strong>15 working days</strong> after 12 months of continuous service</li>
+        <li>Increases to 20 working days after 5 years with the same employer</li>
+        <li>Leave cannot be replaced with a cash payment <em>while the employee is still employed</em> — it must be taken as actual rest (Art. 79)</li>
+        <li>On termination, unused accrued leave must be paid out in cash</li>
+      </ul>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Sick leave</h2>
+      <ul style="margin:.75rem 0 .75rem 1.4rem;line-height:2.1">
+        <li>First 30 days: full pay</li>
+        <li>Days 31–90: 50% pay</li>
+        <li>After 90 days of continuous illness: employer may terminate with full severance, but <em>not</em> during the sick leave period itself</li>
+        <li>A medical certificate from a recognised Somali health facility is required from day 3 onwards</li>
+      </ul>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Quick compliance audit — 5 questions to ask your HR team</h2>
+      <ol style="margin:.75rem 0 .75rem 1.4rem;line-height:2.2">
+        <li>Do all employment contracts specify a probation period <em>in writing</em>?</li>
+        <li>Does payroll track weekly hours worked and pay overtime at the correct rate?</li>
+        <li>Is annual leave tracked per employee and accrued correctly from the one-year mark?</li>
+        <li>Are female employees informed of their maternity entitlements at onboarding?</li>
+        <li>Are public holiday calendars updated each year to reflect the official Somali public holiday list?</li>
+      </ol>
+      <div style="background:var(--teal-pale);border-left:3px solid var(--teal-mid);padding:.85rem 1.1rem;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:.85rem 0">
+        If you answered "no" or "unsure" to any of the above, you likely have a live Labour Code compliance exposure. XeerHub recommends an annual HR audit against the current Labour Code before the Somali fiscal year-end.
+      </div>
+    `
+  },
+
+  'data-protection-act': {
+    slug: 'data-protection-act',
+    title: "Somalia's Data Protection Act: what organisations processing personal data must do now",
+    category: '🔐 Data Protection',
+    categoryStyle: 'background:var(--data-bg);color:var(--data);border:1px solid rgba(99,102,241,.2)',
+    date: 'August 2025', readTime: '6 min read',
+    body: `
+      <p style="font-size:1.05rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.9">Somalia's Data Protection Act (DPA) is one of the most significant pieces of digital governance legislation in East Africa. It applies to any organisation — Somali or foreign — that processes the personal data of Somali residents. This article explains who must comply, what obligations apply, and what the penalties are for non-compliance.</p>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Who must comply?</h2>
+      <p>The DPA has <strong>extraterritorial reach</strong>. It applies to:</p>
+      <ul style="margin:.75rem 0 .75rem 1.4rem;line-height:2">
+        <li>Any organisation established in Somalia that processes personal data</li>
+        <li>Any foreign organisation that processes data <em>about Somali residents</em> — even if the processing happens outside Somalia</li>
+        <li>Both automated and manual data processing (e.g. paper records containing personal data)</li>
+      </ul>
+      <p>The DPA defines "personal data" broadly: any information relating to an identified or identifiable natural person. This includes names, ID numbers, phone numbers, location data, biometric data, IP addresses, and financial account details.</p>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Lawful bases for processing</h2>
+      <p>Processing personal data is only lawful under one of the following bases:</p>
+      <div style="display:flex;flex-direction:column;gap:.75rem;margin:.75rem 0 1.25rem">
+        ${[
+          ['Consent','Freely given, specific, informed, and unambiguous. Pre-ticked boxes and bundled consent are not valid. Consent may be withdrawn at any time.'],
+          ['Contract performance','Processing necessary to execute a contract with the data subject, or to take pre-contractual steps at their request.'],
+          ['Legal obligation','Processing required to comply with a Somali legal obligation (e.g. tax withholding records, KYC/AML requirements).'],
+          ['Vital interests','Processing necessary to protect someone\'s life where consent cannot be obtained (e.g. emergency medical care).'],
+          ['Public task','Processing by government authorities in the exercise of official functions.'],
+          ['Legitimate interests','Processing necessary for legitimate interests of the controller, balanced against the data subject\'s rights. This basis requires a documented balancing test.'],
+        ].map(([h,b])=>`<div style="border:1px solid var(--border);border-radius:var(--r-sm);padding:.9rem 1.1rem;background:#fff"><div style="font-weight:600;color:var(--ink);margin-bottom:.3rem">${h}</div><div style="font-size:.875rem;color:var(--muted);line-height:1.7">${b}</div></div>`).join('')}
+      </div>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Data subject rights</h2>
+      <p>The DPA grants Somali residents the following rights against any organisation processing their data:</p>
+      <div style="background:var(--parchment);border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;margin:.75rem 0 1rem">
+        <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+          <thead><tr style="background:#1e1b4b;color:#fff"><th style="padding:.65rem 1rem;text-align:left">Right</th><th style="padding:.65rem 1rem;text-align:right">Response deadline</th></tr></thead>
+          <tbody>
+            ${[
+              ['Access (obtain a copy of your data)','30 days'],
+              ['Rectification (correct inaccurate data)','30 days'],
+              ['Erasure ("right to be forgotten")','30 days'],
+              ['Restriction of processing','Immediate on valid request'],
+              ['Data portability (receive data in machine-readable format)','30 days'],
+              ['Object to processing (including direct marketing)','Immediate on valid request'],
+            ].map(([a,b],i)=>`<tr style="border-bottom:1px solid var(--border)${i%2===1?';background:#fff':''}"><td style="padding:.6rem 1rem">${a}</td><td style="padding:.6rem 1rem;text-align:right;font-family:'DM Mono',monospace">${b}</td></tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Cross-border data transfers</h2>
+      <p>Transferring personal data of Somali residents outside Somalia is only permitted if the destination country provides an "adequate level of protection." In practice, organisations should:</p>
+      <ul style="margin:.75rem 0 .75rem 1.4rem;line-height:2">
+        <li>Use standard contractual clauses approved by the Somali Data Protection Authority (SDPA)</li>
+        <li>Or obtain the data subject's explicit consent to the international transfer</li>
+        <li>Or rely on a binding corporate agreement (for intra-group transfers)</li>
+      </ul>
+      <div style="background:#ede9fe;border-left:3px solid #6366f1;padding:.85rem 1.1rem;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:.85rem 0">
+        <strong>Important for NGOs and cloud platforms:</strong> Storing Somali beneficiary or staff data on servers located outside Somalia — including major cloud providers (AWS, Azure, Google Cloud) — constitutes a cross-border transfer. You must document the legal basis for each transfer and have appropriate safeguards in place.
+      </div>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Penalties</h2>
+      <ul style="margin:.75rem 0 .75rem 1.4rem;line-height:2.1">
+        <li>Failure to register with the SDPA: up to <strong>USD 5,000</strong></li>
+        <li>Processing without a lawful basis: up to <strong>USD 50,000</strong> or 2% of annual turnover (whichever is higher)</li>
+        <li>Unlawful cross-border transfer: up to <strong>USD 100,000</strong></li>
+        <li>Deliberate or negligent breach causing harm to a data subject: criminal liability for directors and officers</li>
+      </ul>
+
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--ink)">Immediate action checklist</h2>
+      <ol style="margin:.75rem 0 .75rem 1.4rem;line-height:2.2">
+        <li>Register your organisation with the SDPA as a data controller or processor</li>
+        <li>Audit all data processing activities and document the lawful basis for each</li>
+        <li>Update your privacy notices to meet DPA transparency requirements</li>
+        <li>Map all cross-border data transfers and ensure appropriate safeguards are in place</li>
+        <li>Implement a data subject request process with a 30-day response SLA</li>
+        <li>Establish a personal data breach notification procedure (72-hour notification to SDPA)</li>
+      </ol>
+    `
+  }
+};
+
+// ── BLOG MODAL FUNCTIONS ──────────────────────────────────────
+function openBlog(slug) {
+  const article = BLOG_ARTICLES[slug];
+  if (!article) { showToast('Article not found', 'error'); return; }
+
+  document.getElementById('blog-modal-title').textContent    = article.title;
+  document.getElementById('blog-modal-category').innerHTML   = `<span style="${article.categoryStyle};display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .85rem;border-radius:100px">${article.category}</span>`;
+  document.getElementById('blog-modal-meta').innerHTML       = `<span>📅 ${article.date}</span><span>⏱ ${article.readTime}</span>`;
+  document.getElementById('blog-modal-body').innerHTML       = article.body;
+
+  const modal = document.getElementById('modal-blog-article');
+  modal.style.display = 'block';
+  modal.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function openBlogBySlug(slug) {
+  if (BLOG_ARTICLES[slug]) {
+    openBlog(slug);
+  } else {
+    showPage('blog');
+    showToast('Browse our articles below', 'success');
+  }
+}
+
+function closeBlogModal() {
+  document.getElementById('modal-blog-article').style.display = 'none';
+  document.body.style.overflow = '';
+}
 
 // ── INIT ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded',()=>{
