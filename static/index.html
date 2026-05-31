@@ -2493,7 +2493,7 @@ const RAILWAY_TIMEOUT_MS = 15000;
 (function warmUpRailway() {
   function ping() {
     try {
-      fetch(RAILWAY_API + '?q=ping&warmup=1', {
+      fetch(RAILWAY_API + '?warmup=1', {
         method: 'GET',
         signal: AbortSignal.timeout ? AbortSignal.timeout(6000)
           : (()=>{ const c=new AbortController(); setTimeout(()=>c.abort(),6000); return c.signal; })()
@@ -2649,6 +2649,7 @@ function retrieveRelevant(question,lawArea,topK=8){
     'Foreign Investment Law':['investment'],
     'Income Tax Law':['tax'],
     'Environmental Law':['environment'],
+    'Data Protection Law':['data'],
     'General':Object.keys(QA)
   };
   const cats=catMap[lawArea]||Object.keys(QA);
@@ -2973,7 +2974,7 @@ const BLOG_ARTICLES = {
 
       <div style="display:flex;flex-direction:column;gap:1rem;margin:.75rem 0 1.5rem">
         ${[
-          ['1. Identity of parties','Full legal names of the employer organisation and employee, including the employee's national ID or passport number.'],
+          ['1. Identity of parties','Full legal names of the employer organisation and employee, including the employee\'s national ID or passport number.'],
           ['2. Job title & duties','A clear description of the role. Vague titles like "Programme Officer" without a duties schedule create ambiguity in termination disputes.'],
           ['3. Contract duration','Fixed-term or open-ended. Fixed-term contracts automatically become open-ended if renewed more than twice (Labour Code Art. 14).'],
           ['4. Probation period','Maximum 3 months for general staff, 6 months for senior/specialist roles. Must be stated explicitly — it does not apply by default.'],
@@ -2981,8 +2982,8 @@ const BLOG_ARTICLES = {
           ['6. Working hours','Standard is 48 hours per week / 8 hours per day. Any deviation requires Ministry approval.'],
           ['7. Leave entitlements','Annual leave (minimum 15 working days per year after one year), sick leave (up to 3 months at full pay), and maternity leave (14 weeks).'],
           ['8. Termination notice','Minimum notice by tier: less than 1 year of service = 1 week; 1–5 years = 1 month; over 5 years = 2 months.'],
-          ['9. Severance pay','Employees dismissed without cause after 1 year of service are entitled to 1 month's salary per year of service.'],
-          ['10. Dispute resolution','Disputes must first go to internal grievance, then the Ministry of Labour's conciliation unit before any court action.'],
+          ['9. Severance pay','Employees dismissed without cause after 1 year of service are entitled to 1 month\'s salary per year of service.'],
+          ['10. Dispute resolution','Disputes must first go to internal grievance, then the Ministry of Labour\'s conciliation unit before any court action.'],
         ].map(([h,b])=>`<div style="border:1px solid var(--border);border-radius:var(--r-sm);padding:1rem 1.25rem;background:#fff"><div style="font-weight:600;color:var(--ink);margin-bottom:.35rem">${h}</div><div style="font-size:.9rem;color:var(--muted);line-height:1.7">${b}</div></div>`).join('')}
       </div>
 
@@ -3313,7 +3314,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const banner = document.getElementById('noKeyBanner');
     const ctrl   = new AbortController();
     const tid    = setTimeout(() => ctrl.abort(), 8000);
-    fetch(RAILWAY_API + '?q=ping&warmup=1', { signal: ctrl.signal })
+    fetch(RAILWAY_API + '?warmup=1', { signal: ctrl.signal })
       .then(res => {
         clearTimeout(tid);
         // Railway responded — ensure banner stays hidden
