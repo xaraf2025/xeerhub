@@ -2485,7 +2485,7 @@ function setSample(el){document.getElementById('questionInput').value=el.textCon
 // ══════════════════════════════════════════════════════════════
 const RAILWAY_API = 'https://xeerhub-api-production.up.railway.app/ask';
 // 15 s — tighter ceiling; Railway should be warm after the load-time ping
-const RAILWAY_TIMEOUT_MS = 15000;
+const RAILWAY_TIMEOUT_MS = 8000;
 
 // ── Warm up Railway the moment the page loads ─────────────────
 // Dual ping: one immediately, one after 8 s — keeps the server
@@ -2784,9 +2784,21 @@ function submitQuestion(){
   btn.style.background = 'var(--teal-mid)';
   area.innerHTML = '';
 
-  // Show animated status strip immediately — user sees activity at once
-  const statusInterval = startStatusCycle(area);
+  // ── INSTANT RESULT: show local answer immediately (zero wait) ──
+  // The local engine runs synchronously and renders in <50ms.
+  // The AI answer then upgrades it in the background when ready.
+  runLocalEngine(question, lawArea);
+  // Re-enable button immediately so user can ask another question
+  btn.disabled = false; btn.innerHTML = 'Get Answer →'; btn.style.background = '';
 
+  // Mark the current answer as "upgrading to AI"
+  const upgradeStrip = document.createElement('div');
+  upgradeStrip.id = 'railwayUpgradeStrip';
+  upgradeStrip.style.cssText = 'display:flex;align-items:center;gap:.6rem;padding:.5rem .9rem;background:var(--teal-pale);border:1px solid var(--border-strong);border-radius:var(--r-sm);font-size:.8rem;color:var(--teal-deep);margin-bottom:.75rem';
+  upgradeStrip.innerHTML = '<span class="spinner" style="width:12px;height:12px;border-width:1.5px;flex-shrink:0"></span><span>Upgrading to AI answer…</span>';
+  area.prepend(upgradeStrip);
+
+  // ── BACKGROUND: fire API call, replace answer silently when done ──
   const controller = new AbortController();
   const timeoutId  = setTimeout(() => controller.abort(), RAILWAY_TIMEOUT_MS);
 
@@ -2797,22 +2809,21 @@ function submitQuestion(){
       return res.json();
     })
     .then(data => {
-      stopStatusCycle(statusInterval);
-      if (!data || !data.answer || data.answer.trim() === '') throw new Error('empty response');
+      if (!data || typeof data.answer !== 'string' || data.answer.trim() === '') throw new Error('empty response');
       renderAPIAnswer(question, lawArea, data);
       showToast('✦ AI answer ready', 'success');
     })
     .catch(err => {
       clearTimeout(timeoutId);
-      stopStatusCycle(statusInterval);
-      console.warn('[XeerHub] Railway unavailable, falling back to local engine:', err.message);
-      // Graceful fallback — run local keyword engine and show a note
-      runLocalEngine(question, lawArea);
-      // Add a subtle note that full AI is temporarily unavailable
+      // API failed — local result is already showing, just remove the spinner strip
+      const strip = document.getElementById('railwayUpgradeStrip');
+      if (strip) strip.remove();
+      // Add quiet note so user knows it's a local result
       const note = document.createElement('div');
       note.style.cssText = 'margin-top:.5rem;padding:.4rem .75rem;background:var(--gold-pale);border:1px solid var(--gold-border);border-radius:var(--r-sm);font-size:.75rem;color:var(--gold-dark)';
       note.textContent = '⚡ Showing local knowledge base result — AI engine temporarily unavailable.';
       area.appendChild(note);
+      console.warn('[XeerHub] API unavailable:', err.message);
     });
 }
 
