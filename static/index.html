@@ -2489,7 +2489,7 @@ function setSample(el){document.getElementById('questionInput').value=el.textCon
 // ══════════════════════════════════════════════════════════════
 const RAILWAY_API = 'https://xeerhub-api-production.up.railway.app/ask';
 // 15 s — tighter ceiling; Railway should be warm after the load-time ping
-const RAILWAY_TIMEOUT_MS = 8000;
+const RAILWAY_TIMEOUT_MS = 25000; // text search is fast; give Groq full time to stream
 
 // ── Warm up Railway the moment the page loads ─────────────────
 // Dual ping: one immediately, one after 8 s — keeps the server
@@ -2906,19 +2906,19 @@ function submitQuestion(){
 
   const btn  = document.getElementById('askBtn');
   const area = document.getElementById('answerArea');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Asking AI…';
-  btn.style.background = 'var(--teal-mid)';
-  area.innerHTML = '';
 
-  // ── INSTANT RESULT: show local answer immediately (zero wait) ──
-  // The local engine runs synchronously and renders in <50ms.
-  // The AI answer then upgrades it in the background when ready.
-  runLocalEngine(question, lawArea);
-  // Re-enable button immediately so user can ask another question
+  // Disable button to prevent double-submit
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Thinking…';
+  btn.style.background = 'var(--teal-mid)';
+
+  // ── ZERO-FLASH: run local engine first, then swap DOM atomically ──
+  // We clear + fill in a single assignment so the browser never paints a blank frame.
+  area.innerHTML = '';           // clear old result
+  runLocalEngine(question, lawArea);  // fill instantly (~10ms, synchronous)
   btn.disabled = false; btn.innerHTML = 'Get Answer →'; btn.style.background = '';
 
-  // ── BACKGROUND: stream AI answer, typing it in word-by-word ──
+  // ── BACKGROUND: stream AI answer over the local result ──
   streamAIAnswer(question, lawArea, area);
 }
 
