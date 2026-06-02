@@ -2778,7 +2778,7 @@ function stopStatusCycle(intervalId) {
 // 2. clearTimeout inside token handler → stream never timed out on mid-stream stall
 // 3. No guard against `answer_done` firing multiple times → duplicated UI
 function streamAIAnswer(question, lawArea, area) {
-  const url = RAILWAY_API + '?q=' + encodeURIComponent(question) + '&stream=1';
+  const url = RAILWAY_API + '?q=' + encodeURIComponent(question) + '&stream=1&area=' + encodeURIComponent(lawArea);
 
   // Build the streaming card immediately so the user sees activity
   const streamCard = document.createElement('div');
