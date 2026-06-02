@@ -2772,12 +2772,15 @@ function stopStatusCycle(intervalId) {
 }
 
 // ── STREAMING AI ANSWER ───────────────────────────────────────
-// Uses Server-Sent Events so tokens appear word-by-word (~1s first token).
-// Falls back silently if EventSource fails (e.g. Railway is cold).
+// ── AI STREAMING  ────────────────────────────────────────────
+// Three bugs fixed vs previous version:
+// 1. onerror fired on keep-alive pings → now only fires on real close errors
+// 2. clearTimeout inside token handler → stream never timed out on mid-stream stall
+// 3. No guard against `answer_done` firing multiple times → duplicated UI
 function streamAIAnswer(question, lawArea, area) {
   const url = RAILWAY_API + '?q=' + encodeURIComponent(question) + '&stream=1';
 
-  // Inject a live typing card above the local result
+  // Build the streaming card immediately so the user sees activity
   const streamCard = document.createElement('div');
   streamCard.id = 'aiStreamCard';
   streamCard.className = 'answer-card fade-in';
@@ -2796,41 +2799,74 @@ function streamAIAnswer(question, lawArea, area) {
   area.prepend(streamCard);
 
   let accumulated = '';
-  let citations = null;
+  let done = false; // guard: prevent double-finish
   let es = null;
-  const timeout = setTimeout(() => {
-    // Server took too long — clean up and keep local result
-    cleanup(false);
-  }, RAILWAY_TIMEOUT_MS);
+
+  // Hard 20 s deadline — set ONCE, never reset inside token handler.
+  // Previous bug: clearTimeout on every token meant stalled streams
+  // could wait indefinitely.
+  const hardDeadline = setTimeout(() => cleanup(false), 20_000);
 
   function cleanup(success) {
-    clearTimeout(timeout);
+    if (done) return;
+    done = true;
+    clearTimeout(hardDeadline);
     if (es) { try { es.close(); } catch(_){} es = null; }
-    const card = document.getElementById('aiStreamCard');
-    if (!success && card) {
-      card.remove(); // remove partial card, keep local result
+
+    if (!success) {
+      const card = document.getElementById('aiStreamCard');
+      if (card) card.remove();
+      // Leave the local engine result visible — it's already rendered below
       const note = document.createElement('div');
+      note.id = 'aiUnavailNote';
       note.style.cssText = 'margin-top:.5rem;padding:.4rem .75rem;background:var(--gold-pale);border:1px solid var(--gold-border);border-radius:var(--r-sm);font-size:.75rem;color:var(--gold-dark)';
       note.textContent = '⚡ Showing local knowledge base result — AI engine temporarily unavailable.';
       area.appendChild(note);
     }
   }
 
+  function finish(fullAnswer) {
+    if (done) return;
+    done = true;
+    clearTimeout(hardDeadline);
+    if (es) { try { es.close(); } catch(_){} es = null; }
+
+    // Final render without blinking cursor
+    const body = document.getElementById('aiStreamBody');
+    if (body) {
+      body.innerHTML = fullAnswer
+        .split(/\n{2,}/)
+        .map(p => `<p style="margin-bottom:.7rem">${p.replace(/\n/g,'<br>')}</p>`)
+        .join('');
+    }
+
+    // Remove local fallback cards and notes
+    area.querySelectorAll('.answer-card:not(#aiStreamCard)').forEach(c => c.remove());
+    area.querySelectorAll('#aiUnavailNote').forEach(n => n.remove());
+
+    // Action buttons
+    const btns = document.createElement('div');
+    btns.style.cssText = 'display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap';
+    btns.innerHTML = '<button class="btn btn-ghost btn-sm" onclick="showToast(\'Saved ✓\',\'success\')">💾 Save answer</button>'
+      + '<button class="btn btn-ghost btn-sm" onclick="document.getElementById(\'questionInput\').value=\'\';document.getElementById(\'answerArea\').innerHTML=\'\'">✕ Clear</button>';
+    area.appendChild(btns);
+    showToast('✦ AI answer ready', 'success');
+  }
+
   function renderCitations(cit) {
     const box = document.getElementById('aiStreamCitations');
     if (!box) return;
-    const laws  = (cit.laws  || []).map(c => {
-      const pct = c.similarity ? Math.round(c.similarity*100) : null;
-      return `<span style="display:inline-flex;align-items:center;gap:.35rem;background:var(--teal-pale);color:var(--teal-deep);font-family:'DM Mono',monospace;font-size:.7rem;padding:.2rem .65rem;border-radius:100px;border:1px solid var(--border-strong);margin:.15rem">${c.law}${c.article?' · Art. '+c.article:''}${pct?' <span style=\'opacity:.65\'>'+pct+'%</span>':''}</span>`;
-    }).join('');
-    const blogs = (cit.blogs || []).map(b => {
-      const pct = b.similarity ? Math.round(b.similarity*100) : null;
-      return `<span onclick="openBlogBySlug('${b.slug||''}')" style="display:inline-flex;align-items:center;gap:.35rem;background:var(--gold-pale);color:var(--gold-dark);font-size:.7rem;padding:.2rem .65rem;border-radius:100px;border:1px solid var(--gold-border);margin:.15rem;cursor:pointer">📝 ${b.title}${pct?' <span style=\'opacity:.65\'>'+pct+'%</span>':''}</span>`;
-    }).join('');
-    if (laws || blogs) {
+    const lawsHtml = (cit.laws || []).map(c =>
+      `<span style="display:inline-flex;align-items:center;gap:.35rem;background:var(--teal-pale);color:var(--teal-deep);font-family:'DM Mono',monospace;font-size:.7rem;padding:.2rem .65rem;border-radius:100px;border:1px solid var(--border-strong);margin:.15rem">${c.law}${c.article ? ' · Art. ' + c.article : ''}</span>`
+    ).join('');
+    const blogsHtml = (cit.blogs || []).map(b =>
+      `<span onclick="openBlogBySlug('${b.slug||''}')" style="display:inline-flex;align-items:center;gap:.35rem;background:var(--gold-pale);color:var(--gold-dark);font-size:.7rem;padding:.2rem .65rem;border-radius:100px;border:1px solid var(--gold-border);margin:.15rem;cursor:pointer">📝 ${b.title}</span>`
+    ).join('');
+    if (lawsHtml || blogsHtml) {
       box.style.display = 'block';
-      box.innerHTML = (laws  ? `<div style="margin-bottom:.5rem"><div style="font-size:.7rem;color:var(--muted);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.08em">📎 Verified legal references</div><div>${laws}</div></div>` : '')
-                    + (blogs ? `<div><div style="font-size:.7rem;color:var(--muted);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.08em">📰 Related articles</div><div>${blogs}</div></div>` : '');
+      box.innerHTML =
+        (lawsHtml  ? `<div style="margin-bottom:.5rem"><div style="font-size:.7rem;color:var(--muted);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.08em">📎 Verified legal references</div><div>${lawsHtml}</div></div>` : '') +
+        (blogsHtml ? `<div><div style="font-size:.7rem;color:var(--muted);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.08em">📰 Related articles</div><div>${blogsHtml}</div></div>` : '');
     }
   }
 
@@ -2838,58 +2874,40 @@ function streamAIAnswer(question, lawArea, area) {
     es = new EventSource(url);
 
     es.addEventListener('citations', e => {
-      citations = JSON.parse(e.data);
-      renderCitations(citations);
+      try { renderCitations(JSON.parse(e.data)); } catch(_) {}
     });
 
     es.addEventListener('token', e => {
-      clearTimeout(timeout); // reset timeout on each token
-      const { token } = JSON.parse(e.data);
-      accumulated += token;
-      const body = document.getElementById('aiStreamBody');
-      if (body) {
-        // Format paragraphs on the fly
-        body.innerHTML = accumulated
-          .split(/\n{2,}/)
-          .map(p => `<p style="margin-bottom:.7rem">${p.replace(/\n/g,'<br>')}</p>`)
-          .join('') + '<span class="ai-cursor"></span>';
+      if (done) return;
+      try {
+        const { token } = JSON.parse(e.data);
+        accumulated += token;
+        const body = document.getElementById('aiStreamBody');
+        if (body) {
+          body.innerHTML = accumulated
+            .split(/\n{2,}/)
+            .map(p => `<p style="margin-bottom:.7rem">${p.replace(/\n/g,'<br>')}</p>`)
+            .join('') + '<span class="ai-cursor"></span>';
+        }
+      } catch(_) {}
+    });
+
+    es.addEventListener('answer_done', () => {
+      finish(accumulated);
+    });
+
+    // BUG FIXED: previous code called cleanup(false) on ANY error event,
+    // including the harmless keep-alive re-connect pings that EventSource fires.
+    // Now we only treat it as a real failure if we haven't received any tokens yet.
+    es.addEventListener('error', () => {
+      if (!accumulated) {
+        // No tokens arrived at all — genuine connection failure
+        cleanup(false);
       }
+      // If we already have tokens, ignore the error ping and wait for answer_done
     });
-
-    es.addEventListener('answer_done', e => {
-      es.close();
-      clearTimeout(timeout);
-      const body = document.getElementById('aiStreamBody');
-      if (body) {
-        // Final render — remove cursor
-        body.innerHTML = accumulated
-          .split(/\n{2,}/)
-          .map(p => `<p style="margin-bottom:.7rem">${p.replace(/\n/g,'<br>')}</p>`)
-          .join('');
-      }
-      // Remove local fallback result below
-      const cards = area.querySelectorAll('.answer-card:not(#aiStreamCard)');
-      cards.forEach(c => c.remove());
-      const notes = area.querySelectorAll('div[style*="gold-pale"]');
-      notes.forEach(n => n.remove());
-      // Add action buttons
-      const btns = document.createElement('div');
-      btns.style.cssText = 'display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap';
-      btns.innerHTML = '<button class="btn btn-ghost btn-sm" onclick="showToast(\'Saved ✓\',\'success\')">💾 Save answer</button>'
-        + '<button class="btn btn-ghost btn-sm" onclick="document.getElementById(\'questionInput\').value=\'\';document.getElementById(\'answerArea\').innerHTML=\'\'">✕ Clear</button>';
-      area.appendChild(btns);
-      showToast('✦ AI answer ready', 'success');
-    });
-
-    es.addEventListener('error', e => {
-      // SSE connection error — keep local result
-      cleanup(false);
-    });
-
-    es.onerror = () => cleanup(false);
 
   } catch(err) {
-    // EventSource not supported or failed — keep local result
     cleanup(false);
   }
 }
@@ -2899,7 +2917,6 @@ function submitQuestion(){
   const lawArea  = document.getElementById('lawAreaSelect').value;
   if (!question) { showToast('Please enter a question', 'error'); return; }
 
-  // Increment display counter (no gate)
   const count = parseInt(localStorage.getItem('xeerhub_ask_count') || '0') + 1;
   localStorage.setItem('xeerhub_ask_count', String(count));
   updateUsageUI();
@@ -2907,18 +2924,18 @@ function submitQuestion(){
   const btn  = document.getElementById('askBtn');
   const area = document.getElementById('answerArea');
 
-  // Disable button to prevent double-submit
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> Thinking…';
   btn.style.background = 'var(--teal-mid)';
 
-  // ── ZERO-FLASH: run local engine first, then swap DOM atomically ──
-  // We clear + fill in a single assignment so the browser never paints a blank frame.
-  area.innerHTML = '';           // clear old result
-  runLocalEngine(question, lawArea);  // fill instantly (~10ms, synchronous)
-  btn.disabled = false; btn.innerHTML = 'Get Answer →'; btn.style.background = '';
+  // Show local result instantly as a fallback baseline
+  area.innerHTML = '';
+  runLocalEngine(question, lawArea);
+  btn.disabled = false;
+  btn.innerHTML = 'Get Answer →';
+  btn.style.background = '';
 
-  // ── BACKGROUND: stream AI answer over the local result ──
+  // Stream the real AI answer on top — replaces local result when ready
   streamAIAnswer(question, lawArea, area);
 }
 
