@@ -1715,7 +1715,7 @@ const QA={
     {id:41,q:"Can an employee be dismissed for long-term illness?",a:"Dismissal due to long-term illness is possible but only after allowing a reasonable period for recovery, considering role adjustments, and following proper process. Dismissing an employee immediately upon learning of a serious illness without following due process is unlawful.",ref:"Labour Code · Arts. 68, 70, 111",tier:"premium"},
     {id:42,q:"What rights does an employee have if falsely accused of misconduct?",a:"An employee falsely accused of misconduct has the right to a fair hearing before any disciplinary sanction is imposed. If the employer proceeds to dismiss without establishing the facts the dismissal is unlawful and the employee can bring a claim before the Ministry of Labour or courts.",ref:"Labour Code · Arts. 108, 111, 112",tier:"premium"},
     {id:43,q:"Can an employer require employees to work on Fridays?",a:"Friday is the designated weekly rest day in Somalia. Employers may require Friday work only in exceptional circumstances and must provide compensatory rest or additional pay. Systematic rostering of Friday as a regular working day without compensation violates the Labour Code.",ref:"Labour Code · Art. 64",tier:"premium"},
-    {id:44,q:"Are apprentices and trainees covered by the Labour Code?",a:"Yes. Apprentices and trainees have protections under the Labour Code. Their training agreement must be in writing, they must be remunerated in a just and fair manner, and they cannot be assigned tasks outside the scope of their training or beyond their physical strength.",ref:"Labour Code · Arts. 50-58",tier:"premium"},
+    {id:44,q:"Are apprentices and trainees covered by the Labour Code?\",a:\"Yes. Apprentices and trainees have protections under the Labour Code. Their training agreement must be in writing, they must be remunerated in a just and fair manner, and they cannot be assigned tasks outside the scope of their training or beyond their physical strength.",ref:"Labour Code · Arts. 50-58",tier:"premium"},
     {id:45,q:"Can an employer monitor employees communications?",a:"Employers may implement monitoring policies but must inform employees clearly that monitoring takes place. Covert surveillance that invades reasonable privacy is not permitted. Any monitoring policy must be proportionate to the legitimate business need and documented in the contract or staff handbook.",ref:"Labour Code · Arts. 47, 48",tier:"premium"},
     {id:46,q:"What happens if an employer does not follow safety rules and an accident occurs?",a:"An employer who fails to comply with safety obligations and an employee is injured as a result faces both civil liability — to compensate the injured worker — and potential criminal prosecution. Regulatory authorities can also impose fines and require remedial action.",ref:"Labour Code · Arts. 35, 38, 140",tier:"premium"},
     {id:47,q:"Can employees be required to wear uniforms or follow a dress code?",a:"Employers can require uniforms or dress codes where there is a legitimate business reason such as safety, hygiene, or professional image. Where uniforms are required the employer should bear the cost. Dress code requirements must be applied consistently and not in a discriminatory manner.",ref:"Labour Code · Arts. 35, 48",tier:"premium"},
@@ -2772,15 +2772,12 @@ function stopStatusCycle(intervalId) {
 }
 
 // ── STREAMING AI ANSWER ───────────────────────────────────────
-// ── AI STREAMING  ────────────────────────────────────────────
-// Three bugs fixed vs previous version:
-// 1. onerror fired on keep-alive pings → now only fires on real close errors
-// 2. clearTimeout inside token handler → stream never timed out on mid-stream stall
-// 3. No guard against `answer_done` firing multiple times → duplicated UI
+// Uses Server-Sent Events so tokens appear word-by-word (~1s first token).
+// Falls back silently if EventSource fails (e.g. Railway is cold).
 function streamAIAnswer(question, lawArea, area) {
-  const url = RAILWAY_API + '?q=' + encodeURIComponent(question) + '&stream=1&area=' + encodeURIComponent(lawArea);
+  const url = RAILWAY_API + '?q=' + encodeURIComponent(question) + '&stream=1';
 
-  // Build the streaming card immediately so the user sees activity
+  // Inject a live typing card above the local result
   const streamCard = document.createElement('div');
   streamCard.id = 'aiStreamCard';
   streamCard.className = 'answer-card fade-in';
@@ -2799,74 +2796,41 @@ function streamAIAnswer(question, lawArea, area) {
   area.prepend(streamCard);
 
   let accumulated = '';
-  let done = false; // guard: prevent double-finish
+  let citations = null;
   let es = null;
-
-  // Hard 20 s deadline — set ONCE, never reset inside token handler.
-  // Previous bug: clearTimeout on every token meant stalled streams
-  // could wait indefinitely.
-  const hardDeadline = setTimeout(() => cleanup(false), 20_000);
+  const timeout = setTimeout(() => {
+    // Server took too long — clean up and keep local result
+    cleanup(false);
+  }, RAILWAY_TIMEOUT_MS);
 
   function cleanup(success) {
-    if (done) return;
-    done = true;
-    clearTimeout(hardDeadline);
+    clearTimeout(timeout);
     if (es) { try { es.close(); } catch(_){} es = null; }
-
-    if (!success) {
-      const card = document.getElementById('aiStreamCard');
-      if (card) card.remove();
-      // Leave the local engine result visible — it's already rendered below
+    const card = document.getElementById('aiStreamCard');
+    if (!success && card) {
+      card.remove(); // remove partial card, keep local result
       const note = document.createElement('div');
-      note.id = 'aiUnavailNote';
       note.style.cssText = 'margin-top:.5rem;padding:.4rem .75rem;background:var(--gold-pale);border:1px solid var(--gold-border);border-radius:var(--r-sm);font-size:.75rem;color:var(--gold-dark)';
       note.textContent = '⚡ Showing local knowledge base result — AI engine temporarily unavailable.';
       area.appendChild(note);
     }
   }
 
-  function finish(fullAnswer) {
-    if (done) return;
-    done = true;
-    clearTimeout(hardDeadline);
-    if (es) { try { es.close(); } catch(_){} es = null; }
-
-    // Final render without blinking cursor
-    const body = document.getElementById('aiStreamBody');
-    if (body) {
-      body.innerHTML = fullAnswer
-        .split(/\n{2,}/)
-        .map(p => `<p style="margin-bottom:.7rem">${p.replace(/\n/g,'<br>')}</p>`)
-        .join('');
-    }
-
-    // Remove local fallback cards and notes
-    area.querySelectorAll('.answer-card:not(#aiStreamCard)').forEach(c => c.remove());
-    area.querySelectorAll('#aiUnavailNote').forEach(n => n.remove());
-
-    // Action buttons
-    const btns = document.createElement('div');
-    btns.style.cssText = 'display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap';
-    btns.innerHTML = '<button class="btn btn-ghost btn-sm" onclick="showToast(\'Saved ✓\',\'success\')">💾 Save answer</button>'
-      + '<button class="btn btn-ghost btn-sm" onclick="document.getElementById(\'questionInput\').value=\'\';document.getElementById(\'answerArea\').innerHTML=\'\'">✕ Clear</button>';
-    area.appendChild(btns);
-    showToast('✦ AI answer ready', 'success');
-  }
-
   function renderCitations(cit) {
     const box = document.getElementById('aiStreamCitations');
     if (!box) return;
-    const lawsHtml = (cit.laws || []).map(c =>
-      `<span style="display:inline-flex;align-items:center;gap:.35rem;background:var(--teal-pale);color:var(--teal-deep);font-family:'DM Mono',monospace;font-size:.7rem;padding:.2rem .65rem;border-radius:100px;border:1px solid var(--border-strong);margin:.15rem">${c.law}${c.article ? ' · Art. ' + c.article : ''}</span>`
-    ).join('');
-    const blogsHtml = (cit.blogs || []).map(b =>
-      `<span onclick="openBlogBySlug('${b.slug||''}')" style="display:inline-flex;align-items:center;gap:.35rem;background:var(--gold-pale);color:var(--gold-dark);font-size:.7rem;padding:.2rem .65rem;border-radius:100px;border:1px solid var(--gold-border);margin:.15rem;cursor:pointer">📝 ${b.title}</span>`
-    ).join('');
-    if (lawsHtml || blogsHtml) {
+    const laws  = (cit.laws  || []).map(c => {
+      const pct = c.similarity ? Math.round(c.similarity*100) : null;
+      return `<span style="display:inline-flex;align-items:center;gap:.35rem;background:var(--teal-pale);color:var(--teal-deep);font-family:'DM Mono',monospace;font-size:.7rem;padding:.2rem .65rem;border-radius:100px;border:1px solid var(--border-strong);margin:.15rem">${c.law}${c.article?' · Art. '+c.article:''}${pct?' <span style=\'opacity:.65\'>'+pct+'%</span>':''}</span>`;
+    }).join('');
+    const blogs = (cit.blogs || []).map(b => {
+      const pct = b.similarity ? Math.round(b.similarity*100) : null;
+      return `<span onclick="openBlogBySlug('${b.slug||''}')" style="display:inline-flex;align-items:center;gap:.35rem;background:var(--gold-pale);color:var(--gold-dark);font-size:.7rem;padding:.2rem .65rem;border-radius:100px;border:1px solid var(--gold-border);margin:.15rem;cursor:pointer">📝 ${b.title}${pct?' <span style=\'opacity:.65\'>'+pct+'%</span>':''}</span>`;
+    }).join('');
+    if (laws || blogs) {
       box.style.display = 'block';
-      box.innerHTML =
-        (lawsHtml  ? `<div style="margin-bottom:.5rem"><div style="font-size:.7rem;color:var(--muted);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.08em">📎 Verified legal references</div><div>${lawsHtml}</div></div>` : '') +
-        (blogsHtml ? `<div><div style="font-size:.7rem;color:var(--muted);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.08em">📰 Related articles</div><div>${blogsHtml}</div></div>` : '');
+      box.innerHTML = (laws  ? `<div style="margin-bottom:.5rem"><div style="font-size:.7rem;color:var(--muted);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.08em">📎 Verified legal references</div><div>${laws}</div></div>` : '')
+                    + (blogs ? `<div><div style="font-size:.7rem;color:var(--muted);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.08em">📰 Related articles</div><div>${blogs}</div></div>` : '');
     }
   }
 
@@ -2874,40 +2838,71 @@ function streamAIAnswer(question, lawArea, area) {
     es = new EventSource(url);
 
     es.addEventListener('citations', e => {
-      try { renderCitations(JSON.parse(e.data)); } catch(_) {}
+      citations = JSON.parse(e.data);
+      renderCitations(citations);
     });
 
     es.addEventListener('token', e => {
-      if (done) return;
+      clearTimeout(timeout);
       try {
-        const { token } = JSON.parse(e.data);
-        accumulated += token;
-        const body = document.getElementById('aiStreamBody');
-        if (body) {
-          body.innerHTML = accumulated
-            .split(/\n{2,}/)
-            .map(p => `<p style="margin-bottom:.7rem">${p.replace(/\n/g,'<br>')}</p>`)
-            .join('') + '<span class="ai-cursor"></span>';
+        const parsed = JSON.parse(e.data);
+        const token = parsed.token || '';
+        if (token) {
+          accumulated += token;
+          const body = document.getElementById('aiStreamBody');
+          if (body) {
+            body.innerHTML = accumulated
+              .split(/\n{2,}/)
+              .map(p => `<p style="margin-bottom:.7rem">${p.replace(/\n/g,'<br>')}</p>`)
+              .join('') + '<span class="ai-cursor"></span>';
+          }
         }
       } catch(_) {}
     });
 
-    es.addEventListener('answer_done', () => {
-      finish(accumulated);
+    es.addEventListener('answer_done', e => {
+      es.close();
+      clearTimeout(timeout);
+      // Use event answer data as primary, accumulated tokens as fallback
+      let finalText = accumulated;
+      try {
+        const parsed = JSON.parse(e.data);
+        if (parsed.answer && parsed.answer.trim()) finalText = parsed.answer;
+      } catch(_) {}
+      const body = document.getElementById('aiStreamBody');
+      if (body) {
+        if (finalText && finalText.trim()) {
+          body.innerHTML = finalText
+            .split(/\n{2,}/)
+            .map(p => `<p style="margin-bottom:.7rem">${p.replace(/\n/g,'<br>')}</p>`)
+            .join('');
+        } else {
+          body.innerHTML = '<p style="color:var(--muted);font-style:italic">The AI could not generate an answer for this question. Please try rephrasing or browse the Q&A Library.</p>';
+        }
+      }
+      // Remove local fallback result below
+      const cards = area.querySelectorAll('.answer-card:not(#aiStreamCard)');
+      cards.forEach(c => c.remove());
+      const notes = area.querySelectorAll('div[style*="gold-pale"]');
+      notes.forEach(n => n.remove());
+      // Add action buttons
+      const btns = document.createElement('div');
+      btns.style.cssText = 'display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap';
+      btns.innerHTML = '<button class="btn btn-ghost btn-sm" onclick="showToast(\'Saved ✓\',\'success\')">💾 Save answer</button>'
+        + '<button class="btn btn-ghost btn-sm" onclick="document.getElementById(\'questionInput\').value=\'\';document.getElementById(\'answerArea\').innerHTML=\'\'">✕ Clear</button>';
+      area.appendChild(btns);
+      showToast('✦ AI answer ready', 'success');
     });
 
-    // BUG FIXED: previous code called cleanup(false) on ANY error event,
-    // including the harmless keep-alive re-connect pings that EventSource fires.
-    // Now we only treat it as a real failure if we haven't received any tokens yet.
-    es.addEventListener('error', () => {
-      if (!accumulated) {
-        // No tokens arrived at all — genuine connection failure
-        cleanup(false);
-      }
-      // If we already have tokens, ignore the error ping and wait for answer_done
+    es.addEventListener('error', e => {
+      // SSE connection error — keep local result
+      cleanup(false);
     });
+
+    es.onerror = () => cleanup(false);
 
   } catch(err) {
+    // EventSource not supported or failed — keep local result
     cleanup(false);
   }
 }
@@ -2917,6 +2912,7 @@ function submitQuestion(){
   const lawArea  = document.getElementById('lawAreaSelect').value;
   if (!question) { showToast('Please enter a question', 'error'); return; }
 
+  // Increment display counter (no gate)
   const count = parseInt(localStorage.getItem('xeerhub_ask_count') || '0') + 1;
   localStorage.setItem('xeerhub_ask_count', String(count));
   updateUsageUI();
@@ -2924,18 +2920,18 @@ function submitQuestion(){
   const btn  = document.getElementById('askBtn');
   const area = document.getElementById('answerArea');
 
+  // Disable button to prevent double-submit
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> Thinking…';
   btn.style.background = 'var(--teal-mid)';
 
-  // Show local result instantly as a fallback baseline
-  area.innerHTML = '';
-  runLocalEngine(question, lawArea);
-  btn.disabled = false;
-  btn.innerHTML = 'Get Answer →';
-  btn.style.background = '';
+  // ── ZERO-FLASH: run local engine first, then swap DOM atomically ──
+  // We clear + fill in a single assignment so the browser never paints a blank frame.
+  area.innerHTML = '';           // clear old result
+  runLocalEngine(question, lawArea);  // fill instantly (~10ms, synchronous)
+  btn.disabled = false; btn.innerHTML = 'Get Answer →'; btn.style.background = '';
 
-  // Stream the real AI answer on top — replaces local result when ready
+  // ── BACKGROUND: stream AI answer over the local result ──
   streamAIAnswer(question, lawArea, area);
 }
 
