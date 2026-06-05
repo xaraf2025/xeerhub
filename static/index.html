@@ -2843,42 +2843,29 @@ function streamAIAnswer(question, lawArea, area) {
     });
 
     es.addEventListener('token', e => {
-      clearTimeout(timeout);
-      try {
-        const parsed = JSON.parse(e.data);
-        const token = parsed.token || '';
-        if (token) {
-          accumulated += token;
-          const body = document.getElementById('aiStreamBody');
-          if (body) {
-            body.innerHTML = accumulated
-              .split(/\n{2,}/)
-              .map(p => `<p style="margin-bottom:.7rem">${p.replace(/\n/g,'<br>')}</p>`)
-              .join('') + '<span class="ai-cursor"></span>';
-          }
-        }
-      } catch(_) {}
+      clearTimeout(timeout); // reset timeout on each token
+      const { token } = JSON.parse(e.data);
+      accumulated += token;
+      const body = document.getElementById('aiStreamBody');
+      if (body) {
+        // Format paragraphs on the fly
+        body.innerHTML = accumulated
+          .split(/\n{2,}/)
+          .map(p => `<p style="margin-bottom:.7rem">${p.replace(/\n/g,'<br>')}</p>`)
+          .join('') + '<span class="ai-cursor"></span>';
+      }
     });
 
     es.addEventListener('answer_done', e => {
       es.close();
       clearTimeout(timeout);
-      // Use event answer data as primary, accumulated tokens as fallback
-      let finalText = accumulated;
-      try {
-        const parsed = JSON.parse(e.data);
-        if (parsed.answer && parsed.answer.trim()) finalText = parsed.answer;
-      } catch(_) {}
       const body = document.getElementById('aiStreamBody');
       if (body) {
-        if (finalText && finalText.trim()) {
-          body.innerHTML = finalText
-            .split(/\n{2,}/)
-            .map(p => `<p style="margin-bottom:.7rem">${p.replace(/\n/g,'<br>')}</p>`)
-            .join('');
-        } else {
-          body.innerHTML = '<p style="color:var(--muted);font-style:italic">The AI could not generate an answer for this question. Please try rephrasing or browse the Q&A Library.</p>';
-        }
+        // Final render — remove cursor
+        body.innerHTML = accumulated
+          .split(/\n{2,}/)
+          .map(p => `<p style="margin-bottom:.7rem">${p.replace(/\n/g,'<br>')}</p>`)
+          .join('');
       }
       // Remove local fallback result below
       const cards = area.querySelectorAll('.answer-card:not(#aiStreamCard)');
@@ -3380,8 +3367,29 @@ const BLOG_ARTICLES = {
 };
 
 // ── BLOG MODAL FUNCTIONS ──────────────────────────────────────
-function openBlog(slug) {
-  const article = BLOG_ARTICLES[slug];
+async function openBlog(slug) {
+  // Try Supabase-backed API first, fall back to local BLOG_ARTICLES
+  const RAIL = 'https://xeerhub-api-production.up.railway.app';
+  let article = null;
+
+  try {
+    const res = await fetch(`${RAIL}/blogs/${encodeURIComponent(slug)}`);
+    if (res.ok) {
+      const d = await res.json();
+      // Map DB columns → same shape as old local object
+      article = {
+        title:         d.title,
+        category:      d.category,
+        categoryStyle: d.category_style || '',
+        date:          d.date_label,
+        readTime:      d.read_time,
+        body:          d.body,
+      };
+    }
+  } catch (_) {}
+
+  // Fallback to hardcoded object if API unavailable
+  if (!article) article = BLOG_ARTICLES[slug];
   if (!article) { showToast('Article not found', 'error'); return; }
 
   document.getElementById('blog-modal-title').textContent    = article.title;
@@ -3396,12 +3404,8 @@ function openBlog(slug) {
 }
 
 function openBlogBySlug(slug) {
-  if (BLOG_ARTICLES[slug]) {
-    openBlog(slug);
-  } else {
-    showPage('blog');
-    showToast('Browse our articles below', 'success');
-  }
+  // openBlog() already handles API + fallback
+  openBlog(slug);
 }
 
 function closeBlogModal() {
