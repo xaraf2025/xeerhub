@@ -331,6 +331,108 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 .page.active{display:block}
 
 /* ═══════════════════════════════════════════
+   HERO V2 — STATUTE CONSOLE
+═══════════════════════════════════════════ */
+.hero-v2{
+  position:relative;background:var(--teal-deep);overflow:hidden;
+  padding-top:64px;
+}
+.hero-v2-bg{
+  position:absolute;right:-4%;top:50%;transform:translateY(-50%);
+  font-family:'Playfair Display',serif;font-size:42rem;font-weight:900;
+  color:rgba(255,255,255,0.045);line-height:1;pointer-events:none;user-select:none;
+}
+.hero-v2-inner{
+  position:relative;z-index:2;max-width:760px;margin:0 auto;
+  padding:5rem 2rem 4.5rem;text-align:center;
+}
+.hero-v2-eyebrow{
+  font-size:.72rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--teal-light);margin-bottom:1.5rem;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.hero-v2-eyebrow::before,.hero-v2-eyebrow::after{content:'';display:inline-block;width:24px;height:1px;background:var(--teal-light)}
+.hero-v2-headline{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.4rem,5.5vw,4rem);font-weight:900;line-height:1.1;
+  color:#fff;margin-bottom:1.25rem;letter-spacing:-0.01em;
+}
+.hero-v2-headline em{font-style:italic;color:var(--teal-light)}
+.hero-v2-sub{
+  font-size:1.02rem;font-weight:300;color:rgba(255,255,255,0.68);
+  max-width:560px;margin:0 auto 2.25rem;line-height:1.8;
+}
+.hero-v2-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:3rem}
+
+/* Console mockup */
+.console{
+  background:var(--cream);border-radius:var(--r);
+  box-shadow:0 24px 64px rgba(0,0,0,0.28);
+  max-width:560px;margin:0 auto 3rem;text-align:left;
+  overflow:hidden;border:1px solid rgba(255,255,255,0.08);
+}
+.console-bar{
+  display:flex;align-items:center;gap:8px;
+  padding:.7rem 1.1rem;border-bottom:1px solid var(--border);background:var(--parchment);
+}
+.console-dot{width:9px;height:9px;border-radius:50%;background:var(--teal-light);display:inline-block;animation:pulse 2s infinite}
+.console-label{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-deep)}
+.console-q{
+  padding:1.1rem 1.25rem .25rem;font-family:'Playfair Display',serif;font-style:italic;
+  font-size:1.05rem;color:var(--ink);line-height:1.5;
+}
+.console-a{
+  padding:.6rem 1.25rem 1rem;font-size:.9rem;color:var(--muted);line-height:1.75;
+}
+.console-cite{
+  display:inline-block;margin:0 1.25rem 1.25rem;font-family:'DM Mono',monospace;
+  font-size:.74rem;letter-spacing:.02em;color:#9A4A26;
+  background:#FAECE7;border:1px solid rgba(181,86,46,0.25);
+  padding:.3rem .75rem;border-radius:100px;font-weight:500;
+}
+
+.hero-v2-stats{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap}
+.hero-v2-stats .stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#fff;line-height:1;text-align:center}
+.hero-v2-stats .stat-label{font-size:.7rem;font-weight:400;color:rgba(255,255,255,0.45);margin-top:4px;text-transform:uppercase;letter-spacing:.1em;text-align:center}
+
+@media(max-width:640px){
+  .hero-v2-inner{padding:4rem 1.25rem 3.5rem}
+  .hero-v2-bg{font-size:24rem}
+  .hero-v2-stats{gap:1.5rem 2rem}
+}
+
+/* ═══════════════════════════════════════════
+   STATUTE INDEX — five-law spine
+═══════════════════════════════════════════ */
+.statute-index{padding:5.5rem 0;background:var(--cream)}
+.statute-list{display:flex;flex-direction:column;border-top:1px solid var(--border);margin-top:2rem}
+.statute-row{
+  display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:1.5rem;
+  padding:1.4rem 0;border-bottom:1px solid var(--border);
+  cursor:pointer;transition:background .2s;
+}
+.statute-row:hover{background:var(--parchment)}
+.statute-row-pending{cursor:default}
+.statute-row-pending:hover{background:transparent}
+.statute-num{
+  font-family:'DM Mono',monospace;font-size:1.05rem;color:var(--teal-mid);
+  font-weight:500;letter-spacing:.05em;
+}
+.statute-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--ink);margin-bottom:.2rem}
+.statute-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+.statute-meta{text-align:right;display:flex;flex-direction:column;gap:.3rem;align-items:flex-end}
+.statute-count{
+  font-family:'DM Mono',monospace;font-size:.8rem;font-weight:600;color:var(--teal-deep);
+  background:var(--teal-pale);padding:.2rem .65rem;border-radius:100px;border:1px solid var(--border-strong);
+}
+.statute-count-pending{color:var(--gold-dark);background:var(--gold-pale);border-color:var(--gold-border)}
+.statute-cite{font-size:.72rem;color:var(--muted);font-family:'DM Mono',monospace}
+@media(max-width:700px){
+  .statute-row{grid-template-columns:40px 1fr;gap:1rem}
+  .statute-meta{grid-column:2;align-items:flex-start;text-align:left;margin-top:.4rem}
+}
+
+/* ═══════════════════════════════════════════
    HERO — SPLIT LAYOUT (from redesign)
 ═══════════════════════════════════════════ */
 .hero{
@@ -828,52 +930,36 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 ══════════════════════════════════════════════ -->
 <div class="page active" id="page-home">
 
-  <!-- SPLIT HERO -->
-  <section class="hero">
-    <!-- LEFT -->
-    <div class="hero-left">
-      <div class="hero-eyebrow">Somalia's Legal Intelligence Platform</div>
-      <h1 class="hero-headline">Clear answers to<br><em>real legal questions</em></h1>
-      <p class="hero-sub">Instant, verified answers on Somali Labour Law, Foreign Investment Law, Income Tax Law, Environmental Protection Act 2024, and the <strong style="color:var(--teal-light)">Data Protection Act</strong> — built for enterprises, lawyers, and business professionals.</p>
-      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(43,174,135,0.13);border:1px solid rgba(43,174,135,0.28);border-radius:100px;padding:.35rem 1rem .35rem .6rem;margin-bottom:1.5rem;position:relative;z-index:2">
-        <span style="background:var(--gold);color:var(--ink);font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .55rem;border-radius:100px">NEW</span>
-        <span style="font-size:.8rem;color:rgba(255,255,255,0.8);font-weight:400">🔐 Data Protection Act — now in the library</span>
+  <!-- HERO — STATUTE CONSOLE -->
+  <section class="hero-v2">
+    <div class="hero-v2-bg" aria-hidden="true">§</div>
+    <div class="hero-v2-inner">
+      <div class="hero-v2-eyebrow">Somalia's legal intelligence platform</div>
+      <h1 class="hero-v2-headline">Every Somali law,<br><em>down to the article.</em></h1>
+      <p class="hero-v2-sub">Ask a question in plain English. XeerHub searches the Labour Code, Income Tax Act 2025, EPMA 2024, the Data Protection Act, and Foreign Investment Law — and answers with the exact provision cited.</p>
+      <div class="hero-v2-actions">
+        <button class="hero-btn-gold" onclick="showPage('ask')">Ask a legal question →</button>
+        <button class="hero-btn-ghost" onclick="showPage('library')">Browse the Q&amp;A library</button>
       </div>
-      <div class="hero-actions">
-        <button class="hero-btn-gold" onclick="showPage('library')">Browse Q&A Library →</button>
-        <button class="hero-btn-ghost" onclick="showPage('ask')">Ask a Legal Question</button>
+
+      <!-- Console mockup -->
+      <div class="console" role="img" aria-label="Example of XeerHub answering a legal question with a cited article">
+        <div class="console-bar">
+          <span class="console-dot"></span>
+          <span class="console-label">Ask AI</span>
+        </div>
+        <div class="console-q">"Is the import and export of charcoal legal in Somalia?"</div>
+        <div class="console-a">
+          No. The import and export of charcoal is prohibited. Violations carry imprisonment of two to five years, and the government shall confiscate all materials used in committing the offence.
+        </div>
+        <div class="console-cite">EPMA 2024 · Art. 48(1),(5)&ndash;(6)</div>
       </div>
-      <div class="hero-stats stagger">
-        <div><div class="stat-num">245</div><div class="stat-label">Verified Q&As</div></div>
-        <div><div class="stat-num">5</div><div class="stat-label">Laws Covered</div></div>
-        <div><div class="stat-num">AI</div><div class="stat-label">Powered Answers</div></div>
-        <div><div class="stat-num">Free</div><div class="stat-label">To Start</div></div>
-      </div>
-    </div>
-    <!-- RIGHT: sample cards -->
-    <div class="hero-right">
-      <div class="hero-right-label">Sample Q&As from the library</div>
-      <div class="sample-cards">
-        <div class="sample-card card-labor">
-          <div class="card-area"><span class="dot dot-teal"></span><span class="card-area-label" style="color:var(--labor)">Labor Law</span></div>
-          <div class="card-q">Is maternity leave paid in Somalia?</div>
-          <div class="card-ref">Labour Code · Art. 129</div>
-        </div>
-        <div class="sample-card card-invest">
-          <div class="card-area"><span class="dot dot-blue"></span><span class="card-area-label" style="color:var(--company)">Investment Law</span></div>
-          <div class="card-q">Can the government seize my foreign investment?</div>
-          <div class="card-ref">Foreign Investment Law · Art. 18</div>
-        </div>
-        <div class="sample-card card-tax">
-          <div class="card-area"><span class="dot dot-red"></span><span class="card-area-label" style="color:#E24B4A">Income Tax Law</span></div>
-          <div class="card-q">What is the Presumptive Tax Regime and who qualifies?</div>
-          <div class="card-ref">ITR 2025 · Reg 9-1, Reg 9-2 · ITA 2025 · Art. 9</div>
-        </div>
-        <div class="sample-card card-env" style="border-left-color:var(--env)">
-          <div class="card-area"><span class="dot dot-env"></span><span class="card-area-label" style="color:var(--env)">Environmental Law 🌿</span></div>
-          <div class="card-q">Is the import and export of charcoal legal in Somalia?</div>
-          <div class="card-ref">EPMA 2024 · Art. 48(1),(5)–(6)</div>
-        </div>
+
+      <div class="hero-v2-stats stagger">
+        <div><div class="stat-num">195</div><div class="stat-label">Verified Q&amp;As</div></div>
+        <div><div class="stat-num">5</div><div class="stat-label">Laws indexed</div></div>
+        <div><div class="stat-num">100%</div><div class="stat-label">Article-cited</div></div>
+        <div><div class="stat-num">Free</div><div class="stat-label">To start</div></div>
       </div>
     </div>
   </section>
@@ -887,7 +973,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
           <div class="trust-item-icon">📋</div>
           <div class="trust-item-text">
             <span class="trust-item-label">Knowledge base</span>
-            <span class="trust-item-value">245+ Verified Q&amp;As</span>
+            <span class="trust-item-value">195 verified Q&amp;As</span>
           </div>
         </div>
 
@@ -895,7 +981,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
           <div class="trust-item-icon">📚</div>
           <div class="trust-item-text">
             <span class="trust-item-label">Laws covered</span>
-            <span class="trust-item-value">6 Official Somali Laws</span>
+            <span class="trust-item-value">5 official Somali laws</span>
           </div>
         </div>
 
@@ -903,7 +989,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
           <div class="trust-item-icon">🔒</div>
           <div class="trust-item-text">
             <span class="trust-item-label">Security</span>
-            <span class="trust-item-value">SSL Encrypted</span>
+            <span class="trust-item-value">SSL encrypted</span>
           </div>
         </div>
 
@@ -911,7 +997,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
           <div class="trust-item-icon">🏛️</div>
           <div class="trust-item-text">
             <span class="trust-item-label">Sources</span>
-            <span class="trust-item-value">Official Legislation Only</span>
+            <span class="trust-item-value">Official legislation only</span>
           </div>
         </div>
 
@@ -919,7 +1005,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
           <div class="trust-item-icon">👥</div>
           <div class="trust-item-text">
             <span class="trust-item-label">Trusted by</span>
-            <span class="trust-item-value">Enterprises &amp; Law Firms</span>
+            <span class="trust-item-value">Enterprises &amp; law firms</span>
           </div>
         </div>
 
@@ -934,6 +1020,80 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       </div>
     </div>
   </section>
+
+  <!-- THE FIVE STATUTES — index spine -->
+  <section class="statute-index">
+    <div class="container">
+      <div class="section-eyebrow">The library</div>
+      <h2 class="section-title">Five laws, indexed article by article</h2>
+      <p class="section-sub">Every Q&amp;A traces back to a specific article. Where coverage is still being built, we say so — no invented provisions.</p>
+      <div class="statute-list stagger">
+
+        <div class="statute-row" onclick="setLibraryFilterAndGo('labor')">
+          <div class="statute-num">01</div>
+          <div class="statute-body">
+            <div class="statute-name">Labour Code</div>
+            <div class="statute-desc">Contracts, leave, termination, wages, and worker rights.</div>
+          </div>
+          <div class="statute-meta">
+            <span class="statute-count">50 Q&amp;As</span>
+            <span class="statute-cite">e.g. Art. 129 — maternity leave</span>
+          </div>
+        </div>
+
+        <div class="statute-row" onclick="setLibraryFilterAndGo('tax')">
+          <div class="statute-num">02</div>
+          <div class="statute-body">
+            <div class="statute-name">Income Tax Act 2025</div>
+            <div class="statute-desc">PIT, corporation tax, withholding, PTR, and the GIA.</div>
+          </div>
+          <div class="statute-meta">
+            <span class="statute-count">70 Q&amp;As</span>
+            <span class="statute-cite">e.g. Art. 9 — Presumptive Tax Regime</span>
+          </div>
+        </div>
+
+        <div class="statute-row" onclick="setLibraryFilterAndGo('environment')">
+          <div class="statute-num">03</div>
+          <div class="statute-body">
+            <div class="statute-name">EPMA 2024</div>
+            <div class="statute-desc">Impact assessments, permits, and environmental offences.</div>
+          </div>
+          <div class="statute-meta">
+            <span class="statute-count">50 Q&amp;As</span>
+            <span class="statute-cite">e.g. Art. 48 — charcoal ban</span>
+          </div>
+        </div>
+
+        <div class="statute-row" onclick="setLibraryFilterAndGo('data')">
+          <div class="statute-num">04</div>
+          <div class="statute-body">
+            <div class="statute-name">Data Protection Act</div>
+            <div class="statute-desc">Consent, breach notification, and data subject rights.</div>
+          </div>
+          <div class="statute-meta">
+            <span class="statute-count">25 Q&amp;As</span>
+            <span class="statute-cite">e.g. Art. 25 — breach reporting</span>
+          </div>
+        </div>
+
+        <div class="statute-row statute-row-pending">
+          <div class="statute-num">05</div>
+          <div class="statute-body">
+            <div class="statute-name">Foreign Investment Law</div>
+            <div class="statute-desc">Investor rights, repatriation, and registration.</div>
+          </div>
+          <div class="statute-meta">
+            <span class="statute-count statute-count-pending">In research</span>
+            <span class="statute-cite">Coming to the library next</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
 
   <!-- WHO IT'S FOR -->
   <section class="who-section">
@@ -960,11 +1120,11 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <p class="section-sub">Plain-English questions. Law-backed answers. Every answer cites the exact article.</p>
       <div class="preview-grid stagger">
         <div class="preview-card"><div class="preview-card-header"><span class="tag tag-labor">🟢 Labor Law</span></div><div class="preview-card-body"><div class="preview-q">Do I have to give an employee a written contract?</div><div class="preview-a">Yes. Every employment relationship must be documented in writing. Verbal agreements are not enforceable for key terms such as salary, duration, and job role.</div><div class="preview-ref">Labour Code · Arts. 16–18</div></div></div>
-        <div class="preview-card"><div class="preview-card-header"><span class="tag tag-invest">🟡 Investment Law</span></div><div class="preview-card-body"><div class="preview-q">Can the government seize my foreign investment?</div><div class="preview-a">Registered foreign investment is protected from expropriation except in cases of overriding public interest. Adequate compensation at fair market value is required.</div><div class="preview-ref">Foreign Investment Law · Art. 18</div></div></div>
         <div class="preview-card"><div class="preview-card-header"><span class="tag tag-tax">🔷 Income Tax Law</span></div><div class="preview-card-body"><div class="preview-q">What is the Presumptive Tax Regime and who qualifies?</div><div class="preview-a">Under Regulation 9-1, PTR applies to residents whose turnover does not exceed USD 50,000/year. Quarterly tax = higher of USD 37.50 or 1.5% of quarterly turnover. Professionals are excluded.</div><div class="preview-ref">ITR 2025 · Reg 9-1, Reg 9-2 · ITA 2025 · Art. 9</div></div></div>
         <div class="preview-card"><div class="preview-card-header"><span class="tag tag-env">🌿 Environmental Law</span></div><div class="preview-card-body"><div class="preview-q">Is the import and export of charcoal legal in Somalia?</div><div class="preview-a">No. The import and export of charcoal is prohibited under the EPMA 2024. Violations carry criminal penalties including fines and imprisonment. The government shall also confiscate all materials used in committing the offence.</div><div class="preview-ref">EPMA 2024 · Art. 48(1),(5)–(6)</div></div></div>
+        <div class="preview-card"><div class="preview-card-header"><span class="tag tag-data">🛡️ Data Protection</span></div><div class="preview-card-body"><div class="preview-q">When must a data breach be reported, and to whom?</div><div class="preview-a">If a breach is likely to result in a risk to individuals' rights and freedoms, the controller must notify the Data Protection Authority within 72 hours of becoming aware of it. High-risk breaches must also be reported directly to affected individuals.</div><div class="preview-ref">Data Protection Act · Arts. 25–26</div></div></div>
       </div>
-      <div style="text-align:center;margin-top:2.5rem"><button class="btn btn-teal btn-lg" onclick="showPage('library')">View All 245+ Q&As →</button></div>
+      <div style="text-align:center;margin-top:2.5rem"><button class="btn btn-teal btn-lg" onclick="showPage('library')">View all 195 Q&As →</button></div>
     </div>
   </section>
 
@@ -999,7 +1159,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <div class="section-eyebrow">How it works</div>
       <h2 class="section-title">Three ways to get your answer</h2>
       <div class="steps-grid stagger">
-        <div class="step-card"><div class="step-num">1</div><div class="step-title">Browse the Library</div><div class="step-desc">Search 245+ verified Q&As across all five law areas. Filter by topic and find your answer instantly with exact article references.</div></div>
+        <div class="step-card"><div class="step-num">1</div><div class="step-title">Browse the Library</div><div class="step-desc">Search 195 verified Q&As across all five law areas. Filter by topic and find your answer instantly with exact article references.</div></div>
         <div class="step-card"><div class="step-num">2</div><div class="step-title">Ask the AI</div><div class="step-desc">Type your question in plain English. Get a clear answer grounded strictly in official legislation — with the exact article cited.</div></div>
         <div class="step-card"><div class="step-num">3</div><div class="step-title">Save & Share</div><div class="step-desc">Save answers to your dashboard, download PDF summaries, and share insights with your team. Everything organised in one place.</div></div>
       </div>
@@ -1060,7 +1220,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <div class="container" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
         <span style="font-size:.78rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.08em">You are in:</span>
         <div style="display:flex;gap:.5rem">
-          <span style="display:inline-flex;align-items:center;gap:.4rem;background:var(--teal-deep);color:#fff;padding:.35rem 1rem;border-radius:100px;font-size:.82rem;font-weight:600">📚 Browse Library <span style="font-size:.7rem;opacity:.75">— search 245+ Q&As</span></span>
+          <span style="display:inline-flex;align-items:center;gap:.4rem;background:var(--teal-deep);color:#fff;padding:.35rem 1rem;border-radius:100px;font-size:.82rem;font-weight:600">📚 Browse Library <span style="font-size:.7rem;opacity:.75">— search 195 Q&As</span></span>
           <button onclick="showPage('ask')" style="display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--muted);padding:.35rem 1rem;border-radius:100px;font-size:.82rem;font-weight:500;border:1.5px solid var(--border);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--teal-pale)';this.style.color='var(--teal-deep)';this.style.borderColor='var(--teal-mid)'" onmouseout="this.style.background='transparent';this.style.color='var(--muted)';this.style.borderColor='var(--border)'">✦ Ask AI <span style="font-size:.7rem;opacity:.75">— type your question</span></button>
         </div>
       </div>
@@ -1070,17 +1230,16 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
         <div>
           <div class="section-eyebrow">Q&A Library</div>
           <h1 style="font-size:2.2rem;font-family:'Playfair Display',serif">Verified Legal Q&As</h1>
-          <p style="color:var(--muted);font-size:.9rem;margin-top:.3rem">245+ questions · 5 laws · all article references included</p>
+          <p style="color:var(--muted);font-size:.9rem;margin-top:.3rem">195 questions · 5 laws · all article references included</p>
           <p style="font-size:.82rem;color:var(--teal-mid);margin-top:.4rem;font-weight:500">💡 Can't find what you need? <button onclick="showPage('ask')" style="background:none;border:none;color:var(--teal-deep);font-weight:600;cursor:pointer;font-size:.82rem;text-decoration:underline;padding:0">Ask the AI instead →</button></p>
         </div>
       </div>
       <div class="library-controls">
         <div class="search-wrap"><span class="search-icon">🔍</span><input class="input search-input" type="text" placeholder="Search questions..." id="searchInput" oninput="filterQA()"></div>
         <div class="filter-tabs">
-          <button class="filter-tab active" onclick="setFilter('all',this)">All (245)</button>
+          <button class="filter-tab active" onclick="setFilter('all',this)">All (195)</button>
           <button class="filter-tab" onclick="setFilter('labor',this)">🟢 Labor (50)</button>
-          <button class="filter-tab" onclick="setFilter('investment',this)">🟡 Investment (50)</button>
-          <button class="filter-tab" onclick="setFilter('tax',this)">🔷 Tax (40)</button>
+          <button class="filter-tab" onclick="setFilter('tax',this)">🔷 Tax (70)</button>
           <button class="filter-tab" onclick="setFilter('environment',this)">🌿 Environment (50)</button>
           <button class="filter-tab" onclick="setFilter('data',this)">🛡️ Data Protection (25)</button>
         </div>
@@ -1102,7 +1261,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
         <span style="font-size:.78rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.08em">You are in:</span>
         <div style="display:flex;gap:.5rem">
           <span style="display:inline-flex;align-items:center;gap:.4rem;background:var(--teal-deep);color:#fff;padding:.35rem 1rem;border-radius:100px;font-size:.82rem;font-weight:600">✦ Ask AI <span style="font-size:.7rem;opacity:.75">— type your question</span></span>
-          <button onclick="showPage('library')" style="display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--muted);padding:.35rem 1rem;border-radius:100px;font-size:.82rem;font-weight:500;border:1.5px solid var(--border);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--teal-pale)';this.style.color='var(--teal-deep)';this.style.borderColor='var(--teal-mid)'" onmouseout="this.style.background='transparent';this.style.color='var(--muted)';this.style.borderColor='var(--border)'">📚 Browse Library <span style="font-size:.7rem;opacity:.75">— search 245+ Q&As</span></button>
+          <button onclick="showPage('library')" style="display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--muted);padding:.35rem 1rem;border-radius:100px;font-size:.82rem;font-weight:500;border:1.5px solid var(--border);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--teal-pale)';this.style.color='var(--teal-deep)';this.style.borderColor='var(--teal-mid)'" onmouseout="this.style.background='transparent';this.style.color='var(--muted)';this.style.borderColor='var(--border)'">📚 Browse Library <span style="font-size:.7rem;opacity:.75">— search 195 Q&As</span></button>
         </div>
       </div>
     </div>
@@ -1288,7 +1447,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
         5. <strong>Data Protection Act</strong> — personal data rights, controller obligations, consent requirements, and enforcement<br><br>
         More law areas are planned. A Somali-language interface is in development.</div></div>
 
-      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How many Q&amp;A entries are in the library? <span class="faq-icon">+</span></div><div class="faq-a">The library contains <strong>245 verified Q&amp;A entries</strong> across all 5 law areas. Every entry is manually reviewed by a legal researcher before publication. Each answer cites the exact article number from the relevant official legislation — no paraphrasing without a reference, no invented provisions.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How many Q&amp;A entries are in the library? <span class="faq-icon">+</span></div><div class="faq-a">The library contains <strong>195 verified Q&amp;A entries</strong> across all 5 law areas. Every entry is manually reviewed by a legal researcher before publication. Each answer cites the exact article number from the relevant official legislation — no paraphrasing without a reference, no invented provisions.</div></div>
 
       <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How accurate are the AI answers? <span class="faq-icon">+</span></div><div class="faq-a">The AI answer engine is strictly grounded in XeerHub's verified knowledge base — it does not draw from the open internet or general AI training data. Every AI answer cites the specific article it is based on. For Income Tax questions, the engine references both the ITA 2025 and the Income Tax Regulation 2025 (Reg No. 0142-2025). The AI is instructed never to fabricate provisions, and if no verified information exists for a question, it says so rather than guessing.</div></div>
 
@@ -1700,7 +1859,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
           <div class="ab2-tl-dot gold">🚀</div>
           <div class="ab2-tl-content">
             <div class="ab2-tl-date">2025 — Today</div>
-            <div class="ab2-tl-title">Live across 5 laws, 245+ Q&As</div>
+            <div class="ab2-tl-title">Live across 5 laws, 195+ Q&As</div>
             <div class="ab2-tl-text">Labour Code, Foreign Investment Law, Income Tax Act 2025, Environmental Protection &amp; Management Act 2024, and the Data Protection Act. Additional legislation is continuously being researched and added.</div>
           </div>
         </div>
@@ -2701,7 +2860,7 @@ function renderQA(){
   const filter=state.currentFilter;
 
   let items=[];
-  const cats=filter==='all'?Object.keys(QA):(filter==='investment'?['investment']:filter==='labor'?['labor']:filter==='environment'?['environment']:filter==='data'?['data']:['tax']);
+  const cats=filter==='all'?Object.keys(QA):(filter==='labor'?['labor']:filter==='environment'?['environment']:filter==='data'?['data']:['tax']);
   cats.forEach(cat=>{
     if(QA[cat])QA[cat].forEach(q=>{
       if(!search||q.q.toLowerCase().includes(search)||q.a.toLowerCase().includes(search))items.push({...q,cat});
@@ -2749,6 +2908,17 @@ function setFilter(f,btn){
   renderQA();
 }
 function filterQA(){renderQA();}
+
+function setLibraryFilterAndGo(cat){
+  state.currentFilter=cat;
+  showPage('library');
+  setTimeout(()=>{
+    document.querySelectorAll('.filter-tab').forEach(t=>{
+      t.classList.toggle('active', t.getAttribute('onclick')===`setFilter('${cat}',this)`);
+    });
+    renderQA();
+  },0);
+}
 
 // ── ASK AI ─────────────────────────────────────────────────────
 function setSample(el){document.getElementById('questionInput').value=el.textContent;}
@@ -2921,7 +3091,7 @@ function scoreEntry(item,qTokens){
 function retrieveRelevant(question,lawArea,topK=8){
   const catMap={
     'Labor Law':['labor'],
-    'Foreign Investment Law':['investment'],
+    'Foreign Investment Law':Object.keys(QA),
     'Income Tax Law':['tax'],
     'Environmental Law':['environment'],
     'Data Protection Law':['data'],
