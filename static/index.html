@@ -1800,7 +1800,9 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 <!-- ══ BLOG ARTICLE MODAL ══ -->
 <div id="modal-blog-article" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(10,30,24,0.72);backdrop-filter:blur(6px);overflow-y:auto;padding:2rem 1rem" onclick="if(event.target===this)closeBlogModal()">
   <div style="max-width:760px;margin:0 auto;background:var(--cream);border-radius:var(--r);box-shadow:0 24px 80px rgba(0,0,0,0.25);overflow:hidden">
-    <div id="blog-modal-header" style="padding:2.5rem 2.5rem 1.5rem;border-bottom:1px solid var(--border);position:relative">
+    <!-- Hero image banner -->
+    <div id="blog-modal-hero" style="width:100%;height:220px;overflow:hidden;position:relative;background:var(--teal-deep)"></div>
+    <div id="blog-modal-header" style="padding:2rem 2.5rem 1.5rem;border-bottom:1px solid var(--border);position:relative">
       <button onclick="closeBlogModal()" style="position:absolute;top:1.25rem;right:1.25rem;background:var(--parchment);border:1px solid var(--border);border-radius:50%;width:36px;height:36px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted)" aria-label="Close">✕</button>
       <div id="blog-modal-category" style="margin-bottom:.9rem"></div>
       <h1 id="blog-modal-title" style="font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);line-height:1.2;margin-bottom:.75rem;color:var(--ink)"></h1>
@@ -1823,27 +1825,200 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
     </div>
     <div class="blog-grid">
       <div class="blog-card featured" onclick="openBlog('income-tax-2025')" style="cursor:pointer">
-        <div class="blog-thumb featured" style="background:linear-gradient(135deg,var(--parchment),var(--teal-pale))"><div class="blog-category" style="background:var(--primary-dim);color:var(--teal-deep);border:1px solid var(--border)">🔷 Income Tax Law</div></div>
+        <div class="blog-thumb featured" style="background:#0A4A3A;padding:0;overflow:hidden">
+          <svg width="100%" height="100%" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="600" height="240" fill="#0A4A3A"/>
+            <rect width="600" height="240" fill="url(#itaGrad)"/>
+            <defs><linearGradient id="itaGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0A4A3A"/><stop offset="100%" stop-color="#1D7A5E"/></linearGradient></defs>
+            <!-- grid lines -->
+            <line x1="0" y1="60" x2="600" y2="60" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <line x1="0" y1="120" x2="600" y2="120" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <line x1="0" y1="180" x2="600" y2="180" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <line x1="150" y1="0" x2="150" y2="240" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <line x1="300" y1="0" x2="300" y2="240" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <line x1="450" y1="0" x2="450" y2="240" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <!-- big % symbol -->
+            <text x="420" y="220" font-family="Georgia,serif" font-size="200" font-weight="900" fill="rgba(255,255,255,0.06)" dominant-baseline="auto">%</text>
+            <!-- bar chart decoration -->
+            <rect x="40" y="140" width="28" height="70" rx="3" fill="rgba(43,174,135,0.4)"/>
+            <rect x="80" y="110" width="28" height="100" rx="3" fill="rgba(43,174,135,0.5)"/>
+            <rect x="120" y="80" width="28" height="130" rx="3" fill="rgba(43,174,135,0.65)"/>
+            <rect x="160" y="100" width="28" height="110" rx="3" fill="rgba(43,174,135,0.5)"/>
+            <!-- gold accent line -->
+            <rect x="0" y="0" width="4" height="240" fill="#C8991A"/>
+            <!-- label -->
+            <rect x="20" y="20" width="130" height="26" rx="13" fill="rgba(200,153,26,0.2)" stroke="#C8991A" stroke-width="1"/>
+            <text x="85" y="37" font-family="'DM Sans',Arial,sans-serif" font-size="11" font-weight="600" fill="#C8991A" text-anchor="middle" letter-spacing="1">🔷 INCOME TAX LAW</text>
+            <!-- title -->
+            <text x="20" y="75" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#fff">ITA 2025 — Business Guide</text>
+            <text x="20" y="100" font-family="Arial,sans-serif" font-size="13" fill="rgba(255,255,255,0.6)">Presumptive Tax · Corporate Rates · Withholding · GIA</text>
+          </svg>
+        </div>
         <div class="blog-card-body"><div class="blog-title" style="font-size:1.2rem">Somalia's Income Tax Act 2025 explained: what businesses need to know</div><div class="blog-excerpt">A plain-English guide to the ITA 2025 and Regulation No. 0142-2025 — covering the Presumptive Tax Regime, corporate tax rates, withholding obligations, and the General Investment Allowance.</div><div class="blog-meta"><span>📅 January 2026</span><span>⏱ 8 min read</span><span style="color:var(--teal-mid);font-weight:500">Read article →</span></div></div>
       </div>
+      <!-- NGO Employment Contracts -->
       <div class="blog-card" onclick="openBlog('ngo-employment-contracts')" style="cursor:pointer">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,var(--parchment),var(--labor-bg))"><div class="blog-category" style="background:var(--labor-bg);color:var(--labor);border:1px solid rgba(29,122,94,.25)">⚖️ Labour Law</div></div>
+        <div class="blog-thumb" style="background:#1D7A5E;padding:0;overflow:hidden">
+          <svg width="100%" height="100%" viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="laborGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1D7A5E"/><stop offset="100%" stop-color="#0A4A3A"/></linearGradient></defs>
+            <rect width="300" height="160" fill="url(#laborGrad)"/>
+            <!-- faint § watermark -->
+            <text x="200" y="155" font-family="Georgia,serif" font-size="160" font-weight="900" fill="rgba(255,255,255,0.05)" dominant-baseline="auto">§</text>
+            <!-- contract document icon -->
+            <rect x="30" y="35" width="68" height="88" rx="4" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+            <rect x="38" y="55" width="42" height="3" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+            <rect x="38" y="64" width="35" height="3" rx="1.5" fill="rgba(255,255,255,0.35)"/>
+            <rect x="38" y="73" width="40" height="3" rx="1.5" fill="rgba(255,255,255,0.35)"/>
+            <rect x="38" y="82" width="28" height="3" rx="1.5" fill="rgba(255,255,255,0.35)"/>
+            <rect x="38" y="95" width="52" height="3" rx="1.5" fill="rgba(255,255,255,0.3)"/>
+            <rect x="38" y="104" width="38" height="3" rx="1.5" fill="rgba(255,255,255,0.3)"/>
+            <!-- checkmark badge -->
+            <circle cx="88" cy="100" r="14" fill="#2BAE87" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <text x="88" y="106" font-family="Arial" font-size="14" fill="#fff" text-anchor="middle" font-weight="700">✓</text>
+            <!-- people icons -->
+            <circle cx="160" cy="55" r="13" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <text x="160" y="61" font-family="Arial" font-size="16" fill="rgba(255,255,255,0.7)" text-anchor="middle">👤</text>
+            <circle cx="195" cy="55" r="13" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <text x="195" y="61" font-family="Arial" font-size="16" fill="rgba(255,255,255,0.5)" text-anchor="middle">👤</text>
+            <!-- label -->
+            <rect x="28" y="18" width="98" height="20" rx="10" fill="rgba(43,174,135,0.3)" stroke="rgba(43,174,135,0.6)" stroke-width="1"/>
+            <text x="77" y="31" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#2BAE87" text-anchor="middle" letter-spacing="0.8">⚖️ LABOUR LAW</text>
+            <!-- gold accent -->
+            <rect x="0" y="0" width="3" height="160" fill="#C8991A"/>
+          </svg>
+        </div>
         <div class="blog-card-body"><div class="blog-title">What every NGO needs to know about Somali employment contracts</div><div class="blog-excerpt">Local staff protections, termination rules, and the 10 contract clauses every INGO must include under the Labour Code.</div><div class="blog-meta"><span>📅 December 2025</span><span>⏱ 6 min read</span><span style="color:var(--teal-mid);font-weight:500">Read article →</span></div></div>
       </div>
+
+      <!-- Foreign Investor Protections -->
       <div class="blog-card" onclick="openBlog('foreign-investor-protections')" style="cursor:pointer">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,var(--parchment),var(--invest-bg))"><div class="blog-category" style="background:var(--invest-bg);color:var(--invest);border:1px solid var(--gold-border)">💰 Investment Law</div></div>
+        <div class="blog-thumb" style="background:#8A6200;padding:0;overflow:hidden">
+          <svg width="100%" height="100%" viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="investGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#A67D12"/><stop offset="100%" stop-color="#5C4500"/></linearGradient></defs>
+            <rect width="300" height="160" fill="url(#investGrad)"/>
+            <text x="190" y="155" font-family="Georgia,serif" font-size="160" font-weight="900" fill="rgba(255,255,255,0.05)">$</text>
+            <!-- shield icon -->
+            <path d="M55 38 L90 38 L90 78 Q90 95 72.5 105 Q55 95 55 78 Z" fill="rgba(200,153,26,0.25)" stroke="#C8991A" stroke-width="1.5"/>
+            <text x="72" y="78" font-family="Arial" font-size="22" fill="#C8991A" text-anchor="middle" font-weight="700">✦</text>
+            <!-- article 18 badge -->
+            <rect x="105" y="38" width="75" height="34" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <text x="142" y="53" font-family="Georgia,serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">Art. 18</text>
+            <text x="142" y="66" font-family="Arial,sans-serif" font-size="9" fill="rgba(255,255,255,0.6)" text-anchor="middle">INVESTOR PROTECTION</text>
+            <!-- globe lines -->
+            <circle cx="210" cy="75" r="30" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <ellipse cx="210" cy="75" rx="14" ry="30" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <line x1="180" y1="75" x2="240" y2="75" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <line x1="183" y1="62" x2="237" y2="62" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+            <line x1="183" y1="88" x2="237" y2="88" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+            <!-- label -->
+            <rect x="28" y="18" width="105" height="20" rx="10" fill="rgba(200,153,26,0.25)" stroke="#C8991A" stroke-width="1"/>
+            <text x="80" y="31" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#C8991A" text-anchor="middle" letter-spacing="0.8">💰 INVESTMENT LAW</text>
+            <rect x="0" y="0" width="3" height="160" fill="#C8991A"/>
+          </svg>
+        </div>
         <div class="blog-card-body"><div class="blog-title">Foreign investor protections in Somalia: what Article 18 actually guarantees</div><div class="blog-excerpt">A plain-English breakdown of Somalia's expropriation protections, profit repatriation rights, and ICSID arbitration access.</div><div class="blog-meta"><span>📅 November 2025</span><span>⏱ 5 min read</span><span style="color:var(--teal-mid);font-weight:500">Read article →</span></div></div>
       </div>
+
+      <!-- EPMA 2024 -->
       <div class="blog-card" onclick="openBlog('epma-2024-business')" style="cursor:pointer">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,var(--parchment),var(--env-bg))"><div class="blog-category" style="background:var(--env-bg);color:var(--env);border:1px solid rgba(22,163,74,.2)">🌿 Environmental Law</div></div>
+        <div class="blog-thumb" style="background:#166534;padding:0;overflow:hidden">
+          <svg width="100%" height="100%" viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="envGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#166534"/><stop offset="100%" stop-color="#052e16"/></linearGradient></defs>
+            <rect width="300" height="160" fill="url(#envGrad)"/>
+            <!-- subtle horizontal lines -->
+            <line x1="0" y1="40" x2="300" y2="40" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="0" y1="80" x2="300" y2="80" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="0" y1="120" x2="300" y2="120" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <!-- tree silhouette -->
+            <polygon points="75,110 95,65 115,110" fill="rgba(74,222,128,0.25)"/>
+            <polygon points="65,110 90,50 115,110" fill="rgba(74,222,128,0.18)"/>
+            <rect x="86" y="110" width="8" height="20" rx="2" fill="rgba(74,222,128,0.2)"/>
+            <!-- second smaller tree -->
+            <polygon points="120,115 135,80 150,115" fill="rgba(74,222,128,0.15)"/>
+            <rect x="131" y="115" width="6" height="14" rx="1" fill="rgba(74,222,128,0.12)"/>
+            <!-- ESIA badge -->
+            <rect x="160" y="38" width="110" height="50" rx="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <text x="215" y="57" font-family="Georgia,serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">ESIA</text>
+            <text x="215" y="72" font-family="Arial,sans-serif" font-size="8.5" fill="rgba(255,255,255,0.55)" text-anchor="middle">REQUIRED BEFORE</text>
+            <text x="215" y="82" font-family="Arial,sans-serif" font-size="8.5" fill="rgba(255,255,255,0.55)" text-anchor="middle">COMMENCEMENT</text>
+            <!-- label -->
+            <rect x="28" y="18" width="95" height="20" rx="10" fill="rgba(74,222,128,0.2)" stroke="rgba(74,222,128,0.5)" stroke-width="1"/>
+            <text x="75" y="31" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#4ade80" text-anchor="middle" letter-spacing="0.8">🌿 ENV. LAW</text>
+            <rect x="0" y="0" width="3" height="160" fill="#4ade80"/>
+          </svg>
+        </div>
         <div class="blog-card-body"><div class="blog-title">EPMA 2024: what Somalia's new environmental law means for your business</div><div class="blog-excerpt">When do you need an environmental impact assessment? What permits are required? A practical guide to compliance under the Environmental Protection &amp; Management Act 2024.</div><div class="blog-meta"><span>📅 October 2025</span><span>⏱ 7 min read</span><span style="color:var(--teal-mid);font-weight:500">Read article →</span></div></div>
       </div>
+
+      <!-- HR Compliance Checklist -->
       <div class="blog-card" onclick="openBlog('hr-compliance-checklist')" style="cursor:pointer">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,var(--parchment),var(--tax-bg))"><div class="blog-category" style="background:var(--labor-bg);color:var(--labor);border:1px solid rgba(29,122,94,.25)">⚖️ Labour Law</div></div>
+        <div class="blog-thumb" style="background:#1D4A5E;padding:0;overflow:hidden">
+          <svg width="100%" height="100%" viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="hrGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1D4A5E"/><stop offset="100%" stop-color="#0A2A3A"/></linearGradient></defs>
+            <rect width="300" height="160" fill="url(#hrGrad)"/>
+            <text x="180" y="155" font-family="Arial" font-size="140" fill="rgba(255,255,255,0.04)">✓</text>
+            <!-- checklist items -->
+            <rect x="30" y="32" width="130" height="100" rx="5" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <!-- checklist rows -->
+            <rect x="42" y="46" width="10" height="10" rx="2" fill="rgba(43,174,135,0.6)" stroke="rgba(43,174,135,0.8)" stroke-width="1"/>
+            <text x="46" y="56" font-family="Arial" font-size="8" fill="#2BAE87" text-anchor="middle" font-weight="700">✓</text>
+            <rect x="58" y="49" width="85" height="4" rx="2" fill="rgba(255,255,255,0.35)"/>
+            <rect x="42" y="64" width="10" height="10" rx="2" fill="rgba(43,174,135,0.6)" stroke="rgba(43,174,135,0.8)" stroke-width="1"/>
+            <text x="46" y="74" font-family="Arial" font-size="8" fill="#2BAE87" text-anchor="middle" font-weight="700">✓</text>
+            <rect x="58" y="67" width="70" height="4" rx="2" fill="rgba(255,255,255,0.35)"/>
+            <rect x="42" y="82" width="10" height="10" rx="2" fill="rgba(200,153,26,0.4)" stroke="#C8991A" stroke-width="1"/>
+            <rect x="58" y="85" width="90" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+            <rect x="42" y="100" width="10" height="10" rx="2" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+            <rect x="58" y="103" width="75" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+            <rect x="42" y="115" width="10" height="10" rx="2" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+            <rect x="58" y="118" width="60" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+            <!-- calendar icon -->
+            <rect x="185" y="38" width="80" height="70" rx="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <rect x="185" y="38" width="80" height="18" rx="6" fill="rgba(43,174,135,0.3)"/>
+            <rect x="185" y="50" width="80" height="6" rx="0" fill="rgba(43,174,135,0.3)"/>
+            <text x="225" y="52" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="1">CALENDAR</text>
+            <text x="225" y="78" font-family="Georgia,serif" font-size="20" font-weight="700" fill="rgba(255,255,255,0.7)" text-anchor="middle">14</text>
+            <text x="225" y="95" font-family="Arial,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.4)" text-anchor="middle">weeks maternity</text>
+            <!-- label -->
+            <rect x="28" y="15" width="92" height="18" rx="9" fill="rgba(43,174,135,0.2)" stroke="rgba(43,174,135,0.5)" stroke-width="1"/>
+            <text x="74" y="27" font-family="Arial,sans-serif" font-size="8.5" font-weight="700" fill="#2BAE87" text-anchor="middle" letter-spacing="0.5">⚖️ LABOUR LAW</text>
+            <rect x="0" y="0" width="3" height="160" fill="#2BAE87"/>
+          </svg>
+        </div>
         <div class="blog-card-body"><div class="blog-title">Maternity leave, overtime, and public holidays: Somali HR compliance checklist</div><div class="blog-excerpt">The 15 most common Labour Code violations we see in Mogadishu — and how to fix them before they become disputes.</div><div class="blog-meta"><span>📅 September 2025</span><span>⏱ 4 min read</span><span style="color:var(--teal-mid);font-weight:500">Read article →</span></div></div>
       </div>
+
+      <!-- Data Protection Act -->
       <div class="blog-card" onclick="openBlog('data-protection-act')" style="cursor:pointer">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,var(--parchment),var(--data-bg))"><div class="blog-category" style="background:var(--data-bg);color:var(--data);border:1px solid rgba(99,102,241,.2)">🔐 Data Protection</div></div>
+        <div class="blog-thumb" style="background:#2e1065;padding:0;overflow:hidden">
+          <svg width="100%" height="100%" viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="dataGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b0764"/><stop offset="100%" stop-color="#1a0533"/></linearGradient></defs>
+            <rect width="300" height="160" fill="url(#dataGrad)"/>
+            <text x="170" y="150" font-family="Arial" font-size="140" fill="rgba(255,255,255,0.04)">🔒</text>
+            <!-- circuit / data flow lines -->
+            <line x1="30" y1="80" x2="80" y2="80" stroke="rgba(167,139,250,0.3)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <line x1="80" y1="80" x2="80" y2="50" stroke="rgba(167,139,250,0.25)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <line x1="80" y1="50" x2="140" y2="50" stroke="rgba(167,139,250,0.25)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <line x1="80" y1="80" x2="80" y2="110" stroke="rgba(167,139,250,0.2)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <line x1="80" y1="110" x2="140" y2="110" stroke="rgba(167,139,250,0.2)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <circle cx="80" cy="80" r="5" fill="rgba(167,139,250,0.5)"/>
+            <circle cx="30" cy="80" r="4" fill="rgba(167,139,250,0.3)"/>
+            <circle cx="140" cy="50" r="4" fill="rgba(167,139,250,0.3)"/>
+            <circle cx="140" cy="110" r="4" fill="rgba(167,139,250,0.3)"/>
+            <!-- lock icon main -->
+            <rect x="150" y="55" width="80" height="65" rx="8" fill="rgba(139,92,246,0.2)" stroke="rgba(139,92,246,0.5)" stroke-width="1.5"/>
+            <path d="M170 55 L170 42 Q170 32 190 32 Q210 32 210 42 L210 55" fill="none" stroke="rgba(139,92,246,0.5)" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="190" cy="83" r="10" fill="rgba(139,92,246,0.5)" stroke="rgba(167,139,250,0.7)" stroke-width="1.5"/>
+            <rect x="187" y="88" width="6" height="12" rx="3" fill="rgba(167,139,250,0.8)"/>
+            <!-- 72h badge -->
+            <rect x="157" y="105" width="66" height="18" rx="4" fill="rgba(139,92,246,0.3)"/>
+            <text x="190" y="117" font-family="Arial,sans-serif" font-size="8.5" font-weight="700" fill="rgba(221,214,254,0.9)" text-anchor="middle">72h BREACH NOTICE</text>
+            <!-- label -->
+            <rect x="28" y="15" width="108" height="18" rx="9" fill="rgba(139,92,246,0.25)" stroke="rgba(139,92,246,0.6)" stroke-width="1"/>
+            <text x="82" y="27" font-family="Arial,sans-serif" font-size="8.5" font-weight="700" fill="#c4b5fd" text-anchor="middle" letter-spacing="0.5">🛡️ DATA PROTECTION</text>
+            <rect x="0" y="0" width="3" height="160" fill="#a78bfa"/>
+          </svg>
+        </div>
         <div class="blog-card-body"><div class="blog-title">Somalia's Data Protection Act: what organisations processing personal data must do now</div><div class="blog-excerpt">Data subject rights, consent obligations, cross-border transfer rules, and penalties — a compliance guide for NGOs, banks, and tech companies operating in Somalia.</div><div class="blog-meta"><span>📅 August 2025</span><span>⏱ 6 min read</span><span style="color:var(--teal-mid);font-weight:500">Read article →</span></div></div>
       </div>
     </div>
@@ -2676,16 +2851,9 @@ function showPage(page){
 }
 // ── SEO: handle browser back/forward and direct hash links ──
 window.addEventListener('hashchange',function(){
-  const hash = window.location.hash.slice(1) || 'home';
-  // ── Blog article deep link: #blog/slug ──
-  if (hash.startsWith('blog/')) {
-    const slug = hash.slice(5);
-    showPage('blog');
-    if (BLOG_ARTICLES[slug]) openBlog(slug);
-    return;
-  }
+  const page = window.location.hash.slice(1) || 'home';
   const validPages=['home','library','ask','pricing','dashboard','about','testimonials','blog','contact'];
-  if(validPages.includes(hash)) showPage(hash);
+  if(validPages.includes(page)) showPage(page);
 });
 function toggleMobileMenu(){
   const links=document.getElementById('navLinks');
@@ -3249,6 +3417,7 @@ const BLOG_ARTICLES = {
     category: '🔷 Income Tax Law',
     categoryStyle: 'background:var(--primary-dim);color:var(--teal-deep);border:1px solid var(--border)',
     date: 'January 2026', readTime: '8 min read',
+    heroSVG: `<svg width="100%" height="100%" viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="mita" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0A4A3A"/><stop offset="100%" stop-color="#1D7A5E"/></linearGradient></defs><rect width="760" height="220" fill="url(#mita)"/><line x1="0" y1="55" x2="760" y2="55" stroke="rgba(255,255,255,0.04)" stroke-width="1"/><line x1="0" y1="110" x2="760" y2="110" stroke="rgba(255,255,255,0.04)" stroke-width="1"/><line x1="0" y1="165" x2="760" y2="165" stroke="rgba(255,255,255,0.04)" stroke-width="1"/><line x1="190" y1="0" x2="190" y2="220" stroke="rgba(255,255,255,0.04)" stroke-width="1"/><line x1="380" y1="0" x2="380" y2="220" stroke="rgba(255,255,255,0.04)" stroke-width="1"/><line x1="570" y1="0" x2="570" y2="220" stroke="rgba(255,255,255,0.04)" stroke-width="1"/><text x="560" y="210" font-family="Georgia,serif" font-size="220" font-weight="900" fill="rgba(255,255,255,0.05)">%</text><rect x="50" y="130" width="36" height="65" rx="3" fill="rgba(43,174,135,0.35)"/><rect x="100" y="100" width="36" height="95" rx="3" fill="rgba(43,174,135,0.45)"/><rect x="150" y="70" width="36" height="125" rx="3" fill="rgba(43,174,135,0.6)"/><rect x="200" y="90" width="36" height="105" rx="3" fill="rgba(43,174,135,0.45)"/><rect x="250" y="55" width="36" height="140" rx="3" fill="rgba(43,174,135,0.7)"/><rect x="0" y="0" width="5" height="220" fill="#C8991A"/><rect x="28" y="22" width="145" height="24" rx="12" fill="rgba(200,153,26,0.2)" stroke="#C8991A" stroke-width="1"/><text x="100" y="38" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#C8991A" text-anchor="middle" letter-spacing="1">🔷 INCOME TAX LAW</text><text x="28" y="82" font-family="Georgia,serif" font-size="26" font-weight="700" fill="#fff">ITA 2025 — Complete Business Guide</text><text x="28" y="108" font-family="Arial,sans-serif" font-size="14" fill="rgba(255,255,255,0.55)">Presumptive Tax · Corporate Rates · Withholding · General Investment Allowance</text></svg>`,
     body: `
       <p style="font-size:1.05rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.9">Somalia enacted the Income Tax Act 2025 (ITA 2025) together with implementing Regulation No. 0142-2025. Together they replace the patchwork of earlier fiscal rules and establish a unified income tax framework applicable to residents and non-residents earning Somali-sourced income. This article walks through the key provisions every business, investor, and employer needs to understand.</p>
 
@@ -3322,6 +3491,7 @@ const BLOG_ARTICLES = {
     category: '⚖️ Labour Law',
     categoryStyle: 'background:var(--labor-bg);color:var(--labor);border:1px solid rgba(29,122,94,.25)',
     date: 'December 2025', readTime: '6 min read',
+    heroSVG: `<svg width="100%" height="100%" viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="mlabor" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1D7A5E"/><stop offset="100%" stop-color="#0A4A3A"/></linearGradient></defs><rect width="760" height="220" fill="url(#mlabor)"/><text x="520" y="215" font-family="Georgia,serif" font-size="220" font-weight="900" fill="rgba(255,255,255,0.04)">§</text><rect x="50" y="45" width="100" height="130" rx="5" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><rect x="64" y="72" width="62" height="4" rx="2" fill="rgba(255,255,255,0.45)"/><rect x="64" y="84" width="50" height="4" rx="2" fill="rgba(255,255,255,0.3)"/><rect x="64" y="96" width="58" height="4" rx="2" fill="rgba(255,255,255,0.3)"/><rect x="64" y="108" width="42" height="4" rx="2" fill="rgba(255,255,255,0.3)"/><rect x="64" y="128" width="70" height="4" rx="2" fill="rgba(255,255,255,0.25)"/><rect x="64" y="140" width="55" height="4" rx="2" fill="rgba(255,255,255,0.25)"/><circle cx="128" cy="155" r="18" fill="#2BAE87" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><text x="128" y="161" font-family="Arial" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">✓</text><circle cx="220" cy="85" r="22" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/><text x="220" y="93" font-family="Arial" font-size="24" fill="rgba(255,255,255,0.6)" text-anchor="middle">👤</text><circle cx="270" cy="85" r="22" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/><text x="270" y="93" font-family="Arial" font-size="24" fill="rgba(255,255,255,0.45)" text-anchor="middle">👤</text><rect x="0" y="0" width="5" height="220" fill="#C8991A"/><rect x="28" y="22" width="108" height="24" rx="12" fill="rgba(43,174,135,0.25)" stroke="rgba(43,174,135,0.6)" stroke-width="1"/><text x="82" y="38" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#2BAE87" text-anchor="middle" letter-spacing="1">⚖️ LABOUR LAW</text><text x="28" y="82" font-family="Georgia,serif" font-size="24" font-weight="700" fill="#fff">Employment Contracts — NGO Compliance Guide</text><text x="28" y="108" font-family="Arial,sans-serif" font-size="14" fill="rgba(255,255,255,0.55)">10 mandatory clauses · Termination rules · Staff protections under the Labour Code</text></svg>`,
     body: `
       <p style="font-size:1.05rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.9">International NGOs operating in Somalia are bound by the Somali Labour Code in their dealings with locally-hired staff. This applies whether the organisation is an INGO, UN-affiliated body, or local NGO. Failure to comply exposes organisations to labour disputes, Ministry of Labour investigations, and reputational risk. Here are the 10 clauses every contract must include — and the most common gaps we see.</p>
 
@@ -3364,6 +3534,7 @@ const BLOG_ARTICLES = {
     category: '💰 Investment Law',
     categoryStyle: 'background:var(--invest-bg);color:var(--invest);border:1px solid var(--gold-border)',
     date: 'November 2025', readTime: '5 min read',
+    heroSVG: `<svg width="100%" height="100%" viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="minvest" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#A67D12"/><stop offset="100%" stop-color="#5C4500"/></linearGradient></defs><rect width="760" height="220" fill="url(#minvest)"/><text x="500" y="210" font-family="Georgia,serif" font-size="220" font-weight="900" fill="rgba(255,255,255,0.05)">$</text><path d="M55 42 L110 42 L110 108 Q110 138 82.5 152 Q55 138 55 108 Z" fill="rgba(200,153,26,0.2)" stroke="#C8991A" stroke-width="2"/><text x="82" y="105" font-family="Arial" font-size="30" fill="#C8991A" text-anchor="middle" font-weight="700">✦</text><rect x="135" y="48" width="110" height="50" rx="7" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><text x="190" y="70" font-family="Georgia,serif" font-size="18" font-weight="700" fill="#fff" text-anchor="middle">Art. 18</text><text x="190" y="88" font-family="Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.6)" text-anchor="middle">INVESTOR PROTECTION</text><circle cx="310" cy="110" r="45" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/><ellipse cx="310" cy="110" rx="20" ry="45" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/><line x1="265" y1="110" x2="355" y2="110" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/><line x1="268" y1="90" x2="352" y2="90" stroke="rgba(255,255,255,0.07)" stroke-width="1"/><line x1="268" y1="130" x2="352" y2="130" stroke="rgba(255,255,255,0.07)" stroke-width="1"/><rect x="0" y="0" width="5" height="220" fill="#C8991A"/><rect x="28" y="22" width="125" height="24" rx="12" fill="rgba(200,153,26,0.25)" stroke="#C8991A" stroke-width="1"/><text x="90" y="38" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#C8991A" text-anchor="middle" letter-spacing="1">💰 INVESTMENT LAW</text><text x="28" y="82" font-family="Georgia,serif" font-size="24" font-weight="700" fill="#fff">Foreign Investor Protections — Article 18</text><text x="28" y="108" font-family="Arial,sans-serif" font-size="14" fill="rgba(255,255,255,0.55)">Expropriation protection · Profit repatriation rights · ICSID arbitration access</text></svg>`,
     body: `
       <p style="font-size:1.05rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.9">Somalia's Foreign Investment Law contains one of the most investor-friendly protection frameworks in East Africa. Article 18, in particular, has drawn attention from international arbitration practitioners. This article explains exactly what the law guarantees — and where the practical limits lie.</p>
 
@@ -3407,6 +3578,7 @@ const BLOG_ARTICLES = {
     category: '🌿 Environmental Law',
     categoryStyle: 'background:var(--env-bg);color:var(--env);border:1px solid rgba(22,163,74,.2)',
     date: 'October 2025', readTime: '7 min read',
+    heroSVG: `<svg width="100%" height="100%" viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="menv" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#166534"/><stop offset="100%" stop-color="#052e16"/></linearGradient></defs><rect width="760" height="220" fill="url(#menv)"/><line x1="0" y1="55" x2="760" y2="55" stroke="rgba(255,255,255,0.03)" stroke-width="1"/><line x1="0" y1="110" x2="760" y2="110" stroke="rgba(255,255,255,0.03)" stroke-width="1"/><line x1="0" y1="165" x2="760" y2="165" stroke="rgba(255,255,255,0.03)" stroke-width="1"/><polygon points="80,175 115,90 150,175" fill="rgba(74,222,128,0.22)"/><polygon points="65,175 110,60 155,175" fill="rgba(74,222,128,0.15)"/><rect x="103" y="175" width="12" height="28" rx="2" fill="rgba(74,222,128,0.18)"/><polygon points="175,178 200,118 225,178" fill="rgba(74,222,128,0.15)"/><rect x="196" y="178" width="9" height="18" rx="1" fill="rgba(74,222,128,0.12)"/><polygon points="240,180 258,135 276,180" fill="rgba(74,222,128,0.1)"/><rect x="255" y="180" width="7" height="14" rx="1" fill="rgba(74,222,128,0.08)"/><rect x="295" y="52" width="160" height="75" rx="8" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/><text x="375" y="82" font-family="Georgia,serif" font-size="20" font-weight="700" fill="#fff" text-anchor="middle">ESIA</text><text x="375" y="100" font-family="Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.55)" text-anchor="middle">ENVIRONMENTAL &amp; SOCIAL</text><text x="375" y="114" font-family="Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.55)" text-anchor="middle">IMPACT ASSESSMENT</text><rect x="0" y="0" width="5" height="220" fill="#4ade80"/><rect x="28" y="22" width="118" height="24" rx="12" fill="rgba(74,222,128,0.18)" stroke="rgba(74,222,128,0.5)" stroke-width="1"/><text x="87" y="38" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#4ade80" text-anchor="middle" letter-spacing="1">🌿 ENV. LAW 2024</text><text x="28" y="82" font-family="Georgia,serif" font-size="24" font-weight="700" fill="#fff">EPMA 2024 — Business Compliance Guide</text><text x="28" y="108" font-family="Arial,sans-serif" font-size="14" fill="rgba(255,255,255,0.55)">ESIA requirements · Emission licences · Hazardous waste · Penalties</text></svg>`,
     body: `
       <p style="font-size:1.05rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.9">Somalia's Environmental Protection and Management Act 2024 (EPMA 2024) is the country's most comprehensive environmental legislation to date. It creates new obligations for businesses, developers, extractive-industry operators, and — crucially — anyone who imports or disposes of hazardous waste. This guide explains the key compliance requirements.</p>
 
@@ -3479,6 +3651,7 @@ const BLOG_ARTICLES = {
     category: '⚖️ Labour Law',
     categoryStyle: 'background:var(--labor-bg);color:var(--labor);border:1px solid rgba(29,122,94,.25)',
     date: 'September 2025', readTime: '4 min read',
+    heroSVG: `<svg width="100%" height="100%" viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="mhr" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1D4A5E"/><stop offset="100%" stop-color="#0A2030"/></linearGradient></defs><rect width="760" height="220" fill="url(#mhr)"/><text x="530" y="210" font-family="Arial" font-size="200" fill="rgba(255,255,255,0.04)">✓</text><rect x="50" y="38" width="180" height="148" rx="6" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/><rect x="66" y="58" width="14" height="14" rx="3" fill="rgba(43,174,135,0.7)" stroke="rgba(43,174,135,0.9)" stroke-width="1"/><text x="72" y="69" font-family="Arial" font-size="10" fill="#2BAE87" text-anchor="middle" font-weight="700">✓</text><rect x="88" y="62" width="118" height="5" rx="2.5" fill="rgba(255,255,255,0.4)"/><rect x="66" y="82" width="14" height="14" rx="3" fill="rgba(43,174,135,0.7)" stroke="rgba(43,174,135,0.9)" stroke-width="1"/><text x="72" y="93" font-family="Arial" font-size="10" fill="#2BAE87" text-anchor="middle" font-weight="700">✓</text><rect x="88" y="86" width="98" height="5" rx="2.5" fill="rgba(255,255,255,0.4)"/><rect x="66" y="106" width="14" height="14" rx="3" fill="rgba(200,153,26,0.5)" stroke="#C8991A" stroke-width="1"/><rect x="88" y="110" width="125" height="5" rx="2.5" fill="rgba(255,255,255,0.25)"/><rect x="66" y="130" width="14" height="14" rx="3" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.25)" stroke-width="1"/><rect x="88" y="134" width="108" height="5" rx="2.5" fill="rgba(255,255,255,0.2)"/><rect x="66" y="154" width="14" height="14" rx="3" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.25)" stroke-width="1"/><rect x="88" y="158" width="85" height="5" rx="2.5" fill="rgba(255,255,255,0.2)"/><rect x="255" y="48" width="110" height="95" rx="7" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/><rect x="255" y="48" width="110" height="26" rx="7" fill="rgba(43,174,135,0.25)"/><rect x="255" y="66" width="110" height="8" rx="0" fill="rgba(43,174,135,0.25)"/><text x="310" y="66" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="1">CALENDAR</text><text x="310" y="100" font-family="Georgia,serif" font-size="28" font-weight="700" fill="rgba(255,255,255,0.75)" text-anchor="middle">14</text><text x="310" y="120" font-family="Arial,sans-serif" font-size="9.5" fill="rgba(255,255,255,0.45)" text-anchor="middle">weeks maternity</text><rect x="0" y="0" width="5" height="220" fill="#2BAE87"/><rect x="28" y="22" width="108" height="24" rx="12" fill="rgba(43,174,135,0.2)" stroke="rgba(43,174,135,0.5)" stroke-width="1"/><text x="82" y="38" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#2BAE87" text-anchor="middle" letter-spacing="1">⚖️ LABOUR LAW</text><text x="28" y="82" font-family="Georgia,serif" font-size="24" font-weight="700" fill="#fff">HR Compliance Checklist — Somalia</text><text x="28" y="108" font-family="Arial,sans-serif" font-size="14" fill="rgba(255,255,255,0.55)">Maternity leave · Overtime rates · Public holidays · Sick leave rules</text></svg>`,
     body: `
       <p style="font-size:1.05rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.9">The Somali Labour Code contains specific, non-negotiable entitlements for employees. Many organisations — particularly those using template contracts drafted outside Somalia — routinely underpay or overlook several of these. The following is a plain-English compliance checklist covering the 15 most common violations we encounter.</p>
 
@@ -3540,6 +3713,7 @@ const BLOG_ARTICLES = {
     category: '🔐 Data Protection',
     categoryStyle: 'background:var(--data-bg);color:var(--data);border:1px solid rgba(99,102,241,.2)',
     date: 'August 2025', readTime: '6 min read',
+    heroSVG: `<svg width="100%" height="100%" viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="mdata" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b0764"/><stop offset="100%" stop-color="#1a0533"/></linearGradient></defs><rect width="760" height="220" fill="url(#mdata)"/><line x1="50" y1="110" x2="130" y2="110" stroke="rgba(167,139,250,0.35)" stroke-width="2" stroke-dasharray="5,4"/><line x1="130" y1="110" x2="130" y2="62" stroke="rgba(167,139,250,0.28)" stroke-width="2" stroke-dasharray="5,4"/><line x1="130" y1="62" x2="220" y2="62" stroke="rgba(167,139,250,0.28)" stroke-width="2" stroke-dasharray="5,4"/><line x1="130" y1="110" x2="130" y2="158" stroke="rgba(167,139,250,0.22)" stroke-width="2" stroke-dasharray="5,4"/><line x1="130" y1="158" x2="220" y2="158" stroke="rgba(167,139,250,0.22)" stroke-width="2" stroke-dasharray="5,4"/><circle cx="130" cy="110" r="7" fill="rgba(167,139,250,0.6)"/><circle cx="50" cy="110" r="5" fill="rgba(167,139,250,0.35)"/><circle cx="220" cy="62" r="5" fill="rgba(167,139,250,0.35)"/><circle cx="220" cy="158" r="5" fill="rgba(167,139,250,0.35)"/><rect x="240" y="62" width="115" height="95" rx="9" fill="rgba(139,92,246,0.18)" stroke="rgba(139,92,246,0.5)" stroke-width="1.5"/><path d="M265 62 L265 46 Q265 33 297 33 Q330 33 330 46 L330 62" fill="none" stroke="rgba(139,92,246,0.55)" stroke-width="2.5" stroke-linecap="round"/><circle cx="297" cy="105" r="15" fill="rgba(139,92,246,0.55)" stroke="rgba(167,139,250,0.7)" stroke-width="1.5"/><rect x="293" y="114" width="9" height="16" rx="4.5" fill="rgba(167,139,250,0.85)"/><rect x="248" y="143" width="99" height="20" rx="5" fill="rgba(139,92,246,0.35)"/><text x="297" y="157" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="rgba(221,214,254,0.9)" text-anchor="middle">72h BREACH NOTICE</text><rect x="0" y="0" width="5" height="220" fill="#a78bfa"/><rect x="28" y="22" width="130" height="24" rx="12" fill="rgba(139,92,246,0.25)" stroke="rgba(139,92,246,0.6)" stroke-width="1"/><text x="93" y="38" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#c4b5fd" text-anchor="middle" letter-spacing="1">🛡️ DATA PROTECTION</text><text x="28" y="82" font-family="Georgia,serif" font-size="24" font-weight="700" fill="#fff">Data Protection Act — Compliance Guide</text><text x="28" y="108" font-family="Arial,sans-serif" font-size="14" fill="rgba(255,255,255,0.55)">Data subject rights · Consent rules · Cross-border transfers · Breach notifications</text></svg>`,
     body: `
       <p style="font-size:1.05rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.9">Somalia's Data Protection Act (DPA) is one of the most significant pieces of digital governance legislation in East Africa. It applies to any organisation — Somali or foreign — that processes the personal data of Somali residents. This article explains who must comply, what obligations apply, and what the penalties are for non-compliance.</p>
 
@@ -3620,6 +3794,10 @@ function openBlog(slug) {
   const article = BLOG_ARTICLES[slug];
   if (!article) { showToast('Article not found', 'error'); return; }
 
+  // Hero image banner
+  const heroEl = document.getElementById('blog-modal-hero');
+  if (heroEl) heroEl.innerHTML = article.heroSVG || '';
+
   document.getElementById('blog-modal-title').textContent    = article.title;
   document.getElementById('blog-modal-category').innerHTML   = `<span style="${article.categoryStyle};display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .85rem;border-radius:100px">${article.category}</span>`;
   document.getElementById('blog-modal-meta').innerHTML       = `<span>📅 ${article.date}</span><span>⏱ ${article.readTime}</span>`;
@@ -3630,7 +3808,7 @@ function openBlog(slug) {
   modal.scrollTop = 0;
   document.body.style.overflow = 'hidden';
 
-  // ── SEO: update URL to article slug & page title ──
+  // SEO: update URL to article slug & page title
   history.pushState({blog: slug}, article.title, '#blog/' + slug);
   document.title = article.title + ' — XeerHub';
   const canonical = document.querySelector('link[rel="canonical"]');
@@ -3649,23 +3827,14 @@ function openBlogBySlug(slug) {
 function closeBlogModal() {
   document.getElementById('modal-blog-article').style.display = 'none';
   document.body.style.overflow = '';
-  // Restore blog page URL and title
-  history.pushState(null, '', '#blog');
-  document.title = 'XeerHub — Somalia\'s AI Legal Platform | Labour, Investment, Tax, Environment & Data Law Q&A';
-  const canonical = document.querySelector('link[rel="canonical"]');
-  if (canonical) canonical.href = 'https://xeerhub.com/#blog';
 }
 
 // ── INIT ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded',()=>{
-  // Handle direct hash link on page load (e.g. xeerhub.com/#pricing or #blog/slug)
+  // Handle direct hash link on page load (e.g. xeerhub.com/#pricing)
   const initHash = window.location.hash.slice(1);
   const validPages=['home','library','ask','pricing','dashboard','about','testimonials','blog','contact'];
-  if (initHash.startsWith('blog/')) {
-    const slug = initHash.slice(5);
-    showPage('blog');
-    if (BLOG_ARTICLES[slug]) openBlog(slug);
-  } else if(initHash && validPages.includes(initHash)){
+  if(initHash && validPages.includes(initHash)){
     showPage(initHash);
   }
   renderQA();
