@@ -757,6 +757,92 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ═══════════════════════════════════════════
+   v21 — CREDIBILITY REDESIGN (homepage)
+   Signature device: the "citation ledger" —
+   article references presented like a statute
+   index, not marketing copy. No emoji anywhere
+   in this block.
+═══════════════════════════════════════════ */
+
+/* ── Citation ledger strip (signature element) ── */
+.ledger-strip{background:var(--ink);overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.08)}
+.ledger-track{display:flex;align-items:center;white-space:nowrap;animation:ledger-scroll 38s linear infinite;width:max-content}
+.ledger-strip:hover .ledger-track{animation-play-state:paused}
+@keyframes ledger-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ledger-item{display:inline-flex;align-items:baseline;gap:.55rem;padding:.85rem 2rem;font-family:'DM Mono',monospace;font-size:.74rem;color:rgba(255,255,255,0.45);border-right:1px solid rgba(255,255,255,0.08)}
+.ledger-item b{color:rgba(255,255,255,0.78);font-weight:500}
+@media(prefers-reduced-motion:reduce){.ledger-track{animation:none}}
+
+/* ── Verification rail (replaces emoji trust bar) ── */
+.verify-rail{background:var(--parchment);border-bottom:1px solid var(--border)}
+.verify-rail-inner{display:grid;grid-template-columns:repeat(4,1fr);max-width:1160px;margin:0 auto}
+.verify-cell{padding:1.6rem 2rem;border-right:1px solid var(--border)}
+.verify-cell:last-child{border-right:none}
+.verify-cell-num{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--teal-mid);letter-spacing:.06em;margin-bottom:.5rem;display:block}
+.verify-cell-stat{font-family:'Playfair Display',serif;font-size:1.85rem;font-weight:700;color:var(--ink);line-height:1;margin-bottom:.35rem}
+.verify-cell-stat span{font-size:1rem;font-weight:400;color:var(--muted);font-family:'DM Sans',sans-serif}
+.verify-cell-label{font-size:.78rem;color:var(--muted);line-height:1.5}
+
+/* ── Methodology section (trust/credibility core) ── */
+.method-section{padding:6.5rem 0;background:var(--cream)}
+.method-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:4rem;margin-top:3rem;align-items:start}
+.method-steps{display:flex;flex-direction:column}
+.method-step{display:grid;grid-template-columns:auto 1fr;gap:1.1rem;padding:1.6rem 0;border-bottom:1px solid var(--border)}
+.method-step:first-child{padding-top:0}
+.method-step:last-child{border-bottom:none}
+.method-step-mark{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--teal-mid);padding-top:.2rem}
+.method-step-title{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:.4rem}
+.method-step-text{font-size:.875rem;color:var(--muted);line-height:1.7}
+.method-doc{background:#fff;border:1px solid var(--border-strong);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.method-doc-head{background:var(--teal-deep);padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.method-doc-head-label{font-family:'DM Mono',monospace;font-size:.7rem;color:rgba(255,255,255,0.55);letter-spacing:.08em;text-transform:uppercase}
+.method-doc-head-status{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--teal-light);letter-spacing:.04em}
+.method-doc-body{padding:1.75rem}
+.method-doc-q{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.5rem;font-weight:500}
+.method-doc-question{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--ink);margin-bottom:1.25rem;line-height:1.4}
+.method-doc-rule{height:1px;background:var(--border);margin:1.25rem 0}
+.method-doc-a{font-size:.9rem;color:var(--ink);line-height:1.8;margin-bottom:1.25rem}
+.method-doc-cite{display:flex;align-items:center;gap:.6rem;padding:.85rem 1rem;background:var(--parchment);border:1px solid var(--border);border-radius:var(--r-sm)}
+.method-doc-cite-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.method-doc-cite-ref{font-family:'DM Mono',monospace;font-size:.82rem;color:var(--teal-deep);font-weight:500}
+
+/* ── Practice areas (replaces persona icon grid) ── */
+.areas-section{padding:6rem 0;background:#fff;border-top:1px solid var(--border)}
+.areas-list{margin-top:2.5rem;border-top:1px solid var(--border-strong)}
+.areas-row{display:grid;grid-template-columns:2.4rem 1fr 1fr auto;gap:2rem;align-items:center;padding:1.5rem 0;border-bottom:1px solid var(--border);transition:background .15s}
+.areas-row:hover{background:var(--parchment)}
+.areas-row-num{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--teal-mid)}
+.areas-row-name{font-size:1rem;font-weight:600;color:var(--ink)}
+.areas-row-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+.areas-row-count{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--muted);white-space:nowrap;text-align:right}
+.areas-row-count b{color:var(--ink);font-weight:500}
+
+/* ── Citation cards (replaces emoji Q&A preview cards) ── */
+.cite-section{padding:6.5rem 0;background:var(--parchment);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.cite-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border-strong);border:1px solid var(--border-strong);margin-top:2.5rem}
+.cite-card{background:#fff;padding:2rem}
+.cite-card-area{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--teal-mid);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1rem}
+.cite-card-q{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--ink);line-height:1.4;margin-bottom:.9rem}
+.cite-card-a{font-size:.85rem;color:var(--muted);line-height:1.75;margin-bottom:1.1rem}
+.cite-card-ref{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--teal-deep);padding-top:.9rem;border-top:1px solid var(--border)}
+
+/* ── Endorsements (replaces star-rating testimonials) ── */
+.endorse-section{padding:6.5rem 0;background:var(--cream)}
+.endorse-list{display:flex;flex-direction:column;margin-top:2.5rem}
+.endorse-item{display:grid;grid-template-columns:1fr 280px;gap:3rem;padding:2.5rem 0;border-top:1px solid var(--border)}
+.endorse-list .endorse-item:last-child{border-bottom:1px solid var(--border)}
+.endorse-quote{font-family:'Playfair Display',serif;font-size:1.3rem;font-style:italic;color:var(--ink);line-height:1.55}
+.endorse-meta{display:flex;flex-direction:column;justify-content:center;border-left:2px solid var(--teal-mid);padding-left:1.5rem}
+.endorse-name{font-size:.92rem;font-weight:600;color:var(--ink);margin-bottom:.25rem}
+.endorse-role{font-size:.8rem;color:var(--muted);line-height:1.5}
+
+/* ── Final CTA (sober, no gradient flourish) ── */
+.cta-section{padding:6rem 0;background:var(--teal-deep);text-align:center}
+.cta-eyebrow{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--teal-light);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem}
+.cta-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.5rem);color:#fff;margin-bottom:1rem}
+.cta-sub{font-size:.95rem;color:rgba(255,255,255,0.55);max-width:480px;margin:0 auto 2rem;line-height:1.7}
+
+/* ═══════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════ */
 @media(max-width:1024px){
@@ -765,6 +851,13 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
   .hero-right{display:none}
   .pricing-grid{grid-template-columns:1fr;max-width:420px}
   .testi-card.featured{grid-column:auto;grid-template-columns:1fr}
+  .verify-rail-inner{grid-template-columns:repeat(2,1fr)}
+  .verify-cell:nth-child(2){border-right:none}
+  .verify-cell{border-bottom:1px solid var(--border)}
+  .method-grid{grid-template-columns:1fr;gap:2.5rem}
+  .cite-grid{grid-template-columns:1fr}
+  .endorse-item{grid-template-columns:1fr;gap:1.25rem}
+  .endorse-meta{border-left:none;border-top:2px solid var(--teal-mid);padding-left:0;padding-top:1rem}
 }
 @media(max-width:900px){
   .steps-grid{grid-template-columns:1fr}
@@ -794,6 +887,11 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
   .ask-form-row{grid-template-columns:1fr;gap:.75rem}
   .container{padding:0 1.25rem}
   .dash-stat-cards{grid-template-columns:1fr}
+  .verify-rail-inner{grid-template-columns:1fr}
+  .verify-cell{border-right:none;border-bottom:1px solid var(--border)}
+  .areas-row{grid-template-columns:1fr;gap:.4rem}
+  .areas-row-count{text-align:left}
+  .hero-stats{flex-wrap:wrap;gap:1.5rem 2rem}
 }
 @media(max-width:480px){.qa-grid{grid-template-columns:1fr}.grid-4{grid-template-columns:1fr}}
 
@@ -835,9 +933,9 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <div class="hero-eyebrow">Somalia's Legal Intelligence Platform</div>
       <h1 class="hero-headline">Clear answers to<br><em>real legal questions</em></h1>
       <p class="hero-sub">Instant, verified answers on Somali Labour Law, Foreign Investment Law, Income Tax Law, Environmental Protection Act 2024, and the <strong style="color:var(--teal-light)">Data Protection Act</strong> — built for enterprises, lawyers, and business professionals.</p>
-      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(43,174,135,0.13);border:1px solid rgba(43,174,135,0.28);border-radius:100px;padding:.35rem 1rem .35rem .6rem;margin-bottom:1.5rem;position:relative;z-index:2">
-        <span style="background:var(--gold);color:var(--ink);font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .55rem;border-radius:100px">NEW</span>
-        <span style="font-size:.8rem;color:rgba(255,255,255,0.8);font-weight:400">🔐 Data Protection Act — now in the library</span>
+      <div style="display:inline-flex;align-items:center;gap:10px;border-left:2px solid var(--gold);padding:.3rem 0 .3rem .85rem;margin-bottom:1.5rem;position:relative;z-index:2">
+        <span style="font-family:'DM Mono',monospace;font-size:.68rem;color:var(--gold);letter-spacing:.06em;text-transform:uppercase">Added this cycle</span>
+        <span style="font-size:.8rem;color:rgba(255,255,255,0.7);font-weight:400">Data Protection Act — 25 verified entries</span>
       </div>
       <div class="hero-actions">
         <button class="hero-btn-gold" onclick="showPage('library')">Browse Q&A Library →</button>
@@ -846,208 +944,252 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <div class="hero-stats stagger">
         <div><div class="stat-num">245</div><div class="stat-label">Verified Q&As</div></div>
         <div><div class="stat-num">5</div><div class="stat-label">Laws Covered</div></div>
-        <div><div class="stat-num">AI</div><div class="stat-label">Powered Answers</div></div>
+        <div><div class="stat-num">100%</div><div class="stat-label">Article-Cited</div></div>
         <div><div class="stat-num">Free</div><div class="stat-label">To Start</div></div>
       </div>
     </div>
     <!-- RIGHT: sample cards -->
     <div class="hero-right">
-      <div class="hero-right-label">Sample Q&As from the library</div>
+      <div class="hero-right-label">From the verified record</div>
       <div class="sample-cards">
         <div class="sample-card card-labor">
-          <div class="card-area"><span class="dot dot-teal"></span><span class="card-area-label" style="color:var(--labor)">Labor Law</span></div>
+          <div class="card-area"><span class="card-area-label" style="color:var(--labor);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em;font-size:.66rem">Labour Code</span></div>
           <div class="card-q">Is maternity leave paid in Somalia?</div>
-          <div class="card-ref">Labour Code · Art. 129</div>
+          <div class="card-ref">Art. 129</div>
         </div>
         <div class="sample-card card-invest">
-          <div class="card-area"><span class="dot dot-blue"></span><span class="card-area-label" style="color:var(--company)">Investment Law</span></div>
+          <div class="card-area"><span class="card-area-label" style="color:var(--company);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em;font-size:.66rem">Foreign Investment Law</span></div>
           <div class="card-q">Can the government seize my foreign investment?</div>
-          <div class="card-ref">Foreign Investment Law · Art. 18</div>
+          <div class="card-ref">Art. 18</div>
         </div>
         <div class="sample-card card-tax">
-          <div class="card-area"><span class="dot dot-red"></span><span class="card-area-label" style="color:#E24B4A">Income Tax Law</span></div>
+          <div class="card-area"><span class="card-area-label" style="color:#E24B4A;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em;font-size:.66rem">Income Tax Law</span></div>
           <div class="card-q">What is the Presumptive Tax Regime and who qualifies?</div>
-          <div class="card-ref">ITR 2025 · Reg 9-1, Reg 9-2 · ITA 2025 · Art. 9</div>
+          <div class="card-ref">ITR 2025 Reg 9-1, 9-2 · ITA 2025 Art. 9</div>
         </div>
         <div class="sample-card card-env" style="border-left-color:var(--env)">
-          <div class="card-area"><span class="dot dot-env"></span><span class="card-area-label" style="color:var(--env)">Environmental Law 🌿</span></div>
+          <div class="card-area"><span class="card-area-label" style="color:var(--env);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em;font-size:.66rem">EPMA 2024</span></div>
           <div class="card-q">Is the import and export of charcoal legal in Somalia?</div>
-          <div class="card-ref">EPMA 2024 · Art. 48(1),(5)–(6)</div>
+          <div class="card-ref">Art. 48(1),(5)–(6)</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TRUST BAR -->
-  <section>
-    <div class="trust-bar">
-      <div class="trust-bar-inner">
+  <!-- CITATION LEDGER — signature element -->
+  <div class="ledger-strip">
+    <div class="ledger-track" id="ledgerTrack"></div>
+  </div>
 
-        <div class="trust-item">
-          <div class="trust-item-icon">📋</div>
-          <div class="trust-item-text">
-            <span class="trust-item-label">Knowledge base</span>
-            <span class="trust-item-value">245+ Verified Q&amp;As</span>
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <div class="trust-item-icon">📚</div>
-          <div class="trust-item-text">
-            <span class="trust-item-label">Laws covered</span>
-            <span class="trust-item-value">6 Official Somali Laws</span>
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <div class="trust-item-icon">🔒</div>
-          <div class="trust-item-text">
-            <span class="trust-item-label">Security</span>
-            <span class="trust-item-value">SSL Encrypted</span>
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <div class="trust-item-icon">🏛️</div>
-          <div class="trust-item-text">
-            <span class="trust-item-label">Sources</span>
-            <span class="trust-item-value">Official Legislation Only</span>
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <div class="trust-item-icon">👥</div>
-          <div class="trust-item-text">
-            <span class="trust-item-label">Trusted by</span>
-            <span class="trust-item-value">Enterprises &amp; Law Firms</span>
-          </div>
-        </div>
-
-        <div class="trust-item" onclick="window.location.href='mailto:info@xeerhub.com'" style="cursor:pointer">
-          <div class="trust-item-icon">✉️</div>
-          <div class="trust-item-text">
-            <span class="trust-item-label">Contact</span>
-            <span class="trust-item-value">info@xeerhub.com</span>
-          </div>
-        </div>
-
+  <!-- VERIFICATION RAIL — replaces emoji trust bar -->
+  <section class="verify-rail">
+    <div class="verify-rail-inner">
+      <div class="verify-cell">
+        <span class="verify-cell-num">01</span>
+        <div class="verify-cell-stat">245<span>+</span></div>
+        <div class="verify-cell-label">Q&amp;A entries, each reviewed against source legislation before publication</div>
+      </div>
+      <div class="verify-cell">
+        <span class="verify-cell-num">02</span>
+        <div class="verify-cell-stat">5</div>
+        <div class="verify-cell-label">Somali laws indexed in full, article by article</div>
+      </div>
+      <div class="verify-cell">
+        <span class="verify-cell-num">03</span>
+        <div class="verify-cell-stat">0</div>
+        <div class="verify-cell-label">Answers published without a verifiable article citation</div>
+      </div>
+      <div class="verify-cell">
+        <span class="verify-cell-num">04</span>
+        <div class="verify-cell-stat">Official</div>
+        <div class="verify-cell-label">Sources only — gazetted legislation and regulations, nothing else</div>
       </div>
     </div>
   </section>
 
-  <!-- WHO IT'S FOR -->
-  <section class="who-section">
+  <!-- METHODOLOGY — the credibility core of the page -->
+  <section class="method-section">
     <div class="container">
-      <div class="section-eyebrow">Who it's for</div>
-      <h2 class="section-title">Four audiences. One platform.</h2>
-      <p class="section-sub">Every professional in Somalia struggles to find fast, reliable legal answers. XeerHub closes that gap.</p>
-      <div class="grid-4 stagger">
-        <div class="persona-card"><div class="persona-icon">⚖️</div><div class="persona-name">Lawyers & Legal Advisors</div><div class="persona-desc">Fast article references to draft contracts, advise clients, and build cases with confidence.</div></div>
-        <div class="persona-card"><div class="persona-icon">🏢</div><div class="persona-name">Enterprises & International Orgs</div><div class="persona-desc">Comply with local labor and registration law — even without an in-house legal team.</div></div>
-        <div class="persona-card"><div class="persona-icon">💼</div><div class="persona-name">Business Founders</div><div class="persona-desc">Understand how to register, structure investment, and stay compliant from day one.</div></div>
-        <div class="persona-card"><div class="persona-icon">👩‍💻</div><div class="persona-name">HR & Compliance Managers</div><div class="persona-desc">Handle contracts, leave, termination, and worker rights under Somali labor law.</div></div>
-      </div>
-    </div>
-  </section>
+      <div class="section-eyebrow">Method</div>
+      <h2 class="section-title">How an answer gets published</h2>
+      <p class="section-sub">Most legal-AI tools optimise for a confident-sounding answer. XeerHub optimises for a defensible one. Here is the process behind every entry in the library.</p>
 
-  <div class="divider"></div>
-
-  <!-- SAMPLE Q&As -->
-  <section class="preview-section">
-    <div class="container">
-      <div class="section-eyebrow">Sample Q&As</div>
-      <h2 class="section-title">See what's inside</h2>
-      <p class="section-sub">Plain-English questions. Law-backed answers. Every answer cites the exact article.</p>
-      <div class="preview-grid stagger">
-        <div class="preview-card"><div class="preview-card-header"><span class="tag tag-labor">🟢 Labor Law</span></div><div class="preview-card-body"><div class="preview-q">Do I have to give an employee a written contract?</div><div class="preview-a">Yes. Every employment relationship must be documented in writing. Verbal agreements are not enforceable for key terms such as salary, duration, and job role.</div><div class="preview-ref">Labour Code · Arts. 16–18</div></div></div>
-        <div class="preview-card"><div class="preview-card-header"><span class="tag tag-invest">🟡 Investment Law</span></div><div class="preview-card-body"><div class="preview-q">Can the government seize my foreign investment?</div><div class="preview-a">Registered foreign investment is protected from expropriation except in cases of overriding public interest. Adequate compensation at fair market value is required.</div><div class="preview-ref">Foreign Investment Law · Art. 18</div></div></div>
-        <div class="preview-card"><div class="preview-card-header"><span class="tag tag-tax">🔷 Income Tax Law</span></div><div class="preview-card-body"><div class="preview-q">What is the Presumptive Tax Regime and who qualifies?</div><div class="preview-a">Under Regulation 9-1, PTR applies to residents whose turnover does not exceed USD 50,000/year. Quarterly tax = higher of USD 37.50 or 1.5% of quarterly turnover. Professionals are excluded.</div><div class="preview-ref">ITR 2025 · Reg 9-1, Reg 9-2 · ITA 2025 · Art. 9</div></div></div>
-        <div class="preview-card"><div class="preview-card-header"><span class="tag tag-env">🌿 Environmental Law</span></div><div class="preview-card-body"><div class="preview-q">Is the import and export of charcoal legal in Somalia?</div><div class="preview-a">No. The import and export of charcoal is prohibited under the EPMA 2024. Violations carry criminal penalties including fines and imprisonment. The government shall also confiscate all materials used in committing the offence.</div><div class="preview-ref">EPMA 2024 · Art. 48(1),(5)–(6)</div></div></div>
-      </div>
-      <div style="text-align:center;margin-top:2.5rem"><button class="btn btn-teal btn-lg" onclick="showPage('library')">View All 245+ Q&As →</button></div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- EMAIL SIGNUP -->
-  <section class="email-signup-section">
-    <div class="email-signup-inner">
-      <div class="email-signup-icon">📬</div>
-      <h2 class="email-signup-title">Stay ahead of Somali law</h2>
-      <p class="email-signup-sub">Get a free weekly legal digest — new Q&As, law updates, and compliance tips delivered to your inbox.</p>
-      <div class="email-signup-form" id="homepageSignupForm">
-        <input class="input" type="email" id="homepageEmail" placeholder="your@email.com" onkeydown="if(event.key==='Enter')subscribeMailchimp('homepage')">
-        <button class="email-signup-btn" id="homepageBtn" onclick="subscribeMailchimp('homepage')">Subscribe Free →</button>
-      </div>
-      <div class="email-signup-success" id="homepageSuccess">✅ You're on the list! Check your inbox for a confirmation email.</div>
-      <p class="email-signup-note">No spam. Unsubscribe anytime. Free forever.</p>
-      <div class="email-signup-perks">
-        <div class="email-perk"><span class="email-perk-icon">📋</span> Weekly legal digest</div>
-        <div class="email-perk"><span class="email-perk-icon">⚡</span> New Q&As first</div>
-        <div class="email-perk"><span class="email-perk-icon">🔔</span> Law change alerts</div>
-        <div class="email-perk"><span class="email-perk-icon">🔒</span> No spam, ever</div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- HOW IT WORKS -->
-  <section class="how-section">
-    <div class="container">
-      <div class="section-eyebrow">How it works</div>
-      <h2 class="section-title">Three ways to get your answer</h2>
-      <div class="steps-grid stagger">
-        <div class="step-card"><div class="step-num">1</div><div class="step-title">Browse the Library</div><div class="step-desc">Search 245+ verified Q&As across all five law areas. Filter by topic and find your answer instantly with exact article references.</div></div>
-        <div class="step-card"><div class="step-num">2</div><div class="step-title">Ask the AI</div><div class="step-desc">Type your question in plain English. Get a clear answer grounded strictly in official legislation — with the exact article cited.</div></div>
-        <div class="step-card"><div class="step-num">3</div><div class="step-title">Save & Share</div><div class="step-desc">Save answers to your dashboard, download PDF summaries, and share insights with your team. Everything organised in one place.</div></div>
-      </div>
-      <div style="text-align:center;margin-top:2.5rem"><button class="btn btn-gold btn-lg" onclick="openModal('signup')">Start Free — No Card Required</button></div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- REVIEWS ON HOMEPAGE -->
-  <section style="padding:6rem 0;background:#fff;border-top:1px solid var(--border)">
-    <div class="container">
-      <div class="section-eyebrow">Reviews</div>
-      <h2 class="section-title">Trusted by professionals across Somalia</h2>
-      <p class="section-sub">Lawyers, enterprise teams, and business founders share their experience.</p>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:2.5rem" class="stagger" id="home-testi-grid">
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <div class="testi-quote">XeerHub saved us days of work when we were onboarding 30 local staff. The article references meant our legal counsel could verify instantly. I've recommended it to every NGO colleague in Mogadishu.</div>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:var(--teal-pale);color:var(--teal-deep)">FA</div>
-            <div><div class="testi-name">Faadumo A.</div><div class="testi-role">HR Manager · International Organisation, Mogadishu</div></div>
+      <div class="method-grid">
+        <div class="method-steps">
+          <div class="method-step">
+            <div class="method-step-mark">01</div>
+            <div>
+              <div class="method-step-title">Source the provision</div>
+              <div class="method-step-text">A researcher locates the exact article in the gazetted text of the relevant law — never a summary, translation, or secondary source.</div>
+            </div>
+          </div>
+          <div class="method-step">
+            <div class="method-step-mark">02</div>
+            <div>
+              <div class="method-step-title">Draft in plain language</div>
+              <div class="method-step-text">The provision is restated in clear English, preserving its legal effect, for readers without formal legal training.</div>
+            </div>
+          </div>
+          <div class="method-step">
+            <div class="method-step-mark">03</div>
+            <div>
+              <div class="method-step-title">Verify against the text</div>
+              <div class="method-step-text">The draft answer is checked line by line against the source article. Anything that cannot be traced to a specific provision is removed, not softened.</div>
+            </div>
+          </div>
+          <div class="method-step">
+            <div class="method-step-mark">04</div>
+            <div>
+              <div class="method-step-title">Publish with citation</div>
+              <div class="method-step-text">Only then does the entry go live — with the law name and article number attached, so it can be checked independently.</div>
+            </div>
           </div>
         </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <div class="testi-quote">As a lawyer, I was skeptical of an AI legal tool. But XeerHub is different — it gives you the article, the reference, and leaves the judgment to you. I use it daily to cross-check references when drafting contracts.</div>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:var(--gold-dim);color:var(--gold)">AH</div>
-            <div><div class="testi-name">Ahmed H.</div><div class="testi-role">Legal Advisor · Private Practice, Mogadishu</div></div>
+
+        <div>
+          <div class="method-doc">
+            <div class="method-doc-head">
+              <span class="method-doc-head-label">XeerHub Record · Sample Entry</span>
+              <span class="method-doc-head-status">Verified</span>
+            </div>
+            <div class="method-doc-body">
+              <div class="method-doc-q">Question on file</div>
+              <div class="method-doc-question">Can the government seize my foreign investment?</div>
+              <div class="method-doc-rule"></div>
+              <div class="method-doc-a">Registered foreign investment is protected from expropriation except in cases of overriding public interest. Where expropriation does occur, the investor is entitled to adequate compensation at fair market value.</div>
+              <div class="method-doc-cite">
+                <span class="method-doc-cite-label">Source</span>
+                <span class="method-doc-cite-ref">Foreign Investment Law · Art. 18</span>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <div class="testi-quote">Before XeerHub, our team had to request legal opinions for basic HR questions. Now we answer 80% ourselves and only escalate the complex cases. The Enterprise plan pays for itself in the first week.</div>
-          <div class="testi-author">
-            <div class="testi-avatar" style="background:var(--teal-pale);color:var(--teal-deep)">NI</div>
-            <div><div class="testi-name">Nasra I.</div><div class="testi-role">Country Director · Humanitarian Organisation</div></div>
+          <div style="display:flex;gap:1.75rem;margin-top:1.5rem;padding:1.25rem 1.5rem;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--parchment)">
+            <div style="flex:1">
+              <div style="font-family:'DM Mono',monospace;font-size:.68rem;color:var(--teal-mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem">What this means for you</div>
+              <div style="font-size:.84rem;color:var(--muted);line-height:1.65">You can take this citation to the gazetted text yourself. If the article doesn't say what we say it says, the entry is wrong — and we want to hear about it.</div>
+            </div>
           </div>
         </div>
       </div>
-      <div style="text-align:center">
+    </div>
+  </section>
+
+  <!-- PRACTICE AREAS — replaces persona icon grid -->
+  <section class="areas-section">
+    <div class="container">
+      <div class="section-eyebrow">Who relies on it</div>
+      <h2 class="section-title">Built for people who have to be right</h2>
+      <div class="areas-list">
+        <div class="areas-row">
+          <span class="areas-row-num">01</span>
+          <span class="areas-row-name">Lawyers &amp; legal advisors</span>
+          <span class="areas-row-desc">Article references for contract drafting, client advice, and case preparation — checkable in seconds.</span>
+          <span class="areas-row-count"><b>5</b> laws indexed</span>
+        </div>
+        <div class="areas-row">
+          <span class="areas-row-num">02</span>
+          <span class="areas-row-name">Enterprises &amp; international organisations</span>
+          <span class="areas-row-desc">Labour and registration compliance for organisations operating in Somalia without in-house counsel.</span>
+          <span class="areas-row-count"><b>50</b> labour entries</span>
+        </div>
+        <div class="areas-row">
+          <span class="areas-row-num">03</span>
+          <span class="areas-row-name">Investors &amp; business founders</span>
+          <span class="areas-row-desc">Registration, structuring, and protection provisions under the Foreign Investment Law.</span>
+          <span class="areas-row-count"><b>50</b> investment entries</span>
+        </div>
+        <div class="areas-row">
+          <span class="areas-row-num">04</span>
+          <span class="areas-row-name">HR &amp; compliance managers</span>
+          <span class="areas-row-desc">Contracts, leave, termination, and worker protections under the Somalia Labour Code.</span>
+          <span class="areas-row-count"><b>245</b> total entries</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CITATION CARDS — replaces emoji preview cards -->
+  <section class="cite-section">
+    <div class="container">
+      <div class="section-eyebrow">From the record</div>
+      <h2 class="section-title">Four questions, four citations</h2>
+      <p class="section-sub">A representative sample. Every entry in the library follows this same structure — plain answer, exact source.</p>
+      <div class="cite-grid">
+        <div class="cite-card">
+          <div class="cite-card-area">Labour Code</div>
+          <div class="cite-card-q">Do I have to give an employee a written contract?</div>
+          <div class="cite-card-a">Every employment relationship must be documented in writing. Verbal agreements are not enforceable for key terms such as salary, duration, and job role.</div>
+          <div class="cite-card-ref">Labour Code · Arts. 16–18</div>
+        </div>
+        <div class="cite-card">
+          <div class="cite-card-area">Foreign Investment Law</div>
+          <div class="cite-card-q">Can the government seize my foreign investment?</div>
+          <div class="cite-card-a">Registered foreign investment is protected from expropriation except in cases of overriding public interest. Adequate compensation at fair market value is required.</div>
+          <div class="cite-card-ref">Foreign Investment Law · Art. 18</div>
+        </div>
+        <div class="cite-card">
+          <div class="cite-card-area">Income Tax Law</div>
+          <div class="cite-card-q">What is the Presumptive Tax Regime and who qualifies?</div>
+          <div class="cite-card-a">Under Regulation 9-1, PTR applies to residents whose annual turnover does not exceed USD 50,000. Quarterly tax is the higher of USD 37.50 or 1.5% of quarterly turnover. Listed professionals are excluded.</div>
+          <div class="cite-card-ref">ITR 2025 · Reg 9-1, 9-2 · ITA 2025 · Art. 9</div>
+        </div>
+        <div class="cite-card">
+          <div class="cite-card-area">Environmental Law</div>
+          <div class="cite-card-q">Is the import and export of charcoal legal in Somalia?</div>
+          <div class="cite-card-a">No. Import and export of charcoal is prohibited under the EPMA 2024. Violations carry criminal penalties including fines and imprisonment, and the government shall confiscate materials used in the offence.</div>
+          <div class="cite-card-ref">EPMA 2024 · Art. 48(1),(5)–(6)</div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:2.5rem"><button class="btn btn-teal btn-lg" onclick="showPage('library')">View the full library →</button></div>
+    </div>
+  </section>
+
+  <!-- ENDORSEMENTS — replaces star-rating testimonials -->
+  <section class="endorse-section">
+    <div class="container">
+      <div class="section-eyebrow">In their own words</div>
+      <h2 class="section-title">Read by people who check their sources</h2>
+      <div class="endorse-list">
+        <div class="endorse-item">
+          <p class="endorse-quote">"XeerHub saved us days of work when onboarding thirty local staff. We needed every contract checked against the Labour Code, and the article references meant our legal counsel could verify each one instantly."</p>
+          <div class="endorse-meta">
+            <div class="endorse-name">Faadumo A.</div>
+            <div class="endorse-role">HR Manager<br>International organisation, Mogadishu</div>
+          </div>
+        </div>
+        <div class="endorse-item">
+          <p class="endorse-quote">"I was skeptical of an AI legal tool. XeerHub is different in one specific way — it gives you the article and the reference, and leaves the judgment to you. I use it to cross-check citations when drafting contracts."</p>
+          <div class="endorse-meta">
+            <div class="endorse-name">Ahmed H.</div>
+            <div class="endorse-role">Legal Advisor<br>Private practice, Mogadishu</div>
+          </div>
+        </div>
+        <div class="endorse-item">
+          <p class="endorse-quote">"Before XeerHub, basic HR questions meant requesting a formal legal opinion. We now resolve most of them ourselves, in minutes, and escalate only the genuinely complex cases."</p>
+          <div class="endorse-meta">
+            <div class="endorse-name">Nasra I.</div>
+            <div class="endorse-role">Country Director<br>Humanitarian organisation</div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:2.5rem">
         <button class="btn btn-outline" onclick="showPage('pricing')">See our plans →</button>
       </div>
     </div>
   </section>
 
-  <div class="divider"></div>
+  <!-- FINAL CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-eyebrow">Start free</div>
+      <h2 class="cta-title">Look up the law before you rely on it.</h2>
+      <p class="cta-sub">No card required. Browse the verified library or ask a direct question — every answer comes with its source attached.</p>
+      <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+        <button class="hero-btn-gold" onclick="openModal('signup')">Create free account →</button>
+        <button class="hero-btn-ghost" onclick="showPage('ask')">Ask a question</button>
+      </div>
+    </div>
+  </section>
 </div>
 
 <!-- ══════════════════════════════════════════════
@@ -2925,6 +3067,39 @@ function setFilter(f,btn){
 }
 function filterQA(){renderQA();}
 
+// ── CITATION LEDGER (homepage signature strip) ──────────────────
+// Pulls real article references straight from the QA dataset so the
+// ledger can never drift out of sync with the actual library content.
+function renderLedger(){
+  const track=document.getElementById('ledgerTrack');
+  if(!track) return;
+  const lawLabels={labor:'Labour Code',investment:'Foreign Investment Law',tax:'Income Tax Law',environment:'EPMA 2024',data:'Data Protection Act'};
+  const cats=Object.keys(QA);
+  // Interleave round-robin across categories so the ledger reads as a
+  // genuine cross-section of the library, not a run of one law.
+  const perCat=8;
+  let interleaved=[];
+  for(let i=0;i<perCat;i++){
+    cats.forEach(cat=>{
+      const items=QA[cat];
+      const idx=Math.floor(i*(items.length/perCat));
+      const item=items[idx];
+      if(item){
+        const display = item.ref.includes('·') ? item.ref : `${lawLabels[cat]} · ${item.ref}`;
+        interleaved.push(display);
+      }
+    });
+  }
+  const itemsHtml = interleaved.map(r=>{
+    const parts=r.split('·');
+    const law=(parts[0]||'').trim();
+    const art=(parts.slice(1).join('·')||'').trim();
+    return `<span class="ledger-item">${law}<b>${art}</b></span>`;
+  }).join('');
+  // Duplicate the sequence once for a seamless scroll loop
+  track.innerHTML = itemsHtml + itemsHtml;
+}
+
 // ── ASK AI ─────────────────────────────────────────────────────
 function setSample(el){document.getElementById('questionInput').value=el.textContent;}
 
@@ -3838,6 +4013,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     showPage(initHash);
   }
   renderQA();
+  renderLedger();
   updateUsageUI();
   const qi=document.getElementById('questionInput');
   if(qi)qi.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.ctrlKey)submitQuestion();});
