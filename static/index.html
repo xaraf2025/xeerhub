@@ -13,7 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- ══ PRIMARY SEO ══ -->
-<title>XeerHub — Somalia's AI Legal Platform | Labour, Investment, Tax, Environment & Data Law Q&A</title>
+<title>XeerHub — Somalia's AI-Powered Legal Platform for Labour Law</title>
 <meta name="description" content="XeerHub is Somalia's AI-powered legal platform. Get instant, verified answers on Somali Labour Law, Foreign Investment Law, Income Tax Law, Environmental Law (EPMA 2024), and the Data Protection Act — with exact article references. Free to start. Trusted by lawyers, enterprises, and businesses across Somalia.">
 <meta name="keywords" content="Somalia law, Somali labour law, Somalia investment law, XeerHub, legal AI Somalia, Somali legislation, Somalia legal research, Mogadishu lawyer, Somalia enterprise compliance, Somali data protection act, legal Q&A Somalia, AI legal assistant Somalia">
 <meta name="author" content="XeerHub">
@@ -190,13 +190,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <meta name="theme-color" content="#0A4A3A">
 
-<!-- Favicon: upload logo.png to https://xeerhub.com/logo.png and replace below -->
-<link rel="icon" type="image/png" sizes="32x32" href="https://xeerhub.com/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://xeerhub.com/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="https://xeerhub.com/apple-touch-icon.png">
+<!-- Favicon: these files must live in the /static folder of the xeerhub repo (same place as index.html) -->
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<!-- Inline SVG fallback favicon (used until proper favicon files are uploaded) -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%230A4A3A'/%3E%3Ctext y='50%25' x='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='Georgia,serif' font-weight='bold' font-size='68'%3EX%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -2649,45 +2648,6 @@ const AI_NOTES = {
     relatedLaws: ["Foreign Investment Law · Art. 6 — Promotion Office role in guiding applicants through the process", "Companies Law · Arts. 83–98 — Registrar must also be notified of the Somali entity through which investment is made"]
   },
 
-  // ── CIVIL LAW ───────────────────────────────────────────────
-  "Somali Civil Code · Arts. 15-20": {
-    note: "These contract formation articles were drafted decades before digital commerce, mobile money, and online platforms became central to Somali business.",
-    modernConsiderations: [
-      "Email and WhatsApp exchanges can constitute binding contract evidence in Somali courts",
-      "Mobile money payment records (EVC Plus, Zaad, Hormuud) accepted as proof of payment",
-      "E-signatures on PDF contracts are increasingly used — their legal enforceability under Somali law is still evolving",
-      "Online platform terms of service are contracts — Somali law applies to contracts performed in Somalia"
-    ],
-    relatedLaws: ["Companies Law · Arts. 34–40 — company contracts must be authorised by directors with proper authority", "Labour Code · Art. 46 — employment contracts may be oral or written; written form is strongly recommended"]
-  },
-  "Somali Civil Code · Arts. 190-220": {
-    note: "Breach of contract remedies are standard in most civil law systems but Somali court capacity to enforce judgments varies significantly by location.",
-    modernConsiderations: [
-      "Arbitration clauses in commercial contracts (especially with international parties) are strongly advisable",
-      "Mediation is faster and cheaper than litigation in Somalia — include a mediation step in dispute resolution clauses",
-      "Penalty clauses provide certainty but courts may reduce excessive penalties — set them at a reasonable pre-estimate of loss"
-    ],
-    relatedLaws: ["Civil Code · Arts. 1–30 — good faith principle underlies all contract performance", "Foreign Investment Law · Art. 19 — ICSID arbitration available for investment disputes with government"]
-  },
-  "Somali Civil Code · Arts. 250-280": {
-    note: "Mortgage and security provisions assume a functioning land registration system. Land title security in Somalia remains a practical challenge in many areas.",
-    modernConsiderations: [
-      "Mobile money and digital payment records increasingly used as evidence of loan repayment",
-      "Movable asset security (chattel mortgage) is often more practically enforceable than land security in Somalia",
-      "Always register mortgages — an unregistered mortgage may not take priority over later creditors"
-    ],
-    relatedLaws: ["Civil Code · Arts. 80–95 — land ownership restrictions affect what can be mortgaged", "Foreign Investment Law · Art. 15 — foreign investors may access 99-year land leases but cannot own land outright"]
-  },
-  "Somali Civil Code · Arts. 400-450": {
-    note: "Inheritance rules apply Islamic law (Sharia) as the primary framework for Muslim Somalis. This is a fixed legal framework under Somali law.",
-    modernConsiderations: [
-      "Business succession planning: company shares form part of an estate and will be divided among heirs — plan for this in founding documents",
-      "A shareholders agreement can include buyout provisions activated on a shareholder's death to prevent fragmentation of ownership",
-      "Foreign nationals may have different inheritance rules apply to their assets abroad — seek cross-border legal advice"
-    ],
-    relatedLaws: ["Companies Law · Arts. 27–33 — share transfer on death requires company and Registrar notification", "Civil Code · Arts. 350–380 — limitation periods apply to inheritance claims"]
-  },
-
   // ── INCOME TAX ──────────────────────────────────────────────
   "ITA 2025 · Arts. 5, 7, 9, 10": {
     note: "The ITA 2025 is a brand new law that came into force on 11 May 2025, replacing the 1966 Direct Taxation Law. This is the most significant domestic revenue reform in Somalia's recent history.",
@@ -2804,21 +2764,6 @@ const CONFLICT_ALERTS = {
     severity: "info",
     title: "Repeal Note: Old Investment Laws Superseded",
     body: "The Foreign Investment Law (2008) repealed incompatible provisions of all earlier investment legislation from the date of its publication in the Official Bulletin (Art. 26). Any legal advice or guidance based on pre-2008 Somali investment law is likely outdated. Existing investors registered under older laws retain their rights (Art. 20) but should consider re-registering under the current law."
-  },
-  "Somali Civil Code · Arts. 15-20": {
-    severity: "info",
-    title: "Interpretation Note: Digital Evidence in Contract Disputes",
-    body: "These civil code articles on written contracts predate digital communications. Somali courts are increasingly being asked to consider WhatsApp message chains, email threads, and mobile money transaction records as evidence of contractual arrangements. While formal written contracts remain legally safest, digital records can support enforcement of agreed terms."
-  },
-  "Somali Civil Code · Arts. 80-95": {
-    severity: "danger",
-    title: "🚫 Land Ownership Restriction for Foreigners",
-    body: "Article 80–95 of the Civil Code, read with the Foreign Investment Law Art. 15, means that foreign investors cannot own land outright in Somalia. The maximum permitted arrangement is a long-term lease of up to 99 years for substantial investments. Any contract purporting to transfer land ownership to a foreign national may be void. Always verify land transaction structures with a qualified Somali lawyer."
-  },
-  "Somali Civil Code · Arts. 400-450": {
-    severity: "info",
-    title: "Succession Planning Alert: Business Shares Form Part of Estate",
-    body: "Under Somali Islamic inheritance law (Arts. 400–450), company shares owned by a deceased shareholder pass to their heirs in fixed Sharia-prescribed proportions. This can result in multiple new shareholders inheriting a single stake, potentially disrupting company governance. A shareholder agreement with a buyout clause triggered on death is strongly advisable for all Somali companies with more than one shareholder."
   },
   "ITA 2025 · Arts. 3, 60, 61": {
     severity: "warning",
