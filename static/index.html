@@ -2077,7 +2077,9 @@ const SUPABASE_ANON_KEY = 'sb_publishable_1YodA1Ch6kyLwldy0C_q4w_sF2Y7LPL';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ── MAILCHIMP ────────────────────────────────────────────────
-const MAILCHIMP_LIST_ID='fb814dd0f4',MAILCHIMP_DC='us13',MAILCHIMP_U='d93ad2f4edf46069f1c804142752b467';
+// Calls the Railway API directly — NOT a relative /api/subscribe path,
+// which would hit Cloudflare Pages (no handler) and always fail.
+const SUBSCRIBE_URL='https://xeerhub-api-production.up.railway.app/subscribe';
 
 async function subscribeMailchimp(source){
   const ids={
@@ -2093,12 +2095,15 @@ async function subscribeMailchimp(source){
   const btn=document.getElementById(cfg.btn);
   if(btn){btn.disabled=true;btn.textContent='Adding...';}
   try{
-    const res=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,source})});
+    const res=await fetch(SUBSCRIBE_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,source})});
     const data=await res.json();
-    if(data.status==='subscribed'||data.status==='pending'){handleSuccess(source,cfg,emailEl,btn);}
-    else if(data.title==='Member Exists'){showToast("You're already subscribed! 🎉",'success');if(btn){btn.disabled=false;btn.textContent='Subscribe →';}}
+    if(data.status==='subscribed'){showToast("You're already subscribed! 🎉",'success');if(btn){btn.disabled=false;btn.textContent='Subscribe →';}}
     else{handleSuccess(source,cfg,emailEl,btn);}
-  }catch(e){showToast('Could not connect. Please try again.','error');if(btn){btn.disabled=false;btn.textContent='Subscribe →';}}
+  }catch(e){
+    console.error('[subscribe]',e);
+    showToast('Could not connect. Please try again.','error');
+    if(btn){btn.disabled=false;btn.textContent='Subscribe →';}
+  }
 }
 
 function handleSuccess(source,cfg,emailEl,btn){
