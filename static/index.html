@@ -478,31 +478,113 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 .step-desc{font-size:.875rem;color:var(--muted);line-height:1.65}
 
 /* ═══════════════════════════════════════════
-   LIBRARY PAGE
+   LIBRARY PAGE — MASTER-DETAIL LAYOUT
 ═══════════════════════════════════════════ */
-.library-header{background:#fff;border-bottom:1px solid var(--border);padding:2.5rem 0 0}
-.library-title-row{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem}
-.library-controls{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;padding-bottom:1.5rem}
-.search-wrap{position:relative;flex:1;min-width:240px}
-.search-icon{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:1rem;pointer-events:none}
-.search-input{padding-left:2.8rem}
-.filter-tabs{display:flex;gap:.4rem;flex-wrap:wrap}
-.filter-tab{padding:.4rem .95rem;border-radius:100px;font-size:.82rem;font-weight:500;background:#fff;color:var(--muted);border:1.5px solid var(--border);transition:all .2s;cursor:pointer;font-family:'DM Sans',sans-serif}
-.filter-tab:hover{border-color:var(--border-strong);color:var(--teal-deep)}
-.filter-tab.active{background:var(--teal-deep);color:#fff;border-color:var(--teal-deep);font-weight:500}
-.library-content{padding:2.5rem 0 4rem;background:var(--parchment)}
-.qa-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.1rem}
-.qa-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:all .25s;box-shadow:var(--shadow-sm)}
-.qa-card:hover{border-color:var(--border-strong);box-shadow:var(--shadow)}
-.qa-card-top{padding:.75rem 1.1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:var(--parchment)}
-.qa-q{padding:1rem 1.1rem .5rem;font-size:.92rem;font-weight:600;line-height:1.5;color:var(--ink)}
-.qa-a{padding:0 1.1rem .85rem;font-size:.84rem;color:var(--muted);line-height:1.7}
-.qa-footer{padding:.65rem 1.1rem;background:var(--parchment);display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
-.qa-ref{font-size:.7rem;color:var(--teal-mid);font-weight:500;font-family:'DM Mono',monospace}
-.qa-locked .qa-a{-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,1) 0%,rgba(0,0,0,0) 70%);mask-image:linear-gradient(180deg,rgba(0,0,0,1) 0%,rgba(0,0,0,0) 70%);max-height:60px;overflow:hidden;position:relative}
-.qa-lock-overlay{position:absolute;bottom:0;left:0;right:0;padding:1rem;text-align:center;background:linear-gradient(to top,rgba(255,253,248,.98) 60%,transparent)}
-.qa-lock-btn{font-size:.78rem;color:var(--teal-mid);background:var(--teal-pale);border:1px solid var(--border);padding:.3rem .8rem;border-radius:100px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;font-weight:500}
-.qa-lock-btn:hover{background:var(--teal-deep);color:#fff}
+/* ── Header strip ── */
+.lib-page-header{background:#fff;border-bottom:1px solid var(--border);padding:0}
+.lib-page-header-inner{max-width:100%;padding:1.5rem 2rem .75rem}
+.lib-page-eyebrow{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:.4rem;font-weight:500;display:flex;align-items:center;gap:8px}
+.lib-page-eyebrow::before{content:'';width:20px;height:1px;background:var(--teal-mid)}
+.lib-page-title-row{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+
+/* ── Master-detail shell ── */
+.lib-shell{display:grid;grid-template-columns:360px 1fr;height:calc(100vh - 130px);min-height:560px;border-top:1px solid var(--border)}
+
+/* ── Sidebar ── */
+.lib-sidebar{border-right:1px solid var(--border);background:#fff;display:flex;flex-direction:column;min-width:0}
+.lib-search-row{padding:.85rem 1.1rem .75rem;border-bottom:1px solid var(--border)}
+.lib-search-wrap-inner{position:relative}
+.lib-search-field{width:100%;padding:.65rem 1rem .65rem 2.35rem;border:1.5px solid var(--border);border-radius:var(--r-sm);font-size:.86rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .15s;background:var(--parchment);color:var(--ink)}
+.lib-search-field:focus{border-color:var(--teal-mid);background:#fff}
+.lib-search-field::placeholder{color:var(--muted)}
+.lib-search-field-icon{position:absolute;left:.8rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.82rem;pointer-events:none}
+.lib-search-kbd{position:absolute;right:.65rem;top:50%;transform:translateY(-50%);font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);background:var(--border);padding:.1rem .32rem;border-radius:3px;pointer-events:none}
+.lib-search-field:focus~.lib-search-kbd{display:none}
+
+.lib-chips-row{display:flex;gap:.35rem;padding:.65rem 1.1rem;overflow-x:auto;border-bottom:1px solid var(--border);scrollbar-width:none}
+.lib-chips-row::-webkit-scrollbar{display:none}
+.lib-chip{flex-shrink:0;display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .7rem;border-radius:100px;font-size:.74rem;font-weight:500;border:1.5px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.lib-chip:hover{border-color:var(--border-strong);color:var(--ink)}
+.lib-chip.active{background:var(--ink);border-color:var(--ink);color:#fff}
+.lib-chip-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.lib-chip-count{font-family:'DM Mono',monospace;opacity:.6;font-size:.68rem}
+
+.lib-list{flex:1;overflow-y:auto;padding:.35rem 0}
+.lib-list::-webkit-scrollbar{width:4px}
+.lib-list::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:3px}
+.lib-index-row{display:grid;grid-template-columns:32px 1fr;gap:.6rem;padding:.65rem 1.1rem;cursor:pointer;border-left:3px solid transparent;transition:background .12s,border-color .12s}
+.lib-index-row:hover{background:var(--parchment)}
+.lib-index-row.sel{background:var(--teal-pale);border-left-color:var(--teal-mid)}
+.lib-index-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);padding-top:.1rem}
+.lib-index-row.sel .lib-index-num{color:var(--teal-deep)}
+.lib-index-q{font-size:.84rem;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:.28rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.lib-index-meta{display:flex;align-items:center;gap:.45rem;font-size:.66rem;color:var(--muted);flex-wrap:wrap}
+.lib-index-dot{width:6px;height:6px;border-radius:50%;display:inline-block;flex-shrink:0}
+.lib-index-ref{font-family:'DM Mono',monospace}
+.lib-index-pro{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.06em;color:var(--gold-dark);background:var(--gold-pale);border:1px solid var(--gold-border);padding:.04rem .32rem;border-radius:3px}
+.lib-list-empty{padding:2.5rem 1.5rem;text-align:center;color:var(--muted);font-size:.84rem}
+
+/* ── Reading pane ── */
+.lib-reading{display:flex;flex-direction:column;min-width:0;background:var(--parchment)}
+.lib-reading-toolbar{padding:.85rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;background:#fff;flex-wrap:wrap}
+.lib-breadcrumb{font-size:.72rem;color:var(--muted);font-family:'DM Mono',monospace}
+.lib-breadcrumb b{color:var(--teal-deep);font-weight:500}
+.lib-nav-arrows{display:flex;gap:.35rem}
+.lib-nav-btn{width:28px;height:28px;border-radius:var(--r-sm);border:1.5px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.82rem;transition:all .15s}
+.lib-nav-btn:hover:not(:disabled){border-color:var(--teal-mid);color:var(--teal-deep)}
+.lib-nav-btn:disabled{opacity:.3;cursor:not-allowed}
+
+.lib-reading-body{flex:1;overflow-y:auto;padding:2rem 2.5rem;display:flex;justify-content:center;align-items:flex-start}
+.lib-reading-body::-webkit-scrollbar{width:5px}
+.lib-reading-body::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:3px}
+
+/* ── Document card (reading pane) ── */
+.lib-doc{max-width:620px;width:100%;background:#fff;border:1px solid var(--border-strong);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;animation:libDocIn .22s ease}
+@keyframes libDocIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.lib-doc-head{background:var(--teal-deep);padding:1rem 1.6rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.lib-doc-head-label{font-family:'DM Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.5);letter-spacing:.07em;text-transform:uppercase}
+.lib-doc-head-badge{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.04em;padding:.14rem .5rem;border-radius:3px}
+.lib-doc-head-badge.free{color:var(--teal-light);background:rgba(43,174,135,.18)}
+.lib-doc-head-badge.pro{color:var(--gold);background:rgba(200,153,26,.18)}
+.lib-doc-body{padding:1.75rem}
+.lib-doc-q-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.55rem;font-weight:500}
+.lib-doc-question{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--ink);margin-bottom:1.25rem;line-height:1.4}
+.lib-doc-rule{height:1px;background:var(--border);margin:1.25rem 0}
+.lib-doc-answer{font-size:.93rem;color:var(--ink);line-height:1.85;margin-bottom:1.25rem}
+.lib-doc-answer.locked{max-height:85px;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,#000 25%,transparent 90%);mask-image:linear-gradient(180deg,#000 25%,transparent 90%)}
+.lib-lock-bar{text-align:center;padding:.85rem 1rem;background:var(--parchment);border:1px dashed var(--border-strong);border-radius:var(--r-sm);margin-bottom:1.25rem}
+.lib-lock-bar button{background:var(--teal-deep);color:#fff;border:none;padding:.45rem 1.1rem;border-radius:var(--r-sm);font-size:.78rem;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s}
+.lib-lock-bar button:hover{background:var(--teal-mid)}
+.lib-doc-cite{display:flex;align-items:center;gap:.55rem;padding:.8rem .95rem;background:var(--parchment);border:1px solid var(--border);border-radius:var(--r-sm);margin-bottom:.9rem}
+.lib-doc-cite-label{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.lib-doc-cite-ref{font-family:'DM Mono',monospace;font-size:.8rem;color:var(--teal-deep);font-weight:500}
+.lib-doc-actions{display:flex;gap:.5rem;flex-wrap:wrap;padding-top:.9rem;border-top:1px solid var(--border)}
+.lib-doc-btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;border:1.5px solid var(--border-strong);color:var(--ink);padding:.45rem .9rem;border-radius:var(--r-sm);font-size:.78rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.lib-doc-btn:hover{border-color:var(--teal-mid);color:var(--teal-deep);background:var(--teal-pale)}
+.lib-doc-btn.prim{background:var(--teal-deep);color:#fff;border-color:var(--teal-deep)}
+.lib-doc-btn.prim:hover{background:var(--teal-mid)}
+
+/* ── Empty reading state ── */
+.lib-reading-empty{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.65rem;color:var(--muted);text-align:center;padding:2rem}
+.lib-reading-empty-mark{font-family:'Playfair Display',serif;font-size:3.5rem;color:var(--border-strong);font-style:italic}
+.lib-reading-empty-text{font-size:.86rem;max-width:260px;line-height:1.65}
+.lib-reading-empty-kbd{display:inline-flex;font-family:'DM Mono',monospace;font-size:.68rem;background:var(--border);padding:.12rem .38rem;border-radius:3px;margin:0 .12rem}
+
+/* ── Mobile: full-screen reading pane slides in ── */
+.lib-mobile-back{display:none}
+@media(max-width:880px){
+  .lib-shell{grid-template-columns:1fr;height:auto;display:block}
+  .lib-sidebar{border-right:none}
+  .lib-reading{position:fixed;inset:0;z-index:600;transform:translateX(100%);transition:transform .28s ease;height:100vh}
+  .lib-reading.mob-open{transform:translateX(0)}
+  .lib-mobile-back{display:flex;align-items:center;gap:.4rem;background:none;border:none;color:var(--teal-deep);font-size:.84rem;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;padding:.25rem 0}
+  .lib-reading-toolbar{padding:.85rem 1.25rem}
+  .lib-reading-body{padding:1.25rem}
+  .lib-page-header-inner{padding:1rem 1.25rem .5rem}
+}
+@media(max-width:480px){.lib-shell{min-height:auto}}
+
+/* keep empty-state for any legacy ref */
 .empty-state{text-align:center;padding:5rem 2rem;color:var(--muted)}
 .empty-icon{font-size:3rem;margin-bottom:1rem;opacity:.4}
 
@@ -1195,40 +1277,62 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
      LIBRARY PAGE
 ══════════════════════════════════════════════ -->
 <div class="page" id="page-library">
-  <div class="library-header">
-    <!-- Mode switcher banner -->
-    <div style="background:var(--parchment);border-bottom:1px solid var(--border);padding:.85rem 0">
-      <div class="container" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
-        <span style="font-size:.78rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.08em">You are in:</span>
-        <div style="display:flex;gap:.5rem">
-          <span style="display:inline-flex;align-items:center;gap:.4rem;background:var(--teal-deep);color:#fff;padding:.35rem 1rem;border-radius:100px;font-size:.82rem;font-weight:600">📚 Browse Library <span style="font-size:.7rem;opacity:.75">— search 245+ Q&As</span></span>
-          <button onclick="showPage('ask')" style="display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--muted);padding:.35rem 1rem;border-radius:100px;font-size:.82rem;font-weight:500;border:1.5px solid var(--border);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--teal-pale)';this.style.color='var(--teal-deep)';this.style.borderColor='var(--teal-mid)'" onmouseout="this.style.background='transparent';this.style.color='var(--muted)';this.style.borderColor='var(--border)'">✦ Ask AI <span style="font-size:.7rem;opacity:.75">— type your question</span></button>
-        </div>
+
+  <!-- ── LIBRARY HEADER ── -->
+  <div class="lib-page-header">
+    <!-- mode switcher -->
+    <div style="background:var(--parchment);border-bottom:1px solid var(--border);padding:.75rem 2rem">
+      <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
+        <span style="font-size:.72rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.08em">You are in:</span>
+        <span style="display:inline-flex;align-items:center;gap:.4rem;background:var(--teal-deep);color:#fff;padding:.3rem .9rem;border-radius:100px;font-size:.78rem;font-weight:600">📚 Browse Library <span style="font-size:.68rem;opacity:.7">— index + reading pane</span></span>
+        <button onclick="showPage('ask')" style="display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--muted);padding:.3rem .9rem;border-radius:100px;font-size:.78rem;font-weight:500;border:1.5px solid var(--border);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--teal-pale)';this.style.color='var(--teal-deep)';this.style.borderColor='var(--teal-mid)'" onmouseout="this.style.background='transparent';this.style.color='var(--muted)';this.style.borderColor='var(--border)'">✦ Ask AI <span style="font-size:.68rem;opacity:.7">— type your question</span></button>
       </div>
     </div>
-    <div class="container">
-      <div class="library-title-row">
-        <div>
-          <div class="section-eyebrow">Q&A Library</div>
-          <h1 style="font-size:2.2rem;font-family:'Playfair Display',serif">Verified Legal Q&As</h1>
-          <p style="color:var(--muted);font-size:.9rem;margin-top:.3rem">245+ questions · 5 laws · all article references included</p>
-          <p style="font-size:.82rem;color:var(--teal-mid);margin-top:.4rem;font-weight:500">💡 Can't find what you need? <button onclick="showPage('ask')" style="background:none;border:none;color:var(--teal-deep);font-weight:600;cursor:pointer;font-size:.82rem;text-decoration:underline;padding:0">Ask the AI instead →</button></p>
-        </div>
-      </div>
-      <div class="library-controls">
-        <div class="search-wrap"><span class="search-icon">🔍</span><input class="input search-input" type="text" placeholder="Search questions..." id="searchInput" oninput="filterQA()"></div>
-        <div class="filter-tabs">
-          <button class="filter-tab active" onclick="setFilter('all',this)">All (245)</button>
-          <button class="filter-tab" onclick="setFilter('labor',this)">🟢 Labor (50)</button>
-          <button class="filter-tab" onclick="setFilter('investment',this)">🟡 Investment (50)</button>
-          <button class="filter-tab" onclick="setFilter('tax',this)">🔷 Tax (70)</button>
-          <button class="filter-tab" onclick="setFilter('environment',this)">🌿 Environment (50)</button>
-          <button class="filter-tab" onclick="setFilter('data',this)">🛡️ Data Protection (25)</button>
-        </div>
+    <div class="lib-page-header-inner">
+      <div class="lib-page-eyebrow">Q&amp;A Library</div>
+      <div class="lib-page-title-row">
+        <h1 style="font-size:1.9rem;font-family:'Playfair Display',serif">Verified Legal Q&amp;As</h1>
+        <span style="font-size:.8rem;color:var(--muted);font-family:'DM Mono',monospace" id="libResultCount">245 entries · 5 laws</span>
       </div>
     </div>
   </div>
-  <div class="library-content"><div class="container"><div class="qa-grid" id="qaGrid"></div><div class="empty-state" id="emptyState" style="display:none"><div class="empty-icon">🔍</div><p>No results found. Try a different search term.</p></div></div></div>
+
+  <!-- ── MASTER-DETAIL SHELL ── -->
+  <div class="lib-shell">
+
+    <!-- SIDEBAR (index) -->
+    <div class="lib-sidebar">
+      <!-- search -->
+      <div class="lib-search-row">
+        <div class="lib-search-wrap-inner">
+          <span class="lib-search-field-icon">⌕</span>
+          <input class="lib-search-field" id="libSearchInput" type="text" placeholder="Search the library…" autocomplete="off">
+          <span class="lib-search-kbd">/</span>
+        </div>
+      </div>
+      <!-- category chips -->
+      <div class="lib-chips-row" id="libChipsRow"></div>
+      <!-- entry index -->
+      <div class="lib-list" id="libList"></div>
+    </div>
+
+    <!-- READING PANE -->
+    <div class="lib-reading" id="libReadingPane">
+      <div class="lib-reading-toolbar">
+        <button class="lib-mobile-back" id="libMobileBack">‹ Back</button>
+        <div class="lib-breadcrumb" id="libBreadcrumb">Library</div>
+        <div style="display:flex;align-items:center;gap:.75rem">
+          <span style="font-size:.72rem;color:var(--muted);font-family:'DM Mono',monospace" id="libEntryPos"></span>
+          <div class="lib-nav-arrows">
+            <button class="lib-nav-btn" id="libPrev" title="Previous (↑)">↑</button>
+            <button class="lib-nav-btn" id="libNext" title="Next (↓)">↓</button>
+          </div>
+        </div>
+      </div>
+      <div class="lib-reading-body" id="libReadingBody"></div>
+    </div>
+
+  </div><!-- end .lib-shell -->
 </div>
 
 <!-- ══════════════════════════════════════════════
@@ -2788,7 +2892,7 @@ function showPage(page){
   if(nav)nav.classList.add('active');
   state.currentPage=page;
   window.scrollTo(0,0);
-  if(page==='library')renderQA();
+  if(page==='library'){libRenderList();libRenderReading();}
   if(page==='dashboard'||page==='ask')updateUsageUI();
   // ── SEO: update URL hash so each page has a crawlable, shareable URL ──
   const newHash = (page==='home') ? '' : '#'+page;
@@ -2823,61 +2927,224 @@ function toggleMobileMenu(){
 }
 
 // ── LIBRARY ───────────────────────────────────────────────────
-function renderQA(){
-  const grid=document.getElementById('qaGrid');
-  const empty=document.getElementById('emptyState');
-  const search=(document.getElementById('searchInput')||{value:''}).value.toLowerCase();
-  const filter=state.currentFilter;
+// ══════════════════════════════════════════════
+//  LIBRARY — MASTER-DETAIL ENGINE
+//  Replaces the old card-grid renderQA / setFilter / filterQA.
+//  All QA data comes from the existing QA object above.
+// ══════════════════════════════════════════════
 
-  let items=[];
-  const cats=filter==='all'?Object.keys(QA):(filter==='investment'?['investment']:filter==='labor'?['labor']:filter==='environment'?['environment']:filter==='data'?['data']:['tax']);
-  cats.forEach(cat=>{
-    if(QA[cat])QA[cat].forEach(q=>{
-      if(!search||q.q.toLowerCase().includes(search)||q.a.toLowerCase().includes(search))items.push({...q,cat});
+const LIB_CATS = {
+  labor:       {label:'Labour Code',            color:'var(--labor)',  dot:'var(--labor)'},
+  investment:  {label:'Foreign Investment Law', color:'var(--invest)', dot:'var(--invest)'},
+  tax:         {label:'Income Tax Law',         color:'var(--tax)',    dot:'var(--tax)'},
+  environment: {label:'Environmental Law',      color:'var(--env)',    dot:'var(--env)'},
+  data:        {label:'Data Protection Act',    color:'var(--data)',   dot:'var(--data)'},
+};
+
+// Flatten QA into a single sortable array
+function libFlattenQA() {
+  const out = [];
+  Object.keys(QA).forEach(cat => {
+    (QA[cat] || []).forEach(item => out.push({...item, cat}));
+  });
+  return out;
+}
+
+let libAllItems    = [];
+let libFiltered    = [];
+let libActiveCat   = 'all';
+let libActiveId    = null;
+
+function libInit() {
+  libAllItems = libFlattenQA();
+  libBuildChips();
+  libRenderList();
+  libRenderReading();
+
+  const listEl   = document.getElementById('libList');
+  const searchEl = document.getElementById('libSearchInput');
+  const prevBtn  = document.getElementById('libPrev');
+  const nextBtn  = document.getElementById('libNext');
+  const mBackBtn = document.getElementById('libMobileBack');
+
+  searchEl.addEventListener('input', () => { libRenderList(); });
+  prevBtn.addEventListener('click', () => libStep(-1));
+  nextBtn.addEventListener('click', () => libStep(1));
+  mBackBtn.addEventListener('click', () => document.getElementById('libReadingPane').classList.remove('mob-open'));
+
+  document.addEventListener('keydown', e => {
+    const onLib = document.getElementById('page-library').classList.contains('active');
+    if (!onLib) return;
+    if (e.key === '/' && document.activeElement !== searchEl) { e.preventDefault(); searchEl.focus(); return; }
+    if (e.key === 'Escape') { searchEl.blur(); document.getElementById('libReadingPane').classList.remove('mob-open'); return; }
+    if (document.activeElement === searchEl) return;
+    if (e.key === 'ArrowDown') { e.preventDefault(); libStep(1); }
+    if (e.key === 'ArrowUp')   { e.preventDefault(); libStep(-1); }
+  });
+}
+
+function libBuildChips() {
+  const row = document.getElementById('libChipsRow');
+  if (!row) return;
+  const counts = {};
+  libAllItems.forEach(i => { counts[i.cat] = (counts[i.cat] || 0) + 1; });
+  const total = libAllItems.length;
+
+  const chips = [
+    {key:'all', label:'All', count:total, dot:null},
+    ...Object.keys(LIB_CATS).map(k => ({key:k, label:LIB_CATS[k].label.split(' ')[0], count:counts[k]||0, dot:LIB_CATS[k].dot}))
+  ];
+
+  row.innerHTML = chips.map(c => `
+    <button class="lib-chip ${c.key === libActiveCat ? 'active' : ''}" data-cat="${c.key}">
+      ${c.dot ? `<span class="lib-chip-dot" style="background:${c.dot}"></span>` : ''}
+      ${c.label}
+      <span class="lib-chip-count">${c.count}</span>
+    </button>`).join('');
+
+  row.querySelectorAll('.lib-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      libActiveCat = btn.dataset.cat;
+      row.querySelectorAll('.lib-chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      libRenderList();
     });
   });
+}
 
-  if(!items.length){grid.innerHTML='';empty.style.display='block';return;}
-  empty.style.display='none';
+function libGetFiltered() {
+  const q = (document.getElementById('libSearchInput')?.value || '').toLowerCase().trim();
+  return libAllItems.filter(item => {
+    const catOk = libActiveCat === 'all' || item.cat === libActiveCat;
+    if (!catOk) return false;
+    if (!q) return true;
+    return item.q.toLowerCase().includes(q) || item.a.toLowerCase().includes(q);
+  });
+}
 
-  const catColors={labor:'var(--labor)',investment:'var(--invest)',tax:'var(--tax)',environment:'var(--env)',data:'var(--data)'};
-  const catLabels={labor:'Labor Law',investment:'Investment Law',tax:'Income Tax',environment:'Environment',data:'Data Protection'};
-  const catEmojis={labor:'🟢',investment:'🟡',tax:'🔷',environment:'🌿',data:'🛡️'};
+function libRenderList() {
+  const listEl  = document.getElementById('libList');
+  const countEl = document.getElementById('libResultCount');
+  if (!listEl) return;
 
-  grid.innerHTML=items.map(item=>{
-    const free=item.tier==='free';
-    return`<div class="qa-card${free?'':' qa-locked'}">
-      <div class="qa-card-top">
-        <span class="tag tag-${item.cat==='environment'?'env':item.cat==='data'?'data':item.cat}" style="color:${catColors[item.cat]}">${catEmojis[item.cat]} ${catLabels[item.cat]}</span>
-        ${free?'<span class="tag tag-free">Free</span>':'<span class="tag tag-premium">Premium</span>'}
-      </div>
-      <div class="qa-q">${item.q}</div>
-      <div style="position:relative">
-        <div class="qa-a">${item.a}</div>
-        ${!free?`<div class="qa-lock-overlay"><button class="qa-lock-btn" onclick="openModal('signup')">🔒 Unlock with free account</button></div>`:''}
-      </div>
-      <div class="qa-footer">${free?`<span class="qa-ref">${item.ref}</span>`:'<span class="qa-ref" style="filter:blur(4px);user-select:none;pointer-events:none;opacity:.5">Unlock to see reference</span>'}
-        ${(()=>{
-          const hasAlert = CONFLICT_ALERTS[item.ref];
-          const hasNote = AI_NOTES[item.ref];
-          if(!hasAlert && !hasNote) return '';
-          return `<div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem">
-            ${hasAlert ? `<span style="font-size:.68rem;padding:.18rem .5rem;border-radius:100px;background:${hasAlert.severity==='danger'?'#fee2e2':hasAlert.severity==='warning'?'#fef9c3':'var(--teal-pale)'};color:${hasAlert.severity==='danger'?'#c53030':hasAlert.severity==='warning'?'var(--gold-dark)':'var(--teal-deep)'};border:1px solid ${hasAlert.severity==='danger'?'#fc8181':hasAlert.severity==='warning'?'#f6c343':'var(--border-strong)'};font-weight:600;cursor:pointer" onclick="document.getElementById('questionInput').value='${item.q.replace(/'/g,"\'")}';showPage('ask');setTimeout(submitQuestion,300)">⚠ Conflict Alert</span>` : ''}
-            ${hasNote ? `<span style="font-size:.68rem;padding:.18rem .5rem;border-radius:100px;background:var(--teal-pale);color:var(--teal-deep);border:1px solid var(--border-strong);font-weight:600;cursor:pointer" onclick="document.getElementById('questionInput').value='${item.q.replace(/'/g,"\'")}';showPage('ask');setTimeout(submitQuestion,300)">🧠 AI Note</span>` : ''}
-          </div>`;
-        })()}
+  libFiltered = libGetFiltered();
+  if (countEl) countEl.textContent = `${libFiltered.length} entr${libFiltered.length===1?'y':'ies'} · 5 laws`;
+
+  if (!libFiltered.length) {
+    listEl.innerHTML = `<div class="lib-list-empty">No results — try a different search or filter.</div>`;
+    return;
+  }
+
+  listEl.innerHTML = libFiltered.map((item, i) => {
+    const cat = LIB_CATS[item.cat] || {};
+    const sel  = item.id === libActiveId;
+    return `<div class="lib-index-row ${sel ? 'sel' : ''}" data-id="${item.id}">
+      <div class="lib-index-num">${String(i+1).padStart(3,'0')}</div>
+      <div>
+        <div class="lib-index-q">${item.q}</div>
+        <div class="lib-index-meta">
+          <span class="lib-index-dot" style="background:${cat.dot||'var(--muted)'}"></span>
+          <span>${cat.label||item.cat}</span>
+          <span class="lib-index-ref">${item.ref}</span>
+          ${item.tier==='premium' ? '<span class="lib-index-pro">PRO</span>' : ''}
+        </div>
       </div>
     </div>`;
   }).join('');
+
+  listEl.querySelectorAll('.lib-index-row').forEach(row => {
+    row.addEventListener('click', () => libSelectEntry(parseInt(row.dataset.id)));
+  });
+
+  // keep active entry visible
+  if (libActiveId != null) {
+    const sel = listEl.querySelector(`.lib-index-row[data-id="${libActiveId}"]`);
+    if (sel) sel.scrollIntoView({block:'nearest'});
+  }
 }
 
-function setFilter(f,btn){
-  state.currentFilter=f;
-  document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  renderQA();
+function libSelectEntry(id) {
+  libActiveId = id;
+  libRenderList();
+  libRenderReading();
+  if (window.innerWidth <= 880) {
+    document.getElementById('libReadingPane').classList.add('mob-open');
+  }
 }
-function filterQA(){renderQA();}
+
+function libRenderReading() {
+  const body       = document.getElementById('libReadingBody');
+  const breadcrumb = document.getElementById('libBreadcrumb');
+  const posEl      = document.getElementById('libEntryPos');
+  const prevBtn    = document.getElementById('libPrev');
+  const nextBtn    = document.getElementById('libNext');
+  if (!body) return;
+
+  const idx  = libFiltered.findIndex(i => i.id === libActiveId);
+  if (prevBtn) prevBtn.disabled = idx <= 0;
+  if (nextBtn) nextBtn.disabled = idx === -1 || idx >= libFiltered.length - 1;
+  if (posEl)   posEl.textContent = idx >= 0 ? `${idx+1} / ${libFiltered.length}` : '';
+
+  const item = libFiltered.find(i => i.id === libActiveId);
+  if (!item) {
+    if (breadcrumb) breadcrumb.textContent = 'Library';
+    body.innerHTML = `<div class="lib-reading-empty">
+      <div class="lib-reading-empty-mark">§</div>
+      <div class="lib-reading-empty-text">Select an entry from the index to read the full cited answer.<br><br>
+      Press <span class="lib-reading-empty-kbd">↑</span><span class="lib-reading-empty-kbd">↓</span> to navigate, or <span class="lib-reading-empty-kbd">/</span> to search.</div>
+    </div>`;
+    return;
+  }
+
+  const cat  = LIB_CATS[item.cat] || {};
+  const free = item.tier === 'free';
+  if (breadcrumb) breadcrumb.innerHTML = `Library / <b>${cat.label||item.cat}</b> / #${item.id}`;
+
+  // Collect alerts and notes for this entry
+  const alerts    = getConflictAlertsForRefs([item.ref]);
+  const aiNote    = getAINoteForRefs([item.ref]);
+
+  body.innerHTML = `<div class="lib-doc">
+    <div class="lib-doc-head">
+      <span class="lib-doc-head-label">XeerHub Record · #${item.id}</span>
+      <span class="lib-doc-head-badge ${free?'free':'pro'}">${free ? 'Verified · Free' : 'Verified · Premium'}</span>
+    </div>
+    <div class="lib-doc-body">
+      <div class="lib-doc-q-label">Question on file</div>
+      <div class="lib-doc-question">${item.q}</div>
+      <div class="lib-doc-rule"></div>
+      <div class="lib-doc-answer ${free?'':'locked'}">${item.a}</div>
+      ${!free ? `<div class="lib-lock-bar">
+        <div style="font-size:.8rem;color:var(--muted);margin-bottom:.5rem">Premium entry — create a free account to read the full answer.</div>
+        <button onclick="openModal('signup')">Unlock with free account →</button>
+      </div>` : ''}
+      <div class="lib-doc-cite">
+        <span class="lib-doc-cite-label">Source</span>
+        <span class="lib-doc-cite-ref">${free ? item.ref : '— visible after unlock —'}</span>
+      </div>
+      <div class="lib-doc-actions">
+        <button class="lib-doc-btn prim" onclick="document.getElementById('questionInput').value=${JSON.stringify(item.q)};showPage('ask');setTimeout(submitQuestion,300)">Ask a follow-up →</button>
+        <button class="lib-doc-btn" onclick="showToast('Saved ✓','success')">Save entry</button>
+        <button class="lib-doc-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText(${JSON.stringify(item.ref)}).then(()=>showToast('Citation copied','success'))">Copy citation</button>
+      </div>
+      ${renderConflictAlerts(alerts)}
+      ${renderAINote(aiNote)}
+    </div>
+  </div>`;
+}
+
+function libStep(delta) {
+  if (!libFiltered.length) return;
+  let idx = libFiltered.findIndex(i => i.id === libActiveId);
+  if (idx === -1) idx = 0;
+  else idx = Math.min(libFiltered.length - 1, Math.max(0, idx + delta));
+  libSelectEntry(libFiltered[idx].id);
+}
+
+// ── backward-compat stubs (called by showPage / other code) ──
+function renderQA()  { libRenderList(); }
+function setFilter(f) { libActiveCat = f === 'investment' ? 'investment' : f; libRenderList(); }
+function filterQA()  { libRenderList(); }
 
 // ── CITATION LEDGER (homepage signature strip) ──────────────────
 // Pulls real article references straight from the QA dataset so the
@@ -3523,9 +3790,9 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(initHash && validPages.includes(initHash)){
     showPage(initHash);
   }
-  renderQA();
   renderLedger();
   updateUsageUI();
+  libInit();
   fetchBlogPosts();
   const qi=document.getElementById('questionInput');
   if(qi)qi.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.ctrlKey)submitQuestion();});
