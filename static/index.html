@@ -488,7 +488,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 .lib-page-title-row{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
 
 /* ── Master-detail shell ── */
-.lib-shell{display:grid;grid-template-columns:360px 1fr;height:calc(100vh - 130px);min-height:560px;border-top:1px solid var(--border)}
+.lib-shell{display:grid;grid-template-columns:360px 1fr;height:calc(100vh - 105px);min-height:560px;border-top:1px solid var(--border)}
 
 /* ── Sidebar ── */
 .lib-sidebar{border-right:1px solid var(--border);background:#fff;display:flex;flex-direction:column;min-width:0}
@@ -501,8 +501,10 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 .lib-search-kbd{position:absolute;right:.65rem;top:50%;transform:translateY(-50%);font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);background:var(--border);padding:.1rem .32rem;border-radius:3px;pointer-events:none}
 .lib-search-field:focus~.lib-search-kbd{display:none}
 
-.lib-chips-row{display:flex;gap:.35rem;padding:.65rem 1.1rem;overflow-x:auto;border-bottom:1px solid var(--border);scrollbar-width:none}
+/* chip row — fade right edge to hint at overflow */
+.lib-chips-row{display:flex;gap:.35rem;padding:.65rem 1.1rem;overflow-x:auto;border-bottom:1px solid var(--border);scrollbar-width:none;position:relative}
 .lib-chips-row::-webkit-scrollbar{display:none}
+.lib-chips-row::after{content:'';position:absolute;right:0;top:0;bottom:0;width:28px;background:linear-gradient(to left,#fff,transparent);pointer-events:none}
 .lib-chip{flex-shrink:0;display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .7rem;border-radius:100px;font-size:.74rem;font-weight:500;border:1.5px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;white-space:nowrap}
 .lib-chip:hover{border-color:var(--border-strong);color:var(--ink)}
 .lib-chip.active{background:var(--ink);border-color:var(--ink);color:#fff}
@@ -581,6 +583,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
   .lib-reading-toolbar{padding:.85rem 1.25rem}
   .lib-reading-body{padding:1.25rem}
   .lib-page-header-inner{padding:1rem 1.25rem .5rem}
+  .lib-chips-row::after{display:none}
 }
 @media(max-width:480px){.lib-shell{min-height:auto}}
 
@@ -1280,19 +1283,16 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 
   <!-- ── LIBRARY HEADER ── -->
   <div class="lib-page-header">
-    <!-- mode switcher -->
-    <div style="background:var(--parchment);border-bottom:1px solid var(--border);padding:.75rem 2rem">
-      <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
-        <span style="font-size:.72rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.08em">You are in:</span>
-        <span style="display:inline-flex;align-items:center;gap:.4rem;background:var(--teal-deep);color:#fff;padding:.3rem .9rem;border-radius:100px;font-size:.78rem;font-weight:600">📚 Browse Library <span style="font-size:.68rem;opacity:.7">— index + reading pane</span></span>
-        <button onclick="showPage('ask')" style="display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--muted);padding:.3rem .9rem;border-radius:100px;font-size:.78rem;font-weight:500;border:1.5px solid var(--border);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--teal-pale)';this.style.color='var(--teal-deep)';this.style.borderColor='var(--teal-mid)'" onmouseout="this.style.background='transparent';this.style.color='var(--muted)';this.style.borderColor='var(--border)'">✦ Ask AI <span style="font-size:.68rem;opacity:.7">— type your question</span></button>
+    <!-- mode switcher + title in one strip -->
+    <div style="background:#fff;border-bottom:1px solid var(--border);padding:.6rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem">
+      <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+        <span style="font-size:.7rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.08em">Mode:</span>
+        <span style="display:inline-flex;align-items:center;gap:.35rem;background:var(--teal-deep);color:#fff;padding:.28rem .8rem;border-radius:100px;font-size:.75rem;font-weight:600">📚 Browse Library</span>
+        <button onclick="showPage('ask')" style="display:inline-flex;align-items:center;gap:.35rem;background:transparent;color:var(--muted);padding:.28rem .8rem;border-radius:100px;font-size:.75rem;font-weight:500;border:1.5px solid var(--border);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--teal-pale)';this.style.color='var(--teal-deep)';this.style.borderColor='var(--teal-mid)'" onmouseout="this.style.background='transparent';this.style.color='var(--muted)';this.style.borderColor='var(--border)'">✦ Ask AI</button>
       </div>
-    </div>
-    <div class="lib-page-header-inner">
-      <div class="lib-page-eyebrow">Q&amp;A Library</div>
-      <div class="lib-page-title-row">
-        <h1 style="font-size:1.9rem;font-family:'Playfair Display',serif">Verified Legal Q&amp;As</h1>
-        <span style="font-size:.8rem;color:var(--muted);font-family:'DM Mono',monospace" id="libResultCount">245 entries · 5 laws</span>
+      <div style="display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap">
+        <h1 style="font-size:1.45rem;font-family:'Playfair Display',serif;line-height:1">Verified Legal Q&amp;As</h1>
+        <span style="font-size:.75rem;color:var(--muted);font-family:'DM Mono',monospace" id="libResultCount">245 entries · 5 laws</span>
       </div>
     </div>
   </div>
@@ -2990,9 +2990,12 @@ function libBuildChips() {
   libAllItems.forEach(i => { counts[i.cat] = (counts[i.cat] || 0) + 1; });
   const total = libAllItems.length;
 
+  const SHORT = {
+    labor:'Labour', investment:'Invest.', tax:'Tax', environment:'Env.', data:'Data'
+  };
   const chips = [
     {key:'all', label:'All', count:total, dot:null},
-    ...Object.keys(LIB_CATS).map(k => ({key:k, label:LIB_CATS[k].label.split(' ')[0], count:counts[k]||0, dot:LIB_CATS[k].dot}))
+    ...Object.keys(LIB_CATS).map(k => ({key:k, label:SHORT[k]||k, count:counts[k]||0, dot:LIB_CATS[k].dot}))
   ];
 
   row.innerHTML = chips.map(c => `
@@ -3044,7 +3047,6 @@ function libRenderList() {
         <div class="lib-index-q">${item.q}</div>
         <div class="lib-index-meta">
           <span class="lib-index-dot" style="background:${cat.dot||'var(--muted)'}"></span>
-          <span>${cat.label||item.cat}</span>
           <span class="lib-index-ref">${item.ref}</span>
           ${item.tier==='premium' ? '<span class="lib-index-pro">PRO</span>' : ''}
         </div>
