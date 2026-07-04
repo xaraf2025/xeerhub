@@ -1597,400 +1597,436 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 ══════════════════════════════════════════════ -->
 <div class="page" id="page-about">
 
-<!-- ══ ABOUT PAGE STYLES ══ -->
+<div class="gaz-page">
+
+<!-- ══ ABOUT PAGE STYLES — "THE REGISTER" ══
+     Concept: XeerHub's own about page framed as a public filing —
+     a gazette notice about the organisation itself, using the same
+     statute/article/citation vocabulary the product applies to Somali
+     law. Signature element: the wax-seal masthead + numbered "Articles"
+     replacing the generic icon-grid/hero-split pattern used elsewhere.
+-->
 <style>
-/* ── Hero (matches home split layout) ── */
-.ab2-hero{
-  min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
-  padding-top:64px;overflow:hidden;
+.gaz-page{
+  --seal:#7A2E2E;
+  --seal-dark:#5C2222;
+  --seal-pale:#F3E7E4;
+  background:var(--cream);
 }
-.ab2-left{
-  background:var(--teal-deep);display:flex;flex-direction:column;
-  justify-content:center;padding:6rem 5% 6rem 7%;
-  position:relative;overflow:hidden;
+
+/* ── MASTHEAD ── */
+.gaz-masthead{
+  background:var(--teal-deep);
+  padding:6.5rem 0 3rem;
+  position:relative;
+  overflow:hidden;
+  text-align:center;
 }
-.ab2-left::before{
+.gaz-masthead::before{
   content:'';position:absolute;inset:0;
-  background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.025) 39px,rgba(255,255,255,0.025) 40px),
-                   repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,0.025) 39px,rgba(255,255,255,0.025) 40px);
+  background-image:repeating-linear-gradient(135deg,transparent,transparent 42px,rgba(255,255,255,0.025) 42px,rgba(255,255,255,0.025) 43px);
 }
-.ab2-left::after{
-  content:'§';position:absolute;right:-40px;top:50%;transform:translateY(-50%);
-  font-family:'Playfair Display',serif;font-size:30rem;font-weight:900;
-  color:rgba(255,255,255,0.03);line-height:1;pointer-events:none;user-select:none;
+.gaz-meta-bar{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
+  gap:0;margin-bottom:2.5rem;
+  font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;
+  color:rgba(255,255,255,0.4);text-transform:uppercase;
 }
-.ab2-eyebrow{
-  font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--teal-light);margin-bottom:1.4rem;
-  display:flex;align-items:center;gap:10px;position:relative;z-index:2;
-}
-.ab2-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--teal-light)}
-.ab2-headline{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.4rem,4vw,3.4rem);font-weight:900;line-height:1.08;
-  color:#fff;margin-bottom:1.25rem;letter-spacing:-0.01em;position:relative;z-index:2;
-}
-.ab2-headline em{font-style:italic;color:var(--teal-light)}
-.ab2-sub{font-size:.975rem;font-weight:300;color:rgba(255,255,255,0.65);
-  max-width:440px;line-height:1.8;margin-bottom:2.25rem;position:relative;z-index:2}
-.ab2-actions{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:2}
-.ab2-btn-gold{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--ink);
-  padding:13px 28px;border-radius:var(--r-sm);font-weight:600;font-size:.9rem;
-  border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
-.ab2-btn-gold:hover{background:var(--gold-dark);transform:translateY(-1px)}
-.ab2-btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#fff;
-  padding:13px 28px;border-radius:var(--r-sm);font-size:.9rem;
-  border:1px solid rgba(255,255,255,0.25);transition:all .2s;cursor:pointer;font-family:'DM Sans',sans-serif}
-.ab2-btn-ghost:hover{border-color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.06)}
-.ab2-stats{display:flex;gap:2rem;margin-top:3.5rem;padding-top:2rem;
-  border-top:1px solid rgba(255,255,255,0.12);position:relative;z-index:2;flex-wrap:wrap}
-.ab2-stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#fff;line-height:1}
-.ab2-stat-label{font-size:.7rem;color:rgba(255,255,255,0.4);margin-top:4px;
-  text-transform:uppercase;letter-spacing:.1em}
+.gaz-meta-bar span{padding:0 1rem;border-right:1px solid rgba(255,255,255,0.15)}
+.gaz-meta-bar span:last-child{border-right:none}
 
-/* Right side: feature cards */
-.ab2-right{
-  background:var(--parchment);padding:6rem 7% 6rem 5%;
-  display:flex;flex-direction:column;justify-content:center;gap:14px;
+.gaz-seal{position:relative;z-index:2;width:86px;height:86px;margin:0 auto 1.75rem}
+.gaz-seal svg{width:100%;height:100%}
+
+.gaz-eyebrow{
+  position:relative;z-index:2;
+  font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--teal-light);margin-bottom:1rem;
 }
-.ab2-right-label{font-size:.72rem;font-weight:500;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
-.ab2-feat{
-  background:#fff;border:1px solid var(--border);border-radius:var(--r);
-  padding:1.1rem 1.4rem;position:relative;overflow:hidden;transition:all .2s;
+.gaz-title{
+  position:relative;z-index:2;
+  font-family:'Playfair Display',serif;font-weight:900;font-style:italic;
+  font-size:clamp(2.1rem,4.4vw,3.4rem);line-height:1.14;color:#fff;
+  max-width:680px;margin:0 auto 1.25rem;letter-spacing:-0.01em;
 }
-.ab2-feat::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
-.ab2-feat.c1::before{background:var(--teal-light)}
-.ab2-feat.c2::before{background:var(--gold)}
-.ab2-feat.c3::before{background:var(--company,#1E5C9E)}
-.ab2-feat.c4::before{background:var(--env,#1A7A2E)}
-.ab2-feat.c5::before{background:var(--data,#6B21A8)}
-.ab2-feat:hover{box-shadow:0 4px 20px rgba(10,74,58,0.1);transform:translateY(-2px)}
-.ab2-feat-icon{font-size:1rem;margin-bottom:.35rem;display:block}
-.ab2-feat-title{font-size:.88rem;font-weight:600;color:var(--ink);margin-bottom:.2rem}
-.ab2-feat-desc{font-size:.78rem;color:var(--muted);line-height:1.55}
-
-/* Mission section */
-.ab2-mission{background:var(--teal-deep);padding:5.5rem 0;position:relative;overflow:hidden}
-.ab2-mission::after{
-  content:'"';position:absolute;right:3%;top:50%;transform:translateY(-50%);
-  font-family:'Playfair Display',serif;font-size:22rem;font-weight:900;
-  color:rgba(255,255,255,0.04);line-height:1;pointer-events:none;
-}
-.ab2-mission-inner{max-width:900px;margin:0 auto;padding:0 2rem;position:relative;z-index:2}
-.ab2-mission-quote{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(1.4rem,3vw,2.2rem);font-weight:400;font-style:italic;
-  color:#fff;line-height:1.5;margin-bottom:1.5rem;
-}
-.ab2-mission-quote strong{font-style:normal;font-weight:700;color:var(--teal-light)}
-.ab2-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.5rem}
-.ab2-pillar{border-left:2px solid rgba(255,255,255,0.15);padding-left:1rem}
-.ab2-pillar.gold{border-color:var(--gold)}
-.ab2-pillar.teal{border-color:var(--teal-light)}
-.ab2-pillar.white{border-color:rgba(255,255,255,0.3)}
-.ab2-pillar-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;
-  color:rgba(255,255,255,0.35);margin-bottom:.3rem}
-.ab2-pillar-val{font-size:.9rem;color:rgba(255,255,255,0.8);font-weight:500;line-height:1.55}
-
-/* Why it matters / two-col */
-.ab2-why{padding:6rem 0;background:var(--cream)}
-.ab2-why-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-top:2.5rem}
-.ab2-why-text{font-size:.975rem;color:var(--muted);line-height:1.85}
-.ab2-why-text p{margin-bottom:1.1rem}
-.ab2-why-text strong{color:var(--ink)}
-.ab2-impact-cards{display:flex;flex-direction:column;gap:.85rem}
-.ab2-impact{background:#fff;border:1px solid var(--border);border-radius:var(--r);
-  padding:1.25rem 1.4rem;box-shadow:var(--shadow-sm);transition:all .2s}
-.ab2-impact:hover{border-color:var(--border-strong);box-shadow:var(--shadow);transform:translateX(4px)}
-.ab2-impact-icon{font-size:1.3rem;margin-bottom:.4rem;display:block}
-.ab2-impact-title{font-size:.9rem;font-weight:700;color:var(--ink);margin-bottom:.3rem}
-.ab2-impact-desc{font-size:.82rem;color:var(--muted);line-height:1.6}
-
-/* Principles */
-.ab2-principles{padding:6rem 0;background:var(--parchment);border-top:1px solid var(--border)}
-.ab2-principles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.5rem}
-.ab2-principle{background:#fff;border:1px solid var(--border);border-radius:var(--r);
-  padding:2rem;box-shadow:var(--shadow-sm);transition:all .2s;position:relative;overflow:hidden}
-.ab2-principle::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
-  background:var(--teal-light);transform:scaleX(0);transform-origin:left;transition:transform .3s}
-.ab2-principle:hover{border-color:var(--border-strong);box-shadow:var(--shadow);transform:translateY(-3px)}
-.ab2-principle:hover::after{transform:scaleX(1)}
-.ab2-prin-icon{font-size:2rem;margin-bottom:.9rem;display:block}
-.ab2-prin-title{font-size:1.05rem;font-weight:700;margin-bottom:.5rem;color:var(--ink)}
-.ab2-prin-text{font-size:.875rem;color:var(--muted);line-height:1.72}
-
-/* Journey */
-.ab2-journey{padding:6rem 0;background:#fff;border-top:1px solid var(--border)}
-.ab2-journey-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:2.5rem}
-.ab2-timeline{display:flex;flex-direction:column;gap:0}
-.ab2-tl-item{display:flex;gap:1.4rem;position:relative;padding-bottom:2.25rem}
-.ab2-tl-item:last-child{padding-bottom:0}
-.ab2-tl-item::before{content:'';position:absolute;left:19px;top:44px;bottom:0;width:2px;
-  background:linear-gradient(to bottom,var(--border-strong),transparent)}
-.ab2-tl-item:last-child::before{display:none}
-.ab2-tl-dot{width:40px;height:40px;border-radius:50%;background:var(--teal-deep);
-  border:2px solid var(--teal-light);display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;font-size:.82rem;color:#fff;font-weight:700;font-family:'Playfair Display',serif;z-index:1}
-.ab2-tl-dot.gold{background:var(--gold);border-color:var(--gold-dark);color:var(--ink)}
-.ab2-tl-content{padding-top:.3rem}
-.ab2-tl-date{font-size:.7rem;color:var(--muted);text-transform:uppercase;
-  letter-spacing:.1em;margin-bottom:.25rem;font-weight:500}
-.ab2-tl-title{font-size:.975rem;font-weight:700;margin-bottom:.35rem;color:var(--ink)}
-.ab2-tl-text{font-size:.86rem;color:var(--muted);line-height:1.7}
-.ab2-vision{background:linear-gradient(135deg,rgba(10,74,58,0.05),#fff);
-  border:1.5px solid var(--border-strong);border-radius:var(--r);padding:2.5rem;box-shadow:var(--shadow)}
-.ab2-vision-title{font-family:'Playfair Display',serif;font-size:1.5rem;
-  color:var(--teal-deep);margin-bottom:.75rem}
-.ab2-vision-text{font-size:.925rem;color:var(--muted);line-height:1.85;margin-bottom:1.5rem}
-
-/* CTA bottom */
-.ab2-cta{padding:6rem 0;background:var(--teal-deep);position:relative;overflow:hidden}
-.ab2-cta::before{
-  content:'';position:absolute;inset:0;
-  background-image:repeating-linear-gradient(45deg,transparent,transparent 40px,
-    rgba(255,255,255,0.018) 40px,rgba(255,255,255,0.018) 41px);
+.gaz-sub{
+  position:relative;z-index:2;
+  font-size:.98rem;font-weight:300;color:rgba(255,255,255,0.62);
+  max-width:560px;margin:0 auto;line-height:1.8;
 }
 
-/* Responsive */
-@media(max-width:1024px){
-  .ab2-hero{grid-template-columns:1fr}
-  .ab2-right{display:none}
-  .ab2-pillars{grid-template-columns:1fr}
-  .ab2-why-grid{grid-template-columns:1fr}
-  .ab2-principles-grid{grid-template-columns:1fr 1fr}
-  .ab2-journey-grid{grid-template-columns:1fr}
+.gaz-rule{
+  position:relative;z-index:2;
+  max-width:640px;margin:2.75rem auto 0;height:1px;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,0.25) 0 6px,transparent 6px 12px);
+}
+
+.gaz-stamp-row{
+  position:relative;z-index:2;
+  display:flex;justify-content:center;gap:1.1rem;flex-wrap:wrap;margin-top:2.25rem;
+}
+.gaz-stamp{
+  font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.03em;
+  color:var(--gold);border:1px solid rgba(200,153,26,0.45);
+  padding:.4rem .9rem;border-radius:2px;background:rgba(200,153,26,0.07);
+  transform:rotate(-1deg);
+}
+.gaz-stamp:nth-child(2n){transform:rotate(1deg)}
+
+/* ── BODY: TOC + ARTICLES ── */
+.gaz-body{padding:4.5rem 0 3rem;background:var(--cream)}
+.gaz-body-inner{display:grid;grid-template-columns:220px 1fr;gap:3.5rem;align-items:start}
+
+.gaz-toc{position:sticky;top:96px}
+.gaz-toc-label{
+  font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:1rem;
+}
+.gaz-toc-list{list-style:none;display:flex;flex-direction:column;gap:0}
+.gaz-toc-item{
+  border-left:2px solid var(--border);padding:.55rem 0 .55rem 1rem;
+  font-size:.85rem;color:var(--muted);cursor:pointer;background:none;text-align:left;
+  font-family:'DM Sans',sans-serif;transition:all .18s;
+}
+.gaz-toc-item b{font-family:'DM Mono',monospace;font-weight:500;margin-right:.5rem;color:var(--muted)}
+.gaz-toc-item:hover{color:var(--ink);border-left-color:var(--border-strong)}
+.gaz-toc-item.active{color:var(--teal-deep);border-left-color:var(--gold);font-weight:600;background:var(--parchment)}
+.gaz-toc-item.active b{color:var(--gold-dark)}
+
+.gaz-content{max-width:680px}
+.gaz-article{padding:2.75rem 0;border-bottom:1px solid var(--border)}
+.gaz-article:first-child{padding-top:0}
+.gaz-article:last-child{border-bottom:none}
+.gaz-article-num{
+  display:block;font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.1em;
+  color:var(--gold-dark);text-transform:uppercase;margin-bottom:.6rem;
+}
+.gaz-article-title{
+  font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--ink);
+  margin-bottom:1.1rem;line-height:1.25;
+}
+.gaz-article-body{font-size:.95rem;color:var(--muted);line-height:1.85}
+.gaz-article-body p{margin-bottom:1rem}
+.gaz-article-body p:first-of-type::first-letter{
+  font-family:'Playfair Display',serif;font-size:3.1rem;font-weight:700;color:var(--teal-deep);
+  float:left;line-height:.85;padding-right:.5rem;margin-top:.15rem;
+}
+
+/* Recitals (WHEREAS clauses) */
+.gaz-recitals{
+  background:var(--parchment);border:1px solid var(--border);border-radius:var(--r-sm);
+  padding:1.3rem 1.5rem;margin:1.25rem 0 1.5rem;font-size:.88rem;color:var(--ink);line-height:1.9;
+}
+.gaz-recitals-head{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.1em;color:var(--teal-mid);margin-bottom:.6rem;text-transform:uppercase}
+.gaz-recitals ol{margin:0 0 .75rem 1.2rem}
+.gaz-recitals ol li{margin-bottom:.4rem}
+.gaz-recitals-close{font-style:italic;color:var(--teal-deep);font-weight:500}
+
+/* Exhibit table (Article II readers) */
+.gaz-exhibit{border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;margin-top:1.25rem}
+.gaz-exhibit-row{display:grid;grid-template-columns:1fr 1.6fr;border-bottom:1px solid var(--border)}
+.gaz-exhibit-row:last-child{border-bottom:none}
+.gaz-exhibit-row:nth-child(odd){background:var(--parchment)}
+.gaz-exhibit-cell{padding:.75rem 1rem;font-size:.84rem}
+.gaz-exhibit-row .gaz-exhibit-cell:first-child{font-weight:600;color:var(--ink);border-right:1px solid var(--border)}
+.gaz-exhibit-row .gaz-exhibit-cell:last-child{color:var(--muted)}
+
+/* Clauses (Article III principles) */
+.gaz-clause{display:flex;gap:1rem;margin-bottom:1.5rem}
+.gaz-clause:last-child{margin-bottom:0}
+.gaz-clause-mark{font-family:'DM Mono',monospace;font-size:.85rem;color:var(--gold-dark);flex-shrink:0;padding-top:.15rem}
+.gaz-clause-title{font-weight:700;color:var(--ink);margin-bottom:.3rem;font-size:.96rem}
+.gaz-clause-body{font-size:.88rem;color:var(--muted);line-height:1.75}
+
+/* Register table (Article IV amendments) */
+.gaz-register{border:1px solid var(--border-strong);border-radius:var(--r-sm);overflow:hidden;margin-top:.5rem}
+.gaz-register-head{
+  display:grid;grid-template-columns:110px 1fr 2fr;background:var(--teal-deep);color:#fff;
+  font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+}
+.gaz-register-head span{padding:.6rem .9rem}
+.gaz-register-row{display:grid;grid-template-columns:110px 1fr 2fr;border-top:1px solid var(--border)}
+.gaz-register-row:nth-child(even){background:var(--parchment)}
+.gaz-register-cell{padding:.75rem .9rem;font-size:.82rem}
+.gaz-register-cell.date{font-family:'DM Mono',monospace;color:var(--teal-mid);font-size:.75rem}
+.gaz-register-cell.entry{font-weight:600;color:var(--ink)}
+.gaz-register-cell.desc{color:var(--muted);line-height:1.6}
+
+/* Closing statement */
+.gaz-closing-text{font-family:'Playfair Display',serif;font-style:italic;font-size:1.15rem;color:var(--ink);line-height:1.75;margin-bottom:1.75rem}
+.gaz-sigline{border-top:1px solid var(--border-strong);padding-top:1rem;margin-top:1.5rem}
+.gaz-sig-name{font-family:'DM Mono',monospace;font-size:.8rem;color:var(--ink);margin-bottom:.3rem}
+.gaz-sig-role{font-size:.78rem;color:var(--muted)}
+.gaz-tagline-box{
+  background:var(--gold-pale);border:1px solid var(--gold-border);border-radius:var(--r-sm);
+  padding:1rem 1.25rem;margin:1.5rem 0;
+}
+.gaz-tagline-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
+.gaz-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;color:var(--gold-dark)}
+.gaz-cta-row{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.75rem}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .gaz-body-inner{grid-template-columns:1fr}
+  .gaz-toc{position:static;margin-bottom:2rem;border-bottom:1px solid var(--border);padding-bottom:1rem}
+  .gaz-toc-list{flex-direction:row;overflow-x:auto;gap:.5rem;padding-bottom:.25rem}
+  .gaz-toc-item{border-left:none;border-bottom:2px solid var(--border);white-space:nowrap;padding:.4rem .2rem}
+  .gaz-toc-item.active{background:none;border-bottom-color:var(--gold)}
+  .gaz-exhibit-row{grid-template-columns:1fr}
+  .gaz-exhibit-row .gaz-exhibit-cell:first-child{border-right:none;border-bottom:1px solid var(--border)}
+  .gaz-register-head,.gaz-register-row{grid-template-columns:80px 1fr}
+  .gaz-register-head span:nth-child(3),.gaz-register-cell.desc{display:none}
 }
 @media(max-width:640px){
-  .ab2-left{padding:5rem 7% 4rem}
-  .ab2-principles-grid{grid-template-columns:1fr}
+  .gaz-masthead{padding:5.5rem 0 2.5rem}
+  .gaz-meta-bar{flex-direction:column;gap:.35rem}
+  .gaz-meta-bar span{border-right:none;padding:0}
+  .gaz-article-title{font-size:1.4rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .gaz-toc-item{transition:none}
 }
 </style>
 
-<!-- ══ HERO SPLIT ══ -->
-<section class="ab2-hero">
-  <!-- LEFT -->
-  <div class="ab2-left">
-    <div class="ab2-eyebrow">About XeerHub</div>
-    <h1 class="ab2-headline">Somalia's Legal<br><em>Intelligence Platform</em></h1>
-    <p class="ab2-sub">XeerHub makes Somali law accessible, searchable, and understandable — turning dense legislation into clear answers with exact article references, for every professional who needs them.</p>
-    <div class="ab2-actions">
-      <button class="ab2-btn-gold" onclick="showPage('library')">Browse the Library →</button>
-      <button class="ab2-btn-ghost" onclick="showPage('contact')">Get in touch</button>
-    </div>
-    <div class="ab2-stats">
-      <div><div class="ab2-stat-num">245+</div><div class="ab2-stat-label">Verified Q&As</div></div>
-      <div><div class="ab2-stat-num">5</div><div class="ab2-stat-label">Laws Covered</div></div>
-      <div><div class="ab2-stat-num">Free</div><div class="ab2-stat-label">To Start</div></div>
-      <div><div class="ab2-stat-num">2024</div><div class="ab2-stat-label">Founded</div></div>
-    </div>
-  </div>
-  <!-- RIGHT -->
-  <div class="ab2-right">
-    <div class="ab2-right-label">What XeerHub provides</div>
-    <div class="ab2-feat c1">
-      <span class="ab2-feat-icon">📋</span>
-      <div class="ab2-feat-title">Plain-language legal explanations</div>
-      <div class="ab2-feat-desc">Every Q&A is written in clear English, then linked directly to the official article it comes from.</div>
-    </div>
-    <div class="ab2-feat c2">
-      <span class="ab2-feat-icon">🔍</span>
-      <div class="ab2-feat-title">Searchable legislation</div>
-      <div class="ab2-feat-desc">245+ verified questions across Labour, Investment, Tax, Environmental, and Data Protection law — all searchable in seconds.</div>
-    </div>
-    <div class="ab2-feat c3">
-      <span class="ab2-feat-icon">✦</span>
-      <div class="ab2-feat-title">AI-powered legal research</div>
-      <div class="ab2-feat-desc">Ask any question in plain English. The AI searches across all five laws and answers with the exact article cited — no guessing.</div>
-    </div>
-    <div class="ab2-feat c4">
-      <span class="ab2-feat-icon">🏛️</span>
-      <div class="ab2-feat-title">Direct references to official provisions</div>
-      <div class="ab2-feat-desc">Every answer is grounded in legislation and linked to the relevant legal source. No paraphrasing without a citation.</div>
-    </div>
-    <div class="ab2-feat c5">
-      <span class="ab2-feat-icon">👥</span>
-      <div class="ab2-feat-title">Built for professionals</div>
-      <div class="ab2-feat-desc">Used by lawyers, enterprises, investors, HR teams, and researchers operating across Somalia.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ MISSION ══ -->
-<section class="ab2-mission">
-  <div class="ab2-mission-inner">
-    <div class="ab2-eyebrow" style="color:var(--teal-light);margin-bottom:1.5rem">
-      <span style="display:block;width:28px;height:1px;background:var(--teal-light)"></span>
-      Our Mission
-    </div>
-    <div class="ab2-mission-quote">
-      To improve access to Somali law by making legal information <strong>easier to discover, understand, and apply.</strong>
-    </div>
-    <p style="font-size:.975rem;color:rgba(255,255,255,0.55);max-width:680px;line-height:1.85;margin-bottom:1rem">
-      We believe legal knowledge should not be limited to specialists. Clear access to legislation supports better business decisions, stronger institutions, greater compliance, and increased investment confidence across Somalia.
-    </p>
-    <div class="ab2-pillars">
-      <div class="ab2-pillar teal">
-        <div class="ab2-pillar-label">Approach</div>
-        <div class="ab2-pillar-val">Article-first. Every answer cites the exact provision from official legislation.</div>
-      </div>
-      <div class="ab2-pillar gold">
-        <div class="ab2-pillar-label">Promise</div>
-        <div class="ab2-pillar-val">Zero hallucination. If it isn't in the law, we don't publish it.</div>
-      </div>
-      <div class="ab2-pillar white">
-        <div class="ab2-pillar-label">Commitment</div>
-        <div class="ab2-pillar-val">Free forever for core access. Legal knowledge shouldn't be a privilege.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ WHY IT MATTERS ══ -->
-<section class="ab2-why">
+<!-- ══ MASTHEAD ══ -->
+<section class="gaz-masthead">
   <div class="container">
-    <div class="section-eyebrow">Why it matters</div>
-    <h2 class="section-title">Legal uncertainty has a real cost</h2>
-    <div class="ab2-why-grid">
-      <div class="ab2-why-text">
-        <p>For many businesses, investors, enterprises, researchers, and professionals, finding reliable legal information in Somalia is genuinely difficult. Laws are scattered across ministries, difficult to search, and written in technical language that takes years of training to interpret.</p>
-        <p><strong>Businesses delay decisions.</strong> Investors face information gaps. Organisations spend valuable time searching for legal answers that should be easy to find. Contracts go unsigned. Disputes drag on without a clear legal foundation to reference.</p>
-        <p>By making Somali law more accessible, XeerHub helps create a more transparent, informed, and efficient legal environment — one where legal uncertainty doesn't silently drain productivity and investment confidence.</p>
-        <p>XeerHub solves this by transforming official Somali legislation into structured legal intelligence that anyone can access quickly and confidently.</p>
-      </div>
-      <div class="ab2-impact-cards">
-        <div class="ab2-impact">
-          <span class="ab2-impact-icon">⚖️</span>
-          <div class="ab2-impact-title">Lawyers & Legal Advisors</div>
-          <div class="ab2-impact-desc">Fast article references to draft contracts, advise clients, and build cases — with the exact provision already cited.</div>
-        </div>
-        <div class="ab2-impact">
-          <span class="ab2-impact-icon">🏢</span>
-          <div class="ab2-impact-title">Enterprises & International Orgs</div>
-          <div class="ab2-impact-desc">Comply with local labour and registration law — even without an in-house legal team — from day one of operations.</div>
-        </div>
-        <div class="ab2-impact">
-          <span class="ab2-impact-icon">💼</span>
-          <div class="ab2-impact-title">Business Founders & Investors</div>
-          <div class="ab2-impact-desc">Understand how to register, structure investment, and stay compliant. Investment decisions made with legal confidence.</div>
-        </div>
-        <div class="ab2-impact">
-          <span class="ab2-impact-icon">👩‍💻</span>
-          <div class="ab2-impact-title">HR & Compliance Managers</div>
-          <div class="ab2-impact-desc">Handle contracts, leave, termination, and worker rights under Somali labour law — with the exact article in hand.</div>
-        </div>
-      </div>
+    <div class="gaz-meta-bar">
+      <span>File No. XH·2024·SO</span>
+      <span>Jurisdiction: Federal Republic of Somalia</span>
+      <span>Status: In Force</span>
+    </div>
+
+    <div class="gaz-seal">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="47" fill="none" stroke="#C8991A" stroke-width="1.5" stroke-dasharray="2 3"/>
+        <circle cx="50" cy="50" r="38" fill="none" stroke="#C8991A" stroke-width="1"/>
+        <text x="50" y="60" font-family="Georgia,serif" font-size="34" font-weight="700" fill="#C8991A" text-anchor="middle">§</text>
+        <path id="gazSealArc" d="M 15 50 A 35 35 0 0 1 85 50" fill="none"/>
+        <text font-family="'DM Mono',monospace" font-size="6.2" letter-spacing="2" fill="#C8991A" opacity=".8">
+          <textPath href="#gazSealArc" startOffset="50%" text-anchor="middle">XEERHUB · SOMALIA</textPath>
+        </text>
+      </svg>
+    </div>
+
+    <div class="gaz-eyebrow">Public Filing — About XeerHub</div>
+    <h1 class="gaz-title">Somali law, entered into the record.</h1>
+    <p class="gaz-sub">XeerHub exists so that no provision of Somali legislation goes unread, unquoted, or misquoted. What follows is our own filing — mission, principles, and the record of how we got here.</p>
+
+    <div class="gaz-rule"></div>
+
+    <div class="gaz-stamp-row">
+      <span class="gaz-stamp">245+ VERIFIED ENTRIES</span>
+      <span class="gaz-stamp">5 STATUTES INDEXED</span>
+      <span class="gaz-stamp">0 UNCITED ANSWERS</span>
+      <span class="gaz-stamp">NO FILING FEE</span>
     </div>
   </div>
 </section>
 
-<!-- ══ PRINCIPLES ══ -->
-<section class="ab2-principles">
-  <div class="container">
-    <div class="section-eyebrow">Our principles</div>
-    <h2 class="section-title">Three standards we don't compromise on</h2>
-    <div class="ab2-principles-grid">
-      <div class="ab2-principle">
-        <span class="ab2-prin-icon">📜</span>
-        <div class="ab2-prin-title">Accuracy First</div>
-        <div class="ab2-prin-text">We prioritise legal accuracy above speed. Every published legal resource is reviewed against official legislation and supported by exact article references before it goes live. No hallucinated provisions — ever.</div>
-      </div>
-      <div class="ab2-principle">
-        <span class="ab2-prin-icon">🌍</span>
-        <div class="ab2-prin-title">Somalia-Focused</div>
-        <div class="ab2-prin-text">XeerHub is built specifically for Somalia's legal environment. Our exclusive focus on Somali law allows us to provide deeper and more relevant legal intelligence than any general-purpose tool can offer.</div>
-      </div>
-      <div class="ab2-principle">
-        <span class="ab2-prin-icon">🔓</span>
-        <div class="ab2-prin-title">Accessible Knowledge</div>
-        <div class="ab2-prin-text">Access to legal information should not be a privilege. We are committed to reducing the barriers that prevent individuals and organisations from understanding their legal obligations and rights under Somali law.</div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- ══ BODY: TABLE OF CONTENTS + ARTICLES ══ -->
+<section class="gaz-body">
+  <div class="container gaz-body-inner">
 
-<!-- ══ JOURNEY + VISION ══ -->
-<section class="ab2-journey">
-  <div class="container">
-    <div class="section-eyebrow">Our journey</div>
-    <h2 class="section-title">How we got here — and where we're going</h2>
-    <div class="ab2-journey-grid">
-      <!-- Timeline left -->
-      <div class="ab2-timeline">
-        <div class="ab2-tl-item">
-          <div class="ab2-tl-dot">Q1</div>
-          <div class="ab2-tl-content">
-            <div class="ab2-tl-date">Early 2024</div>
-            <div class="ab2-tl-title">Research initiative begins</div>
-            <div class="ab2-tl-text">XeerHub began as a focused research project: manually reading and verifying Somalia's key commercial laws — the Labour Code, Foreign Investment Law, and the emerging Income Tax framework — article by article.</div>
-          </div>
-        </div>
-        <div class="ab2-tl-item">
-          <div class="ab2-tl-dot">Q3</div>
-          <div class="ab2-tl-content">
-            <div class="ab2-tl-date">Mid 2024</div>
-            <div class="ab2-tl-title">200 Q&As, all verified by hand</div>
-            <div class="ab2-tl-text">What started as manual legal research evolved into a structured platform. Every question written in plain English. Every answer checked against official legislation. Every article reference confirmed.</div>
-          </div>
-        </div>
-        <div class="ab2-tl-item">
-          <div class="ab2-tl-dot">Q4</div>
-          <div class="ab2-tl-content">
-            <div class="ab2-tl-date">Late 2024</div>
-            <div class="ab2-tl-title">AI engine — with strict guardrails</div>
-            <div class="ab2-tl-text">We integrated AI legal research with one firm rule: only answer from covered laws, always cite the article, never fabricate a provision. Tested with practising Somali lawyers before launch.</div>
-          </div>
-        </div>
-        <div class="ab2-tl-item">
-          <div class="ab2-tl-dot gold">🚀</div>
-          <div class="ab2-tl-content">
-            <div class="ab2-tl-date">2025 — Today</div>
-            <div class="ab2-tl-title">Live across 5 laws, 245+ Q&As</div>
-            <div class="ab2-tl-text">Labour Code, Foreign Investment Law, Income Tax Act 2025, Environmental Protection &amp; Management Act 2024, and the Data Protection Act. Additional legislation is continuously being researched and added.</div>
-          </div>
-        </div>
-      </div>
-      <!-- Vision right -->
-      <div class="ab2-vision">
-        <div class="section-eyebrow" style="margin-bottom:.75rem">Looking ahead</div>
-        <div class="ab2-vision-title">Becoming Somalia's legal infrastructure</div>
-        <div class="ab2-vision-text">
-          Our vision is to become the leading legal intelligence infrastructure for Somalia — a future where Somali law is searchable, understandable, and accessible to everyone who needs it.
-          <br><br>
-          From local entrepreneurs and legal professionals to international organisations and investors — XeerHub is building the foundation that makes informed legal decisions possible across Somalia's entire economy.
-          <br><br>
-          More laws are in research. More law areas are being added. The platform is free to start — and will stay that way for core access.
-        </div>
-        <div style="background:var(--parchment);border:1px solid var(--border);border-radius:var(--r-sm);padding:1.1rem 1.25rem;margin-top:1.25rem">
-          <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;font-weight:500">Our tagline</div>
-          <div style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--teal-deep);font-style:italic;line-height:1.5">"Making Somali law accessible, searchable, and actionable."</div>
-        </div>
-        <div style="display:flex;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap">
-          <button class="btn btn-gold" onclick="showPage('library')">Start browsing →</button>
-          <button class="btn btn-outline" onclick="showPage('pricing')">See plans</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- Table of contents -->
+    <nav class="gaz-toc" id="gazToc">
+      <div class="gaz-toc-label">Contents</div>
+      <ul class="gaz-toc-list">
+        <li class="gaz-toc-item" data-target="gaz-art-1"><b>I.</b>Mission</li>
+        <li class="gaz-toc-item" data-target="gaz-art-2"><b>II.</b>Case for Access</li>
+        <li class="gaz-toc-item" data-target="gaz-art-3"><b>III.</b>Standing Principles</li>
+        <li class="gaz-toc-item" data-target="gaz-art-4"><b>IV.</b>Register of Amendments</li>
+        <li class="gaz-toc-item" data-target="gaz-art-5"><b>V.</b>Closing Statement</li>
+      </ul>
+    </nav>
 
-<!-- ══ BOTTOM CTA ══ -->
-<section class="ab2-cta">
-  <div class="container" style="text-align:center;position:relative;z-index:2">
-    <div class="section-eyebrow" style="justify-content:center;color:var(--teal-light);margin-bottom:1rem">
-      <span style="display:block;width:20px;height:1px;background:var(--teal-light)"></span>
-      Join XeerHub
-    </div>
-    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);color:#fff;margin-bottom:.75rem">Legal clarity,<br>without the barrier.</h2>
-    <p style="color:rgba(255,255,255,0.5);font-size:1rem;max-width:460px;margin:0 auto 2.5rem;line-height:1.75">Free to start. No credit card. Every answer cites the exact article of official Somali legislation.</p>
-    <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
-      <button class="ab2-btn-gold" onclick="openModal('signup')">Create free account →</button>
-      <button class="ab2-btn-ghost" onclick="showPage('ask')">Ask AI a question</button>
+    <!-- Articles -->
+    <div class="gaz-content">
+
+      <!-- ARTICLE I — MISSION -->
+      <article class="gaz-article" id="gaz-art-1">
+        <span class="gaz-article-num">Article I</span>
+        <h2 class="gaz-article-title">Mission</h2>
+        <div class="gaz-article-body">
+          <p>To improve access to Somali law by making legal information easier to discover, understand, and apply. We believe legal knowledge should not be limited to specialists — clear access to legislation supports better business decisions, stronger institutions, greater compliance, and increased investment confidence across Somalia.</p>
+
+          <div class="gaz-recitals">
+            <div class="gaz-recitals-head">Whereas</div>
+            <ol>
+              <li>Somalia's legislation exists in official form, but rarely in searchable, plain-language form;</li>
+              <li>professionals across law, enterprise, and government routinely make decisions without easy access to the exact provision that governs them; and</li>
+              <li>the only reliable source of Somali law is the gazetted text itself, not summary, custom, or hearsay —</li>
+            </ol>
+            <div class="gaz-recitals-close">Now therefore, XeerHub is established to make that text legible, searchable, and citable — for free, from day one.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ARTICLE II — CASE FOR ACCESS -->
+      <article class="gaz-article" id="gaz-art-2">
+        <span class="gaz-article-num">Article II</span>
+        <h2 class="gaz-article-title">The Case for Access</h2>
+        <div class="gaz-article-body">
+          <p>For many businesses, investors, enterprises, and professionals, finding reliable legal information in Somalia is genuinely difficult. Laws are scattered across ministries, difficult to search, and written in technical language that takes years of training to interpret.</p>
+          <p>Businesses delay decisions. Investors face information gaps. Organisations spend valuable time searching for legal answers that should be easy to find. By making Somali law more accessible, XeerHub helps create a more transparent, informed, and efficient legal environment.</p>
+
+          <div class="gaz-exhibit">
+            <div class="gaz-exhibit-row">
+              <div class="gaz-exhibit-cell">Lawyers &amp; advisors</div>
+              <div class="gaz-exhibit-cell">Fast, checkable article references for contracts, client advice, and case preparation.</div>
+            </div>
+            <div class="gaz-exhibit-row">
+              <div class="gaz-exhibit-cell">Enterprises &amp; INGOs</div>
+              <div class="gaz-exhibit-cell">Labour and registration compliance without an in-house legal team, from day one of operations.</div>
+            </div>
+            <div class="gaz-exhibit-row">
+              <div class="gaz-exhibit-cell">Founders &amp; investors</div>
+              <div class="gaz-exhibit-cell">Registration, structuring, and protection provisions under the Foreign Investment Law.</div>
+            </div>
+            <div class="gaz-exhibit-row">
+              <div class="gaz-exhibit-cell">HR &amp; compliance</div>
+              <div class="gaz-exhibit-cell">Contracts, leave, termination, and worker protections under the Labour Code, cited exactly.</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ARTICLE III — STANDING PRINCIPLES -->
+      <article class="gaz-article" id="gaz-art-3">
+        <span class="gaz-article-num">Article III</span>
+        <h2 class="gaz-article-title">Standing Principles</h2>
+        <div class="gaz-article-body">
+          <p>Three standards this platform does not compromise on, regardless of speed, cost, or convenience:</p>
+
+          <div class="gaz-clause">
+            <span class="gaz-clause-mark">§1</span>
+            <div>
+              <div class="gaz-clause-title">Accuracy First</div>
+              <div class="gaz-clause-body">Every published entry is reviewed against official legislation and supported by an exact article reference before it goes live. No hallucinated provisions — ever.</div>
+            </div>
+          </div>
+          <div class="gaz-clause">
+            <span class="gaz-clause-mark">§2</span>
+            <div>
+              <div class="gaz-clause-title">Somalia-Focused</div>
+              <div class="gaz-clause-body">XeerHub is built specifically for Somalia's legal environment. Exclusive focus allows deeper, more relevant legal intelligence than any general-purpose tool can offer.</div>
+            </div>
+          </div>
+          <div class="gaz-clause">
+            <span class="gaz-clause-mark">§3</span>
+            <div>
+              <div class="gaz-clause-title">Accessible Knowledge</div>
+              <div class="gaz-clause-body">Access to legal information should not be a privilege. We work to reduce the barriers that prevent people from understanding their rights and obligations under Somali law.</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ARTICLE IV — REGISTER OF AMENDMENTS (timeline) -->
+      <article class="gaz-article" id="gaz-art-4">
+        <span class="gaz-article-num">Article IV</span>
+        <h2 class="gaz-article-title">Register of Amendments</h2>
+        <div class="gaz-article-body">
+          <p>A record of how this filing has developed since it was first opened.</p>
+          <div class="gaz-register">
+            <div class="gaz-register-head"><span>Date</span><span>Entry</span><span>Description</span></div>
+            <div class="gaz-register-row">
+              <div class="gaz-register-cell date">Q1 2024</div>
+              <div class="gaz-register-cell entry">Research initiative begins</div>
+              <div class="gaz-register-cell desc">Manual, article-by-article verification of the Labour Code, Foreign Investment Law, and the emerging Income Tax framework.</div>
+            </div>
+            <div class="gaz-register-row">
+              <div class="gaz-register-cell date">Q3 2024</div>
+              <div class="gaz-register-cell entry">200 Q&amp;As verified by hand</div>
+              <div class="gaz-register-cell desc">Every question written in plain English; every answer checked against official legislation; every reference confirmed.</div>
+            </div>
+            <div class="gaz-register-row">
+              <div class="gaz-register-cell date">Q4 2024</div>
+              <div class="gaz-register-cell entry">AI engine, with guardrails</div>
+              <div class="gaz-register-cell desc">AI legal research integrated under one rule: only answer from covered laws, always cite the article, never fabricate a provision.</div>
+            </div>
+            <div class="gaz-register-row">
+              <div class="gaz-register-cell date">2025 – Today</div>
+              <div class="gaz-register-cell entry">Live across 5 statutes, 245+ Q&amp;As</div>
+              <div class="gaz-register-cell desc">Labour Code, Foreign Investment Law, Income Tax Act 2025, EPMA 2024, and the Data Protection Act. More legislation is continuously being added.</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ARTICLE V — CLOSING STATEMENT -->
+      <article class="gaz-article" id="gaz-art-5">
+        <span class="gaz-article-num">Article V</span>
+        <h2 class="gaz-article-title">Closing Statement</h2>
+        <div class="gaz-article-body">
+          <p class="gaz-closing-text">Our vision is to become the leading legal intelligence infrastructure for Somalia — a future where Somali law is searchable, understandable, and accessible to everyone who needs it, from local entrepreneurs to international investors.</p>
+
+          <div class="gaz-tagline-box">
+            <div class="gaz-tagline-label">Our tagline</div>
+            <div class="gaz-tagline">"Making Somali law accessible, searchable, and actionable."</div>
+          </div>
+
+          <div class="gaz-sigline">
+            <div class="gaz-sig-name">— The XeerHub Team</div>
+            <div class="gaz-sig-role">Mogadishu, Federal Republic of Somalia</div>
+          </div>
+
+          <div class="gaz-cta-row">
+            <button class="btn btn-gold" onclick="showPage('library')">Start browsing →</button>
+            <button class="btn btn-outline" onclick="showPage('ask')">Ask AI a question</button>
+            <button class="btn btn-ghost" onclick="showPage('pricing')">See plans</button>
+          </div>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
 
 </div>
+</div>
+
+<!-- Scroll-spy + click-to-scroll for the Article table of contents.
+     Defensive: guarded with existence checks so it's safe to include
+     even before the DOM is ready, and harmless while this page is hidden. -->
+<script>
+(function(){
+  function initGazetteToc(){
+    var toc = document.getElementById('gazToc');
+    if(!toc) return;
+    var items = Array.prototype.slice.call(toc.querySelectorAll('.gaz-toc-item'));
+    var sections = items.map(function(it){ return document.getElementById(it.getAttribute('data-target')); });
+
+    items.forEach(function(it,i){
+      it.addEventListener('click', function(){
+        var target = sections[i];
+        if(!target) return;
+        var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+      });
+    });
+
+    if('IntersectionObserver' in window){
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            var idx = sections.indexOf(entry.target);
+            items.forEach(function(it){ it.classList.remove('active'); });
+            if(idx > -1) items[idx].classList.add('active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+      sections.forEach(function(s){ if(s) obs.observe(s); });
+    }
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initGazetteToc);
+  } else {
+    initGazetteToc();
+  }
+})();
+</script>
 
 <!-- ══════════════════════════════════════════════
      TESTIMONIALS PAGE
