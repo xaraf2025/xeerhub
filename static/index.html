@@ -1599,50 +1599,84 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 
 <div class="gaz-page">
 
-<!-- ══ ABOUT PAGE STYLES — "THE REGISTER" ══
-     Concept: XeerHub's own about page framed as a public filing —
-     a gazette notice about the organisation itself, using the same
-     statute/article/citation vocabulary the product applies to Somali
-     law. Signature element: the wax-seal masthead + numbered "Articles"
-     replacing the generic icon-grid/hero-split pattern used elsewhere.
+<!-- ══ ABOUT PAGE STYLES — "THE REGISTER" (v2 — oxblood + interactive) ══
+     Masthead now uses the seal/oxblood accent instead of the site's
+     usual teal, since it's literally the wax-seal color already used
+     for the emblem — one consistent color story instead of an arbitrary
+     new hue. Added: sticky reading-progress rail, a clickable seal that
+     "stamps" on click, accordion register rows, and expandable
+     "see it applied" examples under each principle.
 -->
 <style>
 .gaz-page{
-  --seal:#7A2E2E;
+  --seal:#8C3A3A;
   --seal-dark:#5C2222;
+  --seal-light:#B8654F;
   --seal-pale:#F3E7E4;
   background:var(--cream);
 }
 
+/* ── READING PROGRESS RAIL ── */
+.gaz-progress{
+  position:sticky;top:64px;z-index:20;height:3px;
+  background:var(--border);
+}
+.gaz-progress-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--gold),var(--seal-light));
+  transition:width .08s linear;
+}
+
 /* ── MASTHEAD ── */
 .gaz-masthead{
-  background:var(--teal-deep);
-  padding:6.5rem 0 3rem;
+  background:linear-gradient(165deg,var(--seal-dark) 0%,var(--seal) 100%);
+  padding:5.5rem 0 3rem;
   position:relative;
   overflow:hidden;
   text-align:center;
 }
 .gaz-masthead::before{
   content:'';position:absolute;inset:0;
-  background-image:repeating-linear-gradient(135deg,transparent,transparent 42px,rgba(255,255,255,0.025) 42px,rgba(255,255,255,0.025) 43px);
+  background-image:repeating-linear-gradient(135deg,transparent,transparent 42px,rgba(255,255,255,0.035) 42px,rgba(255,255,255,0.035) 43px);
 }
 .gaz-meta-bar{
   position:relative;z-index:2;
   display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
   gap:0;margin-bottom:2.5rem;
   font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;
-  color:rgba(255,255,255,0.4);text-transform:uppercase;
+  color:rgba(255,255,255,0.45);text-transform:uppercase;
 }
-.gaz-meta-bar span{padding:0 1rem;border-right:1px solid rgba(255,255,255,0.15)}
+.gaz-meta-bar span{padding:0 1rem;border-right:1px solid rgba(255,255,255,0.18)}
 .gaz-meta-bar span:last-child{border-right:none}
 
-.gaz-seal{position:relative;z-index:2;width:86px;height:86px;margin:0 auto 1.75rem}
-.gaz-seal svg{width:100%;height:100%}
+/* Clickable seal — "stamp" interaction */
+.gaz-seal-wrap{position:relative;z-index:2;margin:0 auto 1rem;display:flex;flex-direction:column;align-items:center}
+.gaz-seal{
+  width:86px;height:86px;cursor:pointer;
+  border:none;background:none;padding:0;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,0.25));
+  transition:transform .15s ease;
+}
+.gaz-seal:hover{transform:scale(1.05)}
+.gaz-seal:active{transform:scale(.94)}
+.gaz-seal svg{width:100%;height:100%;display:block}
+.gaz-seal.stamped svg{animation:gazStampPress .5s ease}
+@keyframes gazStampPress{
+  0%{transform:scale(1)}
+  30%{transform:scale(.8) rotate(-2deg)}
+  55%{transform:scale(1.1) rotate(1deg)}
+  100%{transform:scale(1) rotate(0)}
+}
+.gaz-seal-caption{
+  font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(255,255,255,0.4);margin-top:.6rem;height:1em;transition:color .2s;
+}
+.gaz-seal-caption.verified{color:var(--gold)}
 
 .gaz-eyebrow{
   position:relative;z-index:2;
   font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--teal-light);margin-bottom:1rem;
+  color:var(--gold);margin-bottom:1rem;
 }
 .gaz-title{
   position:relative;z-index:2;
@@ -1652,14 +1686,14 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 }
 .gaz-sub{
   position:relative;z-index:2;
-  font-size:.98rem;font-weight:300;color:rgba(255,255,255,0.62);
+  font-size:.98rem;font-weight:300;color:rgba(255,255,255,0.68);
   max-width:560px;margin:0 auto;line-height:1.8;
 }
 
 .gaz-rule{
   position:relative;z-index:2;
   max-width:640px;margin:2.75rem auto 0;height:1px;
-  background:repeating-linear-gradient(90deg,rgba(255,255,255,0.25) 0 6px,transparent 6px 12px);
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,0.3) 0 6px,transparent 6px 12px);
 }
 
 .gaz-stamp-row{
@@ -1668,17 +1702,19 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 }
 .gaz-stamp{
   font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.03em;
-  color:var(--gold);border:1px solid rgba(200,153,26,0.45);
-  padding:.4rem .9rem;border-radius:2px;background:rgba(200,153,26,0.07);
-  transform:rotate(-1deg);
+  color:var(--gold);border:1px solid rgba(200,153,26,0.5);
+  padding:.4rem .9rem;border-radius:2px;background:rgba(200,153,26,0.09);
+  transform:rotate(-1deg);cursor:default;
+  transition:transform .18s,box-shadow .18s,background .18s;
 }
 .gaz-stamp:nth-child(2n){transform:rotate(1deg)}
+.gaz-stamp:hover{transform:translateY(-3px) rotate(0deg);box-shadow:0 6px 16px rgba(0,0,0,0.25);background:rgba(200,153,26,0.16)}
 
 /* ── BODY: TOC + ARTICLES ── */
 .gaz-body{padding:4.5rem 0 3rem;background:var(--cream)}
 .gaz-body-inner{display:grid;grid-template-columns:220px 1fr;gap:3.5rem;align-items:start}
 
-.gaz-toc{position:sticky;top:96px}
+.gaz-toc{position:sticky;top:100px}
 .gaz-toc-label{
   font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--muted);margin-bottom:1rem;
@@ -1686,12 +1722,12 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 .gaz-toc-list{list-style:none;display:flex;flex-direction:column;gap:0}
 .gaz-toc-item{
   border-left:2px solid var(--border);padding:.55rem 0 .55rem 1rem;
-  font-size:.85rem;color:var(--muted);cursor:pointer;background:none;text-align:left;
+  font-size:.85rem;color:var(--muted);cursor:pointer;background:none;text-align:left;width:100%;
   font-family:'DM Sans',sans-serif;transition:all .18s;
 }
 .gaz-toc-item b{font-family:'DM Mono',monospace;font-weight:500;margin-right:.5rem;color:var(--muted)}
 .gaz-toc-item:hover{color:var(--ink);border-left-color:var(--border-strong)}
-.gaz-toc-item.active{color:var(--teal-deep);border-left-color:var(--gold);font-weight:600;background:var(--parchment)}
+.gaz-toc-item.active{color:var(--seal);border-left-color:var(--gold);font-weight:600;background:var(--parchment)}
 .gaz-toc-item.active b{color:var(--gold-dark)}
 
 .gaz-content{max-width:680px}
@@ -1709,7 +1745,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 .gaz-article-body{font-size:.95rem;color:var(--muted);line-height:1.85}
 .gaz-article-body p{margin-bottom:1rem}
 .gaz-article-body p:first-of-type::first-letter{
-  font-family:'Playfair Display',serif;font-size:3.1rem;font-weight:700;color:var(--teal-deep);
+  font-family:'Playfair Display',serif;font-size:3.1rem;font-weight:700;color:var(--seal);
   float:left;line-height:.85;padding-right:.5rem;margin-top:.15rem;
 }
 
@@ -1718,40 +1754,69 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
   background:var(--parchment);border:1px solid var(--border);border-radius:var(--r-sm);
   padding:1.3rem 1.5rem;margin:1.25rem 0 1.5rem;font-size:.88rem;color:var(--ink);line-height:1.9;
 }
-.gaz-recitals-head{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.1em;color:var(--teal-mid);margin-bottom:.6rem;text-transform:uppercase}
+.gaz-recitals-head{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.1em;color:var(--seal);margin-bottom:.6rem;text-transform:uppercase}
 .gaz-recitals ol{margin:0 0 .75rem 1.2rem}
 .gaz-recitals ol li{margin-bottom:.4rem}
-.gaz-recitals-close{font-style:italic;color:var(--teal-deep);font-weight:500}
+.gaz-recitals-close{font-style:italic;color:var(--seal-dark);font-weight:500}
 
 /* Exhibit table (Article II readers) */
 .gaz-exhibit{border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;margin-top:1.25rem}
-.gaz-exhibit-row{display:grid;grid-template-columns:1fr 1.6fr;border-bottom:1px solid var(--border)}
+.gaz-exhibit-row{display:grid;grid-template-columns:1fr 1.6fr;border-bottom:1px solid var(--border);transition:background .15s}
 .gaz-exhibit-row:last-child{border-bottom:none}
 .gaz-exhibit-row:nth-child(odd){background:var(--parchment)}
+.gaz-exhibit-row:hover{background:var(--seal-pale)}
 .gaz-exhibit-cell{padding:.75rem 1rem;font-size:.84rem}
 .gaz-exhibit-row .gaz-exhibit-cell:first-child{font-weight:600;color:var(--ink);border-right:1px solid var(--border)}
 .gaz-exhibit-row .gaz-exhibit-cell:last-child{color:var(--muted)}
 
-/* Clauses (Article III principles) */
-.gaz-clause{display:flex;gap:1rem;margin-bottom:1.5rem}
+/* Clauses (Article III principles) — expandable */
+.gaz-clause{margin-bottom:1.1rem;border:1px solid transparent;border-radius:var(--r-sm)}
 .gaz-clause:last-child{margin-bottom:0}
+.gaz-clause-head{
+  display:flex;gap:1rem;width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  padding:.4rem 0;font-family:'DM Sans',sans-serif;
+}
 .gaz-clause-mark{font-family:'DM Mono',monospace;font-size:.85rem;color:var(--gold-dark);flex-shrink:0;padding-top:.15rem}
-.gaz-clause-title{font-weight:700;color:var(--ink);margin-bottom:.3rem;font-size:.96rem}
+.gaz-clause-title-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.3rem}
+.gaz-clause-title{font-weight:700;color:var(--ink);font-size:.96rem}
+.gaz-clause-toggle{
+  font-size:.7rem;color:var(--seal);font-family:'DM Mono',monospace;
+  transition:transform .25s;flex-shrink:0;
+}
+.gaz-clause.open .gaz-clause-toggle{transform:rotate(180deg)}
 .gaz-clause-body{font-size:.88rem;color:var(--muted);line-height:1.75}
+.gaz-clause-example{
+  max-height:0;overflow:hidden;transition:max-height .35s ease;
+}
+.gaz-clause.open .gaz-clause-example{max-height:200px}
+.gaz-clause-example-inner{
+  margin:.7rem 0 .2rem 2rem;padding:.7rem 1rem;background:var(--seal-pale);
+  border-left:2px solid var(--seal);border-radius:0 var(--r-sm) var(--r-sm) 0;
+  font-size:.82rem;color:var(--seal-dark);line-height:1.7;font-style:italic;
+}
 
-/* Register table (Article IV amendments) */
+/* Register — accordion (Article IV amendments) */
 .gaz-register{border:1px solid var(--border-strong);border-radius:var(--r-sm);overflow:hidden;margin-top:.5rem}
 .gaz-register-head{
-  display:grid;grid-template-columns:110px 1fr 2fr;background:var(--teal-deep);color:#fff;
+  display:grid;grid-template-columns:110px 1fr auto;background:var(--seal-dark);color:#fff;
   font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
 }
 .gaz-register-head span{padding:.6rem .9rem}
-.gaz-register-row{display:grid;grid-template-columns:110px 1fr 2fr;border-top:1px solid var(--border)}
+.gaz-register-row{border-top:1px solid var(--border)}
 .gaz-register-row:nth-child(even){background:var(--parchment)}
+.gaz-register-toggle{
+  display:grid;grid-template-columns:110px 1fr auto;align-items:center;width:100%;
+  background:none;border:none;cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;
+}
+.gaz-register-toggle:hover{background:var(--seal-pale)}
 .gaz-register-cell{padding:.75rem .9rem;font-size:.82rem}
-.gaz-register-cell.date{font-family:'DM Mono',monospace;color:var(--teal-mid);font-size:.75rem}
+.gaz-register-cell.date{font-family:'DM Mono',monospace;color:var(--seal);font-size:.75rem}
 .gaz-register-cell.entry{font-weight:600;color:var(--ink)}
-.gaz-register-cell.desc{color:var(--muted);line-height:1.6}
+.gaz-register-chevron{padding-right:1rem;color:var(--muted);font-size:.7rem;transition:transform .25s}
+.gaz-register-row.open .gaz-register-chevron{transform:rotate(180deg);color:var(--seal)}
+.gaz-register-desc{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.gaz-register-row.open .gaz-register-desc{max-height:220px}
+.gaz-register-desc-inner{padding:0 .9rem 1rem 1.15rem;font-size:.83rem;color:var(--muted);line-height:1.7;border-left:2px solid var(--seal);margin-left:.9rem}
 
 /* Closing statement */
 .gaz-closing-text{font-family:'Playfair Display',serif;font-style:italic;font-size:1.15rem;color:var(--ink);line-height:1.75;margin-bottom:1.75rem}
@@ -1759,11 +1824,11 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 .gaz-sig-name{font-family:'DM Mono',monospace;font-size:.8rem;color:var(--ink);margin-bottom:.3rem}
 .gaz-sig-role{font-size:.78rem;color:var(--muted)}
 .gaz-tagline-box{
-  background:var(--gold-pale);border:1px solid var(--gold-border);border-radius:var(--r-sm);
+  background:var(--seal-pale);border:1px solid rgba(140,58,58,0.3);border-radius:var(--r-sm);
   padding:1rem 1.25rem;margin:1.5rem 0;
 }
 .gaz-tagline-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
-.gaz-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;color:var(--gold-dark)}
+.gaz-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;color:var(--seal-dark)}
 .gaz-cta-row{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.75rem}
 
 /* ── RESPONSIVE ── */
@@ -1775,19 +1840,22 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
   .gaz-toc-item.active{background:none;border-bottom-color:var(--gold)}
   .gaz-exhibit-row{grid-template-columns:1fr}
   .gaz-exhibit-row .gaz-exhibit-cell:first-child{border-right:none;border-bottom:1px solid var(--border)}
-  .gaz-register-head,.gaz-register-row{grid-template-columns:80px 1fr}
-  .gaz-register-head span:nth-child(3),.gaz-register-cell.desc{display:none}
+  .gaz-register-head,.gaz-register-toggle{grid-template-columns:85px 1fr auto}
 }
 @media(max-width:640px){
-  .gaz-masthead{padding:5.5rem 0 2.5rem}
+  .gaz-masthead{padding:5rem 0 2.5rem}
   .gaz-meta-bar{flex-direction:column;gap:.35rem}
   .gaz-meta-bar span{border-right:none;padding:0}
   .gaz-article-title{font-size:1.4rem}
 }
 @media(prefers-reduced-motion:reduce){
-  .gaz-toc-item{transition:none}
+  .gaz-toc-item,.gaz-seal,.gaz-stamp,.gaz-clause-toggle,.gaz-register-chevron,.gaz-clause-example,.gaz-register-desc{transition:none}
+  .gaz-seal.stamped svg{animation:none}
 }
 </style>
+
+<!-- Reading progress rail -->
+<div class="gaz-progress"><div class="gaz-progress-fill" id="gazProgressFill"></div></div>
 
 <!-- ══ MASTHEAD ══ -->
 <section class="gaz-masthead">
@@ -1798,16 +1866,19 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <span>Status: In Force</span>
     </div>
 
-    <div class="gaz-seal">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="47" fill="none" stroke="#C8991A" stroke-width="1.5" stroke-dasharray="2 3"/>
-        <circle cx="50" cy="50" r="38" fill="none" stroke="#C8991A" stroke-width="1"/>
-        <text x="50" y="60" font-family="Georgia,serif" font-size="34" font-weight="700" fill="#C8991A" text-anchor="middle">§</text>
-        <path id="gazSealArc" d="M 15 50 A 35 35 0 0 1 85 50" fill="none"/>
-        <text font-family="'DM Mono',monospace" font-size="6.2" letter-spacing="2" fill="#C8991A" opacity=".8">
-          <textPath href="#gazSealArc" startOffset="50%" text-anchor="middle">XEERHUB · SOMALIA</textPath>
-        </text>
-      </svg>
+    <div class="gaz-seal-wrap">
+      <button class="gaz-seal" id="gazSeal" aria-label="Click to verify this filing" title="Click to verify">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="47" fill="none" stroke="#C8991A" stroke-width="1.5" stroke-dasharray="2 3"/>
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#C8991A" stroke-width="1"/>
+          <text x="50" y="60" font-family="Georgia,serif" font-size="34" font-weight="700" fill="#C8991A" text-anchor="middle">§</text>
+          <path id="gazSealArc" d="M 15 50 A 35 35 0 0 1 85 50" fill="none"/>
+          <text font-family="'DM Mono',monospace" font-size="6.2" letter-spacing="2" fill="#C8991A" opacity=".85">
+            <textPath href="#gazSealArc" startOffset="50%" text-anchor="middle">XEERHUB · SOMALIA</textPath>
+          </text>
+        </svg>
+      </button>
+      <span class="gaz-seal-caption" id="gazSealCaption">Click to verify</span>
     </div>
 
     <div class="gaz-eyebrow">Public Filing — About XeerHub</div>
@@ -1892,65 +1963,108 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
         </div>
       </article>
 
-      <!-- ARTICLE III — STANDING PRINCIPLES -->
+      <!-- ARTICLE III — STANDING PRINCIPLES (expandable clauses) -->
       <article class="gaz-article" id="gaz-art-3">
         <span class="gaz-article-num">Article III</span>
         <h2 class="gaz-article-title">Standing Principles</h2>
         <div class="gaz-article-body">
-          <p>Three standards this platform does not compromise on, regardless of speed, cost, or convenience:</p>
+          <p>Three standards this platform does not compromise on. Tap a clause to see it applied.</p>
 
-          <div class="gaz-clause">
-            <span class="gaz-clause-mark">§1</span>
-            <div>
-              <div class="gaz-clause-title">Accuracy First</div>
-              <div class="gaz-clause-body">Every published entry is reviewed against official legislation and supported by an exact article reference before it goes live. No hallucinated provisions — ever.</div>
+          <div class="gaz-clause" data-clause>
+            <button class="gaz-clause-head" onclick="this.parentElement.classList.toggle('open')">
+              <span class="gaz-clause-mark">§1</span>
+              <div style="flex:1">
+                <div class="gaz-clause-title-row">
+                  <span class="gaz-clause-title">Accuracy First</span>
+                  <span class="gaz-clause-toggle">▾</span>
+                </div>
+                <div class="gaz-clause-body">Every published entry is reviewed against official legislation and supported by an exact article reference before it goes live. No hallucinated provisions — ever.</div>
+              </div>
+            </button>
+            <div class="gaz-clause-example">
+              <div class="gaz-clause-example-inner">Example: an early draft cited "Art. 40" for the minimum wage. Verification against the gazetted Labour Code corrected it to Art. 76 before publication.</div>
             </div>
           </div>
-          <div class="gaz-clause">
-            <span class="gaz-clause-mark">§2</span>
-            <div>
-              <div class="gaz-clause-title">Somalia-Focused</div>
-              <div class="gaz-clause-body">XeerHub is built specifically for Somalia's legal environment. Exclusive focus allows deeper, more relevant legal intelligence than any general-purpose tool can offer.</div>
+
+          <div class="gaz-clause" data-clause>
+            <button class="gaz-clause-head" onclick="this.parentElement.classList.toggle('open')">
+              <span class="gaz-clause-mark">§2</span>
+              <div style="flex:1">
+                <div class="gaz-clause-title-row">
+                  <span class="gaz-clause-title">Somalia-Focused</span>
+                  <span class="gaz-clause-toggle">▾</span>
+                </div>
+                <div class="gaz-clause-body">XeerHub is built specifically for Somalia's legal environment. Exclusive focus allows deeper, more relevant legal intelligence than any general-purpose tool can offer.</div>
+              </div>
+            </button>
+            <div class="gaz-clause-example">
+              <div class="gaz-clause-example-inner">Example: depreciation entries follow Somalia's Regulation 20-1 and 20-2 rates exactly — not generic accounting standards imported from elsewhere.</div>
             </div>
           </div>
-          <div class="gaz-clause">
-            <span class="gaz-clause-mark">§3</span>
-            <div>
-              <div class="gaz-clause-title">Accessible Knowledge</div>
-              <div class="gaz-clause-body">Access to legal information should not be a privilege. We work to reduce the barriers that prevent people from understanding their rights and obligations under Somali law.</div>
+
+          <div class="gaz-clause" data-clause>
+            <button class="gaz-clause-head" onclick="this.parentElement.classList.toggle('open')">
+              <span class="gaz-clause-mark">§3</span>
+              <div style="flex:1">
+                <div class="gaz-clause-title-row">
+                  <span class="gaz-clause-title">Accessible Knowledge</span>
+                  <span class="gaz-clause-toggle">▾</span>
+                </div>
+                <div class="gaz-clause-body">Access to legal information should not be a privilege. We work to reduce the barriers that prevent people from understanding their rights and obligations under Somali law.</div>
+              </div>
+            </button>
+            <div class="gaz-clause-example">
+              <div class="gaz-clause-example-inner">Example: the core Q&amp;A library has never required a card or a login. It launched free and stays free.</div>
             </div>
           </div>
         </div>
       </article>
 
-      <!-- ARTICLE IV — REGISTER OF AMENDMENTS (timeline) -->
+      <!-- ARTICLE IV — REGISTER OF AMENDMENTS (accordion) -->
       <article class="gaz-article" id="gaz-art-4">
         <span class="gaz-article-num">Article IV</span>
         <h2 class="gaz-article-title">Register of Amendments</h2>
         <div class="gaz-article-body">
-          <p>A record of how this filing has developed since it was first opened.</p>
+          <p>A record of how this filing has developed since it was first opened. Tap an entry to expand it.</p>
           <div class="gaz-register">
-            <div class="gaz-register-head"><span>Date</span><span>Entry</span><span>Description</span></div>
-            <div class="gaz-register-row">
-              <div class="gaz-register-cell date">Q1 2024</div>
-              <div class="gaz-register-cell entry">Research initiative begins</div>
-              <div class="gaz-register-cell desc">Manual, article-by-article verification of the Labour Code, Foreign Investment Law, and the emerging Income Tax framework.</div>
+            <div class="gaz-register-head"><span>Date</span><span>Entry</span><span></span></div>
+
+            <div class="gaz-register-row" data-register>
+              <button class="gaz-register-toggle" onclick="this.closest('[data-register]').classList.toggle('open')">
+                <span class="gaz-register-cell date">Q1 2024</span>
+                <span class="gaz-register-cell entry">Research initiative begins</span>
+                <span class="gaz-register-chevron">▾</span>
+              </button>
+              <div class="gaz-register-desc"><div class="gaz-register-desc-inner">Manual, article-by-article verification of the Labour Code, Foreign Investment Law, and the emerging Income Tax framework.</div></div>
             </div>
-            <div class="gaz-register-row">
-              <div class="gaz-register-cell date">Q3 2024</div>
-              <div class="gaz-register-cell entry">200 Q&amp;As verified by hand</div>
-              <div class="gaz-register-cell desc">Every question written in plain English; every answer checked against official legislation; every reference confirmed.</div>
+
+            <div class="gaz-register-row" data-register>
+              <button class="gaz-register-toggle" onclick="this.closest('[data-register]').classList.toggle('open')">
+                <span class="gaz-register-cell date">Q3 2024</span>
+                <span class="gaz-register-cell entry">200 Q&amp;As verified by hand</span>
+                <span class="gaz-register-chevron">▾</span>
+              </button>
+              <div class="gaz-register-desc"><div class="gaz-register-desc-inner">Every question written in plain English; every answer checked against official legislation; every reference confirmed.</div></div>
             </div>
-            <div class="gaz-register-row">
-              <div class="gaz-register-cell date">Q4 2024</div>
-              <div class="gaz-register-cell entry">AI engine, with guardrails</div>
-              <div class="gaz-register-cell desc">AI legal research integrated under one rule: only answer from covered laws, always cite the article, never fabricate a provision.</div>
+
+            <div class="gaz-register-row" data-register>
+              <button class="gaz-register-toggle" onclick="this.closest('[data-register]').classList.toggle('open')">
+                <span class="gaz-register-cell date">Q4 2024</span>
+                <span class="gaz-register-cell entry">AI engine, with guardrails</span>
+                <span class="gaz-register-chevron">▾</span>
+              </button>
+              <div class="gaz-register-desc"><div class="gaz-register-desc-inner">AI legal research integrated under one rule: only answer from covered laws, always cite the article, never fabricate a provision.</div></div>
             </div>
-            <div class="gaz-register-row">
-              <div class="gaz-register-cell date">2025 – Today</div>
-              <div class="gaz-register-cell entry">Live across 5 statutes, 245+ Q&amp;As</div>
-              <div class="gaz-register-cell desc">Labour Code, Foreign Investment Law, Income Tax Act 2025, EPMA 2024, and the Data Protection Act. More legislation is continuously being added.</div>
+
+            <div class="gaz-register-row" data-register>
+              <button class="gaz-register-toggle" onclick="this.closest('[data-register]').classList.toggle('open')">
+                <span class="gaz-register-cell date">2025–Today</span>
+                <span class="gaz-register-cell entry">Live across 5 statutes, 245+ Q&amp;As</span>
+                <span class="gaz-register-chevron">▾</span>
+              </button>
+              <div class="gaz-register-desc"><div class="gaz-register-desc-inner">Labour Code, Foreign Investment Law, Income Tax Act 2025, EPMA 2024, and the Data Protection Act. More legislation is continuously being added.</div></div>
             </div>
+
           </div>
         </div>
       </article>
@@ -1987,46 +2101,79 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 </div>
 </div>
 
-<!-- Scroll-spy + click-to-scroll for the Article table of contents.
-     Defensive: guarded with existence checks so it's safe to include
-     even before the DOM is ready, and harmless while this page is hidden. -->
+<!-- Scroll-spy for TOC + reading-progress rail + seal click interaction.
+     Defensive: guarded with existence checks, safe while this page is hidden. -->
 <script>
 (function(){
-  function initGazetteToc(){
+  function initGazettePage(){
+    var page = document.getElementById('page-about');
+    if(!page) return;
+
+    /* ── TOC scroll-spy + click-to-scroll ── */
     var toc = document.getElementById('gazToc');
-    if(!toc) return;
-    var items = Array.prototype.slice.call(toc.querySelectorAll('.gaz-toc-item'));
-    var sections = items.map(function(it){ return document.getElementById(it.getAttribute('data-target')); });
+    if(toc){
+      var items = Array.prototype.slice.call(toc.querySelectorAll('.gaz-toc-item'));
+      var sections = items.map(function(it){ return document.getElementById(it.getAttribute('data-target')); });
 
-    items.forEach(function(it,i){
-      it.addEventListener('click', function(){
-        var target = sections[i];
-        if(!target) return;
-        var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
-      });
-    });
-
-    if('IntersectionObserver' in window){
-      var obs = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-          if(entry.isIntersecting){
-            var idx = sections.indexOf(entry.target);
-            items.forEach(function(it){ it.classList.remove('active'); });
-            if(idx > -1) items[idx].classList.add('active');
-          }
+      items.forEach(function(it,i){
+        it.addEventListener('click', function(){
+          var target = sections[i];
+          if(!target) return;
+          var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
         });
-      }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
-      sections.forEach(function(s){ if(s) obs.observe(s); });
+      });
+
+      if('IntersectionObserver' in window){
+        var obs = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if(entry.isIntersecting){
+              var idx = sections.indexOf(entry.target);
+              items.forEach(function(it){ it.classList.remove('active'); });
+              if(idx > -1) items[idx].classList.add('active');
+            }
+          });
+        }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+        sections.forEach(function(s){ if(s) obs.observe(s); });
+      }
+    }
+
+    /* ── Reading progress rail ── */
+    var fill = document.getElementById('gazProgressFill');
+    if(fill){
+      window.addEventListener('scroll', function(){
+        if(!page.classList.contains('active')) return;
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = h > 0 ? Math.min(100, Math.max(0, (window.scrollY / h) * 100)) : 0;
+        fill.style.width = pct + '%';
+      }, { passive: true });
+    }
+
+    /* ── Seal click-to-stamp interaction ── */
+    var seal = document.getElementById('gazSeal');
+    var caption = document.getElementById('gazSealCaption');
+    if(seal && caption){
+      seal.addEventListener('click', function(){
+        seal.classList.add('stamped');
+        caption.textContent = '✓ Filing Verified';
+        caption.classList.add('verified');
+        setTimeout(function(){ seal.classList.remove('stamped'); }, 500);
+        setTimeout(function(){
+          caption.textContent = 'Click to verify';
+          caption.classList.remove('verified');
+        }, 2200);
+      });
     }
   }
+
   if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', initGazetteToc);
+    document.addEventListener('DOMContentLoaded', initGazettePage);
   } else {
-    initGazetteToc();
+    initGazettePage();
   }
 })();
 </script>
+
 
 <!-- ══════════════════════════════════════════════
      TESTIMONIALS PAGE
