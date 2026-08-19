@@ -3509,6 +3509,59 @@ function stopStatusCycle(intervalId) {
   if (el) el.remove();
 }
 
+// ── SECURITY: escape before inserting streamed LLM text as HTML ────────────
+// Tokens come from the Railway/Groq stream and are otherwise inserted via
+// innerHTML with no sanitisation. Escaping here prevents a malformed or
+// compromised model response from executing as markup in the page.
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// ── Map Railway/Supabase law_name values back to the short prefixes used as
+// keys in AI_NOTES / CONFLICT_ALERTS (e.g. "Somalia Labour Code" → "Labour
+// Code"), so citations returned by the streamed AI answer can surface the
+// same Notes/Alerts the local engine shows. Keep in sync with the reverse
+// map (LAW_NAME_MAP) in server.js.
+const DB_LAW_TO_SHORT = {
+  'Somalia Labour Code': 'Labour Code',
+  'Foreign Investment Law': 'Foreign Investment Law',
+  'Income Tax Act 2025': 'ITA 2025',
+  'Environmental Protection and Management Act 2024': 'EPMA 2024',
+  'Data Protection Act': 'Data Protection Act',
+};
+
+// Given the `laws` array from a streamed citations event, find which
+// AI_NOTES / CONFLICT_ALERTS keys apply — matching on law name plus any
+// article number appearing in the key's article range/list, since keys can
+// cover a range ("Arts. 62-63") or list ("Arts. 5, 7, 9, 10") rather than a
+// single article.
+function matchRefsFromCitations(lawCitations) {
+  const nums = s => (String(s || '').match(/\d+/g) || []).map(n => parseInt(n, 10));
+  const matched = new Set();
+  (lawCitations || []).forEach(c => {
+    const shortLaw = DB_LAW_TO_SHORT[c.law] || c.law;
+    const artNum = parseInt((String(c.article || '').match(/\d+/) || [])[0], 10);
+    if (!shortLaw || isNaN(artNum)) return;
+    [AI_NOTES, CONFLICT_ALERTS].forEach(dict => {
+      Object.keys(dict).forEach(key => {
+        const sep = key.indexOf('·');
+        if (sep === -1) return;
+        const keyLaw = key.slice(0, sep).trim();
+        const keyArts = key.slice(sep + 1).trim();
+        if (keyLaw === shortLaw && nums(keyArts).includes(artNum)) {
+          matched.add(key);
+        }
+      });
+    });
+  });
+  return [...matched];
+}
+
 // ── STREAMING AI ANSWER ───────────────────────────────────────
 // Uses Server-Sent Events so tokens appear word-by-word (~1s first token).
 // Falls back silently if EventSource fails (e.g. Railway is cold).
@@ -3530,6 +3583,7 @@ function streamAIAnswer(question, lawArea, area) {
       <span class="ai-cursor"></span>
     </div>
     <div id="aiStreamCitations" style="display:none;margin-top:.9rem;padding-top:.75rem;border-top:1px solid var(--border)"></div>
+    <div id="aiStreamExtras"></div>
     <div style="font-size:.72rem;color:var(--gold-dark);margin-top:.75rem;padding-top:.6rem;border-top:1px solid var(--border)">⚠ Legal information only — not legal advice. Consult a qualified Somali lawyer.</div>`;
   area.prepend(streamCard);
 
@@ -3586,8 +3640,9 @@ function streamAIAnswer(question, lawArea, area) {
       accumulated += token;
       const body = document.getElementById('aiStreamBody');
       if (body) {
-        // Format paragraphs on the fly
-        body.innerHTML = accumulated
+        // Format paragraphs on the fly — escape first, THEN convert newlines,
+        // so escaping doesn't clobber the <br> tags we just inserted.
+        body.innerHTML = escapeHtml(accumulated)
           .split(/\n{2,}/)
           .map(p => `<p style="margin-bottom:.7rem">${p.replace(/\n/g,'<br>')}</p>`)
           .join('') + '<span class="ai-cursor"></span>';
@@ -3600,12 +3655,26 @@ function streamAIAnswer(question, lawArea, area) {
       const body = document.getElementById('aiStreamBody');
       if (body) {
         // Final render — remove cursor
-        body.innerHTML = accumulated
+        body.innerHTML = escapeHtml(accumulated)
           .split(/\n{2,}/)
           .map(p => `<p style="margin-bottom:.7rem">${p.replace(/\n/g,'<br>')}</p>`)
           .join('');
       }
-      // Remove local fallback result below
+      // Reattach AI Notes / Conflict Alerts to the streamed card using the
+      // citations Railway returned, so this content isn't lost just because
+      // the AI answer came from the streaming path instead of the local
+      // fallback engine (previously these were only ever shown when Railway
+      // was down, since the local fallback card — the only place they were
+      // rendered — got deleted right below).
+      const extras = document.getElementById('aiStreamExtras');
+      if (extras) {
+        const lawCits = (citations && citations.laws) || [];
+        const usedRefs = matchRefsFromCitations(lawCits);
+        extras.innerHTML = renderConflictAlerts(getConflictAlertsForRefs(usedRefs))
+          + renderAINote(getAINoteForRefs(usedRefs));
+      }
+      // Remove local fallback result below (its own copy of Notes/Alerts is
+      // now redundant with the ones just reattached above)
       const cards = area.querySelectorAll('.answer-card:not(#aiStreamCard)');
       cards.forEach(c => c.remove());
       const notes = area.querySelectorAll('div[style*="gold-pale"]');
