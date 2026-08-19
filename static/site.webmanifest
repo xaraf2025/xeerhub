@@ -1,7 +1,7 @@
 {
-  "name": "XeerHub — Somalia's Legal Platform",
+  "name": "XeerHub",
   "short_name": "XeerHub",
-  "description": "Somalia's AI-powered legal intelligence platform. Verified answers on Somali Labour Law, Foreign Investment Law, Income Tax Law, Environmental Law, and the Data Protection Act.",
+  "description": "Somalia's AI-powered legal intelligence platform",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -18,9 +18,5 @@
   ],
   "theme_color": "#0A4A3A",
   "background_color": "#FFFDF8",
-  "display": "standalone",
-  "start_url": "/",
-  "scope": "/",
-  "lang": "en",
-  "categories": ["business", "productivity", "legal"]
+  "display": "standalone"
 }
