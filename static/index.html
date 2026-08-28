@@ -3541,7 +3541,25 @@ const DB_LAW_TO_SHORT = {
 // cover a range ("Arts. 62-63") or list ("Arts. 5, 7, 9, 10") rather than a
 // single article.
 function matchRefsFromCitations(lawCitations) {
-  const nums = s => (String(s || '').match(/\d+/g) || []).map(n => parseInt(n, 10));
+  // Expands both individual numbers ("5, 7, 9") and inclusive ranges
+  // ("108-113" or "108–113") into a flat list of article numbers. A naive
+  // /\d+/g extraction only pulls out range endpoints (108 and 113), which
+  // means a citation to e.g. Art. 110 — squarely inside that range — would
+  // never match. This caused AI Notes / Conflict Alerts to silently miss
+  // for any citation landing strictly between a range's endpoints.
+  const nums = s => {
+    const str = String(s || '');
+    const out = [];
+    const rangeRe = /(\d+)\s*[-–]\s*(\d+)/g;
+    let m, consumed = str;
+    while ((m = rangeRe.exec(str)) !== null) {
+      const a = parseInt(m[1], 10), b = parseInt(m[2], 10);
+      for (let i = a; i <= b; i++) out.push(i);
+      consumed = consumed.replace(m[0], ' ');
+    }
+    (consumed.match(/\d+/g) || []).forEach(n => out.push(parseInt(n, 10)));
+    return out;
+  };
   const matched = new Set();
   (lawCitations || []).forEach(c => {
     const shortLaw = DB_LAW_TO_SHORT[c.law] || c.law;
