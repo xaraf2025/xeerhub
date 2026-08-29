@@ -1048,11 +1048,23 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
           <button class="btn btn-outline btn-sm" onclick="showPage('library')" style="color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.25)">Browse Legal Library →</button>
         </div>
       </div>
-      <div class="hero-stats stagger">
-        <div><div class="stat-num">245</div><div class="stat-label">Verified Q&As</div></div>
-        <div><div class="stat-num">5</div><div class="stat-label">Laws Covered</div></div>
-        <div><div class="stat-num">100%</div><div class="stat-label">Article-Cited</div></div>
-        <div><div class="stat-num">Free</div><div class="stat-label">To Start</div></div>
+      <div class="hero-stats stagger" style="flex-wrap:wrap;gap:.85rem;border-top:none;margin-top:2.5rem;padding-top:0">
+        <div style="display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:100px;padding:.55rem 1.1rem .55rem .7rem">
+          <span style="width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0">📖</span>
+          <span><span style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1rem">245+</span> <span style="font-size:.75rem;color:rgba(255,255,255,0.55)">Verified Q&As</span></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:100px;padding:.55rem 1.1rem .55rem .7rem">
+          <span style="width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0">⚖️</span>
+          <span><span style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1rem">5</span> <span style="font-size:.75rem;color:rgba(255,255,255,0.55)">Laws Covered</span></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:100px;padding:.55rem 1.1rem .55rem .7rem">
+          <span style="width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0">✓</span>
+          <span><span style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1rem">100%</span> <span style="font-size:.75rem;color:rgba(255,255,255,0.55)">Article-Cited</span></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:100px;padding:.55rem 1.1rem .55rem .7rem">
+          <span style="width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0">👥</span>
+          <span><span style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1rem">Free</span> <span style="font-size:.75rem;color:rgba(255,255,255,0.55)">To Start</span></span>
+        </div>
       </div>
     </div>
     <!-- RIGHT: sample cards -->
@@ -1079,7 +1091,32 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
     </div>
   </section>
 
-  <!-- CITATION LEDGER — signature element -->
+  <!-- WHY XEERHUB — mockup-style gold-ring icon trio -->
+  <section style="padding:4.5rem 0;background:var(--cream);border-bottom:1px solid var(--border)">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:2.75rem">
+        <div class="section-eyebrow" style="justify-content:center">Why XeerHub</div>
+        <h2 class="section-title" style="font-size:clamp(1.6rem,3.5vw,2.2rem)">Source-based. Structured. Somali.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:920px;margin:0 auto">
+        <div style="text-align:center">
+          <div style="width:76px;height:76px;border-radius:50%;background:var(--teal-pale);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin:0 auto 1.1rem">📖</div>
+          <div style="font-weight:600;font-size:1.02rem;margin-bottom:.5rem;color:var(--ink)">Source-Based</div>
+          <div style="font-size:.875rem;color:var(--muted);line-height:1.65">Every answer is connected to the underlying article of official Somali legislation — never a summary without a citation.</div>
+        </div>
+        <div style="text-align:center">
+          <div style="width:76px;height:76px;border-radius:50%;background:var(--teal-pale);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin:0 auto 1.1rem">🔍</div>
+          <div style="font-weight:600;font-size:1.02rem;margin-bottom:.5rem;color:var(--ink)">AI-Powered Search</div>
+          <div style="font-size:.875rem;color:var(--muted);line-height:1.65">Ask a question in plain English or Somali and get a direct answer, grounded in the verified legal record — not the open internet.</div>
+        </div>
+        <div style="text-align:center">
+          <div style="width:76px;height:76px;border-radius:50%;background:var(--teal-pale);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin:0 auto 1.1rem">📜</div>
+          <div style="font-weight:600;font-size:1.02rem;margin-bottom:.5rem;color:var(--ink)">Direct Legal References</div>
+          <div style="font-size:.875rem;color:var(--muted);line-height:1.65">Every answer names the law and exact article — so it can be checked against the gazetted text in seconds.</div>
+        </div>
+      </div>
+    </div>
+  </section>
   <div class="ledger-strip">
     <div class="ledger-track" id="ledgerTrack"></div>
   </div>
