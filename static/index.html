@@ -340,20 +340,10 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
   overflow:hidden;
 }
 .hero-left{
-  background:var(--teal-deep);
+  background:#063B2B; /* single solid forest green — no gradient, no pattern, no overlay */
   display:flex;flex-direction:column;justify-content:center;
   padding:6rem 5% 6rem 7%;
   position:relative;overflow:hidden;
-}
-.hero-left::before{
-  content:'';position:absolute;inset:0;
-  background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.03) 39px,rgba(255,255,255,0.03) 40px),
-  repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,0.03) 39px,rgba(255,255,255,0.03) 40px);
-}
-.hero-left::after{
-  content:'§';position:absolute;right:-40px;top:50%;transform:translateY(-50%);
-  font-family:'Playfair Display',serif;font-size:30rem;font-weight:900;
-  color:rgba(255,255,255,0.03);line-height:1;pointer-events:none;user-select:none;
 }
 .hero-eyebrow{
   font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
@@ -1028,10 +1018,15 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
         <span style="font-family:'DM Mono',monospace;font-size:.68rem;color:var(--gold);letter-spacing:.06em;text-transform:uppercase">Added this cycle</span>
         <span style="font-size:.8rem;color:rgba(255,255,255,0.7);font-weight:400">Data Protection Act — 25 verified entries</span>
       </div>
-      <div class="hero-actions" style="flex-direction:column;align-items:flex-start;gap:14px;width:100%;max-width:520px">
+      <div class="hero-actions" style="flex-direction:column;align-items:flex-start;gap:20px;width:100%;max-width:520px">
+        <!-- Primary hero CTAs — the single Ask AI entry point for the hero -->
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="hero-btn-gold" onclick="showPage('library')">📖 Browse Library →</button>
+          <button class="hero-btn-ghost" style="border-color:var(--gold);color:var(--gold)" onclick="showPage('ask')">✦ Ask AI →</button>
+        </div>
         <div id="homeAskWrap" style="width:100%;position:relative">
           <div style="display:flex;gap:8px;background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.18);border-radius:var(--r-sm);padding:6px 6px 6px 16px;transition:border-color .2s" id="homeAskShell">
-            <input id="homeAskInput" type="text" placeholder="Ask a question about Somali law..."
+            <input id="homeAskInput" type="text" placeholder="Or type your question here..."
               style="flex:1;background:transparent;border:none;outline:none;color:#fff;font-size:.9rem;font-family:'DM Sans',sans-serif;padding:10px 0;min-width:0"
               onkeydown="if(event.key==='Enter')submitHomeAsk()"
               oninput="document.getElementById('homeAskBtn').disabled=!this.value.trim()">
@@ -1047,9 +1042,6 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
             <span class="home-chip" onclick="setHomeAsk(this)">What are the requirements for foreign investment?</span>
             <span class="home-chip" onclick="setHomeAsk(this)">What are the obligations under the Data Protection Act?</span>
           </div>
-        </div>
-        <div style="display:flex;gap:.75rem;margin-top:.25rem">
-          <button class="btn btn-outline btn-sm" onclick="showPage('library')" style="color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.25)">Browse Legal Library →</button>
         </div>
       </div>
       <div class="hero-stats stagger" style="flex-wrap:wrap;gap:.85rem;border-top:none;margin-top:2.5rem;padding-top:0">
@@ -1100,9 +1092,6 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
           <div class="card-ref">Arts. 103, 109, 111</div>
         </div>
       </div>
-      <div style="text-align:center;margin-top:1.5rem">
-        <button class="btn btn-outline btn-sm" onclick="showPage('ask')">Ask your own question →</button>
-      </div>
     </div>
   </section>
 
@@ -1132,10 +1121,6 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       </div>
     </div>
   </section>
-  <div class="ledger-strip">
-    <div class="ledger-track" id="ledgerTrack"></div>
-  </div>
-
   <!-- VERIFICATION RAIL — replaces emoji trust bar -->
   <section class="verify-rail">
     <div class="verify-rail-inner">
