@@ -370,31 +370,32 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 .stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#fff;line-height:1}
 .stat-label{font-size:.72rem;font-weight:400;color:rgba(255,255,255,0.45);margin-top:4px;text-transform:uppercase;letter-spacing:.1em}
 
-/* HERO RIGHT */
+/* HERO RIGHT — unified single-grid hero: same solid green as hero-left */
 .hero-right{
-  background:var(--parchment);
+  background:#063B2B;
   padding:6rem 7% 6rem 5%;
   display:flex;flex-direction:column;justify-content:center;
+  border-left:1px solid rgba(255,255,255,0.08);
 }
-.hero-right-label{font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem}
+.hero-right-label{font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:1.5rem}
 .sample-cards{display:flex;flex-direction:column;gap:14px}
 .sample-card{
-  background:#fff;border:1px solid var(--border);border-radius:var(--r);
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);border-radius:var(--r);
   padding:1.1rem 1.4rem;position:relative;overflow:hidden;
-  transition:box-shadow .2s,transform .2s;cursor:default;
+  transition:box-shadow .2s,transform .2s,background .2s;cursor:default;
 }
-.sample-card:hover{box-shadow:0 4px 20px rgba(10,74,58,0.1);transform:translateY(-2px)}
+.sample-card:hover{box-shadow:0 4px 24px rgba(0,0,0,0.25);transform:translateY(-2px);background:rgba(255,255,255,0.09)}
 .sample-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
 .card-labor::before{background:var(--teal-light)}
-.card-invest::before{background:var(--company)}
+.card-invest::before{background:var(--gold)}
 .card-tax::before{background:#E24B4A}
-.card-env::before{background:var(--env)}
+.card-env::before{background:var(--teal-light)}
 .card-area{display:flex;align-items:center;gap:6px;margin-bottom:6px}
 .dot{width:6px;height:6px;border-radius:50%;display:inline-block}
-.dot-teal{background:var(--teal-light)}.dot-gold{background:var(--gold)}.dot-blue{background:var(--company)}.dot-red{background:#E24B4A}.dot-env{background:var(--env)}
+.dot-teal{background:var(--teal-light)}.dot-gold{background:var(--gold)}.dot-blue{background:var(--teal-light)}.dot-red{background:#E24B4A}.dot-env{background:var(--teal-light)}
 .card-area-label{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
-.card-q{font-size:.875rem;font-weight:600;color:var(--ink);margin-bottom:4px;line-height:1.45}
-.card-ref{font-size:.7rem;color:var(--muted);font-family:'DM Mono',monospace}
+.card-q{font-size:.875rem;font-weight:600;color:#fff;margin-bottom:4px;line-height:1.45}
+.card-ref{font-size:.7rem;color:rgba(255,255,255,0.5);font-family:'DM Mono',monospace}
 
 /* ═══════════════════════════════════════════
    TRUST BAR
@@ -886,9 +887,9 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 /* ── Practice areas (replaces persona icon grid) ── */
 .areas-section{padding:6rem 0;background:#fff;border-top:1px solid var(--border)}
 .areas-list{margin-top:2.5rem;border-top:1px solid var(--border-strong)}
-.areas-row{display:grid;grid-template-columns:2.4rem 1fr 1fr auto;gap:2rem;align-items:center;padding:1.5rem 0;border-bottom:1px solid var(--border);transition:background .15s}
+.areas-row{display:grid;grid-template-columns:2.6rem 1fr 1fr auto;gap:2rem;align-items:center;padding:1.5rem 0;border-bottom:1px solid var(--border);transition:background .15s}
 .areas-row:hover{background:var(--parchment)}
-.areas-row-num{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--teal-mid)}
+.areas-row-num{display:flex;align-items:center;justify-content:center;width:2.6rem;height:2.6rem;border-radius:50%;background:var(--teal-pale);border:1px solid var(--border-strong);font-size:1.15rem}
 .areas-row-name{font-size:1rem;font-weight:600;color:var(--ink)}
 .areas-row-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
 .areas-row-count{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--muted);white-space:nowrap;text-align:right}
@@ -1022,7 +1023,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
         <!-- Primary hero CTAs — the single Ask AI entry point for the hero -->
         <div style="display:flex;gap:12px;flex-wrap:wrap">
           <button class="hero-btn-gold" onclick="showPage('library')">📖 Browse Library →</button>
-          <button class="hero-btn-ghost" style="border-color:var(--gold);color:var(--gold)" onclick="showPage('ask')">✦ Ask AI →</button>
+          <button class="hero-btn-ghost" style="border-color:var(--gold);color:var(--gold)" onclick="showPage('ask')">💬 Ask AI →</button>
         </div>
         <div id="homeAskWrap" style="width:100%;position:relative">
           <div style="display:flex;gap:8px;background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.18);border-radius:var(--r-sm);padding:6px 6px 6px 16px;transition:border-color .2s" id="homeAskShell">
@@ -1065,29 +1066,29 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
     </div>
     <!-- RIGHT: sample cards -->
     <div class="hero-right" style="position:relative;overflow:hidden">
-      <svg viewBox="0 0 200 200" style="position:absolute;top:-20px;right:-30px;width:260px;height:260px;opacity:.06;pointer-events:none;z-index:0" aria-hidden="true">
-        <g fill="none" stroke="var(--teal-deep)" stroke-width="2.5">
+      <svg viewBox="0 0 200 200" style="position:absolute;top:-20px;right:-30px;width:260px;height:260px;opacity:.08;pointer-events:none;z-index:0" aria-hidden="true">
+        <g fill="none" stroke="#fff" stroke-width="2.5">
           <line x1="100" y1="20" x2="100" y2="150"/>
           <line x1="40" y1="55" x2="160" y2="55"/>
           <path d="M40 55 L20 95 A20 20 0 0 0 60 95 Z"/>
           <path d="M160 55 L140 95 A20 20 0 0 0 180 95 Z"/>
           <line x1="70" y1="175" x2="130" y2="175"/>
           <line x1="100" y1="150" x2="100" y2="175"/>
-          <circle cx="100" cy="55" r="6" fill="var(--teal-deep)" stroke="none"/>
+          <circle cx="100" cy="55" r="6" fill="#fff" stroke="none"/>
         </g>
       </svg>
       <div class="hero-right-label">Question → Answer → Legal Basis</div>
       <div class="sample-cards">
         <div class="sample-card card-labor" style="cursor:default">
-          <div class="card-area"><span class="card-area-label" style="color:var(--muted);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em;font-size:.66rem">Question</span></div>
+          <div class="card-area"><span class="card-area-label" style="color:rgba(255,255,255,0.45);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em;font-size:.66rem">Question</span></div>
           <div class="card-q" style="font-size:1rem;margin-bottom:.65rem">Can I fire someone without giving a reason?</div>
         </div>
-        <div class="sample-card" style="border-left-color:var(--teal-mid);cursor:default">
-          <div class="card-area"><span class="card-area-label" style="color:var(--teal-mid);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em;font-size:.66rem">Answer</span></div>
-          <div style="font-size:.84rem;color:var(--muted);line-height:1.65;margin-top:.3rem">No. Termination without a valid, provable reason is unlawful. The employer bears the burden of proving a fair reason related to conduct, capacity, or operational need. Written notice must also be given.</div>
+        <div class="sample-card" style="border-left-color:var(--teal-light);cursor:default">
+          <div class="card-area"><span class="card-area-label" style="color:var(--teal-light);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em;font-size:.66rem">Answer</span></div>
+          <div style="font-size:.84rem;color:rgba(255,255,255,0.65);line-height:1.65;margin-top:.3rem">No. Termination without a valid, provable reason is unlawful. The employer bears the burden of proving a fair reason related to conduct, capacity, or operational need. Written notice must also be given.</div>
         </div>
         <div class="sample-card card-labor" style="cursor:default">
-          <div class="card-area"><span class="card-area-label" style="color:var(--labor);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em;font-size:.66rem">Legal Basis</span></div>
+          <div class="card-area"><span class="card-area-label" style="color:var(--gold);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em;font-size:.66rem">Legal Basis</span></div>
           <div class="card-q" style="margin-bottom:.2rem">Labour Code</div>
           <div class="card-ref">Arts. 103, 109, 111</div>
         </div>
@@ -1221,25 +1222,25 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <h2 class="section-title">Built for people who have to be right</h2>
       <div class="areas-list">
         <div class="areas-row">
-          <span class="areas-row-num">01</span>
+          <span class="areas-row-num">⚖️</span>
           <span class="areas-row-name">Lawyers &amp; legal advisors</span>
           <span class="areas-row-desc">Article references for contract drafting, client advice, and case preparation — checkable in seconds.</span>
           <span class="areas-row-count"><b>5</b> laws indexed</span>
         </div>
         <div class="areas-row">
-          <span class="areas-row-num">02</span>
+          <span class="areas-row-num">🏢</span>
           <span class="areas-row-name">Enterprises &amp; international organisations</span>
           <span class="areas-row-desc">Labour and registration compliance for organisations operating in Somalia without in-house counsel.</span>
           <span class="areas-row-count"><b>50</b> labour entries</span>
         </div>
         <div class="areas-row">
-          <span class="areas-row-num">03</span>
+          <span class="areas-row-num">💰</span>
           <span class="areas-row-name">Investors &amp; business founders</span>
           <span class="areas-row-desc">Registration, structuring, and protection provisions under the Foreign Investment Law.</span>
           <span class="areas-row-count"><b>50</b> investment entries</span>
         </div>
         <div class="areas-row">
-          <span class="areas-row-num">04</span>
+          <span class="areas-row-num">👩‍💼</span>
           <span class="areas-row-name">HR &amp; compliance managers</span>
           <span class="areas-row-desc">Contracts, leave, termination, and worker protections under the Somalia Labour Code.</span>
           <span class="areas-row-count"><b>245</b> total entries</span>
@@ -1344,7 +1345,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
         <span style="font-size:.7rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.08em">Mode:</span>
         <span style="display:inline-flex;align-items:center;gap:.35rem;background:var(--teal-deep);color:#fff;padding:.28rem .8rem;border-radius:100px;font-size:.75rem;font-weight:600">📚 Browse Library</span>
-        <button onclick="showPage('ask')" style="display:inline-flex;align-items:center;gap:.35rem;background:transparent;color:var(--muted);padding:.28rem .8rem;border-radius:100px;font-size:.75rem;font-weight:500;border:1.5px solid var(--border);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--teal-pale)';this.style.color='var(--teal-deep)';this.style.borderColor='var(--teal-mid)'" onmouseout="this.style.background='transparent';this.style.color='var(--muted)';this.style.borderColor='var(--border)'">✦ Ask AI</button>
+        <button onclick="showPage('ask')" style="display:inline-flex;align-items:center;gap:.35rem;background:transparent;color:var(--muted);padding:.28rem .8rem;border-radius:100px;font-size:.75rem;font-weight:500;border:1.5px solid var(--border);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--teal-pale)';this.style.color='var(--teal-deep)';this.style.borderColor='var(--teal-mid)'" onmouseout="this.style.background='transparent';this.style.color='var(--muted)';this.style.borderColor='var(--border)'">💬 Ask AI</button>
       </div>
       <div style="display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap">
         <h1 style="font-size:1.45rem;font-family:'Playfair Display',serif;line-height:1">Verified Legal Q&amp;As</h1>
@@ -1402,7 +1403,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <div class="container" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
         <span style="font-size:.78rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.08em">You are in:</span>
         <div style="display:flex;gap:.5rem">
-          <span style="display:inline-flex;align-items:center;gap:.4rem;background:var(--teal-deep);color:#fff;padding:.35rem 1rem;border-radius:100px;font-size:.82rem;font-weight:600">✦ Ask AI <span style="font-size:.7rem;opacity:.75">— type your question</span></span>
+          <span style="display:inline-flex;align-items:center;gap:.4rem;background:var(--teal-deep);color:#fff;padding:.35rem 1rem;border-radius:100px;font-size:.82rem;font-weight:600">💬 Ask AI <span style="font-size:.7rem;opacity:.75">— type your question</span></span>
           <button onclick="showPage('library')" style="display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--muted);padding:.35rem 1rem;border-radius:100px;font-size:.82rem;font-weight:500;border:1.5px solid var(--border);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--teal-pale)';this.style.color='var(--teal-deep)';this.style.borderColor='var(--teal-mid)'" onmouseout="this.style.background='transparent';this.style.color='var(--muted)';this.style.borderColor='var(--border)'">📚 Browse Library <span style="font-size:.7rem;opacity:.75">— search 245+ Q&As</span></button>
         </div>
       </div>
@@ -1410,7 +1411,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 
     <!-- Hero explainer -->
     <div style="background:linear-gradient(135deg,var(--teal-deep) 0%,#1D7A5E 100%);padding:3rem 0 2.5rem;position:relative;overflow:hidden">
-      <div style="position:absolute;right:-60px;top:50%;transform:translateY(-50%);font-family:'Playfair Display',serif;font-size:18rem;font-weight:900;color:rgba(255,255,255,0.04);line-height:1;pointer-events:none">✦</div>
+      <div style="position:absolute;right:-60px;top:50%;transform:translateY(-50%);font-family:'Playfair Display',serif;font-size:18rem;font-weight:900;color:rgba(255,255,255,0.04);line-height:1;pointer-events:none">💬</div>
       <div class="container" style="position:relative;z-index:2">
         <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(43,174,135,0.2);border:1px solid rgba(43,174,135,0.35);border-radius:100px;padding:.3rem .9rem;margin-bottom:1rem">
           <span style="width:7px;height:7px;background:var(--teal-light);border-radius:50%;display:inline-block;animation:pulse 2s infinite"></span>
@@ -1432,7 +1433,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <div class="container" style="padding-top:1.25rem;padding-bottom:1.25rem">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:720px">
           <div style="background:var(--teal-pale);border:1.5px solid var(--border-strong);border-radius:var(--r);padding:1rem 1.25rem">
-            <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--teal-deep);margin-bottom:.4rem">✦ Ask AI (here)</div>
+            <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--teal-deep);margin-bottom:.4rem">💬 Ask AI (here)</div>
             <div style="font-size:.83rem;color:var(--ink);line-height:1.6">Type any question in your own words. The AI reads across all laws and writes a tailored answer for you.</div>
           </div>
           <div style="background:var(--parchment);border:1.5px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;cursor:pointer" onclick="showPage('library')" onmouseover="this.style.borderColor='var(--teal-mid)'" onmouseout="this.style.borderColor='var(--border)'">
@@ -1632,7 +1633,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <div>
         <div class="plan-dash-card"><div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.4rem">Current Plan</div><div class="plan-dash-name">Free</div><div class="plan-dash-meta">Unlimited AI questions · No monthly cap</div><button class="btn btn-gold btn-sm" style="margin-top:1rem;width:100%;justify-content:center" onclick="showPage('pricing')">Upgrade to Professional</button></div>
         <div class="card"><div style="text-align:center;padding:.5rem 0"><div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:1rem">Questions Asked</div><svg width="100" height="100" viewBox="0 0 100 100" style="display:block;margin:0 auto"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--border)" stroke-width="8"/><circle id="usageRing" cx="50" cy="50" r="40" fill="none" stroke="var(--teal-light)" stroke-width="8" stroke-dasharray="251" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 50 50)"/></svg><div style="margin-top:.75rem"><div style="font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--teal-mid);font-weight:700"><span id="usageCount">0</span></div><div style="font-size:.75rem;color:var(--muted)">total questions asked — keep going, no limit!</div></div></div></div>
-        <div class="card" style="margin-top:1rem"><div style="font-size:.72rem;color:var(--muted);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.08em">Quick Actions</div><div style="display:flex;flex-direction:column;gap:.5rem"><button class="btn btn-ghost btn-sm" style="justify-content:flex-start;gap:.6rem" onclick="showPage('ask')">✦ Ask a question</button><button class="btn btn-ghost btn-sm" style="justify-content:flex-start;gap:.6rem" onclick="showPage('library')">📚 Browse library</button><button class="btn btn-ghost btn-sm" style="justify-content:flex-start;gap:.6rem" onclick="showPage('pricing')">⬆ Upgrade plan</button></div></div>
+        <div class="card" style="margin-top:1rem"><div style="font-size:.72rem;color:var(--muted);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.08em">Quick Actions</div><div style="display:flex;flex-direction:column;gap:.5rem"><button class="btn btn-ghost btn-sm" style="justify-content:flex-start;gap:.6rem" onclick="showPage('ask')">💬 Ask a question</button><button class="btn btn-ghost btn-sm" style="justify-content:flex-start;gap:.6rem" onclick="showPage('library')">📚 Browse library</button><button class="btn btn-ghost btn-sm" style="justify-content:flex-start;gap:.6rem" onclick="showPage('pricing')">⬆ Upgrade plan</button></div></div>
       </div>
       <div>
         <div class="dash-stat-cards"><div class="dash-stat"><div class="dash-stat-val" id="statQAsked">0</div><div class="dash-stat-label">Questions Asked</div></div><div class="dash-stat"><div class="dash-stat-val" id="statSaved">3</div><div class="dash-stat-label">Saved Answers</div></div><div class="dash-stat"><div class="dash-stat-val">Free</div><div class="dash-stat-label">Current Plan</div></div></div>
@@ -3370,7 +3371,7 @@ function renderAPIAnswer(question, lawArea, apiData) {
 
   area.innerHTML = `<div class="answer-card fade-in">
     <div class="answer-header">
-      <span class="answer-header-icon">✦</span>
+      <span class="answer-header-icon">💬</span>
       <span class="answer-header-text">XeerHub AI — ${lawArea}</span>
       <span style="margin-left:auto;font-size:.68rem;background:var(--teal-light);color:#fff;padding:.15rem .5rem;border-radius:100px;font-weight:600">AI-Powered</span>
     </div>
@@ -3412,7 +3413,7 @@ function runLocalEngine(question, lawArea) {
     const refsHtml = result.refs.map(r => `<span style="display:inline-block;background:var(--teal-pale);color:var(--teal-deep);font-family:'DM Mono',monospace;font-size:.7rem;padding:.2rem .55rem;border-radius:100px;border:1px solid var(--border-strong);margin:.15rem">${r}</span>`).join(' ');
     area.innerHTML = `<div class="answer-card fade-in">
       <div class="answer-header">
-        <span class="answer-header-icon">✦</span>
+        <span class="answer-header-icon">💬</span>
         <span class="answer-header-text">XeerHub AI — ${lawArea}</span>
       </div>
       <div class="answer-body">${result.body}</div>
@@ -3680,7 +3681,7 @@ function streamAIAnswer(question, lawArea, area) {
   streamCard.style.cssText = 'margin-bottom:1rem';
   streamCard.innerHTML = `
     <div class="answer-header">
-      <span class="answer-header-icon">✦</span>
+      <span class="answer-header-icon">💬</span>
       <span class="answer-header-text">XeerHub AI — ${lawArea}</span>
       <span style="margin-left:auto;font-size:.68rem;background:var(--teal-light);color:#fff;padding:.15rem .5rem;border-radius:100px;font-weight:600">AI · Live</span>
     </div>
@@ -3790,7 +3791,7 @@ function streamAIAnswer(question, lawArea, area) {
       btns.innerHTML = '<button class="btn btn-ghost btn-sm" onclick="showToast(\'Saved ✓\',\'success\')">💾 Save answer</button>'
         + '<button class="btn btn-ghost btn-sm" onclick="document.getElementById(\'questionInput\').value=\'\';document.getElementById(\'answerArea\').innerHTML=\'\'">✕ Clear</button>';
       area.appendChild(btns);
-      showToast('✦ AI answer ready', 'success');
+      showToast('💬 AI answer ready', 'success');
     });
 
     es.addEventListener('error', e => {
