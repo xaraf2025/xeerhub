@@ -3678,7 +3678,7 @@ function matchRefsFromCitations(lawCitations) {
 // Uses Server-Sent Events so tokens appear word-by-word (~1s first token).
 // Falls back silently if EventSource fails (e.g. Railway is cold).
 function streamAIAnswer(question, lawArea, area) {
-  const url = RAILWAY_API + '?q=' + encodeURIComponent(question) + '&stream=1';
+  const url = RAILWAY_API + '?q=' + encodeURIComponent(question) + '&law=' + encodeURIComponent(lawArea) + '&stream=1';
 
   // Inject a live typing card above the local result
   const streamCard = document.createElement('div');
@@ -3764,10 +3764,27 @@ function streamAIAnswer(question, lawArea, area) {
     es.addEventListener('answer_done', e => {
       es.close();
       clearTimeout(timeout);
+      // FIX: when the server skips streaming entirely (e.g. no matching law
+      // articles found, or an error before any tokens were sent), the final
+      // text only exists in this event's payload — `accumulated` stays empty.
+      // Fall back to payload.answer in that case so the card is never blank.
+      let finalText = accumulated;
+      if (!finalText.trim()) {
+        try {
+          const payload = JSON.parse(e.data);
+          if (payload && payload.answer) finalText = payload.answer;
+        } catch(_) {}
+      }
+      if (!finalText.trim()) {
+        // Still nothing to show — treat this like a failed stream so the
+        // local knowledge-base fallback result is kept instead of a blank card.
+        cleanup(false);
+        return;
+      }
       const body = document.getElementById('aiStreamBody');
       if (body) {
         // Final render — remove cursor
-        body.innerHTML = escapeHtml(accumulated)
+        body.innerHTML = escapeHtml(finalText)
           .split(/\n{2,}/)
           .map(p => `<p style="margin-bottom:.7rem">${p.replace(/\n/g,'<br>')}</p>`)
           .join('');
