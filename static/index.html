@@ -979,6 +979,100 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 /* AI streaming cursor */
 .ai-cursor{display:inline-block;width:2px;height:1em;background:var(--teal-mid);margin-left:2px;vertical-align:text-bottom;animation:blink .7s step-end infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ══ LIBRARY v2 — Source Directory ══ */
+.lib2-header{background:var(--teal-deep);padding:3.5rem 0 2.25rem;position:relative;overflow:hidden}
+.lib2-header::after{content:'§';position:absolute;right:-30px;top:50%;transform:translateY(-50%);font-family:'Playfair Display',serif;font-size:14rem;font-weight:900;color:rgba(255,255,255,0.04);line-height:1;pointer-events:none}
+.lib2-header .section-eyebrow{color:var(--teal-light)}
+.lib2-header .section-eyebrow::before{background:var(--teal-light)}
+.lib2-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,2.6rem);color:#fff;margin-bottom:.6rem;position:relative;z-index:2}
+.lib2-sub{color:rgba(255,255,255,0.6);font-size:.95rem;max-width:620px;line-height:1.7;position:relative;z-index:2}
+
+.lib2-toolbar-wrap{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:64px;z-index:50}
+.lib2-toolbar{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;padding:1rem 2rem}
+.lib2-tabs{display:flex;gap:.4rem;flex-wrap:wrap}
+.lib2-tab{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;border-radius:100px;font-size:.82rem;font-weight:500;background:var(--parchment);color:var(--muted);border:1.5px solid var(--border);cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.lib2-tab b{font-weight:600;font-size:.72rem;background:rgba(0,0,0,0.06);padding:.05rem .4rem;border-radius:100px}
+.lib2-tab:hover{border-color:var(--border-strong);color:var(--teal-deep)}
+.lib2-tab.active{background:var(--teal-deep);color:#fff;border-color:var(--teal-deep)}
+.lib2-tab.active b{background:rgba(255,255,255,0.2)}
+.lib2-search-wrap{position:relative;flex:1;min-width:220px}
+.lib2-search-icon{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.lib2-search-input{padding-left:2.8rem}
+.lib2-sort label{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--muted)}
+.lib2-sort select{padding:.5rem .8rem;border:1.5px solid var(--border);border-radius:var(--r-sm);font-size:.82rem;font-family:'DM Sans',sans-serif;background:#fff;cursor:pointer}
+
+.lib2-mobile-row{display:none;padding:1rem 2rem 0;align-items:center;justify-content:space-between}
+.lib2-results-label{font-size:.8rem;color:var(--muted)}
+
+.lib2-workspace{display:grid;grid-template-columns:220px 340px 1fr;gap:1.5rem;padding:2rem;align-items:start;background:var(--parchment);min-height:60vh}
+
+.lib2-filters{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;position:sticky;top:130px}
+.lib2-filters-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:.85rem;border-bottom:1px solid var(--border)}
+.lib2-filters-head button{background:none;border:none;color:var(--teal-mid);font-size:.78rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.lib2-filter-group{margin-bottom:1.25rem}
+.lib2-filter-title{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;margin-bottom:.6rem}
+.lib2-check{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--ink);padding:.3rem 0;cursor:pointer}
+.lib2-check input{accent-color:var(--teal-deep)}
+.lib2-check-count{margin-left:auto;font-size:.72rem;color:var(--muted);font-family:'DM Mono',monospace}
+.lib2-filter-note{font-size:.76rem;color:var(--muted);line-height:1.6;background:var(--teal-pale);border:1px solid var(--border);border-radius:var(--r-sm);padding:.75rem .85rem;margin-top:.5rem}
+
+.lib2-directory{display:flex;flex-direction:column;gap:.85rem}
+.lib2-directory-head{font-size:.85rem;color:var(--muted);padding:0 .1rem}
+.lib2-source-list{display:flex;flex-direction:column;gap:.65rem}
+.lib2-source-row{display:flex;align-items:flex-start;gap:.85rem;text-align:left;background:#fff;border:1.5px solid var(--border);border-radius:var(--r);padding:1rem 1.1rem;cursor:pointer;transition:all .18s;width:100%}
+.lib2-source-row:hover{border-color:var(--border-strong);box-shadow:var(--shadow-sm)}
+.lib2-source-row.selected{border-color:var(--teal-mid);background:var(--teal-pale);box-shadow:var(--shadow-sm)}
+.lib2-source-icon{width:36px;height:36px;border-radius:8px;background:var(--parchment);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0;border:1px solid var(--border)}
+.lib2-source-row.selected .lib2-source-icon{background:#fff}
+.lib2-source-body{flex:1;min-width:0}
+.lib2-source-title{font-size:.9rem;font-weight:600;color:var(--ink);margin-bottom:.35rem;line-height:1.35}
+.lib2-source-meta{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;font-size:.72rem;color:var(--muted)}
+.lib2-badge{display:inline-block;padding:.12rem .5rem;border-radius:100px;font-size:.65rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.lib2-badge-law{background:var(--labor-bg);color:var(--labor)}
+.lib2-badge-regulation{background:var(--invest-bg);color:var(--invest)}
+.lib2-badge-guide{background:var(--data-bg);color:var(--data)}
+.lib2-verified-pill{display:inline-flex;align-items:center;gap:.25rem;font-size:.68rem;color:var(--teal-mid);font-weight:600;flex-shrink:0;margin-left:auto;white-space:nowrap}
+
+.lib2-empty{text-align:center;padding:3rem 1.5rem;color:var(--muted);background:#fff;border:1px dashed var(--border-strong);border-radius:var(--r)}
+
+.lib2-detail{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.75rem;position:sticky;top:130px;box-shadow:var(--shadow-sm)}
+.lib2-breadcrumb{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--muted);margin-bottom:1rem;flex-wrap:wrap}
+.lib2-breadcrumb b{color:var(--ink);font-weight:500}
+.lib2-detail-top{display:flex;align-items:center;gap:.6rem;margin-bottom:.85rem}
+.lib2-detail-title{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--ink);margin-bottom:1rem;line-height:1.3}
+.lib2-meta-row{display:flex;flex-wrap:wrap;gap:1.25rem;padding:1rem 0;margin-bottom:1rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.lib2-meta-item{display:flex;flex-direction:column;gap:.15rem}
+.lib2-meta-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.lib2-meta-val{font-size:.85rem;color:var(--ink);font-weight:500}
+.lib2-desc{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
+.lib2-topics-title,.lib2-qa-title{display:flex;align-items:center;gap:.5rem;font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:.85rem}
+.lib2-topics{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.lib2-topic-chip{font-size:.78rem;padding:.35rem .85rem;border-radius:100px;background:var(--parchment);border:1.5px solid var(--border);color:var(--muted);cursor:pointer;transition:all .18s;font-family:'DM Sans',sans-serif}
+.lib2-topic-chip:hover,.lib2-topic-chip.active{background:var(--teal-deep);color:#fff;border-color:var(--teal-deep)}
+.lib2-actions{display:flex;gap:.65rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.lib2-qa-list{display:flex;flex-direction:column;gap:.55rem;max-height:420px;overflow-y:auto;padding-right:.35rem}
+.lib2-qa-item{border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden}
+.lib2-qa-q{padding:.75rem .9rem;font-size:.84rem;font-weight:600;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:.5rem;background:var(--parchment)}
+.lib2-qa-q:hover{background:var(--teal-pale)}
+.lib2-qa-a{padding:0 .9rem;max-height:0;overflow:hidden;transition:all .25s ease;font-size:.82rem;color:var(--muted);line-height:1.7}
+.lib2-qa-item.open .lib2-qa-a{padding:.75rem .9rem;max-height:400px}
+.lib2-qa-ref{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--teal-mid);margin-top:.5rem;display:block}
+.lib2-guide-card{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:1.25rem}
+.lib2-guide-excerpt{font-size:.88rem;color:var(--muted);line-height:1.75;margin-bottom:1.25rem}
+.lib2-note{font-size:.76rem;color:var(--muted);background:var(--parchment);border:1px solid var(--border);border-radius:var(--r-sm);padding:.7rem .85rem;margin-top:.5rem}
+
+@media(max-width:1100px){
+  .lib2-workspace{grid-template-columns:1fr;padding:1.25rem}
+  .lib2-filters{position:static;display:none}
+  .lib2-filters.mobile-open{display:block}
+  .lib2-mobile-row{display:flex}
+  .lib2-detail{position:static}
+}
+@media(max-width:640px){
+  .lib2-toolbar{padding:.85rem 1.25rem}
+  .lib2-mobile-row{padding:.85rem 1.25rem 0}
+}
 </style>
 </head>
 <body>
@@ -1344,58 +1438,71 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 ══════════════════════════════════════════════ -->
 <div class="page" id="page-library">
 
-  <!-- ── LIBRARY HEADER ── -->
-  <div class="lib-page-header">
-    <!-- mode switcher + title in one strip -->
-    <div style="background:#fff;border-bottom:1px solid var(--border);padding:.6rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem">
-      <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
-        <span style="font-size:.7rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.08em">Mode:</span>
-        <span style="display:inline-flex;align-items:center;gap:.35rem;background:var(--teal-deep);color:#fff;padding:.28rem .8rem;border-radius:100px;font-size:.75rem;font-weight:600">📚 Browse Library</span>
-        <button onclick="showPage('ask')" style="display:inline-flex;align-items:center;gap:.35rem;background:transparent;color:var(--muted);padding:.28rem .8rem;border-radius:100px;font-size:.75rem;font-weight:500;border:1.5px solid var(--border);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--teal-pale)';this.style.color='var(--teal-deep)';this.style.borderColor='var(--teal-mid)'" onmouseout="this.style.background='transparent';this.style.color='var(--muted)';this.style.borderColor='var(--border)'">💬 Ask AI</button>
+  <div class="lib2-header">
+    <div class="container">
+      <div class="section-eyebrow">Legal Library</div>
+      <h1 class="lib2-title">Somalia's Legal Source Library</h1>
+      <p class="lib2-sub">Browse Somali laws and regulations by source — each one linked to its verified Q&amp;As, key topics, and (where published) related guides.</p>
+    </div>
+  </div>
+
+  <div class="lib2-toolbar-wrap">
+    <div class="lib2-toolbar">
+      <div class="lib2-tabs" id="lib2Tabs">
+        <button class="lib2-tab active" onclick="setLibType('ALL',this)">All sources <b id="lib2CountAll">0</b></button>
+        <button class="lib2-tab" onclick="setLibType('LAW',this)">Laws <b id="lib2CountLaw">0</b></button>
+        <button class="lib2-tab" onclick="setLibType('REGULATION',this)">Regulations <b id="lib2CountReg">0</b></button>
+        <button class="lib2-tab" onclick="setLibType('GUIDE',this)">Guides <b id="lib2CountGuide">0</b></button>
       </div>
-      <div style="display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap">
-        <h1 style="font-size:1.45rem;font-family:'Playfair Display',serif;line-height:1">Verified Legal Q&amp;As</h1>
-        <span style="font-size:.75rem;color:var(--muted);font-family:'DM Mono',monospace" id="libResultCount">245 entries · 5 laws</span>
+      <div class="lib2-search-wrap">
+        <span class="lib2-search-icon">🔍</span>
+        <input class="input lib2-search-input" type="text" id="lib2Search" placeholder="Search sources, authorities, topics..." oninput="renderLibrary()">
+      </div>
+      <div class="lib2-sort">
+        <label>Sort
+          <select id="lib2Sort" onchange="renderLibrary()">
+            <option value="updated">Recently updated</option>
+            <option value="alpha">Alphabetical</option>
+            <option value="coverage">Most Q&amp;A coverage</option>
+          </select>
+        </label>
       </div>
     </div>
   </div>
 
-  <!-- ── MASTER-DETAIL SHELL ── -->
-  <div class="lib-shell">
+  <div class="lib2-mobile-row">
+    <button class="btn btn-ghost btn-sm" onclick="toggleLib2Filters()">☰ Filters</button>
+    <span class="lib2-results-label" id="lib2ResultsCountMobile"></span>
+  </div>
 
-    <!-- SIDEBAR (index) -->
-    <div class="lib-sidebar">
-      <!-- search -->
-      <div class="lib-search-row">
-        <div class="lib-search-wrap-inner">
-          <span class="lib-search-field-icon">⌕</span>
-          <input class="lib-search-field" id="libSearchInput" type="text" placeholder="Search the library…" autocomplete="off">
-          <span class="lib-search-kbd">/</span>
-        </div>
+  <div class="lib2-workspace">
+
+    <aside class="lib2-filters" id="lib2Filters">
+      <div class="lib2-filters-head"><strong>Filters</strong><button onclick="resetLib2Filters()">Clear all</button></div>
+      <div class="lib2-filter-group">
+        <div class="lib2-filter-title">Jurisdiction</div>
+        <label class="lib2-check"><input type="checkbox" checked disabled> Federal Republic of Somalia <span class="lib2-check-count" id="lib2JurisCount">0</span></label>
       </div>
-      <!-- category chips -->
-      <div class="lib-chips-row" id="libChipsRow"></div>
-      <!-- entry index -->
-      <div class="lib-list" id="libList"></div>
-    </div>
-
-    <!-- READING PANE -->
-    <div class="lib-reading" id="libReadingPane">
-      <div class="lib-reading-toolbar">
-        <button class="lib-mobile-back" id="libMobileBack">‹ Back</button>
-        <div class="lib-breadcrumb" id="libBreadcrumb">Library</div>
-        <div style="display:flex;align-items:center;gap:.75rem">
-          <span style="font-size:.72rem;color:var(--muted);font-family:'DM Mono',monospace" id="libEntryPos"></span>
-          <div class="lib-nav-arrows">
-            <button class="lib-nav-btn" id="libPrev" title="Previous (↑)">↑</button>
-            <button class="lib-nav-btn" id="libNext" title="Next (↓)">↓</button>
-          </div>
-        </div>
+      <div class="lib2-filter-group">
+        <div class="lib2-filter-title">Language</div>
+        <label class="lib2-check"><input type="checkbox" checked disabled> English <span class="lib2-check-count" id="lib2EnCount">0</span></label>
+        <label class="lib2-check" style="opacity:.5"><input type="checkbox" disabled> Somali <span class="lib2-check-count">Coming soon</span></label>
       </div>
-      <div class="lib-reading-body" id="libReadingBody"></div>
-    </div>
+      <div class="lib2-filter-group">
+        <div class="lib2-filter-title">Status</div>
+        <label class="lib2-check"><input type="checkbox" id="lib2VerifiedOnly" checked onchange="renderLibrary()"> Verified source <span class="lib2-check-count" id="lib2VerifiedCount">0</span></label>
+      </div>
+      <div class="lib2-filter-note">Verified sources have every entry checked against the official gazetted text before publication.</div>
+    </aside>
 
-  </div><!-- end .lib-shell -->
+    <section class="lib2-directory">
+      <div class="lib2-directory-head"><b id="lib2DirCount">0</b> sources found</div>
+      <div class="lib2-source-list" id="lib2SourceList"></div>
+    </section>
+
+    <article class="lib2-detail" id="lib2Detail"></article>
+
+  </div>
 </div>
 
 <!-- ══════════════════════════════════════════════
@@ -2991,7 +3098,7 @@ function showPage(page){
   if(nav)nav.classList.add('active');
   state.currentPage=page;
   window.scrollTo(0,0);
-  if(page==='library'){libRenderList();libRenderReading();}
+  if(page==='library')renderLibrary();
   if(page==='dashboard'||page==='ask')updateUsageUI();
   // ── SEO: update URL hash so each page has a crawlable, shareable URL ──
   const newHash = (page==='home') ? '' : '#'+page;
@@ -3941,6 +4048,10 @@ async function fetchBlogPosts() {
     BLOG_POSTS = data || [];
     BLOG_LOADED = true;
     renderBlogGrid();
+    // Guides in the Legal Library are built from BLOG_POSTS — refresh
+    // the library view if the user is already on that page.
+    const libPage = document.getElementById('page-library');
+    if (libPage && libPage.classList.contains('active') && typeof renderLibrary === 'function') renderLibrary();
   } catch (err) {
     console.error('Failed to load blog posts:', err);
     const grid = document.getElementById('blog-grid');
@@ -4018,6 +4129,290 @@ function closeBlogModal() {
 }
 
 
+// ══════════════════════════════════════════════════════════════
+//  LIBRARY v2 — Source Directory
+//  Every article-range, authority and year below is drawn from
+//  content already published elsewhere on this site (QA data /
+//  blog posts). Q&A counts are computed live from QA{} so they
+//  can never drift out of sync with the actual library.
+// ══════════════════════════════════════════════════════════════
+
+const LIB2_LAW_SOURCES = [
+  {
+    id:'labor', type:'LAW', cat:'labor',
+    title:'Somalia Labour Code',
+    authority:'Ministry of Labour',
+    status:'In force', articleRange:'Arts. 1–143',
+    updated:'2026-05-16',
+    description:"Somalia's core employment law. Covers employment contracts, wages, working hours, annual and maternity leave, termination and severance, workplace health and safety, child-labour protections, and the dispute-resolution process through the Ministry of Labour and the courts.",
+    topics:['Employment Contracts','Wages & Working Hours','Leave Entitlements','Termination & Severance','Health & Safety','Child Labour & Apprenticeships','Trade Unions','Dispute Resolution']
+  },
+  {
+    id:'investment', type:'LAW', cat:'investment',
+    title:'Foreign Investment Law',
+    authority:'Foreign Investment Board · Ministry of Planning',
+    status:'In force', articleRange:'Arts. 1–27',
+    updated:'2026-05-16',
+    description:'Governs the registration, protection, and repatriation rights of foreign investors in Somalia — including expropriation protection, profit and capital repatriation, priority sectors, and access to ICSID international arbitration.',
+    topics:['Investor Registration','Priority Sectors','Profit & Capital Repatriation','Expropriation Protection','Dispute Resolution & Arbitration','Local Employment Requirements']
+  },
+  {
+    id:'tax', type:'LAW', cat:'tax',
+    title:'Income Tax Act 2025 (ITA 2025)',
+    authority:'Ministry of Finance · Inland Revenue Department',
+    status:'In force since 11 May 2025', articleRange:'Arts. 1–101 + Schedules',
+    updated:'2026-05-16',
+    description:"Somalia's reformed income tax framework. Sets out personal and corporate tax rates, the Presumptive Tax Regime for small traders, withholding-tax obligations, allowable deductions, and filing and payment deadlines.",
+    topics:['Personal Income Tax','Corporate Tax Rates','Presumptive Tax Regime (PTR)','Withholding Tax','Deductions & Depreciation','Filing & Payment Deadlines']
+  },
+  {
+    id:'tax-regs', type:'REGULATION', cat:'tax',
+    title:'Income Tax Regulations 2025 (Reg. No. 0142-2025)',
+    authority:'Ministry of Finance',
+    status:'In force since 15 May 2025', articleRange:'100+ regulations',
+    updated:'2026-05-16',
+    description:'Implementing regulations for the Income Tax Act 2025. Provides the detailed rules on PTR eligibility, depreciation schedules, the modified cash basis, and administrative filing procedure — shares its verified Q&A library with the ITA 2025.',
+    topics:['PTR Eligibility Rules','Depreciation Schedules','Modified Cash Basis','Filing Procedure']
+  },
+  {
+    id:'environment', type:'LAW', cat:'environment',
+    title:'Environmental Protection and Management Act 2024 (EPMA)',
+    authority:'Ministry of Environment and Climate Change (MECC)',
+    status:'In force since 2024', articleRange:'Arts. 1–99 + Schedules',
+    updated:'2026-05-16',
+    description:"Somalia's comprehensive environmental law. Establishes environmental rights, the Polluter Pays and Precautionary principles, mandatory Environmental and Social Impact Assessments, pollution and hazardous-substance controls, and wildlife and biodiversity protections.",
+    topics:['Environmental Rights & Principles','ESIA Requirements','Pollution Control','Hazardous Substances & Waste','Wildlife & Biodiversity','Climate Change Provisions','Enforcement & Penalties']
+  },
+  {
+    id:'data', type:'LAW', cat:'data',
+    title:'Data Protection Act',
+    authority:'Data Protection Authority',
+    status:'In force', articleRange:'Arts. 1–40',
+    updated:'2026-05-16',
+    description:"Somalia's framework for personal data protection. Sets lawful bases for processing, data-subject rights, security and breach-notification duties, cross-border transfer rules, and the powers of the Data Protection Authority.",
+    topics:['Lawful Bases for Processing',"Data Subject Rights",'Security & Breach Notification','Cross-Border Transfers',"Children's Data",'Authority Powers & Penalties']
+  },
+];
+
+function lib2BuildGuideSources(){
+  // Guides are the live blog posts fetched from Supabase (BLOG_POSTS),
+  // not a static object — this keeps the Guides tab in sync with
+  // whatever is actually published on the Blog page.
+  if (typeof BLOG_POSTS === 'undefined' || !BLOG_POSTS.length) return [];
+  return BLOG_POSTS.map(p=>({
+    id:'guide-'+p.slug, type:'GUIDE', slug:p.slug,
+    title:p.title, authority:'XeerHub Editorial',
+    status:p.date_label || '', articleRange:p.read_time || '',
+    updated:p.date_label || '', description:'', topics:[],
+    category:p.category
+  }));
+}
+
+function lib2AllSources(){
+  return [...LIB2_LAW_SOURCES, ...lib2BuildGuideSources()];
+}
+
+function lib2QaCount(cat){
+  return (typeof QA !== 'undefined' && QA[cat]) ? QA[cat].length : 0;
+}
+
+const lib2State = { type:'ALL', search:'', sort:'updated', selectedId:null, mobileOpen:false, activeTopic:null };
+
+function setLibType(type, btn){
+  lib2State.type = type;
+  document.querySelectorAll('#lib2Tabs .lib2-tab').forEach(t=>t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderLibrary();
+}
+
+function toggleLib2Filters(){
+  lib2State.mobileOpen = !lib2State.mobileOpen;
+  document.getElementById('lib2Filters').classList.toggle('mobile-open', lib2State.mobileOpen);
+}
+
+function resetLib2Filters(){
+  lib2State.type='ALL'; lib2State.search='';
+  document.getElementById('lib2Search').value='';
+  document.getElementById('lib2VerifiedOnly').checked=true;
+  document.querySelectorAll('#lib2Tabs .lib2-tab').forEach((t,i)=>t.classList.toggle('active', i===0));
+  renderLibrary();
+}
+
+function lib2Icon(type){
+  return type==='REGULATION' ? '🛡️' : type==='GUIDE' ? '📰' : '📜';
+}
+
+function renderLibrary(){
+  const all = lib2AllSources();
+  const search = (document.getElementById('lib2Search')||{value:''}).value.toLowerCase();
+  const verifiedOnly = (document.getElementById('lib2VerifiedOnly')||{checked:true}).checked;
+  const sort = (document.getElementById('lib2Sort')||{value:'updated'}).value;
+
+  // tab counts always reflect the full inventory, not the current filter
+  document.getElementById('lib2CountAll').textContent = all.length;
+  document.getElementById('lib2CountLaw').textContent = all.filter(s=>s.type==='LAW').length;
+  document.getElementById('lib2CountReg').textContent = all.filter(s=>s.type==='REGULATION').length;
+  document.getElementById('lib2CountGuide').textContent = all.filter(s=>s.type==='GUIDE').length;
+  document.getElementById('lib2JurisCount').textContent = all.length;
+  document.getElementById('lib2EnCount').textContent = all.length;
+  document.getElementById('lib2VerifiedCount').textContent = all.length; // every source here is verified
+
+  let items = all.filter(s=>{
+    const matchesType = lib2State.type==='ALL' || s.type===lib2State.type;
+    const hay = (s.title+' '+s.authority+' '+(s.topics||[]).join(' ')).toLowerCase();
+    const matchesSearch = !search || hay.includes(search);
+    const matchesVerified = verifiedOnly; // all sources are verified — unchecking hides everything, which is correct
+    return matchesType && matchesSearch && matchesVerified;
+  });
+
+  items = items.sort((a,b)=>{
+    if (sort==='alpha') return a.title.localeCompare(b.title);
+    if (sort==='coverage') return lib2QaCount(b.cat) - lib2QaCount(a.cat);
+    return b.updated.localeCompare(a.updated);
+  });
+
+  const listEl = document.getElementById('lib2SourceList');
+  document.getElementById('lib2DirCount').textContent = items.length;
+  document.getElementById('lib2ResultsCountMobile').textContent = items.length + ' sources';
+
+  if (!items.length){
+    listEl.innerHTML = `<div class="lib2-empty">No sources match your filters.<br><button class="btn btn-ghost btn-sm" style="margin-top:.75rem" onclick="resetLib2Filters()">Reset filters</button></div>`;
+    document.getElementById('lib2Detail').innerHTML = '';
+    return;
+  }
+
+  // keep current selection if still in the filtered list, else default to the first
+  if (!lib2State.selectedId || !items.find(s=>s.id===lib2State.selectedId)){
+    lib2State.selectedId = items[0].id;
+  }
+
+  listEl.innerHTML = items.map(s=>{
+    const badgeClass = 'lib2-badge-'+s.type.toLowerCase();
+    const meta = s.type==='GUIDE'
+      ? `${s.category} · ${s.status}`
+      : `${s.authority} · ${s.status}`;
+    return `<button class="lib2-source-row${s.id===lib2State.selectedId?' selected':''}" onclick="selectLibrarySource('${s.id}')">
+      <span class="lib2-source-icon">${lib2Icon(s.type)}</span>
+      <span class="lib2-source-body">
+        <span class="lib2-source-title">${s.title}</span>
+        <span class="lib2-source-meta">
+          <span class="lib2-badge ${badgeClass}">${s.type}</span>
+          <span>${meta}</span>
+        </span>
+      </span>
+      <span class="lib2-verified-pill">✓ Verified</span>
+    </button>`;
+  }).join('');
+
+  renderLib2Detail(items.find(s=>s.id===lib2State.selectedId));
+}
+
+function selectLibrarySource(id){
+  lib2State.selectedId = id;
+  lib2State.activeTopic = null;
+  renderLibrary();
+}
+
+function lib2FilterQaByTopic(topic, el){
+  lib2State.activeTopic = (lib2State.activeTopic === topic) ? null : topic;
+  document.querySelectorAll('.lib2-topic-chip').forEach(c=>c.classList.remove('active'));
+  if (lib2State.activeTopic && el) el.classList.add('active');
+  const source = lib2AllSources().find(s=>s.id===lib2State.selectedId);
+  if (source) lib2RenderQaList(source);
+}
+
+function lib2ToggleQa(el){
+  el.parentElement.classList.toggle('open');
+}
+
+function lib2RenderQaList(source){
+  const box = document.getElementById('lib2QaListBox');
+  if (!box || typeof QA === 'undefined') return;
+  let entries = QA[source.cat] || [];
+  if (lib2State.activeTopic){
+    const t = lib2State.activeTopic.toLowerCase();
+    // loose match: topic words appearing in the question or answer text
+    const words = t.replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(w=>w.length>3);
+    entries = entries.filter(e=>{
+      const hay = (e.q+' '+e.a).toLowerCase();
+      return words.some(w=>hay.includes(w));
+    });
+    if (!entries.length) entries = QA[source.cat]; // fall back rather than show nothing
+  }
+  box.innerHTML = entries.slice(0,40).map((e,i)=>`
+    <div class="lib2-qa-item">
+      <div class="lib2-qa-q" onclick="lib2ToggleQa(this)"><span>${e.q}</span><span>+</span></div>
+      <div class="lib2-qa-a">${e.a}<span class="lib2-qa-ref">${e.ref}</span></div>
+    </div>`).join('');
+}
+
+function lib2AskAbout(source){
+  const areaMap = { labor:'Labor Law', investment:'Foreign Investment Law', tax:'Income Tax Law', environment:'Environmental Law', data:'Data Protection Law' };
+  showPage('ask');
+  setTimeout(()=>{
+    const sel = document.getElementById('lawAreaSelect');
+    if (sel) sel.value = areaMap[source.cat] || 'General';
+  }, 50);
+}
+
+function renderLib2Detail(source){
+  const box = document.getElementById('lib2Detail');
+  if (!source){ box.innerHTML=''; return; }
+
+  if (source.type === 'GUIDE'){
+    box.innerHTML = `
+      <div class="lib2-breadcrumb">Legal Library <span>›</span> Guides <span>›</span> <b>${source.title}</b></div>
+      <div class="lib2-detail-top"><span class="lib2-badge lib2-badge-guide">GUIDE</span></div>
+      <div class="lib2-detail-title">${source.title}</div>
+      <div class="lib2-meta-row">
+        <div class="lib2-meta-item"><span class="lib2-meta-label">Category</span><span class="lib2-meta-val">${source.category}</span></div>
+        <div class="lib2-meta-item"><span class="lib2-meta-label">Published</span><span class="lib2-meta-val">${source.status}</span></div>
+        <div class="lib2-meta-item"><span class="lib2-meta-label">Read time</span><span class="lib2-meta-val">${source.articleRange}</span></div>
+      </div>
+      <p class="lib2-guide-excerpt">A plain-English explainer written by the XeerHub editorial team, grounded in the verified Q&amp;A library. Open the full article to read it in-page.</p>
+      <div class="lib2-actions">
+        <button class="btn btn-gold btn-sm" onclick="openBlog('${source.slug}')">📖 Read full guide</button>
+        <button class="btn btn-outline btn-sm" onclick="showPage('blog')">View all guides</button>
+      </div>`;
+    return;
+  }
+
+  const badgeClass = 'lib2-badge-'+source.type.toLowerCase();
+  const qaCount = lib2QaCount(source.cat);
+
+  box.innerHTML = `
+    <div class="lib2-breadcrumb">Legal Library <span>›</span> ${source.type==='LAW'?'Laws':'Regulations'} <span>›</span> <b>${source.title}</b></div>
+    <div class="lib2-detail-top">
+      <span class="lib2-badge ${badgeClass}">${source.type}</span>
+      <span class="lib2-verified-pill">✓ Verified source</span>
+    </div>
+    <div class="lib2-detail-title">${source.title}</div>
+    <div class="lib2-meta-row">
+      <div class="lib2-meta-item"><span class="lib2-meta-label">Authority</span><span class="lib2-meta-val">${source.authority}</span></div>
+      <div class="lib2-meta-item"><span class="lib2-meta-label">Coverage</span><span class="lib2-meta-val">${source.articleRange}</span></div>
+      <div class="lib2-meta-item"><span class="lib2-meta-label">Status</span><span class="lib2-meta-val">${source.status}</span></div>
+      <div class="lib2-meta-item"><span class="lib2-meta-label">Language</span><span class="lib2-meta-val">English</span></div>
+    </div>
+    <p class="lib2-desc">${source.description}</p>
+
+    <div class="lib2-topics-title">🗂 Topics covered</div>
+    <div class="lib2-topics">
+      ${source.topics.map(t=>`<span class="lib2-topic-chip" onclick="lib2FilterQaByTopic('${t.replace(/'/g,"\\'")}',this)">${t}</span>`).join('')}
+    </div>
+
+    <div class="lib2-actions">
+      <button class="btn btn-gold btn-sm" onclick="lib2AskAbout(${JSON.stringify(source).replace(/"/g,'&quot;')})">✦ Ask AI about this law</button>
+      <button class="btn btn-ghost btn-sm" onclick="showToast('Full downloadable text is coming soon — the verified Q&amp;A library below covers this source today.','success')">⬇ Download official text</button>
+    </div>
+
+    <div class="lib2-qa-title">💬 Verified Q&amp;As from this source <span style="color:var(--muted);font-weight:400;font-size:.8rem">(${qaCount})</span></div>
+    <div class="lib2-qa-list" id="lib2QaListBox"></div>
+    <div class="lib2-note">Click a topic chip above to narrow this list, or a question to expand its full answer and article reference.</div>
+  `;
+
+  lib2RenderQaList(source);
+}
+
 // ── INIT ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded',()=>{
   // Handle direct hash link on page load (e.g. xeerhub.com/#pricing)
@@ -4028,7 +4423,6 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
   renderLedger();
   updateUsageUI();
-  libInit();
   fetchBlogPosts();
   const qi=document.getElementById('questionInput');
   if(qi)qi.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.ctrlKey)submitQuestion();});
