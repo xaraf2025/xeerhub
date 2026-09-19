@@ -328,6 +328,16 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 .nav-cta:hover{background:var(--teal-mid)}
 .nav-cta{white-space:nowrap}
 @media(max-width:1180px){.nav-link{padding:.45rem .6rem}.nav-cta{padding:.5rem .9rem}}
+/* Suggest-a-question modal */
+.sg-sub{font-size:.85rem;color:var(--muted);line-height:1.6;margin:-.75rem 0 1.1rem}
+.sg-count{font-size:.72rem;color:var(--muted);text-align:right;margin-top:.3rem}
+.sg-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.sg-note{font-size:.72rem;color:var(--muted);line-height:1.5}
+.sg-success{display:none;text-align:center;padding:1rem 0 .5rem}
+.sg-success-icon{width:52px;height:52px;border-radius:50%;background:var(--teal-pale);color:var(--teal-deep);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto .9rem}
+.sg-success h3{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:.4rem;color:var(--ink)}
+.sg-success p{font-size:.88rem;color:var(--muted);line-height:1.6;margin-bottom:1.1rem}
+.sg-link{background:none;border:none;color:var(--teal-mid);font-weight:600;cursor:pointer;font-size:.82rem;text-decoration:underline;padding:0}
 .nav-mobile-toggle{display:none;background:none;border:none;color:var(--ink);font-size:1.4rem;padding:.5rem}
 
 /* ── PAGE SYSTEM ── */
@@ -1095,7 +1105,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <a class="nav-link" href="/#pricing" onclick="showPage('pricing');return false;" id="nav-pricing">Pricing</a>
       <a class="nav-link" href="/#contact" onclick="showPage('contact');return false;" id="nav-contact">Contact</a>
       <a class="nav-link" href="/#dashboard" onclick="showPage('dashboard');return false;" id="nav-dashboard">Dashboard</a>
-      <button class="nav-cta" onclick="goSuggestedQuestions()">Suggested Questions</button>
+      <button class="nav-cta" onclick="openSuggest()">Suggest a Question</button>
     </div>
     <button class="nav-mobile-toggle" onclick="toggleMobileMenu()">☰</button>
   </div>
@@ -1570,7 +1580,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       </div>
 
       <div class="sample-qs">
-        <div class="sample-label">Suggested questions</div>
+        <div class="sample-label">Try a sample question</div>
         <div class="sample-chips">
           <span class="sample-chip" onclick="setSample(this)">Can I fire someone without notice?</span>
           <span class="sample-chip" onclick="setSample(this)">What are my rights as a foreign investor?</span>
@@ -1588,6 +1598,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
           <span class="sample-chip" onclick="setSample(this)">When is an ESIA required before a project?</span>
           <span class="sample-chip" onclick="setSample(this)">What are the penalties for wildlife poaching?</span>
         </div>
+        <div style="margin-top:1rem;font-size:.82rem;color:var(--muted)">Can't find your question? <button class="sg-link" onclick="openSuggest(document.getElementById('questionInput').value)">Suggest it to us →</button></div>
       </div>
       <div id="answerArea" style="margin-top:2rem"></div>
     </div>
@@ -2376,6 +2387,35 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <button class="btn btn-gold" style="width:100%;justify-content:center;padding:.9rem" onclick="fakeLogin()">Sign In →</button>
     </div>
     <div class="modal-footer">Don't have an account? <button onclick="switchModal('login','signup')">Sign up free</button></div>
+  </div>
+</div>
+
+<!-- Suggest a Question Modal -->
+<div class="modal-overlay" id="modal-suggest" onclick="closeModalOutside(event,'suggest')">
+  <div class="modal"><button class="modal-close" onclick="closeModal('suggest')">✕</button>
+    <h2 class="modal-title">Suggest a question</h2>
+    <div id="sgFormWrap">
+      <p class="sg-sub">Can't find what you're looking for? Tell us what Somali law question you'd like answered. We review every suggestion and add the best ones to the library.</p>
+      <div class="modal-form">
+        <div><label class="label" for="sgArea">Law area</label>
+          <select class="select" id="sgArea"><option value="General">Not sure / General</option><option value="Labor Law">Labour Code</option><option value="Foreign Investment Law">Foreign Investment Law</option><option value="Income Tax Law">Income Tax Law</option><option value="Environmental Law">Environmental Law (EPMA 2024)</option><option value="Data Protection Law">Data Protection Act</option></select></div>
+        <div><label class="label" for="sgQuestion">Your question</label>
+          <textarea class="input" id="sgQuestion" rows="4" maxlength="500" placeholder="e.g. Can an employer deduct money from my salary for a damaged laptop?" oninput="sgUpdateCount()"></textarea>
+          <div class="sg-count"><span id="sgCount">0</span>/500</div></div>
+        <div><label class="label" for="sgEmail">Email <span style="font-weight:400">(optional — only if you want to hear when it's answered)</span></label>
+          <input class="input" type="email" id="sgEmail" placeholder="you@organisation.com" maxlength="200"></div>
+        <input class="sg-hp" type="text" id="sgWebsite" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn-gold" id="sgBtn" style="width:100%;justify-content:center;padding:.9rem" onclick="submitSuggestion()">Send suggestion →</button>
+        <div class="sg-note">Please don't include personal or confidential case details. Suggestions are general legal-information questions, not requests for legal advice.</div>
+      </div>
+    </div>
+    <div class="sg-success" id="sgSuccess">
+      <div class="sg-success-icon">✓</div>
+      <h3>Thank you</h3>
+      <p>Your suggestion has been received. We'll review it and add it to the library if it fits.</p>
+      <button class="btn btn-ghost btn-sm" onclick="closeModal('suggest')">Close</button>
+      <div style="margin-top:.9rem"><button class="sg-link" onclick="sgReset()">Suggest another question</button></div>
+    </div>
   </div>
 </div>
 
@@ -3392,16 +3432,6 @@ function renderLedger(){
 // ── ASK AI ─────────────────────────────────────────────────────
 function setSample(el){document.getElementById('questionInput').value=el.textContent;}
 
-// Nav button: jump to the suggested (sample) questions on the Ask page.
-// showPage() scrolls to top, so wait a tick before scrolling to the chips.
-function goSuggestedQuestions(){
-  showPage('ask');
-  setTimeout(()=>{
-    const el=document.querySelector('#page-ask .sample-qs');
-    if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
-  },80);
-}
-
 // ── HOMEPAGE ASK INPUT ──────────────────────────────────────────
 // Reuses the existing Ask AI page and pipeline entirely — no second backend.
 function setHomeAsk(el){
@@ -4000,6 +4030,53 @@ function deleteSaved(btn){
 // ── MODALS ────────────────────────────────────────────────────
 function openModal(name){document.getElementById('modal-'+name).classList.add('show');document.body.style.overflow='hidden';}
 function closeModal(name){document.getElementById('modal-'+name).classList.remove('show');document.body.style.overflow='';}
+// ── SUGGEST A QUESTION ─────────────────────────────────────────
+const SUGGEST_API = RAILWAY_API.replace(/\/ask.*$/, '/suggest');
+
+function openSuggest(preset){
+  sgReset();
+  if (preset) document.getElementById('sgQuestion').value = preset;
+  sgUpdateCount();
+  openModal('suggest');
+  setTimeout(()=>document.getElementById('sgQuestion').focus(), 120);
+}
+function sgReset(){
+  document.getElementById('sgFormWrap').style.display = 'block';
+  document.getElementById('sgSuccess').style.display = 'none';
+  ['sgQuestion','sgEmail','sgWebsite'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('sgArea').value = 'General';
+  const b = document.getElementById('sgBtn'); b.disabled = false; b.textContent = 'Send suggestion →';
+  sgUpdateCount();
+}
+function sgUpdateCount(){
+  document.getElementById('sgCount').textContent = document.getElementById('sgQuestion').value.length;
+}
+async function submitSuggestion(){
+  const question = document.getElementById('sgQuestion').value.trim();
+  const email    = document.getElementById('sgEmail').value.trim();
+  const lawArea  = document.getElementById('sgArea').value;
+  const website  = document.getElementById('sgWebsite').value; // honeypot — real users leave it empty
+  if (question.length < 10){ showToast('Please write your question (at least 10 characters)','error'); return; }
+  if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ showToast('Please enter a valid email or leave it blank','error'); return; }
+
+  const btn = document.getElementById('sgBtn');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try{
+    const res = await fetch(SUGGEST_API, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({question, lawArea, email, website})
+    });
+    const data = await res.json().catch(()=>({}));
+    if (!res.ok) throw new Error(data.error || 'Request failed');
+    document.getElementById('sgFormWrap').style.display = 'none';
+    document.getElementById('sgSuccess').style.display = 'block';
+  }catch(err){
+    btn.disabled = false; btn.textContent = 'Send suggestion →';
+    showToast(err.message && err.message !== 'Failed to fetch' ? err.message : 'Could not send. Please try again, or email info@xeerhub.com','error');
+  }
+}
+
 function closeModalOutside(e,name){if(e.target===document.getElementById('modal-'+name)){closeModal(name);if(name==='newsletter')dismissNewsletter();}}
 function switchModal(from,to){closeModal(from);setTimeout(()=>openModal(to),150);}
 function fakeSignup(){closeModal('signup');showToast('Account created! Welcome to XeerHub AI 🎉','success');setTimeout(()=>showPage('dashboard'),800);}
