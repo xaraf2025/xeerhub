@@ -326,6 +326,8 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 .nav-link.active{color:var(--teal-deep);background:transparent;border-bottom:2px solid var(--gold);font-weight:600}
 .nav-cta{background:var(--teal-deep);color:#fff;padding:.5rem 1.2rem;border-radius:var(--r-sm);font-size:.82rem;font-weight:500;border:none;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;margin-left:.5rem;letter-spacing:.05em;text-transform:uppercase}
 .nav-cta:hover{background:var(--teal-mid)}
+.nav-cta{white-space:nowrap}
+@media(max-width:1180px){.nav-link{padding:.45rem .6rem}.nav-cta{padding:.5rem .9rem}}
 .nav-mobile-toggle{display:none;background:none;border:none;color:var(--ink);font-size:1.4rem;padding:.5rem}
 
 /* ── PAGE SYSTEM ── */
@@ -1093,7 +1095,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <a class="nav-link" href="/#pricing" onclick="showPage('pricing');return false;" id="nav-pricing">Pricing</a>
       <a class="nav-link" href="/#contact" onclick="showPage('contact');return false;" id="nav-contact">Contact</a>
       <a class="nav-link" href="/#dashboard" onclick="showPage('dashboard');return false;" id="nav-dashboard">Dashboard</a>
-      <button class="nav-cta" onclick="showPage('ask')">Ask XeerHub</button>
+      <button class="nav-cta" onclick="goSuggestedQuestions()">Suggested Questions</button>
     </div>
     <button class="nav-mobile-toggle" onclick="toggleMobileMenu()">☰</button>
   </div>
@@ -1568,7 +1570,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       </div>
 
       <div class="sample-qs">
-        <div class="sample-label">Try a sample question</div>
+        <div class="sample-label">Suggested questions</div>
         <div class="sample-chips">
           <span class="sample-chip" onclick="setSample(this)">Can I fire someone without notice?</span>
           <span class="sample-chip" onclick="setSample(this)">What are my rights as a foreign investor?</span>
@@ -3389,6 +3391,16 @@ function renderLedger(){
 
 // ── ASK AI ─────────────────────────────────────────────────────
 function setSample(el){document.getElementById('questionInput').value=el.textContent;}
+
+// Nav button: jump to the suggested (sample) questions on the Ask page.
+// showPage() scrolls to top, so wait a tick before scrolling to the chips.
+function goSuggestedQuestions(){
+  showPage('ask');
+  setTimeout(()=>{
+    const el=document.querySelector('#page-ask .sample-qs');
+    if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+  },80);
+}
 
 // ── HOMEPAGE ASK INPUT ──────────────────────────────────────────
 // Reuses the existing Ask AI page and pipeline entirely — no second backend.
