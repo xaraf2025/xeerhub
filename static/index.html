@@ -3774,8 +3774,12 @@ const DB_LAW_TO_SHORT = {
   'Somalia Labour Code': 'Labour Code',
   'Foreign Investment Law': 'Foreign Investment Law',
   'Income Tax Act 2025': 'ITA 2025',
-  'Environmental Protection and Management Act 2024': 'EPMA 2024',
-  'Data Protection Act': 'Data Protection Act',
+  // FIX: keys must match the actual law_name values Supabase returns
+  // (confirmed via direct query), not the law's full formal title —
+  // otherwise citations for these two laws never match and their
+  // AI Notes / Conflict Alerts silently fail to attach.
+  'Environmental Law': 'EPMA 2024',
+  'Data Protection Law': 'Data Protection Act',
 };
 
 // Given the `laws` array from a streamed citations event, find which
