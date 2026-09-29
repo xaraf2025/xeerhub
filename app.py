@@ -23,6 +23,14 @@ app = Flask(__name__, static_folder='static', template_folder='static')
 #  promise on the site.
 # ══════════════════════════════════════════════
 
+# Paths the single-page app handles client-side. These return 200 so the
+# URLs listed in sitemap.xml are valid (the JS in index.html shows the
+# right page). Anything else that is not a real file returns a 404.
+SPA_PATHS = {
+    '/privacy-policy', '/terms-of-service', '/qa-library', '/ask',
+    '/pricing', '/about', '/blog', '/contact', '/dashboard',
+}
+
 
 @app.route('/')
 def index():
@@ -31,13 +39,16 @@ def index():
 
 @app.route('/<path:path>')
 def static_files(path):
-    try:
-        full = os.path.join(app.static_folder, path)
-        if os.path.exists(full):
-            return send_from_directory(app.static_folder, path)
+    full = os.path.join(app.static_folder, path)
+    if os.path.isfile(full):
+        return send_from_directory(app.static_folder, path)
+    clean = '/' + path.rstrip('/')
+    if clean in SPA_PATHS or clean.startswith('/blog/'):
         return send_from_directory(app.static_folder, 'index.html')
-    except Exception:
-        return send_from_directory(app.static_folder, 'index.html')
+    # Unknown URL: show the app, but with a real 404 status
+    resp = send_from_directory(app.static_folder, 'index.html')
+    resp.status_code = 404
+    return resp
 
 
 # ══════════════════════════════════════════════
