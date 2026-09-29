@@ -994,6 +994,21 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 }
 @media(max-width:480px){.qa-grid{grid-template-columns:1fr}.grid-4{grid-template-columns:1fr}}
 
+/* ── LEGAL PAGES ── */
+.legal-page{max-width:780px;margin:0 auto;padding:4rem 2rem 6rem}
+.legal-page h1{font-size:clamp(2rem,4vw,2.6rem);margin-bottom:.5rem}
+.legal-meta{font-size:.82rem;color:var(--muted);margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.legal-page h2{font-family:'Playfair Display',serif;font-size:1.3rem;margin:2.25rem 0 .7rem;color:var(--ink)}
+.legal-page p,.legal-page li{font-size:.95rem;color:var(--muted);line-height:1.8}
+.legal-page p{margin-bottom:.85rem}
+.legal-page ul{margin:.4rem 0 1rem 1.3rem}
+.legal-page li{margin-bottom:.35rem}
+.legal-page strong{color:var(--ink)}
+.legal-page a{color:var(--teal-mid);text-decoration:underline}
+.legal-note{background:var(--parchment);border:1px solid var(--border);border-left:3px solid var(--teal-mid);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:1rem 1.25rem;margin:1.25rem 0;font-size:.9rem;color:var(--ink);line-height:1.7}
+.legal-consent{font-size:.75rem;color:var(--muted);text-align:center;line-height:1.6;margin-top:-.25rem}
+.legal-consent a{color:var(--teal-mid);text-decoration:underline}
+
 /* AI streaming cursor */
 .ai-cursor{display:inline-block;width:2px;height:1em;background:var(--teal-mid);margin-left:2px;vertical-align:text-bottom;animation:blink .7s step-end infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
@@ -1738,7 +1753,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 
       <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What payment methods do you accept? <span class="faq-icon">+</span></div><div class="faq-a">We accept: <strong>Visa / Mastercard</strong> (internationally), <strong>EVC Plus</strong>, <strong>Zaad</strong>, and <strong>Hormuud</strong> mobile money for users in Somalia, and <strong>bank transfer</strong> for Enterprise plan customers. USD is accepted across all methods. If you need a different arrangement — including invoice-based billing for organisations — contact us at info@xeerhub.com.</div></div>
 
-      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is my data private? <span class="faq-icon">+</span></div><div class="faq-a">Yes. The questions you ask on XeerHub are not shared with third parties and are not used to train AI models. Your saved answers are private to your account. XeerHub does not sell user data. For the full details, refer to our Privacy Policy or contact info@xeerhub.com.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is my data private? <span class="faq-icon">+</span></div><div class="faq-a">We do not sell your data and we do not use your questions to train our own AI models. To answer a question, the text is processed by service providers that run the Service (for example Groq for AI answers and Supabase for the legal database). Newsletter emails are handled by Mailchimp. Read the full details in our <a href="/privacy-policy" onclick="showPage('privacy');return false;" style="color:var(--teal-mid);text-decoration:underline">Privacy Policy</a> or contact info@xeerhub.com.</div></div>
 
     </div>
 
@@ -2343,6 +2358,143 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════════
+     PRIVACY POLICY PAGE
+     TODO: have a qualified Somali lawyer review before relying on this text.
+══════════════════════════════════════════════ -->
+<div class="page" id="page-privacy">
+  <div class="legal-page">
+    <h1>Privacy Policy</h1>
+    <div class="legal-meta">Effective date: 29 September 2026 · XeerHub (xeerhub.com), Mogadishu, Somalia</div>
+
+    <p>This policy explains what personal information XeerHub collects, why, who we share it with, and the choices you have. XeerHub provides legal <em>information</em> about Somali legislation; it does not need your personal details to let you browse the Q&amp;A library.</p>
+
+    <h2>1. Who we are</h2>
+    <p>XeerHub is operated from Mogadishu, Somalia. For any privacy question or request, email <a href="mailto:info@xeerhub.com">info@xeerhub.com</a>.</p>
+
+    <h2>2. What we collect</h2>
+    <ul>
+      <li><strong>Questions you ask.</strong> The text of questions you submit on the Ask AI page, and the law area you select. Please do not include names, ID numbers, or other confidential details about you or anyone else in a question.</li>
+      <li><strong>Your email address</strong>, if you subscribe to our newsletter.</li>
+      <li><strong>Messages you send us</strong> by email, including anything you include in them.</li>
+      <li><strong>Account details</strong> (name, email, professional category), when account registration is available and you create an account.</li>
+      <li><strong>Usage data.</strong> We use Google Analytics to understand how the site is used: pages viewed, device and browser type, approximate location, and how you arrived. Google may set cookies and process your IP address for this purpose.</li>
+      <li><strong>Data stored in your browser.</strong> Your browser's local storage keeps a count of questions asked and whether you have subscribed to or dismissed the newsletter prompt. This stays on your device.</li>
+    </ul>
+
+    <h2>3. How we use it</h2>
+    <ul>
+      <li>To answer your questions and show relevant legal references.</li>
+      <li>To send the weekly legal digest, only if you subscribe.</li>
+      <li>To reply to your messages and provide support.</li>
+      <li>To keep the service secure, fix problems, and improve content and features.</li>
+    </ul>
+    <p>We do not sell your personal information. We do not use your questions to train our own AI models.</p>
+
+    <h2>4. Who we share it with</h2>
+    <p>We use trusted service providers to run XeerHub. They process data on our behalf, under their own terms and privacy policies:</p>
+    <ul>
+      <li><strong>Groq</strong> – generates AI answers. Your question and the legal text retrieved for it are sent to Groq.</li>
+      <li><strong>Supabase</strong> – hosts the legal database that is searched using words from your question.</li>
+      <li><strong>Railway</strong> – hosts our servers.</li>
+      <li><strong>Mailchimp</strong> – stores subscriber emails and sends the newsletter. New subscribers confirm by email before they are added.</li>
+      <li><strong>Google Analytics and Google Fonts</strong> – usage statistics and typefaces. Loading fonts from Google shares your IP address with Google.</li>
+    </ul>
+    <p>We may also disclose information if required by law or to protect our rights and users' safety.</p>
+
+    <h2>5. Transfers outside Somalia</h2>
+    <p>Our providers operate servers in other countries, so your information may be processed outside Somalia. We choose providers that apply security measures, but we cannot control their systems.</p>
+
+    <h2>6. How long we keep it</h2>
+    <ul>
+      <li>Questions may be held briefly in server memory to speed up repeat answers, and are cleared when the server restarts. Our providers may keep their own logs under their own policies.</li>
+      <li>Newsletter emails are kept until you unsubscribe.</li>
+      <li>Emails you send us are kept as long as needed to deal with your request and for our records.</li>
+      <li>Analytics data is kept according to our Google Analytics settings.</li>
+    </ul>
+
+    <h2>7. Your rights</h2>
+    <p>Under Somalia's Data Protection Act you may have the right to access your personal data, have it corrected or deleted, withdraw consent, object to certain processing, and not be subject to solely automated decisions with significant effects. To use any of these rights, email <a href="mailto:info@xeerhub.com">info@xeerhub.com</a>. You can unsubscribe from the newsletter at any time using the link in any email. You may also complain to Somalia's Data Protection Authority.</p>
+
+    <h2>8. Security</h2>
+    <p>We use reasonable technical and organisational measures to protect information, including encrypted connections (HTTPS). No online service is completely secure, so we cannot guarantee absolute security.</p>
+
+    <h2>9. Children</h2>
+    <p>XeerHub is intended for adults and professionals. It is not directed at anyone under 18, and we do not knowingly collect their information.</p>
+
+    <h2>10. Changes to this policy</h2>
+    <p>We may update this policy. The effective date above shows the latest version. If we make significant changes we will post a notice on the site.</p>
+
+    <div class="legal-note">XeerHub provides legal information, not legal advice. See our <a href="/terms-of-service" onclick="showPage('terms');return false;">Terms of Service</a>.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TERMS OF SERVICE PAGE
+     TODO: have a qualified Somali lawyer review before relying on this text.
+══════════════════════════════════════════════ -->
+<div class="page" id="page-terms">
+  <div class="legal-page">
+    <h1>Terms of Service</h1>
+    <div class="legal-meta">Effective date: 29 September 2026 · XeerHub (xeerhub.com), Mogadishu, Somalia</div>
+
+    <p>By using xeerhub.com (the "Service") you agree to these terms. If you do not agree, please do not use the Service.</p>
+
+    <h2>1. What XeerHub is</h2>
+    <p>XeerHub is a research tool that presents plain-English information about Somali legislation, with article references. <strong>It provides legal information, not legal advice.</strong> Using XeerHub does not create a lawyer-client relationship, and nothing on the Service replaces advice from a qualified Somali lawyer about your specific situation.</p>
+
+    <h2>2. Accuracy and AI-generated answers</h2>
+    <ul>
+      <li>We work to keep the Q&amp;A library accurate and to cite the relevant article, but laws are amended and interpreted over time, and errors can occur.</li>
+      <li>AI-generated answers can be incomplete or wrong. Always check the cited article against the official, gazetted text before relying on it.</li>
+      <li>You are responsible for decisions you make using the Service.</li>
+    </ul>
+
+    <h2>3. Acceptable use</h2>
+    <p>You agree not to:</p>
+    <ul>
+      <li>use the Service for unlawful purposes or in a way that harms others;</li>
+      <li>scrape, copy, or republish the library in bulk, or resell access to it;</li>
+      <li>attempt to disrupt, overload, or gain unauthorised access to the Service or its systems;</li>
+      <li>present XeerHub content as legal advice to third parties without appropriate professional review.</li>
+    </ul>
+
+    <h2>4. Accounts</h2>
+    <p>Where accounts are available, you must give accurate information and keep your login details secure. You are responsible for activity under your account. Enterprise plan seats are for the named members of your team only.</p>
+
+    <h2>5. Plans, payment, and cancellation</h2>
+    <ul>
+      <li>The Free plan is provided at no charge and may be changed as the Service develops.</li>
+      <li>Paid plans (Professional and Enterprise) are described on the Pricing page. Prices and features may change; changes will not affect a billing period you have already paid for.</li>
+      <li>You can cancel at any time from your dashboard. Access continues until the end of the current billing period. We do not offer pro-rata refunds for annual plans.</li>
+    </ul>
+
+    <h2>6. Intellectual property</h2>
+    <p>The underlying legislation is official public text. The XeerHub library as a compilation, including our plain-language answers, selection, structure, design, and software, belongs to XeerHub. You may use the Service and its content for your own personal or internal business purposes. Any other use needs our written permission.</p>
+
+    <h2>7. Third-party services</h2>
+    <p>The Service relies on third-party providers, described in our <a href="/privacy-policy" onclick="showPage('privacy');return false;">Privacy Policy</a>. We are not responsible for their availability or conduct.</p>
+
+    <h2>8. Availability and disclaimers</h2>
+    <p>The Service is provided "as is" and "as available". We do not guarantee that it will be uninterrupted, error-free, or complete, and we disclaim all warranties to the fullest extent permitted by law.</p>
+
+    <h2>9. Limitation of liability</h2>
+    <p>To the fullest extent permitted by law, XeerHub and its operators are not liable for indirect or consequential losses, or for loss arising from reliance on information from the Service. Where liability cannot be excluded, it is limited to the amount you paid us in the 12 months before the claim (or USD 100 if you use the Free plan). Nothing in these terms limits liability that cannot lawfully be limited.</p>
+
+    <h2>10. Suspension and termination</h2>
+    <p>We may suspend or end access if you breach these terms or misuse the Service. You may stop using the Service at any time.</p>
+
+    <h2>11. Governing law</h2>
+    <p>These terms are governed by the laws of the Federal Republic of Somalia. Disputes will be handled by the competent courts of Somalia, unless the parties agree in writing to another method of resolution.</p>
+
+    <h2>12. Changes</h2>
+    <p>We may update these terms. The effective date above shows the latest version. Continuing to use the Service after a change means you accept the updated terms.</p>
+
+    <h2>13. Contact</h2>
+    <p>Questions about these terms: <a href="mailto:info@xeerhub.com">info@xeerhub.com</a>.</p>
+  </div>
+</div>
+
 <!-- ══ NEWSLETTER POPUP ══ -->
 <div class="modal-overlay" id="modal-newsletter" onclick="closeModalOutside(event,'newsletter')">
   <div class="modal">
@@ -2364,6 +2516,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
           <input class="input" type="email" id="popupEmail" placeholder="your@email.com" onkeydown="if(event.key==='Enter')subscribeMailchimp('popup')">
           <button class="newsletter-submit" id="popupBtn" onclick="subscribeMailchimp('popup')">Subscribe →</button>
         </div>
+        <p class="legal-consent" style="margin:.5rem 0 0">We use your email only for the digest. See our <a href="/privacy-policy" onclick="closeModal('newsletter');showPage('privacy');return false;">Privacy Policy</a>.</p>
         <div class="newsletter-skip" onclick="closeModal('newsletter');dismissNewsletter()">No thanks, I'll miss out</div>
       </div>
     </div>
@@ -2379,6 +2532,7 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
       <div><label class="label">I am a...</label><select class="select"><option>Lawyer / Legal Advisor</option><option>Enterprise / INGO Staff</option><option>Business Owner / Founder</option><option>HR / Compliance Manager</option><option>Other</option></select></div>
       <div><label class="label">Password</label><input class="input" type="password" placeholder="Min. 8 characters"></div>
       <button class="btn btn-gold" style="width:100%;justify-content:center;padding:.9rem" onclick="fakeSignup()">Create Account →</button>
+      <p class="legal-consent">By creating an account you agree to our <a href="/terms-of-service" onclick="closeModal('signup');showPage('terms');return false;">Terms of Service</a> and <a href="/privacy-policy" onclick="closeModal('signup');showPage('privacy');return false;">Privacy Policy</a>.</p>
     </div>
     <div class="modal-footer">Already have an account? <button onclick="switchModal('signup','login')">Sign in</button></div>
   </div>
@@ -3137,7 +3291,19 @@ function renderConflictAlerts(alerts){
 
 // ── NAVIGATION ────────────────────────────────────────────────
 
-function showPage(page){
+const VALID_PAGES=['home','library','ask','pricing','dashboard','about','testimonials','blog','contact','privacy','terms'];
+const ROUTE_PATHS={privacy:'/privacy-policy',terms:'/terms-of-service'};
+const PAGE_TITLES={privacy:'Privacy Policy — XeerHub',terms:'Terms of Service — XeerHub'};
+const DEFAULT_TITLE=document.title;
+function routeFromLocation(){
+  const p=(window.location.pathname.replace(/\/+$/,'')||'/');
+  const pathMap={'/privacy-policy':'privacy','/terms-of-service':'terms','/qa-library':'library','/ask':'ask','/pricing':'pricing','/about':'about','/blog':'blog','/contact':'contact','/dashboard':'dashboard'};
+  if(pathMap[p]) return pathMap[p];
+  if(p.indexOf('/blog/')===0) return 'blog';
+  const h=window.location.hash.slice(1).split('/')[0];
+  return VALID_PAGES.includes(h)?h:'home';
+}
+function showPage(page,noPush){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
   const el=document.getElementById('page-'+page);
@@ -3148,25 +3314,28 @@ function showPage(page){
   window.scrollTo(0,0);
   if(page==='library')renderLibrary();
   if(page==='dashboard'||page==='ask')updateUsageUI();
-  // ── SEO: update URL hash so each page has a crawlable, shareable URL ──
-  const newHash = (page==='home') ? '' : '#'+page;
-  if(window.location.hash !== newHash){
-    history.pushState(null,'',window.location.pathname + newHash);
+  // ── SEO: each page gets a shareable URL (legal pages get real paths) ──
+  if(!noPush){
+    const path=ROUTE_PATHS[page]||'/';
+    const hash=(page==='home'||ROUTE_PATHS[page])?'':'#'+page;
+    const target=path+hash;
+    if(window.location.pathname+window.location.hash!==target){
+      history.pushState(null,'',target);
+    }
   }
-  // ── SEO: update canonical tag to reflect current page ──
-  const canonical = document.querySelector('link[rel="canonical"]');
+  document.title=PAGE_TITLES[page]||DEFAULT_TITLE;
+  const canonical=document.querySelector('link[rel="canonical"]');
   if(canonical){
-    canonical.href = (page==='home')
-      ? 'https://xeerhub.com/'
-      : 'https://xeerhub.com/#'+page;
+    canonical.href=ROUTE_PATHS[page]?'https://xeerhub.com'+ROUTE_PATHS[page]
+      :(page==='home'?'https://xeerhub.com/':'https://xeerhub.com/#'+page);
   }
 }
-// ── SEO: handle browser back/forward and direct hash links ──
-window.addEventListener('hashchange',function(){
-  const page = window.location.hash.slice(1) || 'home';
-  const validPages=['home','library','ask','pricing','dashboard','about','testimonials','blog','contact'];
-  if(validPages.includes(page)) showPage(page);
+// ── Back/forward and hash edits ──
+window.addEventListener('popstate',function(){
+  if(typeof closeBlogModal==='function') closeBlogModal();
+  showPage(routeFromLocation(),true);
 });
+
 function toggleMobileMenu(){
   const links=document.getElementById('navLinks');
   links.style.display=links.style.display==='flex'?'none':'flex';
@@ -4515,11 +4684,8 @@ function renderLib2Detail(source){
 // ── INIT ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded',()=>{
   // Handle direct hash link on page load (e.g. xeerhub.com/#pricing)
-  const initHash = window.location.hash.slice(1);
-  const validPages=['home','library','ask','pricing','dashboard','about','testimonials','blog','contact'];
-  if(initHash && validPages.includes(initHash)){
-    showPage(initHash);
-  }
+  const initRoute=routeFromLocation();
+  if(initRoute!=='home') showPage(initRoute,true);
   renderLedger();
   updateUsageUI();
   fetchBlogPosts();
@@ -4591,8 +4757,8 @@ document.addEventListener('DOMContentLoaded',()=>{
       <a class="footer-link" href="/#pricing" onclick="showPage('pricing');return false;">Pricing</a>
       <a class="footer-link" href="/#contact" onclick="showPage('contact');return false;">Contact</a>
       <a class="footer-link" href="/#dashboard" onclick="showPage('dashboard');return false;">Dashboard</a>
-      <span class="footer-link" onclick="showToast('Privacy Policy — contact info@xeerhub.com','success')">Privacy Policy</span>
-      <span class="footer-link" onclick="showToast('Terms of Service — contact info@xeerhub.com','success')">Terms of Service</span>
+      <a class="footer-link" href="/privacy-policy" onclick="showPage('privacy');return false;">Privacy Policy</a>
+      <a class="footer-link" href="/terms-of-service" onclick="showPage('terms');return false;">Terms of Service</a>
     </div>
     <div class="footer-copy">© 2026 XeerHub · xeerhub.com</div>
     <div class="footer-disclaimer">Legal information only — not legal advice. All answers reference official legislation. Consult a qualified Somali lawyer for case-specific guidance.</div>
