@@ -1085,6 +1085,19 @@ textarea.input{resize:vertical;min-height:120px;line-height:1.6}
 .lib2-topic-chip{font-size:.78rem;padding:.35rem .85rem;border-radius:100px;background:var(--parchment);border:1.5px solid var(--border);color:var(--muted);cursor:pointer;transition:all .18s;font-family:'DM Sans',sans-serif}
 .lib2-topic-chip:hover,.lib2-topic-chip.active{background:var(--teal-deep);color:var(--gold);border-color:var(--teal-deep)}
 .lib2-actions{display:flex;gap:.65rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.lib2-pdf{border:1px solid var(--border);border-radius:var(--r);background:var(--parchment);padding:.9rem 1rem;margin-bottom:1.5rem;display:flex;flex-direction:column;gap:.75rem}
+.lib2-pdf-title{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lib2-pdf-row{display:flex;align-items:center;justify-content:space-between;gap:.75rem 1rem;flex-wrap:wrap}
+.lib2-pdf-info{display:flex;flex-direction:column;gap:.3rem;min-width:0;flex:1 1 220px}
+.lib2-pdf-tags{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+.lib2-pdf-badge{display:inline-flex;align-items:center;gap:.25rem;font-size:.68rem;font-weight:600;padding:.15rem .55rem;border-radius:100px;white-space:nowrap}
+.lib2-pdf-badge.official{background:var(--teal-pale);color:var(--teal-deep);border:1px solid var(--border-strong)}
+.lib2-pdf-badge.unverified{background:var(--gold-pale);color:var(--gold-dark);border:1px solid var(--gold-border)}
+.lib2-pdf-lang{font-size:.72rem;color:var(--muted)}
+.lib2-pdf-src{font-size:.78rem;color:var(--muted);overflow-wrap:anywhere}
+.lib2-pdf-btns{display:flex;gap:.5rem;flex-wrap:wrap}
+.lib2-pdf-note{font-size:.72rem;color:var(--gold-dark);line-height:1.5}
+@media(max-width:600px){.lib2-pdf-btns{width:100%}.lib2-pdf-btns .btn{flex:1;justify-content:center}}
 .lib2-qa-list{display:flex;flex-direction:column;gap:.55rem;max-height:420px;overflow-y:auto;padding-right:.35rem}
 .lib2-qa-item{border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;flex-shrink:0}
 .lib2-qa-q{padding:.75rem .9rem;font-size:.84rem;font-weight:600;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:.5rem;background:var(--parchment)}
@@ -1196,13 +1209,6 @@ button.xh-cell:hover,a.xh-cell:hover{background:#FFFDF8}
 #site-footer .xf-brand p{font-size:1rem;max-width:30ch}
 @media(max-width:960px){#site-footer .xf-g{grid-template-columns:1fr 1fr 1fr}}
 @media(max-width:560px){#site-footer .xf-g{grid-template-columns:1fr 1fr}}
-
-.xh-aud{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:2.2rem;align-items:center;padding:2.2rem 0}
-.xh-aud h2{margin-bottom:.6rem}
-.xh-ph{margin:0;aspect-ratio:4/3;background:var(--ink);overflow:hidden;position:relative}
-.xh-ph img{width:100%;height:100%;object-fit:cover;display:block}
-.xh-ph.missing::after{content:attr(data-label);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.55);font:500 .72rem 'DM Mono',monospace;letter-spacing:.16em;text-transform:uppercase;border:1px solid rgba(245,158,11,.35);margin:10px}
-@media(max-width:900px){.xh-aud{grid-template-columns:1fr;gap:1.1rem}.xh-ph{aspect-ratio:16/9}}
 </style>
 </head>
 <body>
@@ -1392,10 +1398,10 @@ button.xh-cell:hover,a.xh-cell:hover{background:#FFFDF8}
 <div class="page" id="page-solutions">
   <section class="xh-hero"><div class="container"><div class="section-eyebrow">Solutions</div><h1>Legal intelligence for people doing business in Somalia.</h1><p>Practical ways to use Somali legislation, verified answers, and article-level references in day-to-day work.</p></div></section>
   <section class="xh-sec"><div class="container">
-    <div class="xh-aud"><figure class="xh-ph" data-label="Organizations"><img src="/images/solutions/organizations.jpg" alt="Colleagues reviewing documents in an office" width="800" height="600" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('missing');this.remove()"></figure><div><h2>Organizations</h2><p>Support HR, compliance, regulatory research, and day-to-day legal questions.</p><div class="xh-btns"><button class="btn btn-outline btn-sm" onclick="openLibrarySource('labor')">Labour Code</button><button class="btn btn-outline btn-sm" onclick="openLibrarySource('data')">Data Protection Act</button></div></div></div>
-    <div class="xh-aud"><figure class="xh-ph" data-label="Lawyers"><img src="/images/solutions/lawyers.jpg" alt="A lawyer researching at a desk" width="800" height="600" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('missing');this.remove()"></figure><div><h2>Lawyers</h2><p>Accelerate legal research and locate relevant provisions and sources.</p><div class="xh-btns"><button class="btn btn-outline btn-sm" onclick="openLibrarySource('labor')">Browse the library</button><button class="btn btn-outline btn-sm" onclick="showPage('ask')">Ask a question</button></div></div></div>
-    <div class="xh-aud"><figure class="xh-ph" data-label="Investors"><img src="/images/solutions/investors.jpg" alt="Business owners discussing an investment" width="800" height="600" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('missing');this.remove()"></figure><div><h2>Investors</h2><p>Understand the legal and regulatory environment relevant to investment in Somalia.</p><div class="xh-btns"><button class="btn btn-outline btn-sm" onclick="openLibrarySource('investment')">Foreign Investment Law</button><button class="btn btn-outline btn-sm" onclick="openLibrarySource('tax')">Income Tax Act 2025</button></div></div></div>
-    <div class="xh-aud"><figure class="xh-ph" data-label="HR &amp; Compliance"><img src="/images/solutions/hr-compliance.jpg" alt="An HR team working through compliance requirements" width="800" height="600" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('missing');this.remove()"></figure><div><h2>HR &amp; Compliance</h2><p>Find employment, tax, data protection, and regulatory requirements more efficiently.</p><div class="xh-btns"><button class="btn btn-outline btn-sm" onclick="openLibrarySource('labor')">Labour Code</button><button class="btn btn-outline btn-sm" onclick="openLibrarySource('tax')">Income Tax Act 2025</button><button class="btn btn-outline btn-sm" onclick="openLibrarySource('data')">Data Protection Act</button></div></div></div>
+    <div class="xh-aud"><h2>Organizations</h2><div><p>Support HR, compliance, regulatory research, and day-to-day legal questions.</p><div class="xh-btns"><button class="btn btn-outline btn-sm" onclick="openLibrarySource('labor')">Labour Code</button><button class="btn btn-outline btn-sm" onclick="openLibrarySource('data')">Data Protection Act</button></div></div></div>
+    <div class="xh-aud"><h2>Lawyers</h2><div><p>Accelerate legal research and locate relevant provisions and sources.</p><div class="xh-btns"><button class="btn btn-outline btn-sm" onclick="openLibrarySource('labor')">Browse the library</button><button class="btn btn-outline btn-sm" onclick="showPage('ask')">Ask a question</button></div></div></div>
+    <div class="xh-aud"><h2>Investors</h2><div><p>Understand the legal and regulatory environment relevant to investment in Somalia.</p><div class="xh-btns"><button class="btn btn-outline btn-sm" onclick="openLibrarySource('investment')">Foreign Investment Law</button><button class="btn btn-outline btn-sm" onclick="openLibrarySource('tax')">Income Tax Act 2025</button></div></div></div>
+    <div class="xh-aud"><h2>HR &amp; Compliance</h2><div><p>Find employment, tax, data protection, and regulatory requirements more efficiently.</p><div class="xh-btns"><button class="btn btn-outline btn-sm" onclick="openLibrarySource('labor')">Labour Code</button><button class="btn btn-outline btn-sm" onclick="openLibrarySource('tax')">Income Tax Act 2025</button><button class="btn btn-outline btn-sm" onclick="openLibrarySource('data')">Data Protection Act</button></div></div></div>
   </div></section>
   <section class="xh-cta"><div class="container"><h2>Working with XeerHub in your organization?</h2><p>Tell us about your team and the legal questions you work with.</p><div class="xh-btns"><button class="btn btn-gold btn-lg" onclick="goContact('Organization / Enterprise')">Talk to XeerHub</button></div></div></section>
 </div>
@@ -4217,6 +4223,100 @@ function closeBlogModal() {
 //  can never drift out of sync with the actual library.
 // ══════════════════════════════════════════════════════════════
 
+// ── LIBRARY: PDF DOWNLOADS (Supabase `laws` table) ──────────────
+// Reads pdf_url / pdf_source / pdf_language through the existing anon `sb`
+// client (read-only; needs a SELECT policy on `laws`). Nothing is hardcoded:
+// URLs live only in the database. The library works unchanged if the query
+// fails or the columns are empty — buttons simply don't render.
+// DB law_name values (lower-cased) → library source id. Several aliases are
+// listed because law_name has varied between the API and the frontend.
+const LIB2_PDF_NAME_MAP = {
+  labor:       ['somalia labour code','labour code','labor law'],
+  investment:  ['foreign investment law'],
+  tax:         ['income tax act 2025','income tax law','ita 2025'],
+  'tax-regs':  ['income tax regulations 2025','income tax regulation 2025'],
+  environment: ['environmental protection and management act 2024','environmental law','epma 2024'],
+  data:        ['data protection act','data protection law']
+};
+let LAW_PDFS = {};   // { sourceId: [ {url, source, language} ] }
+
+function lib2SafePdfUrl(raw){
+  try{
+    const u = new URL(String(raw||'').trim());
+    return (u.protocol==='https:'||u.protocol==='http:') ? u.href : '';
+  }catch(e){ return ''; }
+}
+
+async function fetchLawPdfs(){
+  try{
+    const { data, error } = await sb.from('laws')
+      .select('law_name, pdf_url, pdf_source, pdf_language')
+      .not('pdf_url','is',null)
+      .neq('pdf_url','');
+    if (error) throw error;
+    const idByName = {};
+    Object.keys(LIB2_PDF_NAME_MAP).forEach(id=>LIB2_PDF_NAME_MAP[id].forEach(n=>idByName[n]=id));
+    const out = {};
+    (data||[]).forEach(r=>{
+      const url = lib2SafePdfUrl(r.pdf_url);
+      const id = idByName[String(r.law_name||'').trim().toLowerCase()];
+      if (!url) return;
+      if (!id){ console.warn('PDF row ignored — unmapped law_name:', r.law_name); return; }
+      const list = out[id] = out[id] || [];
+      if (list.length < 4 && !list.some(x=>x.url===url))   // one entry per distinct file
+        list.push({ url, source:(r.pdf_source||'').trim(), language:(r.pdf_language||'').trim() });
+    });
+    LAW_PDFS = out;
+    const libPage = document.getElementById('page-library');
+    if (libPage && libPage.classList.contains('active') && typeof renderLibrary==='function') renderLibrary();
+  }catch(err){
+    console.warn('Law PDFs unavailable:', err);
+  }
+}
+
+// Conservative: a copy is only labelled Official when pdf_source says so
+// explicitly; anything else (including blank) is shown as unverified.
+function lib2PdfIsOfficial(src){
+  const t = String(src||'');
+  if (/unofficial|unverified|third[- ]party|mirror|draft|scan of|translation/i.test(t)) return false;
+  return /\bofficial\b|gazette|ministry|parliament|federal government|government of/i.test(t);
+}
+
+// Supabase Storage honours ?download=<name> (forces a save instead of inline view).
+function lib2PdfDownloadUrl(url, title){
+  try{
+    const u = new URL(url);
+    if (/\.supabase\.co$/.test(u.hostname) && u.pathname.indexOf('/storage/')===0 && !u.searchParams.has('download')){
+      u.searchParams.set('download', String(title||'legislation').replace(/[^\w\- ]+/g,'').trim().replace(/\s+/g,'-')+'.pdf');
+      return u.href;
+    }
+  }catch(e){}
+  return url;
+}
+
+function lib2PdfPanel(source){
+  const list = LAW_PDFS[source.id];
+  if (!list || !list.length) return '';
+  const rows = list.map(f=>{
+    const official = lib2PdfIsOfficial(f.source);
+    const badge = official
+      ? '<span class="lib2-pdf-badge official">✓ Official document</span>'
+      : '<span class="lib2-pdf-badge unverified">⚠ Unverified copy</span>';
+    const lang = f.language ? `<span class="lib2-pdf-lang">Language: ${escapeHtml(f.language)}</span>` : '';
+    const src  = f.source ? `<div class="lib2-pdf-src">Source: ${escapeHtml(f.source)}</div>` : '';
+    const note = official ? '' : '<div class="lib2-pdf-note">Not confirmed as the official gazetted text. Check against the official publication before relying on it.</div>';
+    const label = list.length>1 && f.language ? ` (${escapeHtml(f.language)})` : '';
+    return `<div class="lib2-pdf-row">
+      <div class="lib2-pdf-info"><div class="lib2-pdf-tags">${badge}${lang}</div>${src}${note}</div>
+      <div class="lib2-pdf-btns">
+        <a class="btn btn-gold btn-sm" href="${escapeHtml(lib2PdfDownloadUrl(f.url, source.title))}" target="_blank" rel="noopener noreferrer">⬇ Download PDF${label}</a>
+        <a class="btn btn-outline btn-sm" href="${escapeHtml(f.url)}" target="_blank" rel="noopener noreferrer">Open</a>
+      </div>
+    </div>`;
+  }).join('');
+  return `<div class="lib2-pdf"><div class="lib2-pdf-title">📄 Original legislation (PDF)</div>${rows}</div>`;
+}
+
 const LIB2_LAW_SOURCES = [
   {
     id:'labor', type:'LAW', cat:'labor',
@@ -4482,8 +4582,8 @@ function renderLib2Detail(source){
 
     <div class="lib2-actions">
       <button class="btn btn-gold btn-sm" onclick="lib2AskAbout(${JSON.stringify(source).replace(/"/g,'&quot;')})">✦ Ask AI about this law</button>
-      <button class="btn btn-ghost btn-sm" onclick="showToast('Full downloadable text is coming soon — the verified Q&amp;A library below covers this source today.','success')">⬇ Download official text</button>
     </div>
+    ${lib2PdfPanel(source)}
 
     <div class="lib2-qa-title">💬 Verified Q&amp;As from this source <span style="color:var(--muted);font-weight:400;font-size:.8rem">(${qaCount})</span></div>
     <div class="lib2-qa-list" id="lib2QaListBox"></div>
@@ -4502,6 +4602,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   updateUsageUI();
   renderHomeRecord();renderHomeQuestions();
   Promise.resolve(fetchBlogPosts()).then(renderHomeInsights);
+  fetchLawPdfs();
   const qi=document.getElementById('questionInput');
   if(qi)qi.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.ctrlKey)submitQuestion();});
 
