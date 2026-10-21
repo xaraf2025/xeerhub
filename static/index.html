@@ -1231,6 +1231,7 @@ button.xh-cell:hover,a.xh-cell:hover{background:#FFFDF8}
       </div>
       <a class="nav-link" href="/#solutions" onclick="showPage('solutions');return false;" id="nav-solutions">Solutions</a>
       <a class="nav-link" href="/#insights" onclick="showPage('blog');return false;" id="nav-blog">Insights</a>
+      <a class="nav-link" href="/#activities" onclick="showPage('activities');return false;" id="nav-activities">Activities</a>
       <a class="nav-link" href="/#about" onclick="showPage('about');return false;" id="nav-about">About</a>
       <a class="nav-link" href="/#pricing" onclick="showPage('pricing');return false;" id="nav-pricing">Pricing</a>
       <button class="nav-cta" onclick="showPage('ask')">Ask AI</button>
@@ -2238,6 +2239,15 @@ button.xh-cell:hover,a.xh-cell:hover{background:#FFFDF8}
   </div>
 </div>
 
+<div class="page" id="page-activities">
+  <div class="container" style="padding:4rem 0 6rem">
+    <div class="section-eyebrow">Activities</div>
+    <h1 style="font-size:2.4rem;font-family:'Playfair Display',serif;margin-bottom:.6rem">Our Activities</h1>
+    <p style="color:var(--muted);font-size:.95rem;max-width:520px;margin-bottom:2rem">Workshops, trainings and events from the XeerHub team.</p>
+    <div id="activitiesGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.1rem"><p style="color:var(--muted)">Loading…</p></div>
+  </div>
+</div>
+
 <!-- ══ NEWSLETTER POPUP ══ -->
 <div class="modal-overlay" id="modal-newsletter" onclick="closeModalOutside(event,'newsletter')">
   <div class="modal">
@@ -3034,7 +3044,7 @@ function renderConflictAlerts(alerts){
 
 // ── NAVIGATION ────────────────────────────────────────────────
 
-const VALID_PAGES=['home','library','ask','solutions','pricing','dashboard','about','testimonials','blog','contact','privacy','terms'];
+const VALID_PAGES=['home','library','ask','solutions','pricing','dashboard','about','testimonials','blog','contact','privacy','terms','activities'];
 const HASH_ALIAS={insights:'blog'};
 const PAGE_HASH={blog:'insights'};
 const ROUTE_PATHS={privacy:'/privacy-policy',terms:'/terms-of-service'};
@@ -3069,6 +3079,7 @@ function showPage(page,noPush){
   state.currentPage=page;
   window.scrollTo(0,0);
   if(page==='library')renderLibrary();
+  if(page==='activities')loadActivities();
   if(page==='dashboard'||page==='ask')updateUsageUI();
   if(!noPush){
     const path=ROUTE_PATHS[page]||'/';
@@ -4591,6 +4602,26 @@ function renderLib2Detail(source){
   `;
 
   lib2RenderQaList(source);
+}
+
+// ── ACTIVITIES ──
+const ACTIVITIES_API = RAILWAY_API.replace(/\/ask$/, '/activities');
+async function loadActivities(){
+  const grid = document.getElementById('activitiesGrid');
+  try {
+    const items = await (await fetch(ACTIVITIES_API)).json();
+    if(!Array.isArray(items) || !items.length){ grid.innerHTML='<p style="color:var(--muted)">No activities published yet.</p>'; return; }
+    grid.innerHTML = items.map(a => `
+      <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-sm)">
+        ${a.cover_image ? `<img src="${escapeHtml(a.cover_image)}" alt="${escapeHtml(a.title)}" loading="lazy" style="width:100%;height:190px;object-fit:cover;display:block">` : ''}
+        <div style="padding:1rem 1.1rem">
+          <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--teal-mid);margin-bottom:.4rem">${escapeHtml(a.category)}${a.event_date ? ' · ' + new Date(a.event_date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : ''}</div>
+          <div style="font-weight:600;margin-bottom:.4rem">${escapeHtml(a.title)}</div>
+          <div style="font-size:.85rem;color:var(--muted);line-height:1.6">${escapeHtml(a.summary || '')}</div>
+          ${a.organization ? `<div style="font-size:.75rem;color:var(--muted);margin-top:.6rem">${escapeHtml(a.organization)}</div>` : ''}
+        </div>
+      </div>`).join('');
+  } catch(e){ grid.innerHTML='<p style="color:var(--muted)">Could not load activities right now.</p>'; }
 }
 
 // ── INIT ──────────────────────────────────────────────────────
