@@ -198,8 +198,7 @@
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1192,8 +1191,9 @@ button.xh-cell:hover,a.xh-cell:hover{background:#FFFDF8}
 .xh-hero h1{color:#fff;font-size:clamp(2rem,4.6vw,3.2rem);max-width:20ch;margin-bottom:1rem}
 .xh-hero p{color:rgba(255,255,255,.72);max-width:620px;line-height:1.7}
 .xh-hero .section-eyebrow{color:var(--gold)}.xh-hero .section-eyebrow::before{background:var(--gold)}
-.xh-aud{display:grid;grid-template-columns:1fr 2fr;gap:2rem;padding:2.2rem 0;border-top:1px solid var(--border-strong)}
+.xh-aud{display:grid;grid-template-columns:1fr 2fr minmax(200px,280px);gap:2rem;align-items:center;padding:2.2rem 0;border-top:1px solid var(--border-strong)}
 .xh-aud h2{font-size:1.5rem}
+.xh-aud-img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;border:1px solid var(--border);background:var(--parchment);display:block}
 .xh-aud p{color:var(--body);line-height:1.7;margin-bottom:1rem}
 .xh-aud .xh-btns{justify-content:flex-start}
 .xh-ins-bar{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin:1.6rem 0 2rem}
@@ -1203,7 +1203,7 @@ button.xh-cell:hover,a.xh-cell:hover{background:#FFFDF8}
 .xh-chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}.xh-chip.on b{color:rgba(255,255,255,.7)}
 .xh-chip[data-n="0"]{opacity:.55}
 .xh-search{flex:0 1 260px;min-width:180px}
-@media(max-width:900px){.xh-g3,.xh-g4{grid-template-columns:repeat(2,1fr)}.xh-steps{grid-template-columns:repeat(2,1fr)}.xh-aud{grid-template-columns:1fr;gap:.6rem}}
+@media(max-width:900px){.xh-g3,.xh-g4{grid-template-columns:repeat(2,1fr)}.xh-steps{grid-template-columns:repeat(2,1fr)}.xh-aud{grid-template-columns:1fr;gap:.6rem}.xh-aud-img{max-width:420px;margin-top:.6rem}}
 @media(max-width:600px){.xh-g2,.xh-g3,.xh-g4{grid-template-columns:1fr}.xh-steps{grid-template-columns:1fr}.xh-sec{padding:3.2rem 0}.xh-btns .btn{width:100%;justify-content:center}}
 #site-footer .xf-g{grid-template-columns:1.6fr repeat(3,1fr)}
 #site-footer .xf-brand p{font-size:1rem;max-width:30ch}
@@ -1398,10 +1398,10 @@ button.xh-cell:hover,a.xh-cell:hover{background:#FFFDF8}
 <div class="page" id="page-solutions">
   <section class="xh-hero"><div class="container"><div class="section-eyebrow">Solutions</div><h1>Legal intelligence for people doing business in Somalia.</h1><p>Practical ways to use Somali legislation, verified answers, and article-level references in day-to-day work.</p></div></section>
   <section class="xh-sec"><div class="container">
-    <div class="xh-aud"><h2>Organizations</h2><div><p>Support HR, compliance, regulatory research, and day-to-day legal questions.</p><div class="xh-btns"><button class="btn btn-outline btn-sm" onclick="openLibrarySource('labor')">Labour Code</button><button class="btn btn-outline btn-sm" onclick="openLibrarySource('data')">Data Protection Act</button></div></div></div>
-    <div class="xh-aud"><h2>Lawyers</h2><div><p>Accelerate legal research and locate relevant provisions and sources.</p><div class="xh-btns"><button class="btn btn-outline btn-sm" onclick="openLibrarySource('labor')">Browse the library</button><button class="btn btn-outline btn-sm" onclick="showPage('ask')">Ask a question</button></div></div></div>
-    <div class="xh-aud"><h2>Investors</h2><div><p>Understand the legal and regulatory environment relevant to investment in Somalia.</p><div class="xh-btns"><button class="btn btn-outline btn-sm" onclick="openLibrarySource('investment')">Foreign Investment Law</button><button class="btn btn-outline btn-sm" onclick="openLibrarySource('tax')">Income Tax Act 2025</button></div></div></div>
-    <div class="xh-aud"><h2>HR &amp; Compliance</h2><div><p>Find employment, tax, data protection, and regulatory requirements more efficiently.</p><div class="xh-btns"><button class="btn btn-outline btn-sm" onclick="openLibrarySource('labor')">Labour Code</button><button class="btn btn-outline btn-sm" onclick="openLibrarySource('tax')">Income Tax Act 2025</button><button class="btn btn-outline btn-sm" onclick="openLibrarySource('data')">Data Protection Act</button></div></div></div>
+    <div class="xh-aud"><h2>Organizations</h2><div><p>Support HR, compliance, regulatory research, and day-to-day legal questions.</p><div class="xh-btns"><button class="btn btn-outline btn-sm" onclick="openLibrarySource('labor')">Labour Code</button><button class="btn btn-outline btn-sm" onclick="openLibrarySource('data')">Data Protection Act</button></div></div><img class="xh-aud-img" src="/images/solutions/organizations.jpg" alt="Organization team reviewing compliance requirements" loading="lazy"></div>
+    <div class="xh-aud"><h2>Lawyers</h2><div><p>Accelerate legal research and locate relevant provisions and sources.</p><div class="xh-btns"><button class="btn btn-outline btn-sm" onclick="openLibrarySource('labor')">Browse the library</button><button class="btn btn-outline btn-sm" onclick="showPage('ask')">Ask a question</button></div></div><img class="xh-aud-img" src="/images/solutions/lawyers.jpg" alt="Lawyer conducting legal research" loading="lazy"></div>
+    <div class="xh-aud"><h2>Investors</h2><div><p>Understand the legal and regulatory environment relevant to investment in Somalia.</p><div class="xh-btns"><button class="btn btn-outline btn-sm" onclick="openLibrarySource('investment')">Foreign Investment Law</button><button class="btn btn-outline btn-sm" onclick="openLibrarySource('tax')">Income Tax Act 2025</button></div></div><img class="xh-aud-img" src="/images/solutions/investors.jpg" alt="Investors reviewing Somalia investment regulations" loading="lazy"></div>
+    <div class="xh-aud"><h2>HR &amp; Compliance</h2><div><p>Find employment, tax, data protection, and regulatory requirements more efficiently.</p><div class="xh-btns"><button class="btn btn-outline btn-sm" onclick="openLibrarySource('labor')">Labour Code</button><button class="btn btn-outline btn-sm" onclick="openLibrarySource('tax')">Income Tax Act 2025</button><button class="btn btn-outline btn-sm" onclick="openLibrarySource('data')">Data Protection Act</button></div></div><img class="xh-aud-img" src="/images/solutions/hr-compliance.jpg" alt="HR and compliance team at work" loading="lazy"></div>
   </div></section>
   <section class="xh-cta"><div class="container"><h2>Working with XeerHub in your organization?</h2><p>Tell us about your team and the legal questions you work with.</p><div class="xh-btns"><button class="btn btn-gold btn-lg" onclick="goContact('Organization / Enterprise')">Talk to XeerHub</button></div></div></section>
 </div>
