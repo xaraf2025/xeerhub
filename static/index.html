@@ -4613,7 +4613,8 @@ async function loadActivities(){
     if(!Array.isArray(items) || !items.length){ grid.innerHTML='<p style="color:var(--muted)">No activities published yet.</p>'; return; }
     grid.innerHTML = items.map(a => `
       <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-sm)">
-        ${a.cover_image ? `<img src="${escapeHtml(a.cover_image)}" alt="${escapeHtml(a.title)}" loading="lazy" style="width:100%;height:190px;object-fit:cover;display:block">` : ''}
+        ${a.cover_image ? `<img id="actMain${a.id}" src="${escapeHtml(a.cover_image)}" alt="${escapeHtml(a.title)}" loading="lazy" style="width:100%;height:190px;object-fit:cover;display:block">` : ''}
+        ${(a.photos && a.photos.length > 1) ? `<div style="display:flex;gap:4px;padding:6px 6px 0;overflow-x:auto">${a.photos.map(u => `<img src="${escapeHtml(u)}" alt="" loading="lazy" onclick="document.getElementById('actMain${a.id}').src=this.src" style="width:56px;height:42px;object-fit:cover;border-radius:4px;cursor:pointer;flex:0 0 auto;border:1px solid var(--border)">`).join('')}</div>` : ''}
         <div style="padding:1rem 1.1rem">
           <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--teal-mid);margin-bottom:.4rem">${escapeHtml(a.category)}${a.event_date ? ' · ' + new Date(a.event_date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : ''}</div>
           <div style="font-weight:600;margin-bottom:.4rem">${escapeHtml(a.title)}</div>
