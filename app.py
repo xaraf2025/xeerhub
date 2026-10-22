@@ -21,12 +21,9 @@ def static_files(path):
 
 @app.route('/api/subscribe', methods=['POST'])
 def subscribe():
-    """Mailchimp signup. Credentials come from environment variables only:
-       MAILCHIMP_API_KEY (e.g. xxxxxxxx-us13) and MAILCHIMP_LIST_ID."""
-    data = request.get_json(silent=True) or {}
-    email = (data.get('email') or '').strip().lower()
-    if not email or '@' not in email or len(email) > 200:
-        return jsonify({'error': 'Valid email required'}), 400
+   MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_API_KEY', '').strip()
+if not MAILCHIMP_API_KEY:
+    return jsonify({'error': 'Newsletter not configured'}), 500
 
     api_key = os.environ.get('MAILCHIMP_API_KEY', '').strip()
     list_id = os.environ.get('MAILCHIMP_LIST_ID', '').strip()
