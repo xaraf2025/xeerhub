@@ -4608,14 +4608,19 @@ function renderLib2Detail(source){
 async function loadActivities(){
   const grid = document.getElementById('activitiesGrid');
   try {
-    const { data, error } = await sb.from('activity_posts').select('*').eq('published', true).order('event_date', { ascending: false });
-    if (error) throw error;
-    const items = (data || []).map(a => {
-      let photos = a.photos;
-      if (typeof photos === 'string') { try { photos = JSON.parse(photos); } catch(_) { photos = [photos]; } }
-      photos = Array.isArray(photos) ? photos.filter(Boolean) : [];
-      const cover = a.cover_image || photos[0] || '';
-      return Object.assign({}, a, { photos, cover_image: cover });
+    const [postsRes, photosRes] = await Promise.all([
+      sb.from('activity_posts').select('*').eq('published', true).order('event_date', { ascending: false }),
+      sb.from('activity_post_photos').select('*').order('sort_order', { ascending: true })
+    ]);
+    if (postsRes.error) throw postsRes.error;
+    const byPost = {};
+    (photosRes.data || []).forEach(p => {
+      const url = sb.storage.from(p.bucket_id).getPublicUrl(p.object_path).data.publicUrl;
+      (byPost[p.activity_post_id] = byPost[p.activity_post_id] || []).push(url);
+    });
+    const items = (postsRes.data || []).map(a => {
+      const photos = byPost[a.id] || [];
+      return Object.assign({}, a, { photos, cover_image: a.cover_image || photos[0] || '' });
     });
     if(!Array.isArray(items) || !items.length){ grid.innerHTML='<p style="color:var(--muted)">No activities published yet.</p>'; return; }
     grid.innerHTML = items.map(a => `
