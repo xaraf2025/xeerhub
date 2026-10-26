@@ -4605,11 +4605,23 @@ function renderLib2Detail(source){
 }
 
 // ── ACTIVITIES ──
-const ACTIVITIES_API = RAILWAY_API.replace(/\/ask$/, '/activities');
 async function loadActivities(){
   const grid = document.getElementById('activitiesGrid');
   try {
-    const items = await (await fetch(ACTIVITIES_API)).json();
+    const [postsRes, photosRes] = await Promise.all([
+      sb.from('activity_posts').select('*').eq('published', true).order('event_date', { ascending: false }),
+      sb.from('activity_post_photos').select('*').order('sort_order', { ascending: true })
+    ]);
+    if (postsRes.error) throw postsRes.error;
+    const byPost = {};
+    (photosRes.data || []).forEach(p => {
+      const url = sb.storage.from(p.bucket_id).getPublicUrl(p.object_path).data.publicUrl;
+      (byPost[p.activity_post_id] = byPost[p.activity_post_id] || []).push(url);
+    });
+    const items = (postsRes.data || []).map(a => {
+      const photos = byPost[a.id] || [];
+      return Object.assign({}, a, { photos, cover_image: a.cover_image || photos[0] || '' });
+    });
     if(!Array.isArray(items) || !items.length){ grid.innerHTML='<p style="color:var(--muted)">No activities published yet.</p>'; return; }
     grid.innerHTML = items.map(a => `
       <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-sm)">
@@ -4622,7 +4634,7 @@ async function loadActivities(){
           ${a.organization ? `<div style="font-size:.75rem;color:var(--muted);margin-top:.6rem">${escapeHtml(a.organization)}</div>` : ''}
         </div>
       </div>`).join('');
-  } catch(e){ grid.innerHTML='<p style="color:var(--muted)">Could not load activities right now.</p>'; }
+  } catch(e){ console.error('loadActivities failed:', e); grid.innerHTML='<p style="color:var(--muted)">Could not load activities right now.</p>'; }
 }
 
 // ── INIT ──────────────────────────────────────────────────────
