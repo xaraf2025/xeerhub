@@ -21,9 +21,10 @@ def static_files(path):
 
 @app.route('/api/subscribe', methods=['POST'])
 def subscribe():
-   MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_API_KEY', '').strip()
-if not MAILCHIMP_API_KEY:
-    return jsonify({'error': 'Newsletter not configured'}), 500
+    data = request.get_json(silent=True) or {}
+    email = (data.get('email') or '').strip().lower()
+    if not email or '@' not in email or len(email) > 200:
+        return jsonify({'error': 'Valid email required'}), 400
 
     api_key = os.environ.get('MAILCHIMP_API_KEY', '').strip()
     list_id = os.environ.get('MAILCHIMP_LIST_ID', '').strip()
