@@ -4605,11 +4605,18 @@ function renderLib2Detail(source){
 }
 
 // ── ACTIVITIES ──
-const ACTIVITIES_API = RAILWAY_API.replace(/\/ask$/, '/activities');
 async function loadActivities(){
   const grid = document.getElementById('activitiesGrid');
   try {
-    const items = await (await fetch(ACTIVITIES_API)).json();
+    const { data, error } = await sb.from('activity_posts').select('*').eq('published', true).order('event_date', { ascending: false });
+    if (error) throw error;
+    const items = (data || []).map(a => {
+      let photos = a.photos;
+      if (typeof photos === 'string') { try { photos = JSON.parse(photos); } catch(_) { photos = [photos]; } }
+      photos = Array.isArray(photos) ? photos.filter(Boolean) : [];
+      const cover = a.cover_image || photos[0] || '';
+      return Object.assign({}, a, { photos, cover_image: cover });
+    });
     if(!Array.isArray(items) || !items.length){ grid.innerHTML='<p style="color:var(--muted)">No activities published yet.</p>'; return; }
     grid.innerHTML = items.map(a => `
       <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-sm)">
@@ -4622,7 +4629,7 @@ async function loadActivities(){
           ${a.organization ? `<div style="font-size:.75rem;color:var(--muted);margin-top:.6rem">${escapeHtml(a.organization)}</div>` : ''}
         </div>
       </div>`).join('');
-  } catch(e){ grid.innerHTML='<p style="color:var(--muted)">Could not load activities right now.</p>'; }
+  } catch(e){ console.error('loadActivities failed:', e); grid.innerHTML='<p style="color:var(--muted)">Could not load activities right now.</p>'; }
 }
 
 // ── INIT ──────────────────────────────────────────────────────
