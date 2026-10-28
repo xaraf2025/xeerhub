@@ -4642,7 +4642,9 @@ function actPhotos(a){
 async function loadActivities(){
   const grid = document.getElementById('activitiesGrid');
   try {
-    const items = await (await fetch(ACTIVITIES_API)).json();
+    const r = await fetch(ACTIVITIES_API);
+    if(!r.ok) throw new Error('Server answered ' + r.status + ' for /activities');
+    const items = await r.json();
     if(!Array.isArray(items) || !items.length){ grid.innerHTML='<p style="color:var(--muted)">No activities published yet.</p>'; return; }
     ACT_ITEMS = items;
     grid.innerHTML = items.map((a, i) => {
@@ -4664,7 +4666,7 @@ async function loadActivities(){
       </div>`;
     }).join('');
     if(!grid.dataset.bound){ grid.dataset.bound = '1'; grid.addEventListener('click', actClick); }
-  } catch(e){ grid.innerHTML='<p style="color:var(--muted)">Could not load activities right now.</p>'; }
+  } catch(e){ console.error('Activities error:', e); grid.innerHTML='<p style="color:var(--muted)">Could not load activities right now.<br><small>Reason: ' + escapeHtml(e && e.message ? e.message : e) + '</small></p>'; }
 }
 function actClick(ev){
   const t = ev.target.closest('[data-act]'); if(!t) return;
