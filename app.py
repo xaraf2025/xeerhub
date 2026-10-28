@@ -21,9 +21,10 @@ def static_files(path):
 
 @app.route('/api/subscribe', methods=['POST'])
 def subscribe():
-   MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_API_KEY', '').strip()
-if not MAILCHIMP_API_KEY:
-    return jsonify({'error': 'Newsletter not configured'}), 500
+    data = request.get_json(silent=True) or {}
+    email = (data.get('email') or '').strip().lower()
+    if not email or '@' not in email:
+        return jsonify({'error': 'Valid email required'}), 400
 
     api_key = os.environ.get('MAILCHIMP_API_KEY', '').strip()
     list_id = os.environ.get('MAILCHIMP_LIST_ID', '').strip()
@@ -49,18 +50,3 @@ if not MAILCHIMP_API_KEY:
     except Exception as e:
         print('Subscribe error:', str(e), flush=True)
         return jsonify({'error': 'Server error'}), 500
-
-
-@app.route('/sitemap.xml')
-def sitemap():
-    return send_from_directory('.', 'sitemap.xml', mimetype='application/xml')
-
-
-@app.route('/robots.txt')
-def robots():
-    return send_from_directory('.', 'robots.txt', mimetype='text/plain')
-
-
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8080))
-    app.run(debug=False, host='0.0.0.0', port=port)
